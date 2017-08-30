@@ -1,4 +1,4 @@
-package basico;
+package model;
 
 public class Produto {
 

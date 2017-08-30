@@ -1,4 +1,4 @@
-package dao.generico;
+package dados;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.Collection;
