@@ -1,18 +1,42 @@
 package model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+
+@Entity
+@NamedQuery(name="efetuarLogin", query="Select e from Estabelecimento e where e.eMail = :eMail and e.senha = :senha")
 public class Estabelecimento {
 	
-	private Integer codEstabelecimento; 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer codEstabelecimento;
 	
+	@Column (nullable = false, length = 100)
+	private String razaoSocial;	
+	
+	@Column (nullable = false, length = 100)
+	private String nomeFantasia;
+	
+	@Column (nullable = false, length = 100)
+	private String eMail;
+	
+	@Column (nullable = false, length = 16)
+	private String senha;
+	
+	@Column (nullable = false, length = 14)
 	private String cnpj;
-	
-	private String razaoSocial;
 	
 	private Endereco endereco;
 	
-	private String latitude;
+	@Column (length = 14)	
+	private String latitude;	
 	
-	private String longetude;
+	@Column (length = 14)
+	private String longitude;
 
 	public Integer getCodEstabelecimento() {
 		return codEstabelecimento;
@@ -22,20 +46,44 @@ public class Estabelecimento {
 		this.codEstabelecimento = codEstabelecimento;
 	}
 
-	public String getCnpj() {
-		return cnpj;
-	}
-
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
-	}
-
 	public String getRazaoSocial() {
 		return razaoSocial;
 	}
 
 	public void setRazaoSocial(String razaoSocial) {
 		this.razaoSocial = razaoSocial;
+	}
+
+	public String getNomeFantasia() {
+		return nomeFantasia;
+	}
+
+	public void setNomeFantasia(String nomeFantasia) {
+		this.nomeFantasia = nomeFantasia;
+	}
+
+	public String geteMail() {
+		return eMail;
+	}
+
+	public void seteMail(String eMail) {
+		this.eMail = eMail;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public String getCnpj() {
+		return cnpj;
+	}
+
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
 	}
 
 	public Endereco getEndereco() {
@@ -54,14 +102,31 @@ public class Estabelecimento {
 		this.latitude = latitude;
 	}
 
-	public String getLongetude() {
-		return longetude;
+	public String getLongitude() {
+		return longitude;
 	}
 
-	public void setLongetude(String longetude) {
-		this.longetude = longetude;
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+
+	public Estabelecimento(Integer codEstabelecimento, String razaoSocial, String nomeFantasia, String eMail,
+			String senha, String cnpj, Endereco endereco, String latitude, String longitude) {
+		super();
+		this.codEstabelecimento = codEstabelecimento;
+		this.razaoSocial = razaoSocial;
+		this.nomeFantasia = nomeFantasia;
+		this.eMail = eMail;
+		this.senha = senha;
+		this.cnpj = cnpj;
+		this.endereco = endereco;
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
+
+	public Estabelecimento() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	
-	
-
 }
