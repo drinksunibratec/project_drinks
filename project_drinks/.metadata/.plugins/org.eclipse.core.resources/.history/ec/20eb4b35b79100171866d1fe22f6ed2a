@@ -1,0 +1,70 @@
+package basicas;
+
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+
+import interfaces.Persistent;
+
+@Entity
+public class TipoDeProblema extends ObjetoSistema implements Persistent{
+	
+	@Column(nullable=false)
+	private String nome;
+	
+	@Column(nullable = false, insertable = true, updatable = true)
+	private boolean ativo;
+	
+	@OneToMany(mappedBy="tipoDeProblema",  fetch=FetchType.LAZY)
+	private List<Solicitacao> solicitacoes;
+	
+	
+	public TipoDeProblema() {
+		
+	}
+	
+	public TipoDeProblema(String nome, boolean ativo) {
+		super();
+		this.nome = nome;
+		this.ativo = ativo;
+	}
+
+	public TipoDeProblema(Integer codigo, Date dataUltimaAtualizacao, String nome, boolean ativo) {
+		super(codigo, dataUltimaAtualizacao);
+		this.nome = nome;
+		this.ativo = ativo;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
+
+	@Override
+	public String getLabel() {
+		return this.getNome();
+	}
+
+	@Override
+	public String getName() {
+		return this.getNome();
+	}
+	
+	
+
+}

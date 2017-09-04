@@ -1,0 +1,9 @@
+package fachada;
+
+import model.Cliente;
+
+public class IFachada {
+	
+	public void inserirCliente(Cliente entidade);
+
+}

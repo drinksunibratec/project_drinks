@@ -1,0 +1,18 @@
+package util;
+
+public class Mensagens {
+	
+	public  static final String NOME_USUARIO_OBRIGATORIO = "O nome de usuário é obrigatório";
+	
+	public  static final String SENHA_OBRIGATORIA = "Senha é obrigatória";
+	
+	public  static final String USUARIO_NAO_ENCONTRADO = "Usuário não encontrado";
+	
+	public  static final String USUARIO_LOGADO = "Bem vindo ";
+	
+	public  static final String TIPO_PROBLEMA_OBRIGATORIO = "O tipo de problema é obrigatório";
+	
+	public  static final String DESCRICAO_OBRIGATORIO = "A descrição é obrigatório";
+	
+
+}

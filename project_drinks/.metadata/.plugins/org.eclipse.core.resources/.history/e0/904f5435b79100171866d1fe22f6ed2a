@@ -1,0 +1,78 @@
+package basicas;
+
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import interfaces.Persistent;
+
+@Entity
+public class Tecnico extends ObjetoSistema implements Persistent{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1980036767074567990L;
+
+	@Column(nullable=false)
+	private String especialidade;
+	
+	@OneToMany(mappedBy="tecnicoAlocado", fetch = FetchType.LAZY)
+	private List<Solicitacao> solicitacoes;
+	
+	@OneToOne
+	@JoinColumn(name="id_usuario")
+	private Usuario usuario;
+	
+	private boolean ativo;
+	
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
+
+	public List<Solicitacao> getSolicitacoes() {
+		return solicitacoes;
+	}
+
+	public void setSolicitacoes(List<Solicitacao> solicitacoes) {
+		this.solicitacoes = solicitacoes;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getEspecialidade() {
+		return especialidade;
+	}
+
+	public void setEspecialidade(String especialidade) {
+		this.especialidade = especialidade;
+	}
+
+	@Override
+	public String getLabel() {
+		return this.usuario.getNome();
+	}
+
+	@Override
+	public String getName() {
+		return this.usuario.getNome();
+	}
+	
+	
+
+}

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" lang="pt-BR">
+<h:head>
+	<title>Serviços Gerais</title>
+
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<ui:include src="/pages/dialog/confirm.xhtml" />
+	<ui:include src="/pages/menu/menu.xhtml" />
+
+</h:head>
+<h:body>
+	<h:form id="formSolicitacao">
+		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
+		<p:panel id="Cadastro" header="Cadastro" style="margin-bottom:20px">
+			<h:panelGrid columns="2" cellpadding="5">
+
+				<p:outputLabel for="nome" value="Nome:" />
+				<p:inputText id="nome" disabled="true"
+					value="#{solicitacaoBean.solicitacao.solicitante.nome}" />
+
+				<p:outputLabel for="problema" value="Tipo de Problema:" />
+				<h:selectOneMenu id="problema"
+					value="#{solicitacaoBean.solicitacao.tipoDeProblema}">
+					<f:converter converterId="simpleEntity" />
+					<f:selectItem itemLabel="-- SELECIONE --" />
+					<f:selectItems value="#{tipoDeProblema.list}" var="var"
+						itemValue="#{var}" itemLabel="#{var.nome}" />
+				</h:selectOneMenu>
+
+				<p:outputLabel for="descricao" value="Descrição:" />
+				<p:inputTextarea id="descricao"
+					value="#{solicitacaoBean.solicitacao.descricao}" autoResize="false" />
+
+				<p:commandButton value="Inserir" action="#{solicitacaoBean.inserir}"
+					rendered="#{!solicitacaoBean.edit}" update="@form">
+				</p:commandButton>
+
+				<p:commandButton value="Editar" action="#{solicitacaoBean.editar}"
+					rendered="#{solicitacaoBean.edit}" update="@form">
+				</p:commandButton>
+				<p:commandButton value="Cancelar"
+					action="#{solicitacaoBean.cancelar}" update="@form">
+				</p:commandButton>
+			</h:panelGrid>
+		</p:panel>
+
+		<p:panel id="Listagem" header="Listagem" style="margin-bottom:20px">
+
+			<p:dataTable id="dtTable" var="obj" value="#{solicitacaoBean.list}"
+				paginator="true" rows="10"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+				emptyMessage="Sem registros encontrados">
+
+				<p:column headerText="Número" filterBy="#{obj.numeroSolicitacao}"
+					sortBy="#{obj.numeroSolicitacao}" filterMatchMode="contains">
+					<h:outputText value="#{obj.numeroSolicitacao == null ? 'S/N' : obj.numeroSolicitacao}" />
+				</p:column>
+
+				<p:column headerText="Solicitante"
+					filterBy="#{obj.solicitante.nome}" sortBy="#{obj.solicitante.nome}"
+					filterMatchMode="contains">
+					<h:outputText value="#{obj.solicitante.nome}" />
+				</p:column>
+
+				<p:column headerText="Tipo de Problema" 
+					filterBy="#{obj.tipoDeProblema.nome}" sortBy="#{obj.tipoDeProblema.nome}"
+					filterMatchMode="contains">
+					<h:outputText value="#{obj.tipoDeProblema.nome}" />
+				</p:column>
+				<p:column headerText="Situação" filterBy="#{obj.situacao.label}"
+					sortBy="#{obj.situacao.label}" filterMatchMode="contains">
+					<h:outputText value="#{obj.situacao.label} " />
+				</p:column>
+				
+				<p:column headerText="Técnico" filterBy="#{obj.tecnicoAlocado.usuario.nome}"
+					sortBy="#{obj.tecnicoAlocado.usuario.nome}" filterMatchMode="contains">
+					<h:outputText value="#{obj.tecnicoAlocado.usuario.nome == null ?  ' - ' : obj.tecnicoAlocado.usuario.nome} " />
+				</p:column>
+
+				<p:column headerText="Ações" >
+					<p:commandButton icon="ui-icon-pencil" rendered="#{obj.situacao == 'AGUARDANDO'}"
+						actionListener="#{solicitacaoBean.loadEdit(obj)}" update="@form"
+						title="Editar">
+					</p:commandButton>
+
+					<p:commandButton icon="ui-icon-closethick"
+						action="#{solicitacaoBean.excluir(obj)}" update="@form"
+						title="Excluir" rendered="#{obj.situacao == 'AGUARDANDO'}">
+						<p:confirm header="Confirmação" 
+							message="Deseja deletar o registro?" icon="ui-icon-alert" />
+					</p:commandButton>
+					
+					<p:commandButton icon="ui-icon-arrowreturnthick-1-n"
+						title="Enviar para Atendimento" rendered="#{obj.situacao == 'RASCUNHO'}"
+						action="#{solicitacaoBean.enviar(obj)}" update="@form">
+						<p:confirm header="Confirmação" 
+							message="Deseja enviar a solicitação para Serviços Gerais?" icon="ui-icon-alert" />
+					</p:commandButton>
+					
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+
+
+
+	</h:form>
+
+</h:body>
+</html>

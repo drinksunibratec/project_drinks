@@ -1,0 +1,63 @@
+package basicas;
+
+import java.io.Serializable;
+import java.util.Date;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import interfaces.Persistent;
+
+@MappedSuperclass
+public abstract class ObjetoSistema implements Serializable, Persistent{
+
+	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 372621787311394015L;
+	@Id
+	@GeneratedValue(strategy=GenerationType.TABLE)
+	private Integer id;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataUltimaAtualizacao;
+	
+	@PreUpdate
+	public void onUpdate(){
+		dataUltimaAtualizacao = new Date();
+	}
+	
+	@PrePersist
+	public void onPersist(){
+		dataUltimaAtualizacao = new Date();
+	}
+	
+	public ObjetoSistema(Integer id, Date dataUltimaAtualizacao) {
+		super();
+		this.id = id;
+		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
+	}
+	public ObjetoSistema() {
+		super();
+	}
+	public Integer getId() {
+		return (id == 0 ? null : id);
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public Date getDataUltimaAtualizacao() {
+		return dataUltimaAtualizacao;
+	}
+	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
+		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
+	}
+}

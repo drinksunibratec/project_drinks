@@ -1,0 +1,82 @@
+package basicas;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+@Entity
+public class Comentario extends ObjetoSistema {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5542053125846603042L;
+
+	@Column(nullable=false)
+	private String nome;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="data_comentario")
+	private Date dataComentario;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_usuario", insertable=true, updatable=true)
+	private Usuario usuario;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_solicitacao", insertable=true, updatable=true)
+	private Solicitacao solicitacao;
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public Date getDataComentario() {
+		return dataComentario;
+	}
+
+	public void setDataComentario(Date dataComentario) {
+		this.dataComentario = dataComentario;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Solicitacao getSolicitacao() {
+		return solicitacao;
+	}
+
+	public void setSolicitacao(Solicitacao solicitacao) {
+		this.solicitacao = solicitacao;
+	}
+
+	@Override
+	public String getLabel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+	
+}

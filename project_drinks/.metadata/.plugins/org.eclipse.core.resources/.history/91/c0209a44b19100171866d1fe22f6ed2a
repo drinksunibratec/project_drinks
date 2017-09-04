@@ -1,0 +1,44 @@
+package business;
+
+import java.util.List;
+
+import basicas.Setor;
+import fachada.ServicosGeraisBusiness;
+
+public class SetorBO extends BasicBO<Setor>{
+	
+	private static SetorBO instance = null;
+	
+	public static SetorBO getInstance(){
+		if (instance == null){
+			instance = new SetorBO();
+		}
+		return instance;
+	}
+	
+
+
+	@Override
+	public void insert(Setor entity) {
+		ServicosGeraisBusiness.getInstance().inserirSetor(entity);
+		
+	}
+
+	@Override
+	public void remove(Setor entity) {
+		ServicosGeraisBusiness.getInstance().removerSetor(entity);
+		
+	}
+
+	@Override
+	public void edit(Setor entity) {
+		ServicosGeraisBusiness.getInstance().editarSetor(entity);
+		
+	}
+
+	@Override
+	public List<Setor> list() {
+		return ServicosGeraisBusiness.getInstance().listarSetores();
+	}
+
+}

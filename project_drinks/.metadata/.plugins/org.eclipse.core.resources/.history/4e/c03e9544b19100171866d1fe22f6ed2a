@@ -1,0 +1,49 @@
+package business;
+
+import java.util.List;
+
+import basicas.Solicitacao;
+import fachada.ServicosGeraisBusiness;
+import util.Situacao;
+
+public class SolicitacaoBO extends BasicBO<Solicitacao>{
+	
+	private static SolicitacaoBO instance = null;
+	
+	public static SolicitacaoBO getInstance(){
+		if (instance == null){
+			instance = new SolicitacaoBO();
+		}
+		return instance;
+	}
+	
+
+	@Override
+	public void insert(Solicitacao entity) {
+		ServicosGeraisBusiness.getInstance().inserirSolicitacao(entity);
+		
+	}
+
+	@Override
+	public void remove(Solicitacao entity) {
+		ServicosGeraisBusiness.getInstance().removerSolicitacao(entity);
+		
+	}
+
+	@Override
+	public void edit(Solicitacao entity) {
+		
+		ServicosGeraisBusiness.getInstance().editarSolicitacao(entity);
+		
+	}
+
+	@Override
+	public List<Solicitacao> list() {
+		return ServicosGeraisBusiness.getInstance().listarSolicitacao();
+	}
+	
+	public Integer getMaxNumeroSolicitacao() {
+		return ServicosGeraisBusiness.getInstance().getMaxNumeroSolicitacao();
+	}
+	
+}

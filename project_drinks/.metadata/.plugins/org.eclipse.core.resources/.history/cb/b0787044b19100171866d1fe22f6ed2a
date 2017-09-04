@@ -1,0 +1,12 @@
+package interfaces;
+
+import java.io.Serializable;
+
+public interface Persistent extends Serializable{
+
+	public Integer getId();
+
+	public String getLabel();
+
+	public String getName();
+}

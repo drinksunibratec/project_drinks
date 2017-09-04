@@ -1,0 +1,68 @@
+package dados;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
+
+import basicas.Setor;
+import basicas.Solicitacao;
+import dados.geral.DAOGenerico;
+import util.Situacao;
+
+public class SolicitacaoDAO extends DAOGenerico<Solicitacao>{
+
+	public SolicitacaoDAO(EntityManagerFactory emf) {
+		super(emf);
+	}
+	
+	public List<Solicitacao> getSolicitacoesPorSetor(Setor setor) {
+		List<Solicitacao> instance = null;
+		EntityManager em = this.getEntityManagerFactory().createEntityManager();
+		try {
+			String sql = "FROM " + getPersistentClass().getName() + " S WHERE S.id_setor = :S";
+			Query query =  em.createQuery(sql, Solicitacao.class);
+			query.setParameter("S", setor.getId());
+			
+			instance = query.getResultList();
+		} catch (RuntimeException re) {
+			re.printStackTrace();
+		}
+		em.close();
+		return instance;
+	}
+	
+	public final List<Solicitacao> getSolicitacoesPorSituacao(Situacao situacao) {
+		List<Solicitacao> instance = null;
+		EntityManager em = this.getEntityManagerFactory().createEntityManager();
+		try {
+			String sql = "FROM " + getPersistentClass().getName() + " S WHERE S.situacao = :S";
+			Query query =  em.createQuery(sql, Solicitacao.class);
+			query.setParameter("S", situacao);
+			
+			instance = query.getResultList();
+		} catch (RuntimeException re) {
+			re.printStackTrace();
+		}
+		em.close();
+		return instance;
+	}
+	
+	public final Integer getMaxId() {
+		Integer instance = null;
+		EntityManager em = this.getEntityManagerFactory().createEntityManager();
+		try {
+			String sql = "select max(numeroSolicitacao) FROM " + getPersistentClass().getName();
+			Query query =  em.createQuery(sql, Integer.class);
+			
+			instance = (Integer)query.getSingleResult();
+		} catch (RuntimeException re) {
+			re.printStackTrace();
+		}
+		em.close();
+		return instance;
+	}
+	
+
+}

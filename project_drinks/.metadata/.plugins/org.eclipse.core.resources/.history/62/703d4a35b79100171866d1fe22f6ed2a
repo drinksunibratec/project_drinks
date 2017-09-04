@@ -1,0 +1,130 @@
+package basicas;
+
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import util.Situacao;
+
+@Entity
+public class Solicitacao extends ObjetoSistema{
+	
+	public static final String NUMERO_SOLICITACAO = "numero_solicitacao";
+	
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@Column(name="numero_solicitacao")
+	private Integer numeroSolicitacao;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="id_solicitante", insertable=true, updatable=true)
+	private Usuario solicitante;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="id_problema", insertable=true, updatable=true)
+	private TipoDeProblema tipoDeProblema;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="id_setor", insertable=true, updatable=true)
+	private Setor setor;
+	
+	@Enumerated(EnumType.STRING)
+	private Situacao situacao;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="id_tecnico", insertable=true, updatable=true)
+	private Tecnico tecnicoAlocado;
+	
+	@OneToMany(mappedBy="solicitacao", fetch = FetchType.LAZY)
+	private List<Comentario> comentario;
+	
+	private String descricao;
+	
+	public List<Comentario> getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(List<Comentario> comentario) {
+		this.comentario = comentario;
+	}
+
+	public Integer getNumeroSolicitacao() {
+		return numeroSolicitacao;
+	}
+
+	public void setNumeroSolicitacao(Integer numeroSolicitacao) {
+		this.numeroSolicitacao = numeroSolicitacao;
+	}
+
+	public Usuario getSolicitante() {
+		return solicitante;
+	}
+
+	public void setSolicitante(Usuario solicitante) {
+		this.solicitante = solicitante;
+	}
+
+	public TipoDeProblema getTipoDeProblema() {
+		return tipoDeProblema;
+	}
+
+	public void setTipoDeProblema(TipoDeProblema tipoDeProblema) {
+		this.tipoDeProblema = tipoDeProblema;
+	}
+
+	public Setor getSetor() {
+		return setor;
+	}
+
+	public void setSetor(Setor setor) {
+		this.setor = setor;
+	}
+
+	public Situacao getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(Situacao situacao) {
+		this.situacao = situacao;
+	}
+
+	public Tecnico getTecnicoAlocado() {
+		return tecnicoAlocado;
+	}
+
+	public void setTecnicoAlocado(Tecnico tecnicoAlocado) {
+		this.tecnicoAlocado = tecnicoAlocado;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	@Override
+	public String getLabel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+	
+
+}

@@ -1,0 +1,16 @@
+package dados;
+
+import javax.persistence.EntityManagerFactory;
+
+import basicas.Perfil;
+import dados.geral.DAOGenerico;
+
+public class PerfilDAO extends DAOGenerico<Perfil>{
+
+	public PerfilDAO(EntityManagerFactory emf) {
+		super(emf);
+		
+	}
+
+	
+}

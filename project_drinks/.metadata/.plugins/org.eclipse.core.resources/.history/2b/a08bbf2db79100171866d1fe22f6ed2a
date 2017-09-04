@@ -1,0 +1,16 @@
+package dados;
+
+import javax.persistence.EntityManagerFactory;
+
+import basicas.Setor;
+import dados.geral.DAOGenerico;
+
+public class SetorDAO extends DAOGenerico<Setor> {
+
+	public SetorDAO(EntityManagerFactory emf) {
+		super(emf);
+	}
+	
+	
+
+}

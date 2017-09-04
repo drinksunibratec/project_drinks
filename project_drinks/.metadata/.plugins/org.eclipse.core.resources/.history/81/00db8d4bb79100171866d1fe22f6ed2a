@@ -1,0 +1,66 @@
+package dados.geral;
+
+
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import basicas.Perfil;
+import dados.ComentarioDAO;
+import dados.PerfilDAO;
+import dados.SetorDAO;
+import dados.SolicitacaoDAO;
+import dados.TecnicoDAO;
+import dados.TipoDeProblemaDAO;
+import dados.UsuarioDAO;
+
+public abstract class DAOFactory{
+
+	
+	private static final EntityManagerFactory factory;
+
+	static {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		factory = Persistence.createEntityManagerFactory("serv");		
+	}
+	
+	public static UsuarioDAO getUsuarioDAO(){
+		UsuarioDAO dao = new UsuarioDAO(factory);
+		return dao;
+	}
+	
+	public static TipoDeProblemaDAO getTipoDeProblemaDAO(){
+		TipoDeProblemaDAO dao = new TipoDeProblemaDAO(factory);
+		return dao;
+	}
+	
+	public static SetorDAO getSetorDAO(){
+		SetorDAO dao = new SetorDAO(factory);
+		return dao;
+	}
+	
+	public static ComentarioDAO getComentarioDAO(){
+		ComentarioDAO dao = new ComentarioDAO(factory);
+		return dao;
+	}
+	
+	public static SolicitacaoDAO getSolicitacaoDAO(){
+		SolicitacaoDAO dao = new SolicitacaoDAO(factory);
+		return dao;
+	}
+	
+	public static TecnicoDAO getTecnicoDAO(){
+		TecnicoDAO dao = new TecnicoDAO(factory);
+		return dao;
+	}
+
+	public static PerfilDAO getPerfilDAO(){
+		PerfilDAO dao = new PerfilDAO(factory);
+		return dao;
+	}
+
+
+}

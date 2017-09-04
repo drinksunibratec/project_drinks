@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" lang="pt-BR">
+<h:head>
+	<title>Serviços Gerais</title>
+
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<ui:include src="/pages/dialog/confirm.xhtml" />
+	<ui:include src="/pages/menu/menu.xhtml" />
+
+</h:head>
+<h:body>
+	<h:form id="formUsuario">
+		<p:messages id="messages" />
+		<p:panel id="Cadastro" header="Cadastro" style="margin-bottom:20px">
+			<h:panelGrid columns="2" cellpadding="5">
+
+				<p:outputLabel for="cpf" value="CPF:" />
+				<p:inputMask id="cpf" value="#{usuario.usuario.cpf}"
+					mask="999.999.999-99" />
+
+				<p:outputLabel for="nome" value="Nome:" />
+				<p:inputText id="nome" value="#{usuario.usuario.nome}" />
+
+				<p:outputLabel for="matricula" value="Matrícula:" />
+				<p:inputText id="matricula" value="#{usuario.usuario.matricula}" />
+
+				<p:outputLabel for="email" value="E-mail:" />
+				<p:inputText id="email" value="#{usuario.usuario.email}" />
+
+				<p:outputLabel for="setor" value="Setor:" />
+				<h:selectOneMenu id="setor" value="#{usuario.usuario.setor}">
+					<f:converter converterId="simpleEntity" />
+					<f:selectItem itemLabel="-- SELECIONE --" />
+					<f:selectItems value="#{setor.list}" var="var" itemValue="#{var}"
+						itemLabel="#{var.nome}" />
+				</h:selectOneMenu>
+
+				<p:outputLabel for="perfil" value="Perfil:" />
+				<h:selectOneMenu id="perfil" value="#{usuario.usuario.perfil}">
+					<f:converter converterId="simpleEntity" />
+					<f:selectItem itemLabel="-- SELECIONE --" />
+					<f:selectItems value="#{perfilBean.list}" var="var" itemValue="#{var}"
+						itemLabel="#{var.nome}" />
+				</h:selectOneMenu>
+
+				<p:outputLabel for="login" value="Nome de Usuário:" />
+				<p:inputText id="login" value="#{usuario.usuario.nomeUsuario}" />
+
+				<p:outputLabel for="senha" value="Senha:" />
+				<p:password id="senha" value="#{usuario.usuario.senha}"
+					feedback="true" />
+
+				<p:selectBooleanCheckbox id="ativo" value="#{usuario.usuario.ativo}" />
+				<p:outputLabel for="ativo" value="Ativo" />
+
+				<p:commandButton value="Inserir" action="#{usuario.inserir}"
+					rendered="#{!usuario.edit}" update="@form">
+				</p:commandButton>
+
+				<p:commandButton value="Editar" action="#{usuario.editar}"
+					rendered="#{usuario.edit}" update="@form">
+				</p:commandButton>
+				<p:commandButton value="Cancelar" action="#{usuario.cancelar}"
+					update="@form">
+				</p:commandButton>
+			</h:panelGrid>
+		</p:panel>
+
+		<p:panel id="Listagem" header="Listagem" style="margin-bottom:20px">
+
+			<p:dataTable id="dtTable" var="obj" value="#{usuario.list}"
+				paginator="true" rows="10"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+				emptyMessage="Sem registros encontrados">
+
+				<p:column headerText="Nome" filterBy="#{obj.nome}"
+					sortBy="#{obj.nome}" filterMatchMode="contains">
+					<h:outputText value="#{obj.nome}" />
+				</p:column>
+
+				<p:column headerText="CPF" filterBy="#{obj.cpf}" sortBy="#{obj.cpf}"
+					filterMatchMode="contains">
+					<h:outputText value="#{obj.cpf}" />
+				</p:column>
+
+				<p:column headerText="Matrícula" filterBy="#{obj.matricula}"
+					sortBy="#{obj.matricula}" filterMatchMode="contains">
+					<h:outputText value="#{obj.matricula}" />
+				</p:column>
+
+				<p:column headerText="E-mail" filterBy="#{obj.email}"
+					sortBy="#{obj.email}" filterMatchMode="contains">
+					<h:outputText value="#{obj.email}" />
+				</p:column>
+
+				<p:column headerText="Login" filterBy="#{obj.nomeUsuario}"
+					sortBy="#{obj.nomeUsuario}" filterMatchMode="contains">
+					<h:outputText value="#{obj.nomeUsuario}" />
+				</p:column>
+<!-- 				<p:column headerText="Setor" filterBy="#{obj.setor.nome}" -->
+<!-- 					sortBy="#{obj.setor.nome}" filterMatchMode="contains"> -->
+<!-- 					<h:outputText value="#{obj.setor.nome} " /> -->
+<!-- 				</p:column> -->
+
+<!-- 				<p:column headerText="Perfil" filterBy="#{obj.perfil.nome}" -->
+<!-- 					sortBy="#{obj.perfil.nome}" filterMatchMode="contains"> -->
+<!-- 					<h:outputText value="#{obj.perfil.nome} " /> -->
+<!-- 				</p:column> -->
+				<p:column headerText="Ativo" filterBy="#{obj.ativo}"
+					sortBy="#{obj.ativo}" filterMatchMode="contains">
+					<h:outputText value="#{obj.ativo ? 'SIM' : 'NÃO'} " />
+				</p:column>
+
+				<p:column headerText="Ações">
+					<p:commandButton icon="ui-icon-pencil"
+						actionListener="#{usuario.loadEdit(obj)}" update="@form"
+						title="Editar">
+					</p:commandButton>
+
+					<p:commandButton icon="ui-icon-closethick"
+						action="#{usuario.excluir(obj)}" update="@form" title="Excluir">
+						<p:confirm header="Confirmação"
+							message="Deseja deletar o registro?" icon="ui-icon-alert" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+
+	</h:form>
+
+</h:body>
+</html>

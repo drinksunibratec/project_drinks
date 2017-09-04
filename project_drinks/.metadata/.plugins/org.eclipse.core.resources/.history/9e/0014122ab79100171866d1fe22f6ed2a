@@ -1,0 +1,70 @@
+package managedbean;
+
+import java.io.Serializable;
+
+import javax.faces.bean.ManagedBean;
+
+import basicas.Perfil;
+import business.BasicBO;
+import business.PerfilBO;
+
+@ManagedBean
+public class PerfilBean extends ManagedBeanGenerico<Perfil> implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9135766805809990592L;
+	private Perfil perfil;
+
+	@Override
+	public BasicBO<Perfil> getBoPadrao() {
+		return PerfilBO.getInstance();
+	}
+
+	@Override
+	public void setBoPadrao(BasicBO<Perfil> boPadrao) {
+
+	}
+
+	@Override
+	public void init() {
+		super.init();
+		perfil = new Perfil();
+		perfil.setAtivo(true);
+	}
+
+	public Perfil getperfil() {
+		return perfil;
+	}
+
+	public void setperfil(Perfil perfil) {
+		this.perfil = perfil;
+	}
+
+	public String loadEdit(Perfil perfil) {
+		this.perfil = perfil;
+		setEdit(true);
+		return "OK";
+	}
+
+	@Override
+	public void afterSave() {
+		setBean(new Perfil());
+		this.perfil = new Perfil();
+		this.perfil.setAtivo(true);
+	}
+
+	@Override
+	public void beforeSave() {
+		setBean(perfil);
+
+	}
+
+	@Override
+	public void beforeEdit() {
+		setBean(perfil);
+		
+	}
+
+}

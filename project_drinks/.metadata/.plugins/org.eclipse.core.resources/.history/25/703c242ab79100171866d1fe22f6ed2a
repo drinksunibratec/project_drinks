@@ -1,0 +1,113 @@
+package managedbean;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
+
+import basicas.Solicitacao;
+import basicas.Tecnico;
+import basicas.Usuario;
+import business.BasicBO;
+import business.SolicitacaoBO;
+import util.SessionContext;
+import util.Situacao;
+import util.ValidacaoCampos;
+
+@ManagedBean
+public class SolicitacaoBean extends ManagedBeanGenerico<Solicitacao> {
+
+	private Solicitacao solicitacao;
+
+	private Usuario currentUser;
+
+
+
+	@PostConstruct
+	public void init(){
+		super.init();
+		solicitacao = new Solicitacao();
+		currentUser = SessionContext.getInstance().getUsuarioLogado();
+		this.solicitacao.setSolicitante(currentUser);
+	}
+
+	public Usuario getCurrentUser() {
+		return currentUser;
+	}
+
+	public void setCurrentUser(Usuario currentUser) {
+		this.currentUser = currentUser;
+	}
+
+	public Solicitacao getSolicitacao() {
+		return solicitacao;
+	}
+
+
+	public void setSolicitacao(Solicitacao solicitacao) {
+		this.solicitacao = solicitacao;
+	}
+
+	@Override
+	public BasicBO<Solicitacao> getBoPadrao() {
+		return SolicitacaoBO.getInstance();
+	}
+
+	@Override
+	public void setBoPadrao(BasicBO<Solicitacao> boPadrao) {
+
+	}
+
+	@Override
+	public void afterSave() {
+		this.solicitacao = new Solicitacao();
+		this.setList(getList());
+	}
+	public String loadEdit(Solicitacao solicitacao){
+		this.solicitacao = solicitacao;
+		setEdit(true);
+		return "OK";
+	}
+
+	public String enviar(Solicitacao solicitacao){
+		this.solicitacao = solicitacao;
+		this.solicitacao.setSituacao(Situacao.AGUARDANDO);
+		this.solicitacao.setSetor(solicitacao.getSolicitante().getSetor());
+		Integer numero = SolicitacaoBO.getInstance().getMaxNumeroSolicitacao();
+
+		this.solicitacao.setNumeroSolicitacao(numero == null ? 1 : (numero+1));
+
+		editar();
+		return "OK";
+	}
+
+	public String concluir(Solicitacao solicitacao){
+		this.solicitacao = solicitacao;
+		this.solicitacao.setSituacao(Situacao.CONCLUIDO);
+		this.solicitacao.setSetor(solicitacao.getSolicitante().getSetor());
+		editar();
+		return "OK";
+	}
+
+
+	@Override
+	public void beforeSave() {
+		
+		ValidacaoCampos.validarSolicitacao(solicitacao);
+		
+		this.solicitacao.setSituacao(Situacao.RASCUNHO);
+		setBean(this.solicitacao);
+	}
+
+	@Override
+	public void beforeEdit() {
+		setBean(this.solicitacao);
+	}
+
+	public Situacao[] getSituacoes(){
+		Situacao[] situacoes = {Situacao.ATENDIMENTO, Situacao.MATERIAL, Situacao.CONCLUIDO};
+		return situacoes;
+	}
+
+}

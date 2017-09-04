@@ -1,0 +1,14 @@
+package business;
+
+public class BasicBusiness {
+
+	import java.util.List;
+
+	public abstract class BasicBO<Entity> {
+
+		public abstract void insert(Entity entity);
+		public abstract void remove(Entity entity);
+		public abstract List<Entity> list();
+		public abstract void edit(Entity entity);
+	}
+}

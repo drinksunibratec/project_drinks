@@ -1,0 +1,17 @@
+package dados;
+
+import javax.persistence.EntityManagerFactory;
+
+import basicas.Tecnico;
+import dados.geral.DAOGenerico;
+
+public class TecnicoDAO extends DAOGenerico<Tecnico>{
+
+	public TecnicoDAO(EntityManagerFactory emf) {
+		super(emf);
+	}
+	
+		
+	
+
+}

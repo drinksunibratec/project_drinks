@@ -1,0 +1,116 @@
+package basicas;
+
+import java.util.List;
+
+public class UsuarioTemp extends Usuario{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6159824873938518306L;
+
+	public static final String NOME = "NOME";
+
+	private String nome;
+	
+	private String cpf;
+	
+	private String matricula;
+	
+	private String email;
+	
+    private String nomeUsuario;
+    
+    private String senha;
+    
+    private List<Solicitacao> solicitacoes;
+    
+    private List<Comentario> comentarios ;
+   
+    private Setor setor;
+    
+    public boolean ativo;
+    
+    
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
+
+	public List<Comentario> getComentarios() {
+		return comentarios;
+	}
+
+	public void setComentarios(List<Comentario> comentarios) {
+		this.comentarios = comentarios;
+	}
+
+	public Setor getSetor() {
+		return setor;
+	}
+
+	public void setSetor(Setor setor) {
+		this.setor = setor;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public List<Solicitacao> getSolicitacoes() {
+		return solicitacoes;
+	}
+
+	public void setSolicitacoes(List<Solicitacao> solicitacoes) {
+		this.solicitacoes = solicitacoes;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getMatricula() {
+		return matricula;
+	}
+
+	public void setMatricula(String matricula) {
+		this.matricula = matricula;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getNomeUsuario() {
+		return nomeUsuario;
+	}
+
+	public void setNomeUsuario(String nomeUsuario) {
+		this.nomeUsuario = nomeUsuario;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+    
+    
+}

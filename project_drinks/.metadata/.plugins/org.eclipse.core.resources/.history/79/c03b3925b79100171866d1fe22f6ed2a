@@ -1,0 +1,42 @@
+package business;
+
+import java.util.List;
+
+import basicas.Perfil;
+import fachada.ServicosGeraisBusiness;
+
+public class PerfilBO extends BasicBO<Perfil>{
+	
+	private static PerfilBO instance = null;
+	
+	public static PerfilBO getInstance(){
+		if (instance == null){
+			instance = new PerfilBO();
+		}
+		return instance;
+	}
+	
+	@Override
+	public void insert(Perfil entity) {
+		ServicosGeraisBusiness.getInstance().inserirPerfil(entity);
+		
+	}
+
+	@Override
+	public void remove(Perfil entity) {
+		ServicosGeraisBusiness.getInstance().removerPerfil(entity);
+		
+	}
+
+	@Override
+	public void edit(Perfil entity) {
+		ServicosGeraisBusiness.getInstance().editarPerfil(entity);
+		
+	}
+
+	@Override
+	public List<Perfil> list() {
+		return ServicosGeraisBusiness.getInstance().listarPerfis();
+	}
+
+}

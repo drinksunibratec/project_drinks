@@ -1,0 +1,43 @@
+package business;
+
+import java.util.List;
+
+import basicas.Tecnico;
+import fachada.ServicosGeraisBusiness;
+
+public class TecnicoBO extends BasicBO<Tecnico>{
+	
+	private static TecnicoBO instance = null;
+	
+	public static TecnicoBO getInstance(){
+		if (instance == null){
+			instance = new TecnicoBO();
+		}
+		return instance;
+	}
+	
+
+	@Override
+	public void insert(Tecnico entity) {
+		ServicosGeraisBusiness.getInstance().inserirTenico(entity);
+		
+	}
+
+	@Override
+	public void remove(Tecnico entity) {
+		ServicosGeraisBusiness.getInstance().removerTecnico(entity);
+		
+	}
+
+	@Override
+	public void edit(Tecnico entity) {
+		ServicosGeraisBusiness.getInstance().editarTecnico(entity);
+		
+	}
+
+	@Override
+	public List<Tecnico> list() {
+		return ServicosGeraisBusiness.getInstance().listarTecnicos();
+	}
+
+}
