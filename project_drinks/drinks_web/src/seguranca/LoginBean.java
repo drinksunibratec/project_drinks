@@ -6,8 +6,8 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.security.auth.login.LoginException;
 
-import fachada.Fachada;
-import fachada.IFachada;
+import fachada.DrinksBusiness;
+import fachada.IDrinksBusiness;
 import basicas.Estabelecimento;
 
 @ManagedBean
@@ -17,7 +17,7 @@ public class LoginBean {
 	private String eMail;
 	private String senha;
 	private Estabelecimento estabelecimentoLogado;
-	private IFachada fachada = Fachada.getInstancia();
+	private IDrinksBusiness fachada = DrinksBusiness.getInstancia();
 	
 public String efetuarLogin(){
 		

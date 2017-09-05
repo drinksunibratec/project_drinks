@@ -1,4 +1,4 @@
-package dados.geral;
+package dados;
 
 
 import javax.persistence.EntityManager;
@@ -8,10 +8,11 @@ import javax.persistence.TypedQuery;
 import javax.security.auth.login.LoginException;
 
 import basicas.Estabelecimento;
+import dados.genericos.DaoGenerico;
 
-public class DaoEstabelecimento extends DaoGenerico<Estabelecimento> implements IDaoEstabelecimento {
+public class EstabelecimentoDAO extends DaoGenerico<Estabelecimento> implements IDaoEstabelecimento {
 
-	public DaoEstabelecimento(EntityManagerFactory emf) {
+	public EstabelecimentoDAO(EntityManagerFactory emf) {
 		super(emf);
 		// TODO Auto-generated constructor stub
 	}

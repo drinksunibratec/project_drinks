@@ -6,17 +6,16 @@ import java.util.List;
 
 import javax.security.auth.login.LoginException;
 
-import dados.geral.DaoEstabelecimento;
-import dados.geral.IDaoEstabelecimento;
 import erro.DaoException;
 import basicas.Estabelecimento;
+import dados.*;
 
-public class ControladorEstabelecimento {
+public class EstabelecimentoController {
 	
 private IDaoEstabelecimento daoEstabelecimento;
 	
-	public ControladorEstabelecimento(){
-		this.daoEstabelecimento = new DaoEstabelecimento(null);
+	public EstabelecimentoController(){
+		this.daoEstabelecimento = DAOFactory.getEstabelecimentoDAO();
 	}
 	
 	public void cadastrarEstabelecimento(Estabelecimento estabelecimento){

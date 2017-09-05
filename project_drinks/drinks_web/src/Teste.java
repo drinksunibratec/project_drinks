@@ -5,7 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import basicas.Cliente;
-import dados.geral.DAOFactory;
+import dados.DAOFactory;
 
 public class Teste {
 

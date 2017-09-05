@@ -1,4 +1,4 @@
-package dados.geral;
+package dados.genericos;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.Collection;
