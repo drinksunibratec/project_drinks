@@ -8,9 +8,9 @@ import javax.persistence.TypedQuery;
 import javax.security.auth.login.LoginException;
 
 import basicas.Estabelecimento;
-import dados.genericos.DaoGenerico;
+import dados.genericos.DAOGenerico;
 
-public class EstabelecimentoDAO extends DaoGenerico<Estabelecimento> implements IDaoEstabelecimento {
+public class EstabelecimentoDAO extends DAOGenerico<Estabelecimento> implements IDaoEstabelecimento {
 
 	public EstabelecimentoDAO(EntityManagerFactory emf) {
 		super(emf);

@@ -1,4 +1,4 @@
-package seguranca;
+package erro;
 
 public class LoginInvalidoException extends Exception {
 	

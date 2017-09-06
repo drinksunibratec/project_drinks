@@ -8,15 +8,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
-import javax.persistence.TypedQuery;
 
-public abstract class DaoGenerico<Entidade> implements IDaoGenerico<Entidade>{
+public abstract class DAOGenerico<Entidade> implements IDAOGenerico<Entidade>{
 
 	protected EntityManagerFactory entityManagerFactory;
 	protected Class<Entidade> classePersistente;
 	
 	@SuppressWarnings("unchecked")
-	public DaoGenerico(EntityManagerFactory emf){
+	public DAOGenerico(EntityManagerFactory emf){
 		this.entityManagerFactory = emf;
 		ParameterizedType parameterizedType = (ParameterizedType) getClass().getGenericSuperclass();  
 	    classePersistente = (Class<Entidade>) parameterizedType.getActualTypeArguments()[0];  

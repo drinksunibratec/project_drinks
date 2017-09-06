@@ -2,7 +2,7 @@ package dados.genericos;
 
 import java.util.List;
 
-public interface IDaoGenerico<Entidade> {
+public interface IDAOGenerico<Entidade> {
 
 	public void inserir(Entidade entidade);
 	

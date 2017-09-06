@@ -1,4 +1,4 @@
-package seguranca;
+package controller;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -6,9 +6,9 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.security.auth.login.LoginException;
 
+import basicas.Estabelecimento;
 import fachada.DrinksBusiness;
 import fachada.IDrinksBusiness;
-import basicas.Estabelecimento;
 
 @ManagedBean
 @SessionScoped
