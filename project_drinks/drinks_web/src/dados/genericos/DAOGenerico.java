@@ -21,6 +21,7 @@ public abstract class DAOGenerico<Entidade> implements IDAOGenerico<Entidade>{
 	    classePersistente = (Class<Entidade>) parameterizedType.getActualTypeArguments()[0];  
 	}
 	
+	@Override
 	public final void alterar(Entidade entidade) {
 		EntityManager em = this.getEntityManagerFactory().createEntityManager();
 
@@ -40,6 +41,7 @@ public abstract class DAOGenerico<Entidade> implements IDAOGenerico<Entidade>{
 		}
 	}
 
+	@Override
 	public final void inserir(Entidade entidade) {
 		EntityManager em = this.getEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = em.getTransaction();		
@@ -78,6 +80,7 @@ public abstract class DAOGenerico<Entidade> implements IDAOGenerico<Entidade>{
 		}
 	}
 
+	@Override
 	public final void remover(Entidade entidade) {
 		EntityManager em = this.entityManagerFactory.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
@@ -99,23 +102,25 @@ public abstract class DAOGenerico<Entidade> implements IDAOGenerico<Entidade>{
 	}
 
 	
+	@Override
 	public final Entidade consultarPorId(Integer chave) {
 		Entidade instance = null;
 		EntityManager em = this.entityManagerFactory.createEntityManager();
 		
 		try {
-			instance = (Entidade) em.find(classePersistente, chave);
+			instance = em.find(classePersistente, chave);
 		} catch (RuntimeException re) {
 			re.printStackTrace();
 		}
 		return instance;
 	}
 
+	@Override
 	public List<Entidade> consultarTodos() {
 		List<Entidade> instance = null;
 		EntityManager em = this.entityManagerFactory.createEntityManager();
 		try {
-			instance = ((List<Entidade>) em.createQuery(
+			instance = (em.createQuery(
 					"from " + getPersistentClass().getName()).getResultList());
 		} catch (RuntimeException re) {
 			re.printStackTrace();
@@ -125,13 +130,14 @@ public abstract class DAOGenerico<Entidade> implements IDAOGenerico<Entidade>{
 		return instance;
 	}
 
+	@Override
 	public List<Entidade> consultarTodos(Integer indiceInicial,
 			Integer quantidade) {
 		
 		List<Entidade> instance = null;
 		EntityManager em = this.entityManagerFactory.createEntityManager();
 		try {
-			instance = ((List<Entidade>) em.createQuery(
+			instance = (em.createQuery(
 					"from " + getPersistentClass().getName()).setMaxResults(quantidade).getResultList());
 		} catch (RuntimeException re) {
 			re.printStackTrace();
