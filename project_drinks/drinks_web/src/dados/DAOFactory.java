@@ -5,6 +5,8 @@ import javax.persistence.Persistence;
 
 import com.mysql.jdbc.EscapeTokenizer;
 
+import dados.geral.ProdutoDAO;
+
 public class DAOFactory {
 	
 	private static final EntityManagerFactory factory;
@@ -25,6 +27,11 @@ public class DAOFactory {
 	
 	public static DaoEstabelecimento getEstabelecimentoDAO(){
 		DaoEstabelecimento dao = new DaoEstabelecimento(factory);
+		return dao;
+	}
+	
+	public static ProdutoDAO getProdutoDAO(){
+		ProdutoDAO dao = new ProdutoDAO(factory);
 		return dao;
 	}
 
