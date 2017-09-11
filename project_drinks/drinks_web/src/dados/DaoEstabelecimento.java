@@ -10,9 +10,9 @@ import javax.security.auth.login.LoginException;
 import basicas.Estabelecimento;
 import dados.genericos.DAOGenerico;
 
-public class EstabelecimentoDAO extends DAOGenerico<Estabelecimento> implements IDaoEstabelecimento {
+public class DaoEstabelecimento extends DAOGenerico<Estabelecimento> implements IDaoEstabelecimento {
 
-	public EstabelecimentoDAO(EntityManagerFactory emf) {
+	public DaoEstabelecimento(EntityManagerFactory emf) {
 		super(emf);
 		// TODO Auto-generated constructor stub
 	}
@@ -28,7 +28,7 @@ public class EstabelecimentoDAO extends DAOGenerico<Estabelecimento> implements 
 			return query.getSingleResult();
 
 		} catch (NoResultException noe) {
-			System.out.println("Login/Senha Inválidos!");
+			System.out.println("Login/Senha Invalidos!");
 			throw new LoginException();
 
 		} catch (Exception e) {

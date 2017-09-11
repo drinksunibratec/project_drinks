@@ -10,6 +10,7 @@ import basicas.Estabelecimento;
 import fachada.DrinksBusiness;
 import fachada.IDrinksBusiness;
 
+@SuppressWarnings("deprecation")
 @ManagedBean
 @SessionScoped
 public class LoginBean {
@@ -23,7 +24,6 @@ public String efetuarLogin(){
 		
 		try {
 			estabelecimentoLogado = fachada.efetuarLogin(eMail, senha);
-			//return "/home.xhtml?faces-redirect=true";
 			return "/cadastro_estab.xhtml?faces-redirect=true";
 		} catch (LoginException e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Login ou Senha Inexistente!"));
