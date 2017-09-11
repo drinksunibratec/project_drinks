@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 
+import seguranca.TipoUsuario;
+
 @Entity
 @NamedQuery(name="efetuarLogin", query="Select e from Estabelecimento e where e.eMail = :eMail and e.senha = :senha")
 public class Estabelecimento {
@@ -29,6 +31,8 @@ public class Estabelecimento {
 	
 	@Column (nullable = false, length = 14)
 	private String cnpj;
+	
+	private TipoUsuario tipo;
 	
 	private Endereco endereco;
 	
@@ -85,6 +89,14 @@ public class Estabelecimento {
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
+	
+	public TipoUsuario getTipo() {
+		return tipo;
+	}
+	
+	public void setTipo(TipoUsuario tipo) {
+		this.tipo = tipo;
+	}
 
 	public Endereco getEndereco() {
 		return endereco;
@@ -111,7 +123,7 @@ public class Estabelecimento {
 	}
 
 	public Estabelecimento(Integer codEstabelecimento, String razaoSocial, String nomeFantasia, String eMail,
-			String senha, String cnpj, Endereco endereco, String latitude, String longitude) {
+			String senha, String cnpj, Endereco endereco, TipoUsuario tipo, String latitude, String longitude) {
 		super();
 		this.codEstabelecimento = codEstabelecimento;
 		this.razaoSocial = razaoSocial;
@@ -119,6 +131,7 @@ public class Estabelecimento {
 		this.eMail = eMail;
 		this.senha = senha;
 		this.cnpj = cnpj;
+		this.tipo = tipo;
 		this.endereco = endereco;
 		this.latitude = latitude;
 		this.longitude = longitude;

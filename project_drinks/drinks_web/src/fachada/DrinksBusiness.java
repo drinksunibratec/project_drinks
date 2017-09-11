@@ -46,7 +46,10 @@ public class DrinksBusiness implements IDrinksBusiness{
 			throws LoginException {
 		return DAOFactory.getEstabelecimentoDAO().efetuarLogin(eMail, senha);
 	}
+	
+	
 
+	//Cliente
 	@Override
 	public void inserirCLiente(Cliente entidade) {
 		DAOFactory.getClienteDAO().inserir(entidade);

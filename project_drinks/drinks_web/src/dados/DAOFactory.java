@@ -25,8 +25,8 @@ public class DAOFactory {
 		return dao;
 	}
 	
-	public static EstabelecimentoDAO getEstabelecimentoDAO(){
-		EstabelecimentoDAO dao = new EstabelecimentoDAO(factory);
+	public static DaoEstabelecimento getEstabelecimentoDAO(){
+		DaoEstabelecimento dao = new DaoEstabelecimento(factory);
 		return dao;
 	}
 	
