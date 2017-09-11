@@ -2089,8 +2089,9 @@ pre code {
     margin-left: 0;
   }
 }
+/*Cor da tabela*/
 table {
-  background-color: transparent;
+  background-color: #c0c0c0;
 }
 th {
   text-align: left;
@@ -2109,7 +2110,7 @@ th {
   padding: 8px;
   line-height: 1.42857143;
   vertical-align: top;
-  border-top: 1px solid #ddd;
+  border-top: 5px solid #ddd;
 }
 .table > thead > tr > th {
   vertical-align: bottom;
@@ -2448,7 +2449,11 @@ input[type="datetime-local"].input-lg,
 input[type="month"].input-lg {
   line-height: 46px;
 }
-.form-group {
+
+/*espaço entre os inputs*/
+.form-group { 
+  padding: 50px;  
+  margin-top: 310px;  
   margin-bottom: 15px;
 }
 .radio,
@@ -3930,7 +3935,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   padding: 35px 35px;
   font-size: 30px;
   font-family: fantasy;
-  line-height: 30px;
+  line-height: 50px;
   color: #FDC01F;
 }
 .navbar-brand1:hover,
