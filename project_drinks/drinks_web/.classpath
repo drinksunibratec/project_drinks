@@ -25,5 +25,13 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/bootstrap-1.0.10.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/casablanca-1.0.10.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/glass-x-1.0.10.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-context-4.3.10.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-core-4.3.10.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-expression-4.3.10.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-jdbc-4.3.10.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-orm-4.3.10.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-web-4.3.10.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-webmvc-4.3.10.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javax.ws.rs-api-2.0.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
