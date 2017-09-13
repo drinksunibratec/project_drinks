@@ -80,7 +80,7 @@ body {
 }
 
 /*Lateral do Menu*/
-#lateral {
+#lateralPricipal {
 	padding:0 50px 0 0;
 	-moz-transition: all 0.5s ease;
 		-webkit-transition: all 0.5s ease;
@@ -97,10 +97,11 @@ body {
 	overflow:hidden;
 	width:330px; 
 	position:fixed;
-	top:265px;
+	top:264px;
 	left:-320px;
-	}
-#lateral:before {
+}
+
+#lateralPricipal:before {
 	z-index:1000;
 	content: url(icone-menu.png);
 	font-size:2em;
@@ -109,10 +110,10 @@ body {
 	left:4px;
 	top:45px;
 	}
-#lateral:hover:before, #lateral:focus:before {
+#lateralPricipal:hover:before, #lateralPricipal:focus:before {
 left:-500px
 	}
-#lateral:hover, #lateral:focus,  #lateral:active  {
+#lateralPricipal:hover, #lateralPricipal:focus,  #lateralPricipal:active  {
 	overflow-y:scroll;
 	-moz-transform: translate(320px, 0);
 		-webkit-transform: translate(320px, 0);
@@ -122,12 +123,136 @@ left:-500px
 	}	
         
 /*Estilização das seções do Menu*/
-#lateral .box {
+#lateralPricipal .box {
 	list-style-type:none;
 	margin-bottom:1em;;
 	padding-bottom:1em;
 	}
-#lateral h3 {
+#lateralPricipal h3 {
+	display:inline-block;
+	font-weight:bold;
+	font-size:1.6em;
+	font-style:normal;
+	padding-bottom:0.2em;
+	margin: 4em 0 2em 0.81em;
+	color:rgb(255,255,255);
+	border-bottom: 4px solid rgb(155,155,155);
+}
+
+/**************************************************************************************************/
+        
+#lateralEstabelecimento {
+	padding:0 50px 0 0;
+	-moz-transition: all 0.5s ease;
+		-webkit-transition: all 0.5s ease;
+			-o-transition: all 0.5s ease;
+				transition: all 0.5s ease;
+	font-size:1.2em;
+	background: #212121;
+/*	background-image: -moz-linear-gradient(135deg, rgb(3,8,12), rgb(16,57,79));
+     background-image: -webkit-linear-gradient(135deg, rgb(3,8,12), rgb(16,57,79));
+      background-image: -o-linear-gradient(135deg, rgb(3,8,12), rgb(16,57,79) );
+       background-image: -ms-linear-gradient(135deg, rgb(3,8,12), rgb(16,57,79));
+        background-image: linear-gradient(135deg, rgb(3,8,12), rgb(16,57,79));*/
+	height:100%;
+	overflow:hidden;
+	width:330px; 
+	position:fixed;
+	top:264px;
+	left:-320px;
+}
+
+#lateralEstabelecimento:before {
+	z-index:1000;
+	content: url(icone-menu.png);
+	font-size:2em;
+	color:white;
+	position:fixed;
+	left:4px;
+	top:45px;
+}
+#lateralEstabelecimento:hover:before, #lateralEstabelecimento:focus:before {
+left:-500px
+}
+#lateralEstabelecimento:hover, #lateralEstabelecimento:focus,  #lateralEstabelecimento:active  {
+	overflow-y:scroll;
+	-moz-transform: translate(320px, 0);
+		-webkit-transform: translate(320px, 0);
+			-o-transform: translate(320px, 0);
+				transform: translate(320px, 0);
+	padding-right:0;
+}	
+        
+/*Estilização das seções do Menu*/
+#lateralEstabelecimento .box {
+	list-style-type:none;
+	margin-bottom:1em;;
+	padding-bottom:1em;
+}
+#lateralEstabelecimento h3 {
+	display:inline-block;
+	font-weight:bold;
+	font-size:1.6em;
+	font-style:normal;
+	padding-bottom:0.2em;
+	margin: 4em 0 2em 0.81em;
+	color:rgb(255,255,255);
+	border-bottom: 4px solid rgb(155,155,155);
+}
+
+/**************************************************************************************************/
+
+
+        
+#lateralCliente {
+	padding:0 50px 0 0;
+	-moz-transition: all 0.5s ease;
+		-webkit-transition: all 0.5s ease;
+			-o-transition: all 0.5s ease;
+				transition: all 0.5s ease;
+	font-size:1.2em;
+	background: #212121;
+/*	background-image: -moz-linear-gradient(135deg, rgb(3,8,12), rgb(16,57,79));
+     background-image: -webkit-linear-gradient(135deg, rgb(3,8,12), rgb(16,57,79));
+      background-image: -o-linear-gradient(135deg, rgb(3,8,12), rgb(16,57,79) );
+       background-image: -ms-linear-gradient(135deg, rgb(3,8,12), rgb(16,57,79));
+        background-image: linear-gradient(135deg, rgb(3,8,12), rgb(16,57,79));*/
+	height:100%;
+	overflow:hidden;
+	width:330px; 
+	position:fixed;
+	top:264px;
+	left:-320px;
+	}
+        
+#lateralCliente:before {
+	z-index:1000;
+	content: url(icone-menu.png);
+	font-size:2em;
+	color:white;
+	position:fixed;
+	left:4px;
+	top:45px;
+	}
+#lateralCliente:hover:before, #lateralCliente:focus:before {
+left:-500px
+	}
+#lateralCliente:hover, #lateralCliente:focus,  #lateralCliente:active  {
+	overflow-y:scroll;
+	-moz-transform: translate(320px, 0);
+		-webkit-transform: translate(320px, 0);
+			-o-transform: translate(320px, 0);
+				transform: translate(320px, 0);
+	padding-right:0;
+	}	
+        
+/*Estilização das seções do Menu*/
+#lateralCliente .box {
+	list-style-type:none;
+	margin-bottom:1em;;
+	padding-bottom:1em;
+	}
+#lateralCliente h3 {
 	display:inline-block;
 	font-weight:bold;
 	font-size:1.6em;
@@ -170,3 +295,95 @@ left:-500px
             margin: 300px;
         }
         /*RESPONSIVO*/
+        
+/*Css do Menu*/
+
+/*.wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+       
+  .nav {
+    background: #FFF;
+    z-index: 200;
+    position: fixed;
+    width: 100%;
+    font-size: 1em;
+    overflow: auto;
+  }
+       
+     .nav ul {
+        padding: 1em;
+      }
+       
+        li {
+	         display: inline-block;
+	         margin-right: 2em;
+         }
+       
+           a {
+	           text-decoration: none;
+	           color: #444;
+           }
+       
+             a:hover {
+       		      color: red;
+             }
+       
+       .nav-toggle {
+       		display: none;
+       }
+       
+.foto {
+    width: 100%;
+}
+
+Media Queries
+@media only screen and (max-width: 800px) {
+.wrap {
+	 max-width: 100%;
+	 margin: 0;
+}
+  
+  .drop {
+     height: 48px;
+     position: relative;
+	   z-index: 1000;
+  }
+  
+  .nav.nav-aberta {
+		   position: relative;
+		   padding: 0 0 0.5em 0;
+		   height: 0;
+	 }   
+	       
+      .nav ul {
+	        padding: .5em;
+	        margin: 0;
+          background: #444;
+	     }		
+	       
+	       li {
+		         margin: 0;
+		         padding: 0;
+		         display: block;
+		         border-bottom: 1px solid #FFF;
+	        }
+       			
+	           li a {
+		           padding: 0.5em 0 0.5em 0;
+		           display: block;
+               color: #FFF;
+	           }
+  
+            li:last-child {
+              border-bottom:none;
+            }
+	       
+	       .nav-toggle {
+	       		display: block;
+	       		padding: .4em;
+	       		margin: .5em 0;
+	       }
+  
+}*/

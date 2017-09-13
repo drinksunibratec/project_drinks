@@ -2452,8 +2452,8 @@ input[type="month"].input-lg {
 
 /*espaço entre os inputs*/
 .form-group { 
-  padding: 50px;  
-  margin-top: 310px;  
+  padding: 200px;  
+  margin-top: 130px;  
   margin-bottom: 15px;
 }
 .radio,
