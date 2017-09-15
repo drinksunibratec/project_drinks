@@ -5,7 +5,7 @@ import javax.persistence.Persistence;
 
 import com.mysql.jdbc.EscapeTokenizer;
 
-import dados.geral.ProdutoDAO;
+import dados.ProdutoDAO;
 
 public class DAOFactory {
 	

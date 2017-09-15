@@ -13,7 +13,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import controller.LoginBean;
+import managebean.LoginBean;
 
 /**
  * Servlet Filter implementation class LoginAutenticadoFilter

@@ -20,9 +20,10 @@ public class ClienteRestController {
 	
 	
 	@SuppressWarnings("rawtypes")
-	@RequestMapping(value = "/", method = RequestMethod.POST, consumes = {"application/json"})
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public @ResponseBody ResponseEntity insert(@Context HttpServletRequest request, @RequestBody Cliente cliente){
 		ClienteBusiness.getInstancia().insert(cliente);
+		System.out.println("POrraaa!!!");
 		return new ResponseEntity(HttpStatus.OK);
 	}
 
