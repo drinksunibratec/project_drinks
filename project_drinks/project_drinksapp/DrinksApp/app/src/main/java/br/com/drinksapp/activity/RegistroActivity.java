@@ -1,5 +1,6 @@
 package br.com.drinksapp.activity;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import android.app.ProgressDialog;
@@ -10,30 +11,36 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import com.android.volley.Request.Method;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import br.com.drinksapp.R;
 import br.com.drinksapp.app.AppConfig;
 import br.com.drinksapp.app.AppController;
+import br.com.drinksapp.basicas.Cliente;
+import br.com.drinksapp.dbconect.DBDrinksConnect;
 import br.com.drinksapp.helper.SQLiteHandler;
 import br.com.drinksapp.helper.SessionManager;
+import br.com.drinksapp.util.Validator;
 
 public class RegistroActivity extends AppCompatActivity {
     private static final String TAG = RegistroActivity.class.getSimpleName();
-    private Button btnRegister;
+    private Button mBntCadastrar;
     private Button btnLinkToLogin;
-    private EditText inputFullName;
-    private EditText inputEmail;
-    private EditText inputPassword;
-    private EditText inputTelefone;
-    private ProgressDialog pDialog;
+    private EditText mEdtNome;
+    private EditText mEdtEmail;
+    private EditText mEdtSenha;
+    private EditText mEdtTelefone;
+    private ProgressDialog mProgressDialog;
     private SessionManager session;
     private SQLiteHandler db;
 
@@ -42,16 +49,16 @@ public class RegistroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
 
-        inputFullName = (EditText) findViewById(R.id.name);
-        inputEmail = (EditText) findViewById(R.id.email);
-        inputPassword = (EditText) findViewById(R.id.password);
-        inputTelefone = (EditText) findViewById(R.id.telefone);
-        btnRegister = (Button) findViewById(R.id.btnRegister);
+        mEdtNome = (EditText) findViewById(R.id.name);
+        mEdtEmail = (EditText) findViewById(R.id.email);
+        mEdtSenha = (EditText) findViewById(R.id.password);
+        mEdtTelefone = (EditText) findViewById(R.id.telefone);
+        mBntCadastrar = (Button) findViewById(R.id.btnRegister);
         btnLinkToLogin = (Button) findViewById(R.id.btnLinkToLoginScreen);
 
         // Progress dialog
-        pDialog = new ProgressDialog(this);
-        pDialog.setCancelable(false);
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setCancelable(false);
 
         // Session manager
         session = new SessionManager(getApplicationContext());
@@ -69,22 +76,7 @@ public class RegistroActivity extends AppCompatActivity {
         }
 
         // Register Button Click event
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                String nome = inputFullName.getText().toString().trim();
-                String email = inputEmail.getText().toString().trim();
-                String senha = inputPassword.getText().toString().trim();
-                String telefone = inputTelefone.getText().toString().trim();
-
-                if (!nome.isEmpty() && !email.isEmpty() && !senha.isEmpty() && !telefone.isEmpty()) {
-                    registerUser(nome, email, senha, telefone);
-                } else {
-                    Toast.makeText(getApplicationContext(),
-                            "Por favor, Digite Nome, Email, Senha e Telefone!", Toast.LENGTH_LONG)
-                            .show();
-                }
-            }
-        });
+        mBntCadastrar.setOnClickListener(new BotaoRegistro());
 
         // Link to Login Screen
         btnLinkToLogin.setOnClickListener(new View.OnClickListener() {
@@ -97,18 +89,57 @@ public class RegistroActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    private class TaskCadastrarUsuario extends AsyncTask<Cliente, Void, Boolean> {
+
+        @Override
+        protected void onPreExecute() {
+            mProgressDialog.setMessage("Carregando... Aguarde!");
+            showDialog();
+        }
+
+        @Override
+        protected Boolean doInBackground(Cliente... params) {
+
+            boolean inserido = DBDrinksConnect.getInstancia().insertCliente(params[0]);
+            return inserido;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean clienteInserido) {
+
+            if (clienteInserido) {
+
+                Toast.makeText(RegistroActivity.this, "Usuário cadastrado com sucesso!", Toast.LENGTH_LONG).show();
+                finish();
+
+            } else {
+
+                mEdtEmail.setError("Email já cadastrado");
+                mEdtEmail.setFocusable(true);
+                mEdtEmail.requestFocus();
+                Toast.makeText(RegistroActivity.this, "Usuário com esse e-mail já existe!", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    private void initAsyncTask(Cliente cliente) {
+        TaskCadastrarUsuario taskCadastrarUsuario = new TaskCadastrarUsuario();
+        taskCadastrarUsuario.execute(cliente);
     }
 
     /**
      * Function to store user in MySQL database will post params(tag, name,
      * email, password) to register url
-     * */
+     */
     private void registerUser(final String nome, final String email, final String senha, final String telefone) {
         // Tag used to cancel the request
 
         String tag_string_req = "req_register";
 
-        pDialog.setMessage("Salvando... Aguarde!");
+        mProgressDialog.setMessage("Salvando... Aguarde!");
         showDialog();
 
         StringRequest strReq = new StringRequest(Method.POST,
@@ -180,12 +211,44 @@ public class RegistroActivity extends AppCompatActivity {
     }
 
     private void showDialog() {
-        if (!pDialog.isShowing())
-            pDialog.show();
+        if (!mProgressDialog.isShowing())
+            mProgressDialog.show();
     }
 
     private void hideDialog() {
-        if (pDialog.isShowing())
-            pDialog.dismiss();
+        if (mProgressDialog.isShowing())
+            mProgressDialog.dismiss();
+    }
+
+    class BotaoRegistro implements View.OnClickListener {
+
+        @Override
+        public void onClick(View view) {
+            String nome = mEdtNome.getText().toString().trim();
+            String email = mEdtEmail.getText().toString().trim();
+            String senha = mEdtSenha.getText().toString().trim();
+            String telefone = mEdtTelefone.getText().toString().trim();
+
+            Validator.validateNotNull(mEdtNome, "Preencha o campo nome");
+            Validator.validateNotNull(mEdtSenha, "Preencha o campo Senha");
+            Validator.validateNotNull(mEdtTelefone, "Preencha o campo Telefone");
+
+            boolean email_valido = Validator.validateEmail(mEdtEmail.getText().toString());
+
+            if (!email_valido) {
+                mEdtEmail.setError("Preencha o campo email");
+                mEdtEmail.setFocusable(true);
+                mEdtEmail.requestFocus();
+            }
+
+            if (!email_valido) {
+                return;
+            }
+
+            registerUser(nome, email, senha, telefone);
+//                    Cliente cliente = new Cliente(nome, email, senha, telefone);
+//                    initAsyncTask(cliente);
+        }
     }
 }
+

@@ -13,7 +13,7 @@
     <string name="btn_login">Entrar</string>
     <string name="btn_register">REGISTRO</string>
     <string name="btn_link_to_register">Clique aqui para se cadastrar</string>
-    <string name="btn_link_to_login">Se ja é Registrado! Faça Login.</string>
+    <string name="btn_link_to_login">Se ja é cadastrado, acesso aqui.</string>
     <string name="welcome">Welcome</string>
     <string name="btn_logout">LOGOUT</string>
     <string name="name">Fullname</string>
