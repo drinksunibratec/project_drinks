@@ -26,13 +26,14 @@ import br.com.drinksapp.app.AppConfig;
 import br.com.drinksapp.app.AppController;
 import br.com.drinksapp.helper.SQLiteHandler;
 import br.com.drinksapp.helper.SessionManager;
+import br.com.drinksapp.util.Validator;
 
-public class LoginActivity extends AppCompatActivity{
+public class LoginActivity extends AppCompatActivity {
     private static final String TAG = RegistroActivity.class.getSimpleName();
-    private Button btnLogin;
-    private Button btnLinkToRegister;
-    private EditText inputEmail;
-    private EditText inputPassword;
+    private Button mBtnLogin;
+    private Button mBtnLinkToRegister;
+    private EditText mEdtEmail;
+    private EditText mEdtSenha;
     private ProgressDialog pDialog;
     private SessionManager session;
     private SQLiteHandler db;
@@ -42,10 +43,10 @@ public class LoginActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        inputEmail = (EditText) findViewById(R.id.email);
-        inputPassword = (EditText) findViewById(R.id.password);
-        btnLogin = (Button) findViewById(R.id.btnLogin);
-        btnLinkToRegister = (Button) findViewById(R.id.btnLinkToRegisterScreen);
+        mEdtEmail = (EditText) findViewById(R.id.email);
+        mEdtSenha = (EditText) findViewById(R.id.password);
+        mBtnLogin = (Button) findViewById(R.id.btnLogin);
+        mBtnLinkToRegister = (Button) findViewById(R.id.btnLinkToRegisterScreen);
 
 
         pDialog = new ProgressDialog(this);
@@ -57,24 +58,9 @@ public class LoginActivity extends AppCompatActivity{
             startActivity(intent);
             finish();
         }
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        mBtnLogin.setOnClickListener(new BotaoLogin());
 
-            public void onClick(View view) {
-                String email = inputEmail.getText().toString().trim();
-                String senha = inputPassword.getText().toString().trim();
-
-                if (!email.isEmpty() && !senha.isEmpty()) {
-                    checkLogin(email, senha);
-                } else {
-                    Toast.makeText(getApplicationContext(),
-                            "Por Favor, Digite Email e Senha!", Toast.LENGTH_LONG)
-                            .show();
-                }
-            }
-
-        });
-
-        btnLinkToRegister.setOnClickListener(new View.OnClickListener() {
+        mBtnLinkToRegister.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(),
@@ -88,7 +74,7 @@ public class LoginActivity extends AppCompatActivity{
 
     /**
      * function to verify login details in mysql db
-     * */
+     */
     private void checkLogin(final String email, final String senha) {
         // Tag used to cancel the request
         String tag_string_req = "req_login";
@@ -167,5 +153,27 @@ public class LoginActivity extends AppCompatActivity{
     private void hideDialog() {
         if (pDialog.isShowing())
             pDialog.dismiss();
+    }
+
+    class BotaoLogin implements View.OnClickListener {
+
+
+        @Override
+        public void onClick(View view) {
+            String email = mEdtEmail.getText().toString().trim();
+            String senha = mEdtSenha.getText().toString().trim();
+
+            Validator.validateNotNull(mEdtSenha, "Preencha o campo Senha");
+
+            boolean email_valido = Validator.validateEmail(mEdtEmail.getText().toString());
+
+            if (!email_valido) {
+                mEdtEmail.setError("Email inválido");
+                mEdtEmail.setFocusable(true);
+                mEdtEmail.requestFocus();
+            }
+
+            checkLogin(email, senha);
+        }
     }
 }
