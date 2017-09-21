@@ -6,5 +6,7 @@ public interface IDrinksBusiness {
 	
 	
 	public void inserirCLiente(Cliente cliente);
+	
+	public boolean loginCliente(Cliente cliente);
 
 }

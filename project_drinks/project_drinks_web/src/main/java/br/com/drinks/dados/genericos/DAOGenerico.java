@@ -119,6 +119,7 @@ public abstract class DAOGenerico<Entidade> implements IDAOGenerico<Entidade>{
 		return instance;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Entidade> consultarTodos() {
 		List<Entidade> instance = null;
@@ -134,6 +135,7 @@ public abstract class DAOGenerico<Entidade> implements IDAOGenerico<Entidade>{
 		return instance;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Entidade> consultarTodos(Integer indiceInicial,
 			Integer quantidade) {

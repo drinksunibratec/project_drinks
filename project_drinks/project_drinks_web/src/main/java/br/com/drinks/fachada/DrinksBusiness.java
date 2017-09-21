@@ -17,11 +17,17 @@ public class DrinksBusiness implements IDrinksBusiness{
 	}
 
 	
-	//Cliente
+	//---------Cliente-------
 	@Override
 	public void inserirCLiente(Cliente entidade) {
 		DAOFactory.getClienteDAO().inserir(entidade);
 		
+	}
+
+
+	@Override
+	public boolean loginCliente(Cliente cliente) {
+		return DAOFactory.getClienteDAO().login(cliente);
 	}
 
 	

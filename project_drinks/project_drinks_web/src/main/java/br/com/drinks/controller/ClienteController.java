@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.drinks.basicas.Cliente;
 import br.com.drinks.basicas.Message;
 import br.com.drinks.business.ClienteBusiness;
+import br.com.drinks.utils.HttpUtils;
 
 @RestController
 @RequestMapping("/clientes")
@@ -25,6 +26,13 @@ public class ClienteController {
 	public @ResponseBody ResponseEntity insert(@Context HttpServletRequest request, @RequestBody Cliente cliente){
 		ClienteBusiness.getInstancia().insert(cliente);
 		return new ResponseEntity(HttpStatus.OK);
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = {"application/json"})
+	public @ResponseBody ResponseEntity login(@Context HttpServletRequest request, @RequestBody Cliente cliente){
+		boolean loginOK = ClienteBusiness.getInstancia().login(cliente);
+		return new ResponseEntity(loginOK, HttpUtils.getHeaders(), HttpStatus.OK);
 	}
 	
 	

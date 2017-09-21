@@ -43,5 +43,22 @@ public class ClienteBusiness extends BasicBusiness<Cliente> {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public boolean login(Cliente cliente) {
+		
+		boolean loginOK = false;
+		
+		if((cliente.geteMail() == null || cliente.geteMail().equals(""))){
+			//TODO lançar exceção
+			return loginOK;
+		}
+		if(cliente.getSenha() == null || cliente.getSenha().equals("")) {
+			//TODO lançar exceção
+			return loginOK;
+		}
+		
+		loginOK = fachada.loginCliente(cliente);
+		return loginOK;
+	}
 
 }
