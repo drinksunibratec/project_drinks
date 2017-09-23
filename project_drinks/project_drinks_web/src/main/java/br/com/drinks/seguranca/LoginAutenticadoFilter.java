@@ -1,4 +1,4 @@
-package seguranca;
+package br.com.drinks.seguranca;
 
 import java.io.IOException;
 
@@ -12,6 +12,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import br.com.drinks.managedbean.LoginBean;
 
 /**
  * Servlet Filter implementation class LoginAutenticadoFilter

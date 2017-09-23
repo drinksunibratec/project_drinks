@@ -8,6 +8,7 @@
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
 			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 			<property name="javax.persistence.jdbc.user" value="comumana_drinks" />
 			<property name="javax.persistence.jdbc.password" value="Drinks@2017" />
@@ -16,7 +17,7 @@
 			
 		</properties>
 
-<!--  <property name="hibernate.hbm2ddl.auto" value="update" />  -->
+<!--    -->
 
 	</persistence-unit>
 </persistence>

@@ -1,4 +1,4 @@
-package dao;
+package br.com.drinks.dados.dao;
 
 
 import javax.persistence.EntityManager;
@@ -7,14 +7,15 @@ import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import javax.security.auth.login.LoginException;
 
-import basicas.Estabelecimento;
-import dados.genercio.DAOGenerico;
+import br.com.drinks.basicas.Estabelecimento;
+import br.com.drinks.dados.genericos.DAOGenerico;
 
 
-public class EstabelecimentoDAO extends DAOGenerico<Estabelecimento> implements IDaoEstabelecimento {
+
+public class EstabelecimentoDAO extends DAOGenerico<Estabelecimento> {
 
 	public EstabelecimentoDAO(EntityManagerFactory emf) {
-		super();
+		super(emf);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -22,11 +23,11 @@ public class EstabelecimentoDAO extends DAOGenerico<Estabelecimento> implements 
 			throws LoginException {
 
 		try {
-			TypedQuery<Estabelecimento> query = ((EntityManager) getEntityManager()).createNamedQuery(
+			TypedQuery<Estabelecimento> query = ((EntityManager) getEntityManagerFactory()).createNamedQuery(
 					"efetuarLogin", Estabelecimento.class);
 			query.setParameter("eMail", eMail);
 			query.setParameter("senha", senha);
-			return query.getSingleResult();
+			return (Estabelecimento)query.getSingleResult();
 
 		} catch (NoResultException noe) {
 			System.out.println("Login/Senha Invalidos!");

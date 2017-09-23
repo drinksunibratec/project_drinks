@@ -1,14 +1,12 @@
-package basicas;
+package br.com.drinks.basicas;
 
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,8 +30,8 @@ public class Pedido {
 	@JoinColumn (name = "codEstabelecimento")
 	private Estabelecimento estabelecimento;
 	
-	@ElementCollection(fetch=FetchType.LAZY)
-	private Collection<Produto> produtos;
+//	@ElementCollection(fetch=FetchType.LAZY)
+//	private List<Produto> produtos;
 	
 	private Endereco endereco;
 	
@@ -73,13 +71,13 @@ public class Pedido {
 		this.estabelecimento = estabelecimento;
 	}
 
-	public Collection<Produto> getProdutos() {
-		return produtos;
-	}
+//	public List<Produto> getProdutos() {
+//		return produtos;
+//	}
 
-	public void setProdutos(Collection<Produto> produtos) {
-		this.produtos = produtos;
-	}
+//	public void setProdutos(List<Produto> produtos) {
+//		this.produtos = produtos;
+//	}
 
 	public Endereco getEndereco() {
 		return endereco;
@@ -121,13 +119,13 @@ public class Pedido {
 		this.pagamento = pagamento;
 	}
 
-	public Pedido(Integer codPedido, Cliente cliente, Estabelecimento estabelecimento, Collection<Produto> produtos,
+	public Pedido(Integer codPedido, Cliente cliente, Estabelecimento estabelecimento, List<Produto> produtos,
 			Endereco endereco, double valorTotal, Date dataPedido, Status status,Pagamento pagamento) {
 		super();
 		this.codPedido = codPedido;
 		this.cliente = cliente;
 		this.estabelecimento = estabelecimento;
-		this.produtos = produtos;
+//		this.produtos = produtos;
 		this.endereco = endereco;
 		this.valorTotal = valorTotal;
 		this.dataPedido = dataPedido;

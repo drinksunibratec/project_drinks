@@ -1,12 +1,12 @@
-package business;
+package br.com.drinks.controller;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
-import basicas.Estabelecimento;
-import erro.GeralException;
-import fachada.DrinksBusiness;
-import seguranca.TipoUsuario;
+import br.com.drinks.basicas.Estabelecimento;
+import br.com.drinks.erro.GeralException;
+import br.com.drinks.fachada.DrinksBusiness;
+
 
 public class EstabelecimentoController {
 	
@@ -27,8 +27,8 @@ public class EstabelecimentoController {
 		this.estabelecimento = estabelecimento;
 	}
 	
-	public TipoUsuario[] getTiposUsuario(){
-		return TipoUsuario.values();
-	}
+//	public TipoUsuario[] getTiposUsuario(){
+//		return TipoUsuario.values();
+//	}
 
 }

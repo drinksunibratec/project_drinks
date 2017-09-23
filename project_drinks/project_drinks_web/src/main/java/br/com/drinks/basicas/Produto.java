@@ -1,4 +1,4 @@
-package basicas;
+package br.com.drinks.basicas;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

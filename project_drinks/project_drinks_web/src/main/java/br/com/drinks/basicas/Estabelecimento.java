@@ -1,4 +1,4 @@
-package basicas;
+package br.com.drinks.basicas;
 
 
 
@@ -41,7 +41,7 @@ public class Estabelecimento {
 	
 	private Endereco endereco;
 	
-	@ElementCollection(fetch=FetchType.LAZY)
+//	@ElementCollection(fetch=FetchType.LAZY)
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinColumn(name = "CodProduto", insertable = true, updatable = true)
 	private Collection<Produto> produtos;

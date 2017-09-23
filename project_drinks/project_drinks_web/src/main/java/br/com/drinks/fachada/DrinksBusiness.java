@@ -1,7 +1,14 @@
 package br.com.drinks.fachada;
 
+import java.util.List;
+
+import javax.security.auth.login.LoginException;
+
 import br.com.drinks.basicas.Cliente;
+import br.com.drinks.basicas.Estabelecimento;
 import br.com.drinks.dados.genericos.DAOFactory;
+import br.com.drinks.erro.DaoException;
+import br.com.drinks.erro.GeralException;
 
 
 
@@ -29,6 +36,34 @@ public class DrinksBusiness implements IDrinksBusiness{
 	public boolean loginCliente(Cliente cliente) {
 		return DAOFactory.getClienteDAO().login(cliente);
 	}
+
+
+	@Override
+	public void salvarEstabelecimento(Estabelecimento estabelecimento) throws GeralException{
+		DAOFactory.getEstabelecimentoDAO().inserir(estabelecimento);
+		
+	}
+
+
+	@Override
+	public void alterarEstabelecimento(Estabelecimento estabelecimento) throws GeralException {
+		DAOFactory.getEstabelecimentoDAO().alterar(estabelecimento);
+		
+	}
+
+
+	@Override
+	public Estabelecimento efetuarLogin(String email, String senha) throws LoginException {
+		return DAOFactory.getEstabelecimentoDAO().efetuarLogin(email, senha);
+	}
+
+
+	@Override
+	public List<Estabelecimento> consultarTodosOsEstabelecimentos() throws DaoException {
+		return DAOFactory.getEstabelecimentoDAO().consultarTodos();
+	}
+	
+	
 
 	
 	

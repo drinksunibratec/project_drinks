@@ -1,4 +1,4 @@
-package erro;
+package br.com.drinks.erro;
 
 public class GeralException extends Exception {
 

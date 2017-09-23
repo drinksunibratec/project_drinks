@@ -1,11 +1,11 @@
-package basicas;
+package br.com.drinks.basicas;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import dao.DAOFactory;
-import dao.IDaoEstabelecimento;
+import br.com.drinks.dados.genericos.DAOFactory;
+
 
 
 
@@ -17,7 +17,7 @@ public class Teste {
 		EntityManagerFactory emf = null;
 		EntityManager em = null;
 		
-		IDaoEstabelecimento daoEstabelecimento = null;
+		
 		Estabelecimento estabelecimento = new Estabelecimento (null,"SuperAdmin","SuperAdmin","admin@admin.com",
 				"admin123","24582745000174",null,null);
 

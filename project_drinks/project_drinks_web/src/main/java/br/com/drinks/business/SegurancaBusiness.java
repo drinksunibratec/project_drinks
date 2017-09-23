@@ -1,26 +1,21 @@
-package business;
+package br.com.drinks.business;
 
 import javax.security.auth.login.LoginException;
 
-import basicas.Estabelecimento;
-import dao.DAOFactory;
-import dao.IDaoEstabelecimento;
-import erro.LoginInvalidoException;
+import br.com.drinks.basicas.Estabelecimento;
+import br.com.drinks.dados.genericos.DAOFactory;
+import br.com.drinks.erro.LoginInvalidoException;
+
 
 public class SegurancaBusiness {
 	
-	private IDaoEstabelecimento estabelecimentoDAO;
-	
-	public SegurancaBusiness(){
-		estabelecimentoDAO = DAOFactory.getEstabelecimentoDAO();
-	}
 	
 	public Estabelecimento efetuarLogin (String eMail, String senha)
 		throws LoginInvalidoException, LoginException {
-			return estabelecimentoDAO.efetuarLogin(eMail, senha);		
+			return  DAOFactory.getEstabelecimentoDAO().efetuarLogin(eMail, senha);		
 	}
 
 	public void inserirEstabelecimento (Estabelecimento entidade){
-		estabelecimentoDAO.inserir(entidade);
+		 DAOFactory.getEstabelecimentoDAO().inserir(entidade);
 	} 
 }
