@@ -29,7 +29,7 @@ public class LoginBean {
 			//				return "/pages/home_admin.xhtml?faces-redirect=true";
 			//			}else
 			estabelecimentoLogado = fachada.efetuarLogin(eMail, senha);		
-			return "/pages/home_admin_teste.xhtml?faces-redirect=true";
+			return "/pages/home_admin.xhtml?faces-redirect=true";
 		} catch (LoginException e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Login ou Senha Inexistente!"));
 		}

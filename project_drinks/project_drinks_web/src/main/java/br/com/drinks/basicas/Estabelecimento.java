@@ -13,8 +13,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
-import javax.persistence.ElementCollection;
 
+import basicas.Endereco;
+import basicas.Produto;
+
+import javax.persistence.ElementCollection;
 
 @Entity
 @NamedQuery(name="efetuarLogin", query="Select e from Estabelecimento e where e.eMail = :eMail and e.senha = :senha")
@@ -39,9 +42,12 @@ public class Estabelecimento {
 	@Column (nullable = false, length = 14)
 	private String cnpj;
 	
+	@Column (nullable = false, length = 11)
+	private String telefone; 
+	
 	private Endereco endereco;
 	
-//	@ElementCollection(fetch=FetchType.LAZY)
+	@ElementCollection(fetch=FetchType.LAZY)
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinColumn(name = "CodProduto", insertable = true, updatable = true)
 	private Collection<Produto> produtos;
@@ -94,6 +100,14 @@ public class Estabelecimento {
 		this.cnpj = cnpj;
 	}
 
+	public String getTelefone() {
+		return telefone;
+	}
+	
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+	
 	public Endereco getEndereco() {
 		return endereco;
 	}
@@ -111,7 +125,7 @@ public class Estabelecimento {
 	}
 
 	public Estabelecimento(Integer codEstabelecimento, String razaoSocial, String nomeFantasia, String eMail,
-			String senha, String cnpj, Endereco endereco, Collection<Produto> produtos) {
+			String senha, String cnpj, String telefone, Endereco endereco, Collection<Produto> produtos) {
 		super();
 		this.codEstabelecimento = codEstabelecimento;
 		this.razaoSocial = razaoSocial;
@@ -119,6 +133,7 @@ public class Estabelecimento {
 		this.eMail = eMail;
 		this.senha = senha;
 		this.cnpj = cnpj;
+		this.telefone = telefone;
 		this.endereco = endereco;
 		this.produtos = produtos;
 	}

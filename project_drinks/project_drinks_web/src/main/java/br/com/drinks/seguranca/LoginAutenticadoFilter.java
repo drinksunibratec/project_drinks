@@ -24,7 +24,7 @@ public class LoginAutenticadoFilter implements Filter {
 	private static final String[] arquivosEscape = { 
 		"javax.faces.resource",
 		"index.xhtml", 
-		"/pages/home_admin_teste.xhtml"};
+		"/pages/home_admin.xhtml"};
 	
     public LoginAutenticadoFilter() {
         // TODO Auto-generated constructor stub

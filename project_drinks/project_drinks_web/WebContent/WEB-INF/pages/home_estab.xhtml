@@ -7,44 +7,11 @@
 		xmlns:p="http://primefaces.org/ui">
 <h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Cadastro de Estabelecimentos</title>
+<title>Home Estabelecimento</title>
 </h:head>
 	<h:body>
-		<h:form id = "cadastro"><br/>
-			<p:panel id = "pn" header = "Cadastrar Estabelecimentos">
-				<h:panelGrid columns = "1" cellpadding="2">
-				
-					<h:outputLabel for="razaoSocial" value="Razao Social:"/>
-						<p:inputText id="razaoSocial" label="razaoSocial" value="#{livroMB.livro.titulo}"
-							required="true" requiredMessage="Campos obrigatórios não preenchidos">
-						</p:inputText>
-						<br></br>
-					<h:outputLabel for="nomeFantasia" value="Nome Fantasia:" />
-						<p:inputText id="nomeFantasia" label="nomeFantasia" value="#{livroMB.livro.autores}"
-							required="true" requiredMessage="Campos obrigatórios não preenchidos">
-						</p:inputText>						
-						<br></br>
-					<h:outputText value="Tipo:" />  
-			        <p:selectOneMenu value="#{livroMB.tipoLivro.codigo}" effect="fade" >  
-			            <f:selectItem itemLabel="Selecione" itemValue="" />  
-			            <f:selectItems value="#{livroMB.tiposLivro}" var="tipos"
-			            		itemLabel="#{tipos.descricao}" itemValue="#{tipos.codigo}"/>  
-			        </p:selectOneMenu>
-			        
-			        <h:outputLabel for="codProprietario" value="Código do Proprietário" />
-						<p:inputText id="codProprietario" label="autores" value="#{livroMB.pessoa.codigo}">
-						</p:inputText>			
-						
-					<p:commandButton id="ajax1" value="Salvar"  tabindex="1"
-						action="#{livroMB.cadastrarLivro}" ajax="false" />
-					
-					<p:commandButton id="ajax2" value="Pesquisar" tabindex="2"
-				action="/pesquisar_livros.xhtml?faces-redirect=true" immediate="true" ajax="false" /><br/>
-				
-				<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />				
-													
-				</h:panelGrid>
-			</p:panel>
+		<h:form id = "estabelecimento"><br/>
+			<p:panel id = "pn" header = "Aqui será feito o gerenciamento de Pedidos!"/>
 		</h:form>
 	</h:body>
 </html>

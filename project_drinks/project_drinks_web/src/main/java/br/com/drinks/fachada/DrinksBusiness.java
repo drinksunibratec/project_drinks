@@ -21,9 +21,7 @@ public class DrinksBusiness implements IDrinksBusiness{
 			fachada = new DrinksBusiness();
 		}
 		return fachada;
-	}
-
-	
+	}	
 	//---------Cliente-------
 	@Override
 	public void inserirCLiente(Cliente entidade) {
@@ -37,38 +35,30 @@ public class DrinksBusiness implements IDrinksBusiness{
 		return DAOFactory.getClienteDAO().login(cliente);
 	}
 
-
+	//---------Estabelecimento-------
 	@Override
-	public void salvarEstabelecimento(Estabelecimento estabelecimento) throws GeralException{
-		DAOFactory.getEstabelecimentoDAO().inserir(estabelecimento);
-		
+	public void salvarEstabelecimento(Estabelecimento entidade) throws GeralException{
+		DAOFactory.getEstabelecimentoDAO().inserir(entidade);		
 	}
 
-
 	@Override
-	public void alterarEstabelecimento(Estabelecimento estabelecimento) throws GeralException {
-		DAOFactory.getEstabelecimentoDAO().alterar(estabelecimento);
-		
+	public void alterarEstabelecimento(Estabelecimento entidade) throws GeralException {
+		DAOFactory.getEstabelecimentoDAO()alterarEstabelecimento(entidade);			
 	}
-
+	
+	@Override
+	public void excluirEstabelecimento(Estabelecimento entidade) throws GeralException {
+		DAOFactory.getEstabelecimentoDAO().remover(entidade);		
+	}
 
 	@Override
 	public Estabelecimento efetuarLogin(String email, String senha) throws LoginException {
 		return DAOFactory.getEstabelecimentoDAO().efetuarLogin(email, senha);
 	}
 
-
 	@Override
 	public List<Estabelecimento> consultarTodosOsEstabelecimentos() throws DaoException {
 		return DAOFactory.getEstabelecimentoDAO().consultarTodos();
 	}
-	
-	
-
-	
-	
-
-	
-
 
 }

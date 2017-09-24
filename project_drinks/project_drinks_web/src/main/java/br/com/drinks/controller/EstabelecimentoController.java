@@ -27,8 +27,4 @@ public class EstabelecimentoController {
 		this.estabelecimento = estabelecimento;
 	}
 	
-//	public TipoUsuario[] getTiposUsuario(){
-//		return TipoUsuario.values();
-//	}
-
 }

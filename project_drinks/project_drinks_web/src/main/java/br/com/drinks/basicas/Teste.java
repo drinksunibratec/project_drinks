@@ -19,7 +19,7 @@ public class Teste {
 		
 		
 		Estabelecimento estabelecimento = new Estabelecimento (null,"SuperAdmin","SuperAdmin","admin@admin.com",
-				"admin123","24582745000174",null,null);
+				"admin123","24582745000174","81999999999",null,null);
 
 		try {
 			emf = Persistence.createEntityManagerFactory("unitPSC");
