@@ -67,10 +67,10 @@ public class DrinksBusiness implements IDrinksBusiness{
 	public List<Estabelecimento> consultarTodosOsEstabelecimentos() throws DaoException {
 		return DAOFactory.getEstabelecimentoDAO().consultarTodos();
 	}
-<<<<<<< HEAD
+	
+	//---------Produtos-------
 	
 	@Override
-	
 	public void salvarProduto (Produto produto) throws GeralException {
 		DAOFactory.getProdutoDAO().inserir(produto);
 	}
@@ -80,12 +80,10 @@ public class DrinksBusiness implements IDrinksBusiness{
 		DAOFactory.getProdutoDAO().alterar(produto);
 	}
 
-	
-	
+	@Override
+	public List<Produto> consultarTodosOsProdutos() {
+		return DAOFactory.getProdutoDAO().consultarTodos();
+	}
 
-	
-
-=======
->>>>>>> b3c348658033efc22394b78435ed09861d2dd7b7
 
 }

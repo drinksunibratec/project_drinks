@@ -7,37 +7,35 @@ import javax.faces.context.FacesContext;
 import javax.security.auth.login.LoginException;
 
 import br.com.drinks.basicas.Estabelecimento;
-import br.com.drinks.fachada.DrinksBusiness;
-import br.com.drinks.fachada.IDrinksBusiness;
+import br.com.drinks.business.BasicBusiness;
+import br.com.drinks.business.EstabelecimentoBusiness;
 import br.com.drinks.utils.SessionContext;
 
 
 
 @ManagedBean
 @SessionScoped
-public class LoginBean {
+public class LoginBean extends ManagedBeanGenerico<Estabelecimento>{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6881455116163052253L;
 	private String eMail;
 	private String senha;
 	private Estabelecimento estabelecimentoLogado;
-	private IDrinksBusiness fachada = DrinksBusiness.getInstancia();
 
-	public String efetuarLogin(){
+
+
+
+	public String doLogin(){
 
 		try {
-			//			Validação se é Admin!			
-			//			if (estabelecimentoLogado.geteMail() != null && estabelecimentoLogado.geteMail() == "admin@admin.com"){
-			//				return "/pages/home_admin.xhtml?faces-redirect=true";
-			//			}else
-			
-			
-			estabelecimentoLogado = fachada.efetuarLogin(eMail, senha);		
-
-			
+			estabelecimentoLogado = EstabelecimentoBusiness.getInstancia().efeturarLogin(eMail, senha);		
 			if(estabelecimentoLogado != null) {
 				SessionContext.getInstance().setAttribute("estabelecimentoLogado", estabelecimentoLogado);
 				return "/pages/home_admin.xhtml?faces-redirect=true";
-				
+
 			}else{
 				return "/pages/index.xhtml?faces-redirect=true";
 			}
@@ -46,10 +44,12 @@ public class LoginBean {
 		}
 		return null;
 	}
+	
+	
 
-	public String efetuarLogoff(){
-		estabelecimentoLogado = null;
-		return "/index.xhtml?faces-redirect=true";
+	public String doLogout(){
+		SessionContext.getInstance().encerrarSessao();
+		return "/pages/login/index.xhtml?faces-redirect=true";
 	}
 
 	public String geteMail() {
@@ -67,10 +67,35 @@ public class LoginBean {
 	}
 
 	public Estabelecimento getEstabelecimentoLogado() {
-		return estabelecimentoLogado;
+		return (Estabelecimento) SessionContext.getInstance().getEstabelecimentoLogado();
 	}
 	public void setEstabelecimentoLogado(Estabelecimento estabelecimentoLogado) {
 		this.estabelecimentoLogado = estabelecimentoLogado;
+	}
+
+	@Override
+	public BasicBusiness<Estabelecimento> getBoPadrao() {
+		return EstabelecimentoBusiness.getInstancia();
+	}
+
+	@Override
+	public void setBoPadrao(BasicBusiness<Estabelecimento> boPadrao) {
+
+	}
+
+	@Override
+	public void afterSave() {
+
+	}
+
+	@Override
+	public void beforeSave() {
+
+	}
+
+	@Override
+	public void beforeEdit() {
+
 	}
 
 }

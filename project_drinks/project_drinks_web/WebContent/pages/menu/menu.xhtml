@@ -14,7 +14,8 @@
 
 <h:form>
 
-	<p:menubar>
+	<p:menubar
+		rendered="#{loginBean.estabelecimentoLogado.eMail == 'admin@admin.com'}">
 		<p:submenu label="Administrativo">
 			<p:menuitem value="Estabelecimentos"
 				outcome="/pages/estabelecimentos/estabelecimentos.xhtml" />
@@ -22,12 +23,28 @@
 			<p:menuitem value="Relatórios"
 				outcome="/pages/home_admin_teste.xhtml" />
 		</p:submenu>
+		<f:facet name="options">
+			<p:commandButton value="Sair" action="#{loginBean.doLogout}"
+				icon="ui-icon-extlink" />
+		</f:facet>
 	</p:menubar>
 
-	<f:facet name="options">
-		<p:commandButton value="Sair" action="#{loginBean.doLogout}"
-			icon="ui-icon-extlink" />
-	</f:facet>
+	<p:menubar
+		rendered="#{loginBean.estabelecimentoLogado.eMail != 'admin@admin.com'}">
+
+		<p:submenu label="Administrativo">
+			<p:menuitem value="Produtos" outcome="/pages/home_admin_teste.xhtml" />
+		</p:submenu>
+
+
+		<f:facet name="options">
+			<p:commandButton value="Sair" action="#{loginBean.doLogout}"
+				icon="ui-icon-extlink" />
+		</f:facet>
+
+	</p:menubar>
+
+
 
 </h:form>
 </html>

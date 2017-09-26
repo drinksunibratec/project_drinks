@@ -25,14 +25,12 @@ public class EstabelecimentoBean extends ManagedBeanGenerico<Estabelecimento>{
 
 	private Estabelecimento estabelecimento;
 
-	private Estabelecimento estabelecimentoLogado;
 
 	private List<Estabelecimento> estabelecimentos;
 
 	@PostConstruct
 	public void init() {
 		super.init();
-		estabelecimentoLogado = SessionContext.getInstance().getEstabelecimentoLogado();
 
 		estabelecimentos = getBoPadrao().list();
 
@@ -52,15 +50,8 @@ public class EstabelecimentoBean extends ManagedBeanGenerico<Estabelecimento>{
 
 
 	public Estabelecimento getEstabelecimentoLogado() {
-		return estabelecimentoLogado;
+		return (Estabelecimento) SessionContext.getInstance().getEstabelecimentoLogado();
 	}
-
-
-
-	public void setEstabelecimentoLogado(Estabelecimento estabelecimentoLogado) {
-		this.estabelecimentoLogado = estabelecimentoLogado;
-	}
-
 
 
 	public Estabelecimento getEstabelecimento() {
@@ -112,7 +103,6 @@ public class EstabelecimentoBean extends ManagedBeanGenerico<Estabelecimento>{
 
 	@Override
 	public BasicBusiness<Estabelecimento> getBoPadrao() {
-		// TODO Auto-generated method stub
 		return EstabelecimentoBusiness.getInstancia();
 	}
 

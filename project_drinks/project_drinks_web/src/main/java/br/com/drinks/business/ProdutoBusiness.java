@@ -39,7 +39,7 @@ public class ProdutoBusiness extends BasicBusiness<Produto> {
 		@Override
 		
 		public List<Produto> list() {
-			return null;
+			return DrinksBusiness.getInstancia().consultarTodosOsProdutos();
 		}
 		
 		@Override
