@@ -8,23 +8,23 @@ import javax.persistence.Enumerated;
 @Embeddable
 public class Endereco {
 	
-	@Column(length = 150)
+	@Column
 	private String rua;
 	
 	@Column (length = 4)
 	private Integer numero;
 	
-	@Column(length = 50)
+	@Column
 	private String bairro;
 	
-	@Column(length = 50)
+	@Column
 	private String cidade;
 	
 	@Enumerated (EnumType.STRING)
 	@Column(length = 2)
 	private UF uf;
 	
-	@Column(length = 9)
+	@Column
 	private String cep;
 	
 	@Column (length = 10)	

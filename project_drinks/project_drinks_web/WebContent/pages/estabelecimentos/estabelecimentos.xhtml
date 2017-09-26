@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Cadastro de Estabelecimentos</title>
+
+	<ui:include src="/pages/menu/menu_adm.xhtml" />
+
+
+
+</h:head>
+<h:body>
+	<h:form id="menu">
+		<p:panel>
+			<!-- ************************************************************************************************************************************ -->
+			<h:panelGrid id="pn" columns="4" cellpadding="1">
+
+				<!-- ************************************************************************************************************************************ -->
+				<p:panel>
+					<h:panelGrid columns="4" cellpadding="2">
+
+						<h:outputLabel for="razaoSocial" value="Razao Social:" />
+						<p:inputText id="razaoSocial" label="Razao Social"
+							value="#{mbEstabelecimento.estabelecimento.razaoSocial}"
+							required="true" requiredMessage="Campo Razão Social obrigatório">
+							<f:validateLength minimum="1"></f:validateLength>
+						</p:inputText>
+
+						<h:outputLabel for="nomeFantasia" value="Nome Fantasia:" />
+						<p:inputText id="nomeFantasia" label="Nome Fantasia"
+							value="#{mbEstabelecimento.estabelecimento.nomeFantasia}"
+							required="true" requiredMessage="Campo Nome Fantasia obrigatório">
+							<f:validateLength minimum="1"></f:validateLength>
+						</p:inputText>
+
+						<h:outputLabel for="email" value="Email:" />
+						<p:inputText id="email" label="Email"
+							value="#{mbEstabelecimento.estabelecimento.eMail}"
+							required="true" requiredMessage="Campo E-Mail obrigatório">
+							<f:validateLength minimum="2"></f:validateLength>
+						</p:inputText>
+
+						<h:outputLabel for="senha" value="Senha:" />
+						<p:password id="senha" label="Senha"
+							value="#{mbEstabelecimento.estabelecimento.senha}"
+							required="true" requiredMessage="Campo senha obrigatório">
+							<f:validateLength minimum="1" maximum="12"></f:validateLength>
+						</p:password>
+
+						<h:outputLabel for="cnpj" value="CNPJ:" />
+						<p:inputMask id="cnpj" label="CNPJ:"
+							value="#{mbEstabelecimento.estabelecimento.cnpj}" required="true"
+							requiredMessage="Campo 'CNPJ:' é obrigátorio"
+							mask="99.999.999/9999-99">
+							<f:validateLength minimum="0"></f:validateLength>
+						</p:inputMask>
+
+						<h:outputLabel for="telefone" value="Telefone:" />
+						<p:inputMask id="telefone" label="Telefone"
+							value="#{mbEstabelecimento.estabelecimento.telefone}"
+							required="true" requiredMessage="Campo 'TELEFONE' é obrigátorio"
+							mask="(99) 99999-9999">
+							<f:validateLength minimum="10"></f:validateLength>
+						</p:inputMask>
+
+						<h:outputLabel for="rua" value="Rua" />
+						<p:inputText id="rua" label="Rua"
+							value="#{mbEstabelecimento.estabelecimento.endereco.rua}"
+							required="true">
+							<f:validateLength minimum="5"></f:validateLength>
+						</p:inputText>
+
+						<h:outputLabel for="numero" value="Numero:" />
+						<p:inputText id="numero" label="Número"
+							value="#{mbEstabelecimento.estabelecimento.endereco.numero}"
+							required="true">
+							<f:validateLongRange maximum="9999" minimum="1"></f:validateLongRange>
+						</p:inputText>
+
+						<h:outputLabel for="bairro" value="Bairro:" />
+						<p:inputText id="bairro" label="Bairro"
+							value="#{mbEstabelecimento.estabelecimento.endereco.bairro}"
+							required="true">
+						</p:inputText>
+
+						<h:outputLabel for="cidade" value="Cidade:" />
+						<p:inputText id="cidade" label="Cidade"
+							value="#{mbEstabelecimento.estabelecimento.endereco.cidade}"
+							required="true">
+						</p:inputText>
+
+						<h:outputLabel for="cep" value="CEP:" />
+						<p:inputMask id="cep" label="CEP"
+							value="#{mbEstabelecimento.estabelecimento.endereco.cep}"
+							required="true" requiredMessage="Campo 'CEP' é obrigátorio"
+							mask="99999-999">
+						</p:inputMask>
+
+						<h:outputLabel for="uf" value="Estado:" />
+						<p:selectOneMenu id="uf"
+							value="#{mbEstabelecimento.estabelecimento.endereco.uf}"
+							effect="fade">
+							<f:selectItem itemLabel="--SELECIONE--" itemValue="" />
+							<f:selectItems value="#{mbEstabelecimento.UF}" var="var"
+								itemValue="#{var}" itemLabel="#{var.label}" />
+						</p:selectOneMenu>
+
+						<h:outputLabel for="latitude" value="Latitude:" />
+						<p:inputText id="latitude" label="latitude"
+							value="#{mbEstabelecimento.estabelecimento.endereco.latitude}">
+						</p:inputText>
+
+						<h:outputLabel for="longitude" value="Longitude" />
+						<p:inputText id="longitude" label="longitude"
+							value="#{mbEstabelecimento.estabelecimento.endereco.longitude}">
+						</p:inputText>
+
+						<p:commandButton id="ajax" styleClass="ui-priority-primary"
+							value="Salvar" action="#{mbEstabelecimento.inserir}" ajax="false" />
+						<h:panelGroup />
+						<br />
+						<!-- ************************************************************************************************************************************ -->
+
+					</h:panelGrid>
+				</p:panel>
+				<!-- ************************************************************************************************************************************ -->
+			</h:panelGrid>
+
+			<!--*************************************criando minha tabela****************************************************************************-->
+			<p:dataTable id="tabela"
+				value="#{mbEstabelecimento.estabelecimentos}" var="estab"
+				emptyMessage="Nenhum registro incluido." paginator="true" rows="10">
+				<!--Definindo o cabeçalho da Tabela-->
+				<f:facet name="header">  
+		                    Lista de Estabelecimentos
+		                </f:facet>
+				<p:column headerText="Id" style="text-align: center" size="10">
+					<h:outputText value="#{estab.codEstabelecimento}" />
+				</p:column>
+				<p:column headerText="Razão Social" style="text-align: center"
+					size="10">
+					<h:outputText value="#{estab.razaoSocial}" />
+				</p:column>
+				<p:column headerText="Nome Fantasia" style="text-align: center"
+					size="10">
+					<h:outputText value="#{estab.nomeFantasia}" />
+				</p:column>
+				<p:column headerText="E-mail" style="text-align: center" size="10">
+					<h:outputText value="#{estab.eMail}" />
+				</p:column>
+				<p:column headerText="CNPJ" style="text-align: center" size="10">
+					<h:outputText value="#{estab.cnpj}" />
+				</p:column>
+				<p:column headerText="Telefone" style="text-align: center" size="10">
+					<h:outputText value="#{estab.telefone}" />
+				</p:column>
+				<p:column headerText="Latitude" style="text-align: center" size="10">
+					<h:outputText value="#{estab.endereco.latitude}" />
+				</p:column>
+				<p:column headerText="Longitude" style="text-align: center"
+					size="10">
+					<h:outputText value="#{estab.endereco.longitude}" />
+				</p:column>
+
+				<p:column headerText="Alterar - Excluir" style="text-align: center"
+					size="10">
+					<!--Botão editar com uma Action do nosso metodo editar-->
+					<p:commandButton
+						action="#{mbEstabelecimento.editarEstabelecimento}" value="EDITAR"
+						title="Editar" ajax="false">
+						<f:setPropertyActionListener value="#{estab}"
+							target="#{mbEstabelecimento.estabelecimentos}" />
+					</p:commandButton>
+
+					<!-- Botão excluir com a propriedade onclick contendo o nome do modal e acessando um método de abri-lo.-->
+					<p:commandButton value="EXCLUIR" title="Excluir"
+						onclick="confirmation.show()" style="margin-left: 5px">
+						<!--O setPropertyActionListener pega o objeto estab e seta no objeto Estabelecimento, para posteriomente excluirmos-->
+						<f:setPropertyActionListener value="#{estab}"
+							target="#{mbEstabelecimento.estabelecimento}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+
+	<!-- Modal de confirmação de exclusão fora do form principal.-->
+	<h:form id="dlg">
+		<p:confirmDialog
+			message="Deseja realmente excluir este Estabelecimento?"
+			hideEffect="explode" header="Aviso" severity="alert"
+			widgetVar="confirmation" modal="true">
+
+			<p:commandButton id="btnSim" value="Sim"
+				oncomplete="confirmation.hide();"
+				actionListener="#{mbEstabelecimento.excluirEstabelecimento}"
+				process="@form" update="@form" />
+
+			<p:commandButton id="btnNao" value="Não"
+				onclick="confirmation.hide();" type="button" />
+		</p:confirmDialog>
+	</h:form>
+
+</h:body>
+
+</html>

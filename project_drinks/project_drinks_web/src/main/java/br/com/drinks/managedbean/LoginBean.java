@@ -33,9 +33,14 @@ public class LoginBean {
 			
 			estabelecimentoLogado = fachada.efetuarLogin(eMail, senha);		
 
-			SessionContext.getInstance().setAttribute("estabelecimentoLogado", estabelecimentoLogado);
 			
-			return "/pages/home_admin.xhtml?faces-redirect=true";
+			if(estabelecimentoLogado != null) {
+				SessionContext.getInstance().setAttribute("estabelecimentoLogado", estabelecimentoLogado);
+				return "/pages/home_admin.xhtml?faces-redirect=true";
+				
+			}else{
+				return "/pages/index.xhtml?faces-redirect=true";
+			}
 		} catch (LoginException e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Login ou Senha Inexistente!"));
 		}

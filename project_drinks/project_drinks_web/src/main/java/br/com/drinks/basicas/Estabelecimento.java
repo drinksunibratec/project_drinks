@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -28,22 +27,22 @@ public class Estabelecimento {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer codEstabelecimento;
 	
-	@Column (nullable = false, length = 100)
+	@Column (nullable = false)
 	private String razaoSocial;	
 	
-	@Column (nullable = false, length = 100)
+	@Column (nullable = false)
 	private String nomeFantasia;
 	
-	@Column (nullable = false, length = 100)
+	@Column (nullable = false)
 	private String eMail;
 	
-	@Column (nullable = false, length = 16)
+	@Column (nullable = false)
 	private String senha;
 	
-	@Column (nullable = false, length = 14)
+	@Column (nullable = false)
 	private String cnpj;
 	
-	@Column (nullable = false, length = 11)
+	@Column (nullable = false)
 	private String telefone; 
 	
 	private Endereco endereco;
