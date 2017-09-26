@@ -6,6 +6,7 @@ import javax.security.auth.login.LoginException;
 
 import br.com.drinks.basicas.Cliente;
 import br.com.drinks.basicas.Estabelecimento;
+import br.com.drinks.basicas.Produto;
 import br.com.drinks.dados.genericos.DAOFactory;
 import br.com.drinks.erro.DaoException;
 import br.com.drinks.erro.GeralException;
@@ -63,7 +64,16 @@ public class DrinksBusiness implements IDrinksBusiness{
 		return DAOFactory.getEstabelecimentoDAO().consultarTodos();
 	}
 	
+	@Override
 	
+	public void salvarProduto (Produto produto) throws GeralException {
+		DAOFactory.getProdutoDAO().inserir(produto);
+	}
+	
+	@Override
+	public void alterarProduto(Produto produto) throws GeralException {
+		DAOFactory.getProdutoDAO().alterar(produto);
+	}
 
 	
 	
