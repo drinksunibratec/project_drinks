@@ -22,4 +22,9 @@ public interface IDrinksBusiness {
 	
 	public void inserirCLiente(Cliente cliente);
 
+	public static IDrinksBusiness getInstacia() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

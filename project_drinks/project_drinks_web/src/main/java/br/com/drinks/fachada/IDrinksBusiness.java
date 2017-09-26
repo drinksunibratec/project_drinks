@@ -21,6 +21,8 @@ public interface IDrinksBusiness {
 	
 	public void alterarEstabelecimento(Estabelecimento estabelecimento) throws GeralException;
 	
+	public void excluirEstabelecimento(Estabelecimento estabelecimento) throws GeralException;
+	
 	public Estabelecimento efetuarLogin(String email, String senha) throws LoginException;
 	
 	public List<Estabelecimento> consultarTodosOsEstabelecimentos() throws DaoException;

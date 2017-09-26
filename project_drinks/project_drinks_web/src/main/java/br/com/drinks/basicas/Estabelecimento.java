@@ -3,6 +3,7 @@ package br.com.drinks.basicas;
 
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,38 +14,42 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
-import javax.persistence.ElementCollection;
-
 
 @Entity
 @NamedQuery(name="efetuarLogin", query="Select e from Estabelecimento e where e.eMail = :eMail and e.senha = :senha")
 public class Estabelecimento {
 	
+	public static final String EMAIL = "eMail";
+
+	public static final String SENHA = "senha";
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer codEstabelecimento;
 	
-	@Column (nullable = false, length = 100)
+	@Column (nullable = false)
 	private String razaoSocial;	
 	
-	@Column (nullable = false, length = 100)
+	@Column (nullable = false)
 	private String nomeFantasia;
 	
-	@Column (nullable = false, length = 100)
+	@Column (nullable = false)
 	private String eMail;
 	
-	@Column (nullable = false, length = 16)
+	@Column (nullable = false)
 	private String senha;
 	
-	@Column (nullable = false, length = 14)
+	@Column (nullable = false)
 	private String cnpj;
+	
+	@Column (nullable = false)
+	private String telefone; 
 	
 	private Endereco endereco;
 	
-//	@ElementCollection(fetch=FetchType.LAZY)
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinColumn(name = "CodProduto", insertable = true, updatable = true)
-	private Collection<Produto> produtos;
+	private List<Produto> produtos;
 	
 	public Integer getCodEstabelecimento() {
 		return codEstabelecimento;
@@ -94,6 +99,14 @@ public class Estabelecimento {
 		this.cnpj = cnpj;
 	}
 
+	public String getTelefone() {
+		return telefone;
+	}
+	
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+	
 	public Endereco getEndereco() {
 		return endereco;
 	}
@@ -106,12 +119,12 @@ public class Estabelecimento {
 		return produtos;
 	}
 
-	public void setProdutos(Collection<Produto> produtos) {
+	public void setProdutos(List<Produto> produtos) {
 		this.produtos = produtos;
 	}
 
 	public Estabelecimento(Integer codEstabelecimento, String razaoSocial, String nomeFantasia, String eMail,
-			String senha, String cnpj, Endereco endereco, Collection<Produto> produtos) {
+			String senha, String cnpj, String telefone, Endereco endereco, List<Produto> produtos) {
 		super();
 		this.codEstabelecimento = codEstabelecimento;
 		this.razaoSocial = razaoSocial;
@@ -119,6 +132,7 @@ public class Estabelecimento {
 		this.eMail = eMail;
 		this.senha = senha;
 		this.cnpj = cnpj;
+		this.telefone = telefone;
 		this.endereco = endereco;
 		this.produtos = produtos;
 	}

@@ -9,6 +9,7 @@ import javax.security.auth.login.LoginException;
 import br.com.drinks.basicas.Estabelecimento;
 import br.com.drinks.fachada.DrinksBusiness;
 import br.com.drinks.fachada.IDrinksBusiness;
+import br.com.drinks.utils.SessionContext;
 
 
 
@@ -28,8 +29,18 @@ public class LoginBean {
 			//			if (estabelecimentoLogado.geteMail() != null && estabelecimentoLogado.geteMail() == "admin@admin.com"){
 			//				return "/pages/home_admin.xhtml?faces-redirect=true";
 			//			}else
+			
+			
 			estabelecimentoLogado = fachada.efetuarLogin(eMail, senha);		
-			return "/pages/home_admin_teste.xhtml?faces-redirect=true";
+
+			
+			if(estabelecimentoLogado != null) {
+				SessionContext.getInstance().setAttribute("estabelecimentoLogado", estabelecimentoLogado);
+				return "/pages/home_admin.xhtml?faces-redirect=true";
+				
+			}else{
+				return "/pages/index.xhtml?faces-redirect=true";
+			}
 		} catch (LoginException e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Login ou Senha Inexistente!"));
 		}

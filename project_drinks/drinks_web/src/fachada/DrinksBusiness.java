@@ -21,8 +21,7 @@ public class DrinksBusiness implements IDrinksBusiness{
 		return fachada;
 	}
 
-	//Estabelecimento
-	
+	//Estabelecimento	
 	@Override
 	public void salvarEstabelecimento(Estabelecimento entidade) throws GeralException {
 		DAOFactory.getEstabelecimentoDAO().inserir(entidade);
@@ -45,8 +44,7 @@ public class DrinksBusiness implements IDrinksBusiness{
 	public Estabelecimento efetuarLogin(String eMail, String senha)
 			throws LoginException {
 		return DAOFactory.getEstabelecimentoDAO().efetuarLogin(eMail, senha);
-	}
-	
+	}	
 	
 
 	//Cliente

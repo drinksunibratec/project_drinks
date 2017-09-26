@@ -42,8 +42,14 @@ public class EstabelecimentoBusiness extends BasicBusiness<Estabelecimento> {
 
 	@Override
 	public List<Estabelecimento> list() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Estabelecimento> lista = new ArrayList<Estabelecimento>();
+		try {
+			lista = DrinksBusiness.getInstancia().consultarTodosOsEstabelecimentos();
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return lista;
 	}
 
 	@Override
