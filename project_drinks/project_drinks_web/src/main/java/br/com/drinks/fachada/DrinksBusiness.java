@@ -43,7 +43,7 @@ public class DrinksBusiness implements IDrinksBusiness{
 
 	@Override
 	public void alterarEstabelecimento(Estabelecimento entidade) throws GeralException {
-		DAOFactory.getEstabelecimentoDAO()alterarEstabelecimento(entidade);			
+		DAOFactory.getEstabelecimentoDAO().alterar(entidade);			
 	}
 	
 	@Override

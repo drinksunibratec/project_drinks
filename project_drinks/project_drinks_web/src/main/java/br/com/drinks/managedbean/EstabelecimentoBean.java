@@ -2,18 +2,20 @@ package br.com.drinks.managedbean;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
-import basicas.Estabelecimento;
-import basicas.UF;
-import controller.EstabelecimentoController;
-import dao.EstabelecimentoDAO;
-import erro.GeralException;
-import fachada.DrinksBusiness;
-import fachada.IDrinksBusiness;
+import br.com.drinks.basicas.Estabelecimento;
+import br.com.drinks.basicas.UF;
+import br.com.drinks.erro.DaoException;
+import br.com.drinks.erro.GeralException;
+import br.com.drinks.fachada.DrinksBusiness;
+import br.com.drinks.fachada.IDrinksBusiness;
+import br.com.drinks.utils.SessionContext;
+
 
 @ManagedBean (name = "mbEstabelecimento")
 @SessionScoped
@@ -22,6 +24,13 @@ public class EstabelecimentoBean {
 	private Estabelecimento estabelecimento;
 	private List<Estabelecimento> estabelecimentos;
 	private IDrinksBusiness fachada = DrinksBusiness.getInstancia();
+	
+	@PostConstruct
+	public void init() {
+	
+		estabelecimento = SessionContext.getInstance().getEstabelecimentoLogado();
+		
+	}
 	
 	public Estabelecimento getEstabelecimento() {
 		return estabelecimento;
@@ -43,7 +52,7 @@ public class EstabelecimentoBean {
 		return UF.values();
 	}
 	
-	public EstabelecimentoBean(){
+	public EstabelecimentoBean() throws DaoException{
 		super();
 		estabelecimentos = fachada.consultarTodosOsEstabelecimentos();		
 	}

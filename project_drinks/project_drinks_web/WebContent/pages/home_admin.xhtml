@@ -52,7 +52,7 @@
 					
 					<h:outputLabel for="email" value="Email:" />
 					<p:inputText id="email" label="Email"
-						value="#{mbEstabelecimento.estabelecimento.email}"
+						value="#{mbEstabelecimento.estabelecimento.eMail}"
 						required="true" requiredMessage="Campo E-Mail obrigatório">
 						<f:validateLength minimum="2" maximum="30"></f:validateLength>
 					</p:inputText>
@@ -197,7 +197,7 @@
             				 header="Aviso" severity="alert" widgetVar="confirmation" modal="true">
             				 
                 <p:commandButton id="btnSim" value="Sim" oncomplete="confirmation.hide();"
-                				 actionListener="#{mbEstabelecimento.excluirEstabelecimento}" process="@form" update="form:tabela" />
+                				 actionListener="#{mbEstabelecimento.excluirEstabelecimento}" process="@form" update="@form" />
                 				 
                 <p:commandButton id="btnNao" value="Não" onclick="confirmation.hide();" type="button"/>
             </p:confirmDialog>

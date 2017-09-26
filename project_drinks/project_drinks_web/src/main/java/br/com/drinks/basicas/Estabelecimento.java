@@ -3,8 +3,10 @@ package br.com.drinks.basicas;
 
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -14,14 +16,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 
-import basicas.Endereco;
-import basicas.Produto;
-
-import javax.persistence.ElementCollection;
-
 @Entity
 @NamedQuery(name="efetuarLogin", query="Select e from Estabelecimento e where e.eMail = :eMail and e.senha = :senha")
 public class Estabelecimento {
+	
+	public static final String EMAIL = "eMail";
+
+	public static final String SENHA = "senha";
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -47,10 +48,9 @@ public class Estabelecimento {
 	
 	private Endereco endereco;
 	
-	@ElementCollection(fetch=FetchType.LAZY)
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinColumn(name = "CodProduto", insertable = true, updatable = true)
-	private Collection<Produto> produtos;
+	private List<Produto> produtos;
 	
 	public Integer getCodEstabelecimento() {
 		return codEstabelecimento;
@@ -120,12 +120,12 @@ public class Estabelecimento {
 		return produtos;
 	}
 
-	public void setProdutos(Collection<Produto> produtos) {
+	public void setProdutos(List<Produto> produtos) {
 		this.produtos = produtos;
 	}
 
 	public Estabelecimento(Integer codEstabelecimento, String razaoSocial, String nomeFantasia, String eMail,
-			String senha, String cnpj, String telefone, Endereco endereco, Collection<Produto> produtos) {
+			String senha, String cnpj, String telefone, Endereco endereco, List<Produto> produtos) {
 		super();
 		this.codEstabelecimento = codEstabelecimento;
 		this.razaoSocial = razaoSocial;
