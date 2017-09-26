@@ -16,6 +16,8 @@ public interface IDrinksBusiness {
 	
 	public boolean loginCliente(Cliente cliente);
 	
+	public List<Cliente> consultarTodosOsClientes();
+	
 	public void salvarEstabelecimento(Estabelecimento estabelecimento) throws GeralException;
 	
 	public void alterarEstabelecimento(Estabelecimento estabelecimento) throws GeralException;

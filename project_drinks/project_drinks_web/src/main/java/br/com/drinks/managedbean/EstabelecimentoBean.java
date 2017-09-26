@@ -11,10 +11,6 @@ import br.com.drinks.basicas.Estabelecimento;
 import br.com.drinks.basicas.UF;
 import br.com.drinks.business.BasicBusiness;
 import br.com.drinks.business.EstabelecimentoBusiness;
-import br.com.drinks.erro.DaoException;
-import br.com.drinks.erro.GeralException;
-import br.com.drinks.fachada.DrinksBusiness;
-import br.com.drinks.fachada.IDrinksBusiness;
 import br.com.drinks.utils.SessionContext;
 
 
@@ -32,12 +28,14 @@ public class EstabelecimentoBean extends ManagedBeanGenerico<Estabelecimento>{
 	private Estabelecimento estabelecimentoLogado;
 
 	private List<Estabelecimento> estabelecimentos;
-	private IDrinksBusiness fachada = DrinksBusiness.getInstancia();
 
 	@PostConstruct
 	public void init() {
 		super.init();
 		estabelecimentoLogado = SessionContext.getInstance().getEstabelecimentoLogado();
+
+		estabelecimentos = getBoPadrao().list();
+
 		estabelecimento = new Estabelecimento();
 		estabelecimento.setEndereco(new Endereco());
 		estabelecimento.getEndereco().setBairro("");
@@ -85,11 +83,6 @@ public class EstabelecimentoBean extends ManagedBeanGenerico<Estabelecimento>{
 		return UF.values();
 	}
 
-	public EstabelecimentoBean() throws DaoException{
-		super();
-		estabelecimentos = fachada.consultarTodosOsEstabelecimentos();		
-	}
-
 
 	@Override
 	public void beforeSave() {
@@ -101,27 +94,17 @@ public class EstabelecimentoBean extends ManagedBeanGenerico<Estabelecimento>{
 
 		String telefone = estabelecimento.getTelefone().replace("(", "").replace(")", "").replace("-", "").replace(" ", "");
 		estabelecimento.setTelefone(telefone);
-		
+
 		setBean(estabelecimento);
 
 	}
 
 	public void editarEstabelecimento(){
-		try {
-			fachada.alterarEstabelecimento(estabelecimento);
-		} catch (GeralException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		getBoPadrao().update(estabelecimento);
 	}
 
 	public void excluirEstabelecimento(){
-		try {
-			fachada.excluirEstabelecimento(estabelecimento);
-		} catch (GeralException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		getBoPadrao().remove(estabelecimento);
 	}	
 
 

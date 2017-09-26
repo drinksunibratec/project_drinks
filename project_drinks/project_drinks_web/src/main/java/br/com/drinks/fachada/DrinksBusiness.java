@@ -34,6 +34,12 @@ public class DrinksBusiness implements IDrinksBusiness{
 	public boolean loginCliente(Cliente cliente) {
 		return DAOFactory.getClienteDAO().login(cliente);
 	}
+	
+	
+	@Override
+	public List<Cliente> consultarTodosOsClientes() {
+		return DAOFactory.getClienteDAO().consultarTodos();
+	}
 
 	//---------Estabelecimento-------
 	@Override

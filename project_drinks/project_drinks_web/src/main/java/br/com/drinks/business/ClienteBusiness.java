@@ -34,8 +34,7 @@ public class ClienteBusiness extends BasicBusiness<Cliente> {
 
 	@Override
 	public List<Cliente> list() {
-		// TODO Auto-generated method stub
-		return null;
+		return DrinksBusiness.getInstancia().consultarTodosOsClientes();
 	}
 
 	@Override
