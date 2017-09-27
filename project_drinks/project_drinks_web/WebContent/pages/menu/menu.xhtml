@@ -18,8 +18,8 @@
 		rendered="#{loginBean.estabelecimentoLogado.eMail == 'admin@admin.com'}">
 		<p:submenu label="Administrativo">
 			<p:menuitem value="Estabelecimentos"
-				outcome="/pages/estabelecimentos/estabelecimentos.xhtml" />
-			<p:menuitem value="Clientes" outcome="/pages/clientes/clientes.xhtml" />
+				outcome="/pages/estabelecimentos/estabelecimentos.xhtml?faces-redirect=true" />
+			<p:menuitem value="Clientes" outcome="/pages/clientes/clientes.xhtml?faces-redirect=true" />
 			<p:menuitem value="Relatórios"
 				outcome="/pages/home_admin_teste.xhtml" />
 		</p:submenu>
@@ -33,7 +33,7 @@
 		rendered="#{loginBean.estabelecimentoLogado.eMail != 'admin@admin.com'}">
 
 		<p:submenu label="Administrativo">
-			<p:menuitem value="Produtos" outcome="/pages/produtos/produtos.xhtml" />
+			<p:menuitem value="Produtos" outcome="/pages/produtos/produtos.xhtml?faces-redirect=true" />
 		</p:submenu>
 
 

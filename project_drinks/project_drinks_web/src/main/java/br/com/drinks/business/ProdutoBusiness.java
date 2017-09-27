@@ -30,14 +30,11 @@ public class ProdutoBusiness extends BasicBusiness<Produto> {
 		}
 		
 		@Override
-
-		
 		public void remove (Produto entity) {
 			
 		}
 		
 		@Override
-		
 		public List<Produto> list() {
 			return DrinksBusiness.getInstancia().consultarTodosOsProdutos();
 		}

@@ -1,6 +1,6 @@
 package br.com.drinks.managedbean;
 
-import java.util.List;
+import javax.annotation.PostConstruct;
 
 import br.com.drinks.basicas.Estabelecimento;
 import br.com.drinks.basicas.Produto;
@@ -15,11 +15,15 @@ public class ProdutoBean extends ManagedBeanGenerico<Produto>{
 	 */
 	private static final long serialVersionUID = 4896108785300749122L;
 	
-	private List<Produto> listaDeProdutos;
-	
 	private Produto produto;
 	
-	
+	@Override
+	@PostConstruct
+	public void init() {
+		super.init();
+		produto = new Produto();
+		produto.setEstabelecimento(getEstabelecimentoLogado());
+	}
 	
 	public Estabelecimento getEstabelecimentoLogado() {
 		return (Estabelecimento) SessionContext.getInstance().getEstabelecimentoLogado();
@@ -33,22 +37,6 @@ public class ProdutoBean extends ManagedBeanGenerico<Produto>{
 
 	public void setProduto(Produto produto) {
 		this.produto = produto;
-	}
-
-
-	@Override
-	public void init() {
-		super.init();
-		listaDeProdutos = getBoPadrao().list();
-	}
-	
-
-	public List<Produto> getListaDeProdutos() {
-		return listaDeProdutos;
-	}
-
-	public void setListaDeProdutos(List<Produto> listaDeProdutos) {
-		this.listaDeProdutos = listaDeProdutos;
 	}
 
 	@Override
@@ -69,7 +57,6 @@ public class ProdutoBean extends ManagedBeanGenerico<Produto>{
 
 	@Override
 	public void beforeSave() {
-		produto.getEstabelecimento().setCodEstabelecimento(getEstabelecimentoLogado().getCodEstabelecimento());
 		setBean(produto);
 	}
 

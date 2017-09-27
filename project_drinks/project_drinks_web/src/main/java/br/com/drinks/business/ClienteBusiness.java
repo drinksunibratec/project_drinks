@@ -4,12 +4,9 @@ import java.util.List;
 
 import br.com.drinks.basicas.Cliente;
 import br.com.drinks.fachada.DrinksBusiness;
-import br.com.drinks.fachada.IDrinksBusiness;
 
 
 public class ClienteBusiness extends BasicBusiness<Cliente> {
-	
-	IDrinksBusiness fachada = DrinksBusiness.getInstancia();
 	
 	private static ClienteBusiness instancia;
 	
@@ -22,7 +19,7 @@ public class ClienteBusiness extends BasicBusiness<Cliente> {
 
 	@Override
 	public void insert(Cliente entity) {
-		fachada.inserirCLiente(entity);
+		DrinksBusiness.getInstancia().inserirCLiente(entity);
 		
 	}
 
@@ -56,7 +53,7 @@ public class ClienteBusiness extends BasicBusiness<Cliente> {
 			return loginOK;
 		}
 		
-		loginOK = fachada.loginCliente(cliente);
+		loginOK = DrinksBusiness.getInstancia().loginCliente(cliente);
 		return loginOK;
 	}
 

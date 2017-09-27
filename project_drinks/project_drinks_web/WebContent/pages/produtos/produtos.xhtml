@@ -8,11 +8,92 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>Cadastro de Produtos</title>
-
 	<ui:include src="/pages/menu/menu.xhtml" />
-
-
-
 </h:head>
 
+<h:body>
+	<h:form id="menu">
+		<p:panel>
+			<!-- ************************************************************************************************************************************ -->
+			<h:panelGrid id="pn" columns="4" cellpadding="1">
+
+				<!-- ************************************************************************************************************************************ -->
+				<p:panel>
+					<h:panelGrid columns="4" cellpadding="2">
+
+						<h:outputLabel for="nome" value="Nome:" />
+						<p:inputText id="nome" label="Nome:"
+							value="#{produtosBean.produto.nome}" required="true"
+							requiredMessage="Campo Nome obrigatório">
+							<f:validateLength minimum="1"></f:validateLength>
+						</p:inputText>
+
+						<h:outputLabel for="descricao" value="Descrição:" />
+						<p:inputText id="descricao" label="Descricao"
+							value="#{produtosBean.produto.descricao}" required="true"
+							requiredMessage="Campo Descrição obrigatório">
+							<f:validateLength minimum="1"></f:validateLength>
+						</p:inputText>
+
+						<h:outputLabel for="preco" value="Preço:" />
+						<p:inputText id="preco" label="Preco"
+							value="#{produtosBean.produto.preco}" required="true"
+							requiredMessage="Campo Preço obrigatório">
+							<f:validateLength minimum="2"></f:validateLength>
+						</p:inputText>
+
+						<p:commandButton id="ajax" styleClass="ui-priority-primary"
+							value="Salvar" action="#{produtosBean.inserir}" ajax="false" />
+						<h:panelGroup />
+						<br />
+						<!-- ************************************************************************************************************************************ -->
+
+					</h:panelGrid>
+				</p:panel>
+				<!-- ************************************************************************************************************************************ -->
+			</h:panelGrid>
+
+			<!--*************************************criando minha tabela****************************************************************************-->
+			<p:dataTable id="tabela" value="#{produtosBean.listaDeProdutos}"
+				var="prod" emptyMessage="Nenhum registro incluido." paginator="true"
+				rows="10">
+				<!--Definindo o cabeçalho da Tabela-->
+				<f:facet name="header">  
+		                    Lista de Produtos
+		                </f:facet>
+				<p:column headerText="Id" style="text-align: center" size="10">
+					<h:outputText value="#{prod.codProduto}" />
+				</p:column>
+				<p:column headerText="Nome" style="text-align: center" size="10">
+					<h:outputText value="#{prod.nome}" />
+				</p:column>
+				<p:column headerText="Descrição" style="text-align: center"
+					size="10">
+					<h:outputText value="#{prod.descrição}" />
+				</p:column>
+				<p:column headerText="Preço" style="text-align: center" size="10">
+					<h:outputText value="#{prod.preco}" />
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+
+	<!-- Modal de confirmação de exclusão fora do form principal.-->
+	<h:form id="dlg">
+		<p:confirmDialog
+			message="Deseja realmente excluir este Estabelecimento?"
+			hideEffect="explode" header="Aviso" severity="alert"
+			widgetVar="confirmation" modal="true">
+
+			<p:commandButton id="btnSim" value="Sim"
+				oncomplete="confirmation.hide();"
+				actionListener="#{mbEstabelecimento.excluirEstabelecimento}"
+				process="@form" update="@form" />
+
+			<p:commandButton id="btnNao" value="Não"
+				onclick="confirmation.hide();" type="button" />
+		</p:confirmDialog>
+	</h:form>
+
+</h:body>
 </html>

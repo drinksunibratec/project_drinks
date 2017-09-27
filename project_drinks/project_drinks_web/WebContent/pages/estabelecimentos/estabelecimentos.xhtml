@@ -15,7 +15,8 @@
 
 </h:head>
 <h:body>
-	<h:form id="menu">
+	<h:form id="estabelecimento">
+	<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
 		<p:panel>
 			<!-- ************************************************************************************************************************************ -->
 			<h:panelGrid id="pn" columns="4" cellpadding="1">
@@ -133,7 +134,7 @@
 
 			<!--*************************************criando minha tabela****************************************************************************-->
 			<p:dataTable id="tabela"
-				value="#{mbEstabelecimento.estabelecimentos}" var="estab"
+				value="#{mbEstabelecimento.list}" var="estab"
 				emptyMessage="Nenhum registro incluido." paginator="true" rows="10">
 				<!--Definindo o cabeçalho da Tabela-->
 				<f:facet name="header">  

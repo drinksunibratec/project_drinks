@@ -67,7 +67,7 @@ public class LoginBean extends ManagedBeanGenerico<Estabelecimento>{
 	}
 
 	public Estabelecimento getEstabelecimentoLogado() {
-		return (Estabelecimento) SessionContext.getInstance().getEstabelecimentoLogado();
+		return estabelecimentoLogado;
 	}
 	public void setEstabelecimentoLogado(Estabelecimento estabelecimentoLogado) {
 		this.estabelecimentoLogado = estabelecimentoLogado;

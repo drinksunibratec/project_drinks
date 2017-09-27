@@ -18,13 +18,13 @@
 		<managed-bean-class>br.com.drinks.managedbean.EstabelecimentoBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
-	
+
 	<managed-bean>
 		<managed-bean-name>clienteBean</managed-bean-name>
 		<managed-bean-class>br.com.drinks.managedbean.ClienteBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
-	
+
 	<managed-bean>
 		<managed-bean-name>produtosBean</managed-bean-name>
 		<managed-bean-class>br.com.drinks.managedbean.ProdutoBean</managed-bean-class>
