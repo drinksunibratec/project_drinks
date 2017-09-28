@@ -21,5 +21,9 @@
 		<url-pattern>*.jsf</url-pattern>
 	</servlet-mapping>
 
+	<listener>
+		<listener-class>br.com.drinks.utils.HibernateContext</listener-class>
+	</listener>
+
 
 </web-app>
