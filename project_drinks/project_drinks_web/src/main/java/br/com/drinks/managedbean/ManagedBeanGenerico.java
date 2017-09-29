@@ -8,6 +8,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import br.com.drinks.business.BasicBusiness;
+import br.com.drinks.erro.EntidadeJaExisteException;
 
 
 public abstract class ManagedBeanGenerico<Entity> implements Serializable {
@@ -76,7 +77,7 @@ public abstract class ManagedBeanGenerico<Entity> implements Serializable {
 				
 	}
 	
-	public String inserir(){
+	public String inserir() throws EntidadeJaExisteException{
 		beforeSave();
 		getBoPadrao().insert(bean);
 		initListDataTable();

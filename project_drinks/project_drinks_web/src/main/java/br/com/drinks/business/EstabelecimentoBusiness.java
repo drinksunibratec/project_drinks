@@ -7,6 +7,7 @@ import javax.security.auth.login.LoginException;
 
 import br.com.drinks.basicas.Estabelecimento;
 import br.com.drinks.erro.DaoException;
+import br.com.drinks.erro.EntidadeJaExisteException;
 import br.com.drinks.erro.GeralException;
 import br.com.drinks.fachada.DrinksBusiness;
 
@@ -24,11 +25,16 @@ public class EstabelecimentoBusiness extends BasicBusiness<Estabelecimento> {
 	}
 
 	@Override
-	public void insert(Estabelecimento entity)  {
+	public void insert(Estabelecimento entity)  throws EntidadeJaExisteException{
 		try {
-			DrinksBusiness.getInstancia().salvarEstabelecimento(entity);
+			
+			boolean existe = DrinksBusiness.getInstancia().existeEstabelecimentoPorCNPJ(entity);
+			if(existe) {
+				throw new EntidadeJaExisteException("Estabelecimento com esse CPNJ já existe");
+			}else {
+				DrinksBusiness.getInstancia().salvarEstabelecimento(entity);
+			}
 		} catch (GeralException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

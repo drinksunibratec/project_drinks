@@ -51,11 +51,12 @@ public abstract class DAOGenerico<Entidade> implements IDAOGenerico<Entidade>{
 		EntityTransaction tx = em.getTransaction();		
 		try {
 			tx.begin();
-			em.persist(entidade);
+			em.merge(entidade);
 			tx.commit();
 			em.close();
 		} catch (PersistenceException e) {
-			tx.rollback();
+			if(tx.isActive())
+				tx.rollback();
 		}
 	}
 
@@ -69,7 +70,7 @@ public abstract class DAOGenerico<Entidade> implements IDAOGenerico<Entidade>{
 			tx.begin();
 
 			for (Entidade entidade : colecao) {
-				em.persist(entidade);	
+				em.merge(entidade);	
 			}
 			
 			tx.commit();

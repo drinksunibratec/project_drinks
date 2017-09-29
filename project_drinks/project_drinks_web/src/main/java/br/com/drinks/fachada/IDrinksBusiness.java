@@ -29,6 +29,7 @@ public interface IDrinksBusiness {
 	
 	public List<Estabelecimento> consultarTodosOsEstabelecimentos() throws DaoException;
 	
+	public boolean existeEstabelecimentoPorCNPJ(Estabelecimento estabelecimento) throws GeralException;
 	
 	public void salvarProduto(Produto produto) throws GeralException;
 	

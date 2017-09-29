@@ -22,6 +22,8 @@ public class Estabelecimento {
 	public static final String EMAIL = "eMail";
 
 	public static final String SENHA = "senha";
+
+	public static final String CNPJ = "cnpj";
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

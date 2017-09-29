@@ -68,6 +68,11 @@ public class DrinksBusiness implements IDrinksBusiness{
 		return DAOFactory.getEstabelecimentoDAO().consultarTodos();
 	}
 	
+	@Override
+	public boolean existeEstabelecimentoPorCNPJ(Estabelecimento estabelecimento) throws GeralException {
+		return DAOFactory.getEstabelecimentoDAO().existeEstabelecimentoPorCNPJ(estabelecimento);
+	}
+	
 	//---------Produtos-------
 	
 	@Override
