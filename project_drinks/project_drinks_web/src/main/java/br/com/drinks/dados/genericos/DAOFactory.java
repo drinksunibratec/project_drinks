@@ -3,6 +3,8 @@ package br.com.drinks.dados.genericos;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import br.com.drinks.dados.dao.ClienteDAO;
+import br.com.drinks.dados.dao.EstabelecimentoDAO;
+import br.com.drinks.dados.dao.ProdutoDAO;
 
 
 public class DAOFactory {
@@ -23,5 +25,14 @@ public class DAOFactory {
 		return dao;
 	}
 	
+	public static EstabelecimentoDAO getEstabelecimentoDAO() {
+		EstabelecimentoDAO dao = new EstabelecimentoDAO(factory);
+		return dao;
+	}
+	
+	public static ProdutoDAO getProdutoDAO() {
+		ProdutoDAO dao = new ProdutoDAO(factory);
+		return dao;
+	}
 	
 }

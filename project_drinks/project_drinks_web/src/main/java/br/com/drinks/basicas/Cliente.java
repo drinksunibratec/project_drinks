@@ -9,12 +9,17 @@ import javax.persistence.Id;
 @Entity
 public class Cliente {
 	
+	public static final String EMAIL = "eMail";
+
+	public static final String SENHA = "senha";
+
 	public Cliente() {
 		super();
 	}
 	
 	@Id
 	@GeneratedValue (strategy = GenerationType.AUTO)
+	@Column(name = "id")
 	private Integer codigo;
 	
 	@Column(length = 150, nullable = false)

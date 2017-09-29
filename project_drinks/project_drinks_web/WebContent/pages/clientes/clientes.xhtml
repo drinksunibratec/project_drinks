@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Cadastro de Clientes</title>
+
+	<ui:include src="/pages/menu/menu.xhtml" />
+
+
+
+</h:head>
+<h:body>
+	<h:form id="clientes">
+		<p:panel>
+
+			<p:dataTable id="tabela"
+				value="#{clienteBean.list}" var="cliente"
+				emptyMessage="Nenhum registro incluido." paginator="true" rows="10">
+				<!--Definindo o cabeçalho da Tabela-->
+				<f:facet name="header">  
+		                    Lista de Clientes
+		                </f:facet>
+				<p:column headerText="Id" style="text-align: center" size="10">
+					<h:outputText value="#{cliente.codigo}" />
+				</p:column>
+				<p:column headerText="Nome" style="text-align: center"
+					size="10">
+					<h:outputText value="#{cliente.nome}" />
+				</p:column>
+				<p:column headerText="E-mail" style="text-align: center"
+					size="10">
+					<h:outputText value="#{cliente.eMail}" />
+				</p:column>
+				<p:column headerText="telefone" style="text-align: center" size="10">
+					<h:outputText value="#{cliente.telefone}" />
+				</p:column>
+				<p:column headerText="Alterar - Excluir" style="text-align: center"
+					size="10">
+					<!--Botão editar com uma Action do nosso metodo editar-->
+					<p:commandButton
+						action="#{clienteBean.editar}" value="EDITAR"
+						title="Editar" ajax="false">
+						<f:setPropertyActionListener value="#{cliente}"
+							target="#{clienteBean.listaClientes}" />
+					</p:commandButton>
+
+					<!-- Botão excluir com a propriedade onclick contendo o nome do modal e acessando um método de abri-lo.-->
+					<p:commandButton value="EXCLUIR" title="Excluir"
+						onclick="confirmation.show()" style="margin-left: 5px">
+						<!--O setPropertyActionListener pega o objeto estab e seta no objeto Estabelecimento, para posteriomente excluirmos-->
+						<f:setPropertyActionListener value="#{cliente}"
+							target="#{clienteBean.listaClientes}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>
