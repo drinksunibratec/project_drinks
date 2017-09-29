@@ -16,12 +16,16 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import br.com.drinksapp.R;
 import br.com.drinksapp.app.AppConfig;
@@ -31,6 +35,11 @@ import br.com.drinksapp.dbconect.DBDrinksConnect;
 import br.com.drinksapp.helper.SQLiteHandler;
 import br.com.drinksapp.helper.SessionManager;
 import br.com.drinksapp.util.Validator;
+import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 
 public class RegistroActivity extends AppCompatActivity {
     private static final String TAG = RegistroActivity.class.getSimpleName();
@@ -103,8 +112,16 @@ public class RegistroActivity extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(Cliente... params) {
 
-            boolean inserido = DBDrinksConnect.getInstancia().insertCliente(params[0]);
+            boolean inserido = false;
+            try {
+                inserido = DBDrinksConnect.getInstancia().enviarCliente(AppConfig.POST, params[0]);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             return inserido;
+
+
+
         }
 
         @Override
@@ -245,9 +262,9 @@ public class RegistroActivity extends AppCompatActivity {
                 return;
             }
 
-            registerUser(nome, email, senha, telefone);
-//                    Cliente cliente = new Cliente(nome, email, senha, telefone);
-//                    initAsyncTask(cliente);
+//            registerUser(nome, email, senha, telefone);
+                    Cliente cliente = new Cliente(nome, email, senha, telefone);
+                    initAsyncTask(cliente);
         }
     }
 }

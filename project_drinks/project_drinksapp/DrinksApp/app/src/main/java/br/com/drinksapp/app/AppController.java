@@ -1,8 +1,5 @@
 package br.com.drinksapp.app;
 
-/**
- * Created by Renevalda Maria on 28/08/2017.
- */
 
 import android.app.Application;
 import android.text.TextUtils;
