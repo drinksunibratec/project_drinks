@@ -16,10 +16,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 
 @Entity
-@NamedQuery(name="efetuarLogin", query="Select e from Estabelecimento e where e.eMail = :eMail and e.senha = :senha")
+@NamedQuery(name="efetuarLogin", query="Select e from Estabelecimento e where e.login = :login and e.senha = :senha")
 public class Estabelecimento {
 	
-	public static final String EMAIL = "eMail";
+	public static final String LOGIN = "login";
 
 	public static final String SENHA = "senha";
 
@@ -39,6 +39,9 @@ public class Estabelecimento {
 	private String eMail;
 	
 	@Column (nullable = false)
+	private String login;
+	
+	@Column (nullable = false)
 	private String senha;
 	
 	@Column (nullable = false)
@@ -50,7 +53,7 @@ public class Estabelecimento {
 	private Endereco endereco;
 	
 	@ManyToMany(fetch=FetchType.LAZY)
-	@JoinColumn(name = "CodProduto", insertable = true, updatable = true)
+	@JoinColumn(name = "CodProduto")// insertable = true, updatable = true
 	private List<Produto> produtos;
 	
 	public Integer getCodEstabelecimento() {
@@ -83,6 +86,14 @@ public class Estabelecimento {
 
 	public void seteMail(String eMail) {
 		this.eMail = eMail;
+	}
+	
+	public String getLogin() {
+		return login;
+	}
+	
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
 	public String getSenha() {
@@ -126,12 +137,13 @@ public class Estabelecimento {
 	}
 
 	public Estabelecimento(Integer codEstabelecimento, String razaoSocial, String nomeFantasia, String eMail,
-			String senha, String cnpj, String telefone, Endereco endereco, List<Produto> produtos) {
+			String login, String senha, String cnpj, String telefone, Endereco endereco, List<Produto> produtos) {
 		super();
 		this.codEstabelecimento = codEstabelecimento;
 		this.razaoSocial = razaoSocial;
 		this.nomeFantasia = nomeFantasia;
 		this.eMail = eMail;
+		this.login = login;
 		this.senha = senha;
 		this.cnpj = cnpj;
 		this.telefone = telefone;

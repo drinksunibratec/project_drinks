@@ -10,9 +10,9 @@ import br.com.drinks.erro.LoginInvalidoException;
 public class SegurancaBusiness {
 	
 	
-	public Estabelecimento efetuarLogin (String eMail, String senha)
+	public Estabelecimento efetuarLogin (String login, String senha)
 		throws LoginInvalidoException, LoginException {
-			return  DAOFactory.getEstabelecimentoDAO().efetuarLogin(eMail, senha);		
+			return  DAOFactory.getEstabelecimentoDAO().efetuarLogin(login, senha);		
 	}
 
 	public void inserirEstabelecimento (Estabelecimento entidade){

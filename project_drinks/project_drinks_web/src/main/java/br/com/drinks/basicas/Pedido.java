@@ -22,16 +22,16 @@ public class Pedido {
 	@GeneratedValue (strategy = GenerationType.AUTO)
 	private Integer codPedido;
 	
-	@ManyToOne
+	@OneToMany
 	@JoinColumn	(name = "codCliente")
 	private Cliente cliente;
 	
-	@ManyToOne
+	@OneToMany
 	@JoinColumn (name = "codEstabelecimento")
 	private Estabelecimento estabelecimento;
 	
-//	@ElementCollection(fetch=FetchType.LAZY)
-//	private List<Produto> produtos;
+	@ElementCollection(fetch=FetchType.LAZY)
+	private List<Produto> produtos;
 	
 	private Endereco endereco;
 	
@@ -71,13 +71,13 @@ public class Pedido {
 		this.estabelecimento = estabelecimento;
 	}
 
-//	public List<Produto> getProdutos() {
-//		return produtos;
-//	}
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
 
-//	public void setProdutos(List<Produto> produtos) {
-//		this.produtos = produtos;
-//	}
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
+	}
 
 	public Endereco getEndereco() {
 		return endereco;
@@ -125,7 +125,7 @@ public class Pedido {
 		this.codPedido = codPedido;
 		this.cliente = cliente;
 		this.estabelecimento = estabelecimento;
-//		this.produtos = produtos;
+		this.produtos = produtos;
 		this.endereco = endereco;
 		this.valorTotal = valorTotal;
 		this.dataPedido = dataPedido;

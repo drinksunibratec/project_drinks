@@ -2,9 +2,11 @@ package br.com.drinks.basicas;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 
 @Entity
 public class Cliente {
@@ -19,13 +21,13 @@ public class Cliente {
 	
 	@Id
 	@GeneratedValue (strategy = GenerationType.AUTO)
-	@Column(name = "id")
+	@Column(name = "codcliente")
 	private Integer codigo;
 	
 	@Column(length = 150, nullable = false)
 	private String nome;
 	
-		@Column(length = 100)
+	@Column(length = 100)
 	private String eMail;
 	
 	@Column(length = 11, nullable = false)
@@ -33,6 +35,14 @@ public class Cliente {
 	
 	@Column(length = 15, nullable = false)
 	private String senha;
+	
+	@ManyToOne
+	@JoinColumn(name = "CodProduto"
+	private List<Produto> prodsFavorito;
+	
+	@ManyToOne
+	@JoinColumn(name = "CodEstabelecimento"
+	private List<Estabelecimento> estabsFavorito;
 
 	public Integer getCodigo() {
 		return codigo;
@@ -74,13 +84,32 @@ public class Cliente {
 		this.senha = senha;
 	}
 
-	public Cliente(Integer codigo, String nome, String eMail, String telefone, String senha) {
+	public List<Produto> getProdsFavorito() {
+		return prodsFavorito;
+	}
+	
+	public void setProdsFavorito(List<Produto> prodsFavorito) {
+		this.prodsFavorito = prodsFavorito;
+	}
+	
+	public List<Estabelecimento> getEstabsFavorito() {
+		return estabsFavorito;
+	}
+	
+	public void setEstabsFavorito(List<Estabelecimento> estabsFavorito) {
+		this.estabsFavorito = estabsFavorito;
+	}
+	
+	public Cliente(Integer codigo, String nome, String eMail, String telefone, String senha,
+			List<Produto> prodsFavorito, List<Estabelecimento> estabsFavorito) {
 		super();
 		this.codigo = codigo;
 		this.nome = nome;
 		this.eMail = eMail;
 		this.telefone = telefone;
 		this.senha = senha;
+		this.prodsFavorito = prodsFavorito;
+		this.estabsFavorito = estabsFavorito;
 	}
 
 }

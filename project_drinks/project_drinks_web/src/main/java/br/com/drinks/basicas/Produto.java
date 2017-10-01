@@ -29,7 +29,7 @@ public class Produto {
 	private boolean gelada;
 		
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "CodEstabelecimento", insertable = true, updatable = true)
+	@JoinColumn(name = "CodEstabelecimento") //insertable = true, updatable = true
 	private Estabelecimento estabelecimento;
 
 	public Integer getCodProduto() {

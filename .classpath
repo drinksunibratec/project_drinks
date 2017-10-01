@@ -19,6 +19,21 @@
 	<classpathentry kind="lib" path="project_drinks/drinks_web/WebContent/WEB-INF/lib/mysql-connector-java-5.1.42-bin.jar"/>
 	<classpathentry kind="lib" path="project_drinks/drinks_web/WebContent/WEB-INF/lib/primefaces-6.1.jar"/>
 	<classpathentry kind="lib" path="project_drinks/drinks_web/WebContent/WEB-INF/lib/servlet-api-3.0.jar"/>
+	<classpathentry kind="lib" path="project_drinks/drinks_web/WebContent/WEB-INF/lib/spring-aop-4.3.11.RELEASE.jar"/>
+	<classpathentry kind="lib" path="project_drinks/drinks_web/WebContent/WEB-INF/lib/spring-beans-4.3.11.RELEASE.jar"/>
+	<classpathentry kind="lib" path="project_drinks/drinks_web/WebContent/WEB-INF/lib/spring-context-4.3.10.RELEASE.jar"/>
+	<classpathentry kind="lib" path="project_drinks/drinks_web/WebContent/WEB-INF/lib/spring-core-4.3.10.RELEASE.jar"/>
+	<classpathentry kind="lib" path="project_drinks/drinks_web/WebContent/WEB-INF/lib/spring-expression-4.3.10.RELEASE.jar"/>
+	<classpathentry kind="lib" path="project_drinks/drinks_web/WebContent/WEB-INF/lib/spring-jdbc-4.3.10.RELEASE.jar"/>
+	<classpathentry kind="lib" path="project_drinks/drinks_web/WebContent/WEB-INF/lib/spring-orm-4.3.10.RELEASE.jar"/>
+	<classpathentry kind="lib" path="project_drinks/drinks_web/WebContent/WEB-INF/lib/spring-web-4.3.10.RELEASE.jar"/>
+	<classpathentry kind="lib" path="project_drinks/drinks_web/WebContent/WEB-INF/lib/spring-webmvc-4.3.10.RELEASE.jar"/>
+	<classpathentry kind="lib" path="project_drinks/drinks_web/WebContent/WEB-INF/lib/spring-ws-core-2.4.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="project_drinks/drinks_web/WebContent/WEB-INF/lib/spring-ws-security-2.4.0.RELEASE.jar"/>
+	<classpathentry kind="lib" path="project_drinks/drinks_web/WebContent/WEB-INF/lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="project_drinks/drinks_web/WebContent/WEB-INF/lib/httpclient-4.5.jar"/>
+	<classpathentry kind="lib" path="project_drinks/drinks_web/WebContent/WEB-INF/lib/httpcore-4.4.6.jar"/>
+	<classpathentry kind="lib" path="project_drinks/drinks_web/WebContent/WEB-INF/lib/javax.ws.rs-api-2.0.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

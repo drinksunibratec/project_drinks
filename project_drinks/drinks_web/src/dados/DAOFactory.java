@@ -3,7 +3,6 @@ package dados;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import com.mysql.jdbc.EscapeTokenizer;
 
 import dados.ProdutoDAO;
 

@@ -10,6 +10,8 @@ import basicas.Estabelecimento;
 import fachada.DrinksBusiness;
 import fachada.IDrinksBusiness;
 
+
+@SuppressWarnings("deprecation")
 @ManagedBean
 @RequestScoped
 public class LoginBean {

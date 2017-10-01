@@ -21,7 +21,7 @@ public class LoginBean extends ManagedBeanGenerico<Estabelecimento>{
 	 * 
 	 */
 	private static final long serialVersionUID = 6881455116163052253L;
-	private String eMail;
+	private String login;
 	private String senha;
 	private Estabelecimento estabelecimentoLogado;
 
@@ -31,7 +31,7 @@ public class LoginBean extends ManagedBeanGenerico<Estabelecimento>{
 	public String doLogin(){
 
 		try {
-			estabelecimentoLogado = EstabelecimentoBusiness.getInstancia().efeturarLogin(eMail, senha);		
+			estabelecimentoLogado = EstabelecimentoBusiness.getInstancia().efeturarLogin(login, senha);		
 			if(estabelecimentoLogado != null) {
 				SessionContext.getInstance().setAttribute("estabelecimentoLogado", estabelecimentoLogado);
 				return "/pages/home_admin.xhtml?faces-redirect=true";
@@ -52,11 +52,11 @@ public class LoginBean extends ManagedBeanGenerico<Estabelecimento>{
 		return "/pages/login/index.xhtml?faces-redirect=true";
 	}
 
-	public String geteMail() {
-		return eMail;
+	public String getLogin() {
+		return login;
 	}
-	public void seteMail(String eMail) {
-		this.eMail = eMail;
+	public void setLogin(String login) {
+		this.eMail = login;
 	}
 
 	public String getSenha() {

@@ -69,7 +69,7 @@ public class EstabelecimentoBusiness extends BasicBusiness<Estabelecimento> {
 
 	}
 
-	public Estabelecimento pesquisarEstabelecimentoPorLogin(String eMail){
+	public Estabelecimento pesquisarEstabelecimentoPorLogin(String login){
 
 		Estabelecimento estabelecimento = new Estabelecimento();
 		List<Estabelecimento> estabelecimentos = new ArrayList<Estabelecimento>();
@@ -77,7 +77,7 @@ public class EstabelecimentoBusiness extends BasicBusiness<Estabelecimento> {
 		try {
 			estabelecimentos = this.listarEstabelecimento();
 			for (int i = 0; i < estabelecimentos.size(); i++) {
-				if(estabelecimentos.get(i).geteMail().equals(eMail)){
+				if(estabelecimentos.get(i).getLogin().equals(login)){
 					estabelecimento = estabelecimentos.get(i);
 				}
 			}
@@ -89,8 +89,8 @@ public class EstabelecimentoBusiness extends BasicBusiness<Estabelecimento> {
 		return estabelecimento;
 	}
 
-	public Estabelecimento efeturarLogin(String eMail, String senha)throws LoginException{
-		return DrinksBusiness.getInstancia().efetuarLogin(eMail, senha);
+	public Estabelecimento efeturarLogin(String login, String senha)throws LoginException{
+		return DrinksBusiness.getInstancia().efetuarLogin(login, senha);
 	}
 
 	public List<Estabelecimento> listarEstabelecimento() throws DaoException{

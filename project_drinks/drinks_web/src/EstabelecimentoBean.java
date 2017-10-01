@@ -12,6 +12,7 @@ import dados.DaoEstabelecimento;
 import erro.GeralException;
 import fachada.IDrinksBusiness;
 
+@SuppressWarnings("deprecation")
 @ManagedBean (name = "mbEstabelecimento")
 @ViewScoped
 public class EstabelecimentoBean {

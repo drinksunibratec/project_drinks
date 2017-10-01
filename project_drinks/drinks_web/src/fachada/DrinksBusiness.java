@@ -54,6 +54,12 @@ public class DrinksBusiness implements IDrinksBusiness{
 		
 	}
 
+	@Override
+	public void excluirEstabelecimento(Estabelecimento entidade) throws GeralException {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 	
 

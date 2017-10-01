@@ -8,12 +8,12 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import basicas.Estabelecimento;
-import controller.EstabelecimentoController;
-import dao.EstabelecimentoDAO;
 import erro.GeralException;
 import fachada.DrinksBusiness;
 import fachada.IDrinksBusiness;
 
+
+@SuppressWarnings("deprecation")
 @ManagedBean (name = "mbEstabelecimento")
 @SessionScoped
 public class EstabelecimentoBean {

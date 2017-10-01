@@ -11,9 +11,11 @@ import basicas.Estabelecimento;
 public interface IDrinksBusiness {
 	
 	//Estabelecimento
-	public void salvarEstabelecimento(Estabelecimento estabelecimento) throws GeralException;
+	public void salvarEstabelecimento(Estabelecimento entidade) throws GeralException;
 
-	public void alterarEstabelecimento(Estabelecimento estabelecimento) throws GeralException;
+	public void alterarEstabelecimento(Estabelecimento entidade) throws GeralException;
+	
+	public void excluirEstabelecimento(Estabelecimento entidade) throws GeralException;
 
 	public List<Estabelecimento> consultarTodosOsEstabelecimentos();
 

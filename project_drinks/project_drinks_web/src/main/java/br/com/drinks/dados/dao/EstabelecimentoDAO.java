@@ -18,15 +18,15 @@ public class EstabelecimentoDAO extends DAOGenerico<Estabelecimento> {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Estabelecimento efetuarLogin(String eMail, String senha)
+	public Estabelecimento efetuarLogin(String login, String senha)
 			throws LoginException {
 		
 		EntityManager em = this.entityManagerFactory.createEntityManager();
 		Estabelecimento result = null;
 		try {
-			String sql = "FROM " + getPersistentClass().getName() + " E WHERE E."+ Estabelecimento.EMAIL +" = :L AND E." +Estabelecimento.SENHA + " = :S";
+			String sql = "FROM " + getPersistentClass().getName() + " E WHERE E."+ Estabelecimento.LOGIN +" = :L AND E." +Estabelecimento.SENHA + " = :S";
 			Query query =  em.createQuery(sql, Estabelecimento.class);
-			query.setParameter("L", eMail);
+			query.setParameter("L", login);
 			query.setParameter("S", senha);
 
 			result = (Estabelecimento)query.getSingleResult();
