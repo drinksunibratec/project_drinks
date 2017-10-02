@@ -17,6 +17,8 @@ public interface IDrinksBusiness {
 	
 	public boolean loginCliente(Cliente cliente);
 	
+	public Cliente consultarClientePorEmail(Cliente cliente);
+	
 	public List<Cliente> consultarTodosOsClientes();
 	
 	//---------Estabelecimento-------	
@@ -30,8 +32,9 @@ public interface IDrinksBusiness {
 	
 	public List<Estabelecimento> consultarTodosOsEstabelecimentos() throws DaoException;
 	
-	public boolean existeEstabelecimentoPorCNPJ(Estabelecimento estabelecimento) throws GeralException;
+	public Estabelecimento consultarEstabelecimentoPorCNPJ(Estabelecimento estabelecimento) throws GeralException;
 	
+	public Estabelecimento consultarEstabelecimentoPorLogin(Estabelecimento estabelecimento) throws GeralException;
 	
 	//---------Produtos-------
 	public void salvarProduto(Produto produto) throws GeralException;
@@ -42,4 +45,6 @@ public interface IDrinksBusiness {
 	
 	public List<Produto> consultarTodosOsProdutos(); 
 
+	
+	
 }

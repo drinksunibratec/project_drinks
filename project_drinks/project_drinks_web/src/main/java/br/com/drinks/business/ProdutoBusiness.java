@@ -22,19 +22,25 @@ public class ProdutoBusiness extends BasicBusiness<Produto> {
 		}
 		
 		@Override
-		public void insert (Produto entity) {
+		public boolean insert (Produto entity) {
 			try {
 				DrinksBusiness.getInstancia().salvarProduto(entity);
 			} catch (GeralException e) {
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Não Foi possível Cadastrar Produto!")
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Não Foi possível Cadastrar Produto!"));
 				e.printStackTrace();
 			}
+			return true;
 			
 		}
 		
 		@Override
 		public void remove (Produto entity) {
-			fachada.DrinksBusiness.getInstancia().excluirProduto(entity);
+			try {
+				DrinksBusiness.getInstancia().excluirProduto(entity);
+			} catch (GeralException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		@Override
@@ -48,7 +54,7 @@ public class ProdutoBusiness extends BasicBusiness<Produto> {
 			try {
 				DrinksBusiness.getInstancia().alterarProduto(entity);
 			}catch(GeralException e ){
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Não Foi possível Alterar Produto!")
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Não Foi possível Alterar Produto!"));
 				e.printStackTrace();
 			}
 		}

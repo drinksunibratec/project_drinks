@@ -19,11 +19,11 @@ import br.com.drinks.utils.HttpUtils;
 @RequestMapping("/clientes")
 public class ClienteController {
 
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@RequestMapping(value = "/inserir", method = RequestMethod.POST, consumes = {"application/json"})
 	public @ResponseBody ResponseEntity insert(@Context HttpServletRequest request, @RequestBody Cliente cliente){
-		ClienteBusiness.getInstancia().insert(cliente);
-		return new ResponseEntity(HttpStatus.OK);
+		boolean inseriu = ClienteBusiness.getInstancia().insert(cliente);
+		return new ResponseEntity(inseriu, HttpStatus.OK);
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })

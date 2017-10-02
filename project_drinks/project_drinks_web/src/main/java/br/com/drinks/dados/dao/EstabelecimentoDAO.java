@@ -36,7 +36,7 @@ public class EstabelecimentoDAO extends DAOGenerico<Estabelecimento> {
 		return result;
 	}
 	
-	public boolean existeEstabelecimentoPorCNPJ(Estabelecimento estabelecimento) {
+	public Estabelecimento consultarEstabelecimentoPorCNPJ(Estabelecimento estabelecimento) {
 	
 		EntityManager em = this.entityManagerFactory.createEntityManager();
 		Estabelecimento result = null;
@@ -49,11 +49,23 @@ public class EstabelecimentoDAO extends DAOGenerico<Estabelecimento> {
 		} catch (RuntimeException re) {
 			re.printStackTrace();
 		}
-		if(result != null) {
-			return false;
-		}else {
-			return true;
+		return result;
+	}
+	
+	public Estabelecimento consultarEstabelecimentoPorLogin(Estabelecimento estabelecimento) {
+		
+		EntityManager em = this.entityManagerFactory.createEntityManager();
+		Estabelecimento result = null;
+		try {
+			String sql = "FROM " + getPersistentClass().getName() + " E WHERE E."+ Estabelecimento.LOGIN + " = :C";
+			Query query =  em.createQuery(sql, Estabelecimento.class);
+			query.setParameter("C", estabelecimento.getLogin());
+
+			result = (Estabelecimento)query.getSingleResult();
+		} catch (RuntimeException re) {
+			re.printStackTrace();
 		}
+		return result;
 	}
 	
 	

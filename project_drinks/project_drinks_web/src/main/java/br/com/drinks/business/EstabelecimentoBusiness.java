@@ -27,36 +27,41 @@ public class EstabelecimentoBusiness extends BasicBusiness<Estabelecimento> {
 	}
 
 	@Override
-	public void insert(Estabelecimento entity)  throws EntidadeJaExisteException{
+	public boolean insert(Estabelecimento entity)  throws EntidadeJaExisteException{
+		boolean inseriu = false;
 		try {
 			
-			boolean existe = DrinksBusiness.getInstancia().existeEstabelecimentoPorCNPJ(entity);
-			if(existe) {
+			Estabelecimento estabelecimento = DrinksBusiness.getInstancia().consultarEstabelecimentoPorCNPJ(entity);
+			if(estabelecimento != null) {
 				throw new EntidadeJaExisteException("Estabelecimento com esse CPNJ já existe");
 			}else {
-				DrinksBusiness.getInstancia().salvarEstabelecimento(entity);
+				estabelecimento = DrinksBusiness.getInstancia().consultarEstabelecimentoPorLogin(estabelecimento);
+				if(estabelecimento != null) {
+					throw new EntidadeJaExisteException("Já existe Estabelecimento com este Login!");
+				}else {	
+					DrinksBusiness.getInstancia().salvarEstabelecimento(entity);
+					estabelecimento = DrinksBusiness.getInstancia().consultarEstabelecimentoPorCNPJ(entity);
+					if(estabelecimento != null) {
+						inseriu = true;
+					}
+				}
 			}
 		} catch (GeralException e) {
 			e.printStackTrace();
 		}
-		
-		try {
-			
-			boolean existeLogin = DrinksBusiness.getInstancia().existeEstabelecimentoComLogin(entity);
-			if(existeLogin) {
-				throw new EntidadeJaExisteException("Já existe Estabelecimento com este Login!");
-			}else {
-				DrinksBusiness.getInstancia().salvarEstabelecimento(entity);
-			}
-		} catch (GeralException e) {
-			e.printStackTrace();
-		}		
+		return inseriu;
+				
 
 	}
 
 	@Override
 	public void remove(Estabelecimento entity) {
-		DrinksBusiness.getInstancia().excluirEstabelecimento(entity);
+		try {
+			DrinksBusiness.getInstancia().excluirEstabelecimento(entity);
+		} catch (GeralException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -66,7 +71,7 @@ public class EstabelecimentoBusiness extends BasicBusiness<Estabelecimento> {
 		try {
 			lista = DrinksBusiness.getInstancia().consultarTodosOsEstabelecimentos();
 		} catch (DaoException e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Não Foi possível Listar Estabelecimentos!")
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Não Foi possível Listar Estabelecimentos!"));
 			e.printStackTrace();
 		}
 		return lista;
@@ -98,7 +103,7 @@ public class EstabelecimentoBusiness extends BasicBusiness<Estabelecimento> {
 			}
 
 		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Login Não Encontrado!")
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Login Não Encontrado!"));
 		}
 
 		return estabelecimento;

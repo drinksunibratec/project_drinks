@@ -18,14 +18,14 @@ public class Teste {
 		EntityManager em = null;
 		
 		
-		Estabelecimento estabelecimento = new Estabelecimento (null,"SuperAdmin","SuperAdmin","admin@admin.com",
-				"admin123","24582745000174","81999999999",null,null);
+//		Estabelecimento estabelecimento = new Estabelecimento (null,"SuperAdmin","SuperAdmin","admin@admin.com",
+//				"admin123","24582745000174","81999999999",null,null);
 
 		try {
 			emf = Persistence.createEntityManagerFactory("unitPSC");
 			em = emf.createEntityManager();
 			
-			DAOFactory.getEstabelecimentoDAO().inserir(estabelecimento);
+//			DAOFactory.getEstabelecimentoDAO().inserir(estabelecimento);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

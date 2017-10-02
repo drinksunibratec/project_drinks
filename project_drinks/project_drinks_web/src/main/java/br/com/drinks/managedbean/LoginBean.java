@@ -56,7 +56,7 @@ public class LoginBean extends ManagedBeanGenerico<Estabelecimento>{
 		return login;
 	}
 	public void setLogin(String login) {
-		this.eMail = login;
+		this.login = login;
 	}
 
 	public String getSenha() {

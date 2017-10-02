@@ -41,6 +41,11 @@ public class DrinksBusiness implements IDrinksBusiness{
 	public List<Cliente> consultarTodosOsClientes() {
 		return DAOFactory.getClienteDAO().consultarTodos();
 	}
+	
+	@Override
+	public Cliente consultarClientePorEmail(Cliente cliente) {
+		return DAOFactory.getClienteDAO().consultarClientePorEmail(cliente);
+	}
 
 	//---------Estabelecimento-------
 	@Override
@@ -60,7 +65,7 @@ public class DrinksBusiness implements IDrinksBusiness{
 
 	@Override
 	public Estabelecimento efetuarLogin(String login, String senha) throws LoginException {
-		return DAOFactory.getEstabelecimentoDAO().efetuarLogin(email, senha);
+		return DAOFactory.getEstabelecimentoDAO().efetuarLogin(login, senha);
 	}
 
 	@Override
@@ -69,9 +74,15 @@ public class DrinksBusiness implements IDrinksBusiness{
 	}
 	
 	@Override
-	public boolean existeEstabelecimentoPorCNPJ(Estabelecimento estabelecimento) throws GeralException {
-		return DAOFactory.getEstabelecimentoDAO().existeEstabelecimentoPorCNPJ(estabelecimento);
+	public Estabelecimento consultarEstabelecimentoPorCNPJ(Estabelecimento estabelecimento) throws GeralException {
+		return DAOFactory.getEstabelecimentoDAO().consultarEstabelecimentoPorCNPJ(estabelecimento);
 	}
+	
+	@Override
+	public Estabelecimento consultarEstabelecimentoPorLogin(Estabelecimento estabelecimento) throws GeralException {
+		return DAOFactory.getEstabelecimentoDAO().consultarEstabelecimentoPorLogin(estabelecimento);
+	}
+	
 	
 	//---------Produtos-------
 	

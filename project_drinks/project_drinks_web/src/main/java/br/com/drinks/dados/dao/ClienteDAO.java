@@ -14,7 +14,7 @@ public class ClienteDAO extends DAOGenerico<Cliente>{
 		super(emf);
 	}
 	
-	public Cliente existeUsuario(Cliente cliente) {
+	public Cliente consultarClientePorEmail(Cliente cliente) {
 		EntityManager em = this.entityManagerFactory.createEntityManager();
 		Cliente result = null;
 		try {
@@ -31,7 +31,7 @@ public class ClienteDAO extends DAOGenerico<Cliente>{
 	}
 	
 	public boolean login(Cliente cliente) {
-		Cliente resultado = existeUsuario(cliente);
+		Cliente resultado = consultarClientePorEmail(cliente);
 		if(resultado!= null) {
 			if(cliente.getSenha().equals(resultado.getSenha())) {
 				return true;

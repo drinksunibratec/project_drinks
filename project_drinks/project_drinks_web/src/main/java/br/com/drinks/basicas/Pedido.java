@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -22,15 +23,15 @@ public class Pedido {
 	@GeneratedValue (strategy = GenerationType.AUTO)
 	private Integer codPedido;
 	
-	@OneToMany
+	@ManyToOne
 	@JoinColumn	(name = "codCliente")
 	private Cliente cliente;
 	
-	@OneToMany
+	@ManyToOne
 	@JoinColumn (name = "codEstabelecimento")
 	private Estabelecimento estabelecimento;
 	
-	@ElementCollection(fetch=FetchType.LAZY)
+	@OneToMany
 	private List<Produto> produtos;
 	
 	private Endereco endereco;
