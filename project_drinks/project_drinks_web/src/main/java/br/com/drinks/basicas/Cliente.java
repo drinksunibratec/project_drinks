@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Cliente {
@@ -40,9 +42,9 @@ public class Cliente {
 //	@JoinColumn(name = "CodProduto")
 //	private List<Produto> prodsFavorito;
 //	
-//	@ManyToOne
-//	@JoinColumn(name = "CodEstabelecimento")
-//	private List<Estabelecimento> estabsFavorito;
+	@ManyToOne
+	@JoinColumn(name = "CodEstabelecimento")
+	private List<Estabelecimento> estabsFavorito;
 
 	public Integer getCodigo() {
 		return codigo;
@@ -92,13 +94,13 @@ public class Cliente {
 //		this.prodsFavorito = prodsFavorito;
 //	}
 //	
-//	public List<Estabelecimento> getEstabsFavorito() {
-//		return estabsFavorito;
-//	}
+	public List<Estabelecimento> getEstabsFavorito() {
+		return estabsFavorito;
+	}
 //	
-//	public void setEstabsFavorito(List<Estabelecimento> estabsFavorito) {
-//		this.estabsFavorito = estabsFavorito;
-//	}
+	public void setEstabsFavorito(List<Estabelecimento> estabsFavorito) {
+		this.estabsFavorito = estabsFavorito;
+	}
 //	
 	public Cliente(Integer codigo, String nome, String eMail, String telefone, String senha,
 			List<Produto> prodsFavorito, List<Estabelecimento> estabsFavorito) {
@@ -109,7 +111,7 @@ public class Cliente {
 		this.telefone = telefone;
 		this.senha = senha;
 //		this.prodsFavorito = prodsFavorito;
-//		this.estabsFavorito = estabsFavorito;
+		this.estabsFavorito = estabsFavorito;
 	}
 
 }
