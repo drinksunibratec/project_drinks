@@ -3,6 +3,8 @@ package br.com.drinks.business;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.security.auth.login.LoginException;
 
 import br.com.drinks.basicas.Estabelecimento;
@@ -37,12 +39,24 @@ public class EstabelecimentoBusiness extends BasicBusiness<Estabelecimento> {
 		} catch (GeralException e) {
 			e.printStackTrace();
 		}
+		
+		try {
+			
+			boolean existeLogin = DrinksBusiness.getInstancia().existeEstabelecimentoComLogin(entity);
+			if(existeLogin) {
+				throw new EntidadeJaExisteException("Já existe Estabelecimento com este Login!");
+			}else {
+				DrinksBusiness.getInstancia().salvarEstabelecimento(entity);
+			}
+		} catch (GeralException e) {
+			e.printStackTrace();
+		}		
 
 	}
 
 	@Override
 	public void remove(Estabelecimento entity) {
-		// TODO Auto-generated method stub
+		DrinksBusiness.getInstancia().excluirEstabelecimento(entity);
 
 	}
 
@@ -52,7 +66,7 @@ public class EstabelecimentoBusiness extends BasicBusiness<Estabelecimento> {
 		try {
 			lista = DrinksBusiness.getInstancia().consultarTodosOsEstabelecimentos();
 		} catch (DaoException e) {
-			// TODO Auto-generated catch block
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Não Foi possível Listar Estabelecimentos!")
 			e.printStackTrace();
 		}
 		return lista;
@@ -63,8 +77,9 @@ public class EstabelecimentoBusiness extends BasicBusiness<Estabelecimento> {
 		try {
 			DrinksBusiness.getInstancia().alterarEstabelecimento(entity);
 		} catch (GeralException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Não Foi possível Alterar Estabelecimento!"));
+			
 		}
 
 	}
@@ -83,7 +98,7 @@ public class EstabelecimentoBusiness extends BasicBusiness<Estabelecimento> {
 			}
 
 		} catch (Exception e) {
-			// TODO: handle exception
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Login Não Encontrado!")
 		}
 
 		return estabelecimento;

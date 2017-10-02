@@ -59,7 +59,7 @@ public class DrinksBusiness implements IDrinksBusiness{
 	}
 
 	@Override
-	public Estabelecimento efetuarLogin(String email, String senha) throws LoginException {
+	public Estabelecimento efetuarLogin(String login, String senha) throws LoginException {
 		return DAOFactory.getEstabelecimentoDAO().efetuarLogin(email, senha);
 	}
 
@@ -88,6 +88,11 @@ public class DrinksBusiness implements IDrinksBusiness{
 	@Override
 	public List<Produto> consultarTodosOsProdutos() {
 		return DAOFactory.getProdutoDAO().consultarTodos();
+	}
+	
+	@Override
+	public void excluirProduto(Produto produto) throws GeralException {
+		DAOFactory.getProdutoDAO().remover(produto);
 	}
 
 

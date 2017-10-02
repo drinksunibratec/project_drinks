@@ -59,13 +59,13 @@ public class EstabelecimentoBean {
 		this.produtos = produtos;
 	}
 
-//	public IDrinksBusiness getFachada() {
-//		return fachada;
-//	}
-//
-//	public void setFachada(IDrinksBusiness fachada) {
-//		this.fachada = fachada;
-//	}
+	public IDrinksBusiness getFachada() {
+		return fachada;
+	}
+
+	public void setFachada(IDrinksBusiness fachada) {
+		this.fachada = fachada;
+	}
 	
 	public void salvarEstabelecimento() throws GeralException {
 		try{

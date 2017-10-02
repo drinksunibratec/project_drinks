@@ -2,6 +2,9 @@ package br.com.drinks.business;
 
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
 import br.com.drinks.basicas.Produto;
 import br.com.drinks.erro.GeralException;
 import br.com.drinks.fachada.DrinksBusiness;
@@ -23,7 +26,7 @@ public class ProdutoBusiness extends BasicBusiness<Produto> {
 			try {
 				DrinksBusiness.getInstancia().salvarProduto(entity);
 			} catch (GeralException e) {
-				// TODO Auto-generated catch block
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Não Foi possível Cadastrar Produto!")
 				e.printStackTrace();
 			}
 			
@@ -31,7 +34,7 @@ public class ProdutoBusiness extends BasicBusiness<Produto> {
 		
 		@Override
 		public void remove (Produto entity) {
-			
+			fachada.DrinksBusiness.getInstancia().excluirProduto(entity);
 		}
 		
 		@Override
@@ -45,6 +48,7 @@ public class ProdutoBusiness extends BasicBusiness<Produto> {
 			try {
 				DrinksBusiness.getInstancia().alterarProduto(entity);
 			}catch(GeralException e ){
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Não Foi possível Alterar Produto!")
 				e.printStackTrace();
 			}
 		}

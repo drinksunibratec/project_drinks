@@ -12,28 +12,33 @@ import br.com.drinks.erro.GeralException;
 
 public interface IDrinksBusiness {
 	
-	
+	//---------Cliente-------
 	public void inserirCLiente(Cliente cliente);
 	
 	public boolean loginCliente(Cliente cliente);
 	
 	public List<Cliente> consultarTodosOsClientes();
 	
-	public void salvarEstabelecimento(Estabelecimento estabelecimento) throws GeralException;
+	//---------Estabelecimento-------	
+	public void salvarEstabelecimento(Estabelecimento entidade) throws GeralException;
 	
-	public void alterarEstabelecimento(Estabelecimento estabelecimento) throws GeralException;
+	public void alterarEstabelecimento(Estabelecimento entidade) throws GeralException;
 	
-	public void excluirEstabelecimento(Estabelecimento estabelecimento) throws GeralException;
+	public void excluirEstabelecimento(Estabelecimento entidade) throws GeralException;
 	
-	public Estabelecimento efetuarLogin(String email, String senha) throws LoginException;
+	public Estabelecimento efetuarLogin(String login, String senha) throws LoginException;
 	
 	public List<Estabelecimento> consultarTodosOsEstabelecimentos() throws DaoException;
 	
 	public boolean existeEstabelecimentoPorCNPJ(Estabelecimento estabelecimento) throws GeralException;
 	
+	
+	//---------Produtos-------
 	public void salvarProduto(Produto produto) throws GeralException;
 	
 	public void alterarProduto(Produto produto) throws GeralException;
+	
+	public void excluirProduto(Produto produto) throws GeralException;
 	
 	public List<Produto> consultarTodosOsProdutos(); 
 
