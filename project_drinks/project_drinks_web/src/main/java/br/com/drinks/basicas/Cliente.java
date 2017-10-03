@@ -38,10 +38,10 @@ public class Cliente {
 	@Column(length = 15, nullable = false)
 	private String senha;
 	
-//	@ManyToOne
-//	@JoinColumn(name = "CodProduto")
-//	private List<Produto> prodsFavorito;
-//	
+	@ManyToOne
+	@JoinColumn(name = "CodProduto")
+	private List<Produto> prodsFavorito;
+	
 	@ManyToOne
 	@JoinColumn(name = "CodEstabelecimento")
 	private List<Estabelecimento> estabsFavorito;
@@ -86,22 +86,22 @@ public class Cliente {
 		this.senha = senha;
 	}
 
-//	public List<Produto> getProdsFavorito() {
-//		return prodsFavorito;
-//	}
-//	
-//	public void setProdsFavorito(List<Produto> prodsFavorito) {
-//		this.prodsFavorito = prodsFavorito;
-//	}
-//	
+	public List<Produto> getProdsFavorito() {
+		return prodsFavorito;
+	}
+	
+	public void setProdsFavorito(List<Produto> prodsFavorito) {
+		this.prodsFavorito = prodsFavorito;
+	}
+	
 	public List<Estabelecimento> getEstabsFavorito() {
 		return estabsFavorito;
 	}
-//	
+	
 	public void setEstabsFavorito(List<Estabelecimento> estabsFavorito) {
 		this.estabsFavorito = estabsFavorito;
 	}
-//	
+	
 	public Cliente(Integer codigo, String nome, String eMail, String telefone, String senha,
 			List<Produto> prodsFavorito, List<Estabelecimento> estabsFavorito) {
 		super();
@@ -110,7 +110,7 @@ public class Cliente {
 		this.eMail = eMail;
 		this.telefone = telefone;
 		this.senha = senha;
-//		this.prodsFavorito = prodsFavorito;
+		this.prodsFavorito = prodsFavorito;
 		this.estabsFavorito = estabsFavorito;
 	}
 
