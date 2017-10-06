@@ -109,25 +109,7 @@
       </form>
   </div>
 
-    <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-md-4">
-          <h2>Nossa missão</h2>
-          <p>Ser um sistema para cadastro de Drinks exemplo em todos país.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-          <h2>Drinks</h2>
-          <p>Veja nossas últimas promoções de contrato para Drinksp>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-       </div>
-        <div class="col-md-4">
-          <h2>Inicial</h2>
-          <p>Voltar para a página de administração dos usuários do sistema.</p>
-          <p><a class="btn btn-default" href="inicial-funcionario.php" target="_blanck" role="button">View details &raquo;</a></p>
-        </div>
-      </div>
+   
 
       <hr>
 
