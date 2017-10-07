@@ -126,8 +126,8 @@
                     echo'<td>'.$estabelecimento['razaoSocial'].'</td>';
                     //echo'<td>'.$estabelecimento['senha'].'</td>';
                     echo'<td>'.$estabelecimento['telefone'].'</td>';
-                    echo '<td><a href="editar-estabelecimento.php?id='.$estabelecimento['codEstabelecimento'].'" class="btn btn-warning">&#9999; Editar</a></td>';
-                    echo '<td><a href="excluir-estabelecimento.php?id='.$estabelecimento['codEstabelecimento'].'" class="btn btn-danger">&#10006; Excluir</a></td>';
+                    echo '<td><a href="editar-estabelecimento.php?codEstabelecimento='.$estabelecimento['codEstabelecimento'].'" class="btn btn-warning">&#9999; Editar</a></td>';
+                    echo '<td><a href="excluir-estabelecimento.php?codEstabelecimento='.$estabelecimento['codEstabelecimento'].'" class="btn btn-danger">&#10006; Excluir</a></td>';
                 echo '</tbody>';
               echo '</tr>';
             } 

@@ -19,8 +19,7 @@
     $senha = md5(addslashes($_POST['senha']));
     $telefone = addslashes($_POST['telefone']);
 
-    $sql = "UPDATE estabelecimento SET nomeFantasia = '$nomeFantasia', email = '$email', cep = '$cep', latitude ='$latitude', longitude = '$longitude', 
-    numero ='$numero', uf = '$uf', razaoSocial = '$razaoSocial' , senha = '$senha', telefone = '$telefone' WHERE codEstabelecimento = '$codEstabelecimento'";
+    $sql = "UPDATE estabelecimento SET cnpj = '$cnpj', email = '$eMail', bairro = '$bairro', cep = '$cep', cidade = '$cidade', latitude ='$latitude', longitude = '$longitude',  numero ='$numero', uf = '$uf', nomeFantasia = '$nomeFantasia', razaoSocial = '$razaoSocial' , senha = '$senha', telefone = '$telefone' WHERE codEstabelecimento = '$codEstabelecimento'";
     $PDO->query($sql);
 
     header("Location: cadastro-estabelecimentos.php");
