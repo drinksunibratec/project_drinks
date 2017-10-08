@@ -1,30 +1,10 @@
 <?php
-  require_once('../config.php'); 
+  require_once('../config.php');
+  require_once('../biblioteca/menu/menu.php');
  ?> 
     <div class="container">
       
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="inicial-administrador.php">Drinks</a>
-          </div>
-          <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li><a href="inicial-administrador.php">Home</a></li>
-              <li><a href="cadastro-administrador.php">Administrador</a></li>
-              <li><a href="cadastro-usuario.php">Clientes</a></li>              
-              <li><a href="cadastro-funcionario.php">Estabelecimentos</a></li>  
-              <li><a href="cadastro-produto.php">Produtos</a></li>  
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div><!--/.container-fluid -->
-      </nav>
+     
       
 
 <!DOCTYPE html>
@@ -90,10 +70,8 @@
             echo '<table class="table table-hover">';
             echo  '<thead>';
             echo'<tr>';
-            echo'<th>';
             echo'<th>Nome</th>';
             echo'<th>Email</th>';
-            echo'<th>senha</th>';
             echo'<th>telefone</th>';
             echo'</tr>';
             echo'</thead>';
@@ -101,13 +79,9 @@
             echo '<tr>';
 
             foreach ($sql-> fetchAll() as $cliente) {
-                    echo '<td rowspan="2">'.$cliente['id'].'</td>';
                     echo'<td>'.$cliente['nome']. '</td>';
                     echo'<td>'.$cliente['email'].'</td>';
-                    echo'<td>'.$cliente['senha'].'</td>';
                     echo'<td>'.$cliente['telefone'].'</td>';
-                    echo '<td><a href="editar-cliente.php?id='.$cliente['id'].'" class="btn btn-warning">&#9999; Editar</a></td>';
-                    echo '<td><a href="excluir-cliente.php?id='.$cliente['id'].'" class="btn btn-danger">&#10006; Excluir</a></td>';
                 echo '</tbody>';
               echo '</tr>';
             } 
@@ -116,8 +90,7 @@
         </table>
       </div>
     </div>
-      <a href="adicionar-cliente.php" class="btn btn-success">&#10010; Novo Cliente</a>
-
+     	
       
     <div class="container theme-showcase" role="main">
 
