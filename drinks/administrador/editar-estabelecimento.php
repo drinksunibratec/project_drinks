@@ -6,8 +6,7 @@ $codEstabelecimento = 0;
 if (isset($_GET['codEstabelecimento']) && empty($_GET['codEstabelecimento']) == false) {
     $codEstabelecimento = addslashes($_GET['codEstabelecimento']);
 }
-
-if (isset($_POST['nomeFantasia']) && empty($_POST['nomeFantasia']) == false) {
+if (isset($_POST['dado']) && empty($_POST['dado']) == false) {
     $nomeFantasia = addslashes($_POST['nomeFantasia']);
     $email = addslashes($_POST['email']);
     $bairro = addslashes($_POST['bairro']);
@@ -20,7 +19,7 @@ if (isset($_POST['nomeFantasia']) && empty($_POST['nomeFantasia']) == false) {
     $senha = md5(addslashes($_POST['senha']));
     $telefone = addslashes($_POST['telefone']);
     
-    $sql = "UPDATE estabelecimento SET cnpj = '$cnpj', email = '$eMail', bairro = '$bairro', cep = '$cep', cidade = '$cidade', latitude ='$latitude', longitude = '$longitude',  numero ='$numero', uf = '$uf', nomeFantasia = '$nomeFantasia', razaoSocial = '$razaoSocial' , senha = '$senha', telefone = '$telefone' WHERE codEstabelecimento = '$codEstabelecimento'";
+    $sql = "UPDATE estabelecimento SET eMail = '$eMail', bairro = '$bairro', cep = '$cep', cidade = '$cidade', latitude ='$latitude', longitude = '$longitude',  numero ='$numero', uf = '$uf', nomeFantasia = '$nomeFantasia', razaoSocial = '$razaoSocial' , senha = '$senha', telefone = '$telefone' WHERE codEstabelecimento = '$codEstabelecimento'";
     $PDO->query($sql);
     
     header("Location: cadastro-estabelecimentos.php");
@@ -82,37 +81,129 @@ if ($sql->rowCount() > 0) {
 		<div class="jumbotron">
 			<form method="POST">
 
-
-				CNPJ <br /> <input type="text" name="cnpj"
-					value="<?php echo $dado['cnpj']; ?> " /> <br /> Email <br /> <input
-					type="text" name="email" value="<?php echo $dado['eMail']; ?> " />
-				<br /> Bairro <br /> <input type="text" name="bairro"
-					id="campoBairro" value="<?php echo $dado['bairro']; ?> " /> <br />
-				Cep <br /> <input type="text" name="cep" id="campoCep"
-					value="<?php echo $dado['cep']; ?> " /> <br /> <br /> Cidade <br />
-				<input type="text" name="cidade" id="campoCidade"
-					value="<?php echo $dado['cidade']; ?> " /> <br /> <br /> Latitude <br />
-				<input type="text" name="latitude" id="campoLatitude"
-					value="<?php echo $dado['latitude']; ?> " /> <br /> <br />
-				Longitude <br /> <input type="text" name="longitude"
-					id="campoLongitude" value="<?php echo $dado['longitude']; ?> " /> <br />
-				<br /> Numero <br /> <input type="text" name="numero"
-					id="campoNumero" value="<?php echo $dado['numero']; ?> " /> <br />
-				<br /> Rua <br /> <input type="text" name="rua" id="campoRua"
-					value="<?php echo $dado['rua']; ?> " /> <br /> <br /> UF <br /> <input
-					type="text" name="uf" id="campoUf"
-					value="<?php echo $dado['uf']; ?> " /> <br /> <br /> Nome Fantasia
-				<br /> <input type="text" name="nomeFantasia" id="campoNomeFantasia"
-					value="<?php echo $dado['nomeFantasia']; ?> " /> <br /> <br />
-				Razao Social <br /> <input type="text" name="cep"
-					id="campoRazaoSocial" value="<?php echo $dado['razaoSocial']; ?> " />
-				<br /> <br /> Senha <br /> <input type="text" name="cep"
-					id="campoSenha" value="<?php echo $dado['senha']; ?> " /> <br /> <br />
-				Telefone <br /> <input type="text" name="cep" id="campoTelefone"
-					value="<?php echo $dado['telefone']; ?> " /> <br /> <br /> <input
-					type="submit" value="&#10003 Alterar" class="btn btn-primary" /> <a
-					href="cadastro-estabelecimento.php" class="btn btn-danger">&#10005
-					Cancelar</a>
+                <div class="row">
+                    
+                    <div class="form-group col-md-2">
+                      <label for="cnpj">CNPJ</label>
+                      <input type="text" class="form-control" name="cnpj" value="<?php echo $dado['cnpj']; ?> " readonly>
+                	</div>
+                    
+                    <div class="form-group col-md-3">
+                      <label for="razaoSocial">Raz&atilde;o Social</label>
+                      <input type="text" class="form-control" name="razaoSocial" value="<?php echo $dado['razaoSocial']; ?>">
+                	</div>
+                    
+                    <div class="form-group col-md-3">
+                      <label for="nomeFantasia">Nome Fantasia</label>
+                      <input type="text" class="form-control" name="nomeFantasia" value="<?php echo $dado['nomeFantasia']; ?>">
+                	</div>
+                	
+                	<div class="form-group col-md-4">
+                      <label for="email">E-mail</label>
+                      <input type="text" class="form-control" name="email" value="<?php echo $dado['eMail']; ?>">
+                	</div>
+                	                	
+                </div>
+                
+                <div class="row">
+                	<div class="form-group col-md-4">
+                      <label for="rua">Rua</label>
+                      <input type="text" class="form-control" name="rua" value="<?php echo $dado['rua']; ?>">
+                	</div>
+                	
+                	<div class="form-group col-md-2">
+                      <label for="numero">Numero</label>
+                      <input type="text" class="form-control" name="numero" value="<?php echo $dado['numero']; ?>">
+                	</div>
+                	
+                	<div class="form-group col-md-3">
+                      <label for="bairro">Bairro</label>
+                      <input type="text" class="form-control" name="bairro" value="<?php echo $dado['bairro']; ?>">
+                	</div>
+                	
+                	<div class="form-group col-md-3">
+                      <label for="cep">CEP</label>
+                      <input type="text" class="form-control" name="cep" value="<?php echo $dado['cep']; ?>">
+                	</div>
+                
+                </div>
+                
+                <div class=row>
+                	<div class="form-group col-md-4">
+                      <label for="cidade">Cidade</label>
+                      <input type="text" class="form-control" name="cidade" value="<?php echo $dado['cidade']; ?>">
+                	</div>
+                	
+                	<div class="form-group col-md-3">
+                      	<label for="uf">UF</label>
+                    	<select class="form-control selectpicker" name="uf" id="uf">
+                        	<option value="">--Selecione--</option>
+                        	<option value="AC">AC</option>
+                        	<option value="AL">AL</option>
+                        	<option value="AM">AM</option>
+                        	<option value="AP">AP</option>
+                        	<option value="BA">BA</option>
+                        	<option value="CE">CE</option>
+                        	<option value="DF">DF</option>
+                        	<option value="ES">ES</option>
+                        	<option value="GO">GO</option>
+                        	<option value="MA">MA</option>
+                        	<option value="MG">MG</option>
+                        	<option value="MS">MS</option>
+                        	<option value="MT">MT</option>
+                        	<option value="PA">PA</option>
+                        	<option value="PB">PB</option>
+                        	<option value="PE">PE</option>
+                        	<option value="PI">PI</option>
+                        	<option value="PR">PR</option>
+                        	<option value="RJ">RJ</option>
+                        	<option value="RN">RN</option>
+                        	<option value="RS">RS</option>
+                        	<option value="RO">RO</option>
+                        	<option value="RR">RR</option>
+                        	<option value="SC">SC</option>
+                        	<option value="SE">SE</option>
+                        	<option value="SP">SP</option>
+                        	<option value="TO">TO</option>
+                         </select>  
+                      
+                  	</div>
+                  	
+                  	
+                  	<div class="form-group col-md-2">
+                      <label for="latitute">Latitude</label>
+                      <input type="text" class="form-control" name="latitude" value="<?php echo $dado['latitude']; ?>">
+                	</div>
+                  	
+                  	<div class="form-group col-md-2">
+                      <label for="longitude">Longitude</label>
+                      <input type="text" class="form-control" name="longitude" value="<?php echo $dado['longitude']; ?>">
+                	</div>
+                </div>
+                
+                <div class=row>
+                	<div class="form-group col-md-3">
+                      <label for="telefone">Telefone</label>
+                      <input type="text" class="form-control" name="telefone" value="<?php echo $dado['telefone']; ?>">
+                	</div>
+                	
+                	<div class="form-group col-md-3">
+                      <label for="senha">Senha</label>
+                      <input type="password" class="form-control" name="senha" value="<?php echo $dado['senha']; ?>">
+                	</div>
+                	
+                </div>
+				
+				<div class=row>
+    				<div class="form-group col-md-4">
+    					<input type="submit" value="&#10003 Alterar" class="btn btn-primary" /> 
+    					<a href="cadastro-estabelecimento.php" class="btn btn-danger">&#10005Cancelar</a>
+                   	</div>
+               	</div>
+				
+				
+				
+			 
 
 			</form>
 		</div>

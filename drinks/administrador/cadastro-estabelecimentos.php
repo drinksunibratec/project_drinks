@@ -1,12 +1,11 @@
 <?php
 require_once ('../config.php');
 require_once ('../biblioteca/menu/menu.php');
+
 ?>
-<div class="container">
 
-
-	<!DOCTYPE html>
-	<html lang="pt-br">
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -46,9 +45,13 @@ require_once ('../biblioteca/menu/menu.php');
 
 </head>
 
-<body>
 
-	<h2>Lista de Estabelecimentos</h2>
+
+
+<body>
+	<div class="container">
+
+		<h2>Lista de Estabelecimentos</h2>
   <?php
 $sql = "SELECT * FROM estabelecimento";
 $sql = $PDO->query($sql);
@@ -110,7 +113,9 @@ if ($sql->rowCount() == 0) {
 }
 ?>
 
-<a href="adicionar-estabelecimento.php" class="btn btn-success">&#10010
+
+</div>
+	<a href="adicionar-estabelecimento.php" class="btn btn-success">&#10010
 		Novo estabelecimento</a>
 
 
@@ -133,4 +138,4 @@ if ($sql->rowCount() == 0) {
 		<script src="../biblioteca/js/ie10-viewport-bug-workaround.js"></script>
 
 </body>
-	</html>
+</html>
