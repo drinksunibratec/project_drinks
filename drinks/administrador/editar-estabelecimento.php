@@ -2,9 +2,9 @@
 require_once ('../config.php');
 require_once ('../biblioteca/menu/menu.php');
 
-$id = 0;
+$codEstabelecimento = 0;
 if (isset($_GET['codEstabelecimento']) && empty($_GET['codEstabelecimento']) == false) {
-    $id = addslashes($_GET['codEstabelecimento']);
+    $codEstabelecimento = addslashes($_GET['codEstabelecimento']);
 }
 
 if (isset($_POST['nomeFantasia']) && empty($_POST['nomeFantasia']) == false) {
@@ -33,7 +33,6 @@ if ($sql->rowCount() > 0) {
 } else {
     header("Location: cadastro-estabelecimentos.php");
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -77,50 +76,47 @@ if ($sql->rowCount() > 0) {
 </head>
 
 <body>
+	<div class="container">
 
-	<div class="jumbotron">
-		<form method="POST">
-			<h3>Dados cadastrais de <?php echo $dado['nome']; ?>:</h3>
+		<h3>Dados cadastrais de <?php echo $dado['nomeFantasia']; ?>:</h3>
+		<div class="jumbotron">
+			<form method="POST">
 
-			CNPJ<br /> <input type="text" name="cnpj"
-				value="<?php echo $dado['cnpj']; ?> " /><br /> Email<br /> <input
-				type="text" name="email" value="<?php echo $dado['email']; ?> " /><br />
-			Bairro<br /> <input type="text" name="bairro" id="campoBairro"
-				value="<?php echo $dado['bairro']; ?> " /><br /> Cep<br /> <input
-				type="text" name="cep" id="campoCep"
-				value="<?php echo $dado['cep']; ?> " /><br /> <br /> Cidade<br /> <input
-				type="text" name="cidade" id="campoCidade"
-				value="<?php echo $dado['cidade']; ?> " /><br /> <br /> Latitude<br />
-			<input type="text" name="latitude" id="campoLatitude"
-				value="<?php echo $dado['latitude']; ?> " /><br /> <br /> Longitude<br />
-			<input type="text" name="longitude" id="campoLongitude"
-				value="<?php echo $dado['longitude']; ?> " /><br /> <br /> Numero<br />
-			<input type="text" name="numero" id="campoNumero"
-				value="<?php echo $dado['Numero']; ?> " /><br /> <br /> Rua<br /> <input
-				type="text" name="rua" id="campoRua"
-				value="<?php echo $dado['rua']; ?> " /><br /> <br /> UF<br /> <input
-				type="text" name="uf" id="campoUf"
-				value="<?php echo $dado['uf']; ?> " /><br /> <br /> Nome Fantasia<br />
-			<input type="text" name="nomeFantasia" id="campoNomeFantasia"
-				value="<?php echo $dado['nomeFantasia']; ?> " /><br /> <br /> Razao
-			Social<br /> <input type="text" name="cep" id="campoRazaoSocial"
-				value="<?php echo $dado['razaoSocial']; ?> " /><br /> <br /> Senha<br />
-			<input type="text" name="cep" id="campoSenha"
-				value="<?php echo $dado['senha']; ?> " /><br /> <br /> Telefone<br />
-			<input type="text" name="cep" id="campoTelefone"
-				value="<?php echo $dado['telefone']; ?> " /><br /> <br /> <input
-				type="submit" value="&#10003 Alterar" class="btn btn-primary" /> <a
-				href="cadastro-estabelecimento.php" class="btn btn-danger">&#10005
-				Cancelar</a>
 
-		</form>
+				CNPJ <br /> <input type="text" name="cnpj"
+					value="<?php echo $dado['cnpj']; ?> " /> <br /> Email <br /> <input
+					type="text" name="email" value="<?php echo $dado['eMail']; ?> " />
+				<br /> Bairro <br /> <input type="text" name="bairro"
+					id="campoBairro" value="<?php echo $dado['bairro']; ?> " /> <br />
+				Cep <br /> <input type="text" name="cep" id="campoCep"
+					value="<?php echo $dado['cep']; ?> " /> <br /> <br /> Cidade <br />
+				<input type="text" name="cidade" id="campoCidade"
+					value="<?php echo $dado['cidade']; ?> " /> <br /> <br /> Latitude <br />
+				<input type="text" name="latitude" id="campoLatitude"
+					value="<?php echo $dado['latitude']; ?> " /> <br /> <br />
+				Longitude <br /> <input type="text" name="longitude"
+					id="campoLongitude" value="<?php echo $dado['longitude']; ?> " /> <br />
+				<br /> Numero <br /> <input type="text" name="numero"
+					id="campoNumero" value="<?php echo $dado['numero']; ?> " /> <br />
+				<br /> Rua <br /> <input type="text" name="rua" id="campoRua"
+					value="<?php echo $dado['rua']; ?> " /> <br /> <br /> UF <br /> <input
+					type="text" name="uf" id="campoUf"
+					value="<?php echo $dado['uf']; ?> " /> <br /> <br /> Nome Fantasia
+				<br /> <input type="text" name="nomeFantasia" id="campoNomeFantasia"
+					value="<?php echo $dado['nomeFantasia']; ?> " /> <br /> <br />
+				Razao Social <br /> <input type="text" name="cep"
+					id="campoRazaoSocial" value="<?php echo $dado['razaoSocial']; ?> " />
+				<br /> <br /> Senha <br /> <input type="text" name="cep"
+					id="campoSenha" value="<?php echo $dado['senha']; ?> " /> <br /> <br />
+				Telefone <br /> <input type="text" name="cep" id="campoTelefone"
+					value="<?php echo $dado['telefone']; ?> " /> <br /> <br /> <input
+					type="submit" value="&#10003 Alterar" class="btn btn-primary" /> <a
+					href="cadastro-estabelecimento.php" class="btn btn-danger">&#10005
+					Cancelar</a>
+
+			</form>
+		</div>
 	</div>
-
-	<footer>
-		<p>&copy; 2016 Drinks, Inc.</p>
-	</footer>
-	<!-- /container -->
-
 
 	<!-- Bootstrap core JavaScript
     ================================================== -->

@@ -47,7 +47,7 @@ require_once ('../biblioteca/menu/menu.php');
 </head>
 
 <body>
-	
+
 	<h2>Lista de Estabelecimentos</h2>
   <?php
 $sql = "SELECT * FROM estabelecimento";
@@ -99,7 +99,7 @@ if ($sql->rowCount() == 0) {
         echo '<td>' . $estabelecimento['uf'] . '</td>';
         echo '<td>' . $estabelecimento['razaoSocial'] . '</td>';
         echo '<td>' . $estabelecimento['telefone'] . '</td>';
-        echo '<td><a href="editar-estabelecimento.php?codEstabelecimento='.$estabelecimento['codEstabelecimento'].'" class="btn btn-warning">&#9999; Editar</a></td>';
+        echo '<td><a href="editar-estabelecimento.php?codEstabelecimento=' . $estabelecimento['codEstabelecimento'] . '" class="btn btn-warning">&#9999; Editar</a></td>';
         echo '<td><a href="excluir-estabelecimento.php?codEstabelecimento=' . $estabelecimento['codEstabelecimento'] . '" class="btn btn-danger">&#10006; Excluir</a></td>';
         echo '</tbody>';
         echo '</tr>';
@@ -111,25 +111,26 @@ if ($sql->rowCount() == 0) {
 ?>
 
 <a href="adicionar-estabelecimento.php" class="btn btn-success">&#10010
-	Novo estabelecimento</a>
+		Novo estabelecimento</a>
 
 
-<div class="container theme-showcase" role="main">
+	<div class="container theme-showcase" role="main">
 
-	<br> <br>
+		<br> <br>
 
-	<!-- Main jumbotron for a primary marketing message or call to action -->
+		<!-- Main jumbotron for a primary marketing message or call to action -->
 
 
-	<!-- Bootstrap core JavaScript
+		<!-- Bootstrap core JavaScript
     ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="js/vendor/jquery.min.js"><\/script>')</script>
-	<script src="../biblioteca/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
-	<script src="../biblioteca/js/docs.min.js"></script>
-	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<script src="../biblioteca/js/ie10-viewport-bug-workaround.js"></script>
-	</body>
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script>window.jQuery || document.write('<script src="js/vendor/jquery.min.js"><\/script>')</script>
+		<script src="../biblioteca/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+		<script src="../biblioteca/js/docs.min.js"></script>
+		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+		<script src="../biblioteca/js/ie10-viewport-bug-workaround.js"></script>
+
+</body>
 	</html>
