@@ -1,3 +1,4 @@
+<?php session_start()?>
 <div class="container">
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
@@ -9,17 +10,27 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="inicial-administrador.php">Drinks</a>
+				<a class="navbar-brand" >Drinks</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="cadastro-cliente.php">Clientes</a></li>
+				
 					<li><a href="cadastro-estabelecimentos.php">Estabelecimentos</a></li>
-					<li><a href="cadastro-produto.php">Produtos</a></li>
+					<?php if(!empty($_SESSION['administrador']) && $_SESSION['administrador'] == 1){ ?>
+						<li><a href="cadastro-cliente.php">Clientes</a></li>
+					<?php }else{?>
+						<li><a href="cadastrar-produto.php">Produtos</a></li>
+					<?php }?>
+					
+					
+					   <li><a href="../login.php">Sair</a></li>
 				</ul>
+				
 			</div>
+			
 			<!--/.nav-collapse -->
-		</div>
+		</div> 
 		<!--/.container-fluid -->
+		
 	</nav>
 </div>

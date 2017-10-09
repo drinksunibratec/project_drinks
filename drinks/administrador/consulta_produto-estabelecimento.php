@@ -1,31 +1,9 @@
 <?php
   require_once('../config.php'); 
+  require_once ('../biblioteca/menu/menu.php');
  ?> 
 
-<div class="container">
       
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="inicial-administrador.php">Drinks</a>
-          </div>
-          <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li><a href="inicial-administrador.php">Home</a></li>
-              <li><a href="cadastro-administrador.php">Administrador</a></li>
-              <li><a href="cadastro-usuario.php">Clientes</a></li>              
-              <li><a href="cadastro-funcionario.php">Estabelecimentos</a></li>  
-              <li><a href="cadastro-produto.php">Produtos</a></li>  
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div><!--/.container-fluid -->
-      </nav>
       
 
 <!DOCTYPE html>
@@ -64,6 +42,7 @@
   </head>
 
   <body>
+  <div class="container">
   <?php
     $sql = "SELECT * FROM produto"; 
     $sql = $PDO->query($sql);
@@ -97,9 +76,9 @@
             echo'<tr>';
             echo'<th>';
 //            echo'<th>Codigo</th>';
-            echo'<th>nome</th>';
-            echo'<th>preco</th>';
-            echo'<th>descricao</th>';
+            echo'<th>Nome</th>';
+            echo'<th>Pre&ccedil;o</th>';
+            echo'<th>Descri&ccedil;&atilde;o</th>';
             echo'</tr>';
             echo'</thead>';
             echo '<tbody>';

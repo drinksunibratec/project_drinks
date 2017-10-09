@@ -1,5 +1,6 @@
 <?php
   require_once('../config.php'); 
+  require_once ('../biblioteca/menu/menu.php');
  
   if(isset($_GET['codEstabelecimento']) && empty($_GET['codEstabelecimento']) == false) {
     $id = addslashes($_GET['codEstabelecimento']);
@@ -17,11 +18,10 @@
     $numero = addslashes($_POST['numero']);
     $uf = addslashes($_POST['uf']);
     $razaoSocial = addslashes($_POST['razaoSocial']);
-    $senha = md5(addslashes($_POST['senha']));
+    $senha = addslashes($_POST['senha']);
     $telefone = addslashes($_POST['telefone']);
     
 
-    $id = 0;
     $caracters = array("/", "-", ".", "(", ")");
     $cnpj = str_replace($caracters, "", $cnpj);
     $telefone = str_replace($caracters, "", $telefone);
@@ -30,6 +30,8 @@
     $sql = "INSERT INTO estabelecimento (cnpj, eMail, bairro, cep, cidade, latitude, longitude, numero, uf, nomeFantasia, razaoSocial , senha, telefone) values ('$cnpj', '$email', '$bairro', '$cep', '$cidade', '$latitude', '$longitude', '$numero', '$uf', '$nomeFantasia', '$razaoSocial', '$senha', '$telefone')";
     $PDO->query($sql);
 
+    $_SESSION['message'] = "Estabelecimento cadastrado com sucesso!";
+    $_SESSION['type'] = 'success';
     header("Location: cadastro-estabelecimentos.php");
   }
 ?>

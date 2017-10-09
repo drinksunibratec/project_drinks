@@ -1,6 +1,7 @@
 <?php
 require_once ('../config.php');
 require_once ('../biblioteca/menu/menu.php');
+require_once ('../biblioteca/util/array_uf.php');
 
 $codEstabelecimento = 0;
 
@@ -20,17 +21,20 @@ if (isset($_POST['cnpj']) && empty($_POST['cnpj']) == false) {
     $rua = $_POST['rua'];
     $nomeFantasia = $_POST['nomeFantasia'];
     $razaoSocial = $_POST['razaoSocial'];
-    $senha = md5($_POST['senha']);
+    $senha = $_POST['senha'];
     $telefone = $_POST['telefone'];
     
-    $sql = "UPDATE estabelecimento SET eMail = '$email', rua = '$rua', bairro = '$bairro', cep = '$cep', cidade = '$cidade', latitude ='$latitude', longitude = '$longitude',  numero ='$numero', uf = '$uf', nomeFantasia = '$nomeFantasia', razaoSocial = '$razaoSocial' , senha = '$senha', telefone = '$telefone' WHERE codEstabelecimento = '$codEstabelecimento'";
+    $caracters = array("/", "-", ".", "(", ")", " ");
+    $cnpj = str_replace($caracters, "", $cnpj);
+    $telefone = str_replace($caracters, "", $telefone);
+    $cep = str_replace($caracters, "", $cep);
     
-//     $stmt = $conn->prepare("UPDATE estabelecimento SET eMail =?, bairro =?, cep =?, cidade =?, latitude =?, longitude =?, numero =?, uf =?, nomeFantasia =?, razaoSocial =?, senha =?, telefone =?, administrador=? WHERE codEstabelecimento = ?");
-//     $stmt->bind_param("ssssssisssssss", $email, $bairro, $cep, $cidade, $latitude, $longitude, $numero, $uf, $nomeFantasia, $razaoSocial, $senha, $telefone, $codEstabelecimento, $dado['administrador']);
-//     $result = $stmt->execute();
-//     $stmt->close();
-   
+    $sql = "UPDATE estabelecimento SET eMail = '$email', rua = '$rua', bairro = '$bairro', cep = '$cep', cidade = '$cidade', latitude ='$latitude', longitude = '$longitude',  numero ='$numero', uf = '$uf', nomeFantasia = '$nomeFantasia', razaoSocial = '$razaoSocial' , senha = '$senha', telefone = '$telefone' WHERE codEstabelecimento = '$codEstabelecimento'";
+     
     $result = $PDO->query($sql);
+    
+    $_SESSION['message'] = 'Estabelecimento editado com sucesso.';
+    $_SESSION['type'] = 'success';
     
     header("Location: cadastro-estabelecimentos.php");
 }
@@ -87,7 +91,7 @@ if ($sql->rowCount() > 0) {
      <script>
       jQuery(function($){
              $("#cnpj").mask("99.999.999/9999-99");
-             $("#telefone").mask("(99)99999-9999");
+             $("#telefone").mask("(99) 99999-9999");
              $("#cep").mask("99999-999");     
       });
 
@@ -157,36 +161,7 @@ if ($sql->rowCount() > 0) {
                 	
                 	<div class="form-group col-md-3">
                       	<label for="uf">UF</label>
-                    	<select class="form-control selectpicker" name="uf" id="uf">
-                        	<option value="">--Selecione--</option>
-                        	<option value="AC">AC</option>
-                        	<option value="AL">AL</option>
-                        	<option value="AM">AM</option>
-                        	<option value="AP">AP</option>
-                        	<option value="BA">BA</option>
-                        	<option value="CE">CE</option>
-                        	<option value="DF">DF</option>
-                        	<option value="ES">ES</option>
-                        	<option value="GO">GO</option>
-                        	<option value="MA">MA</option>
-                        	<option value="MG">MG</option>
-                        	<option value="MS">MS</option>
-                        	<option value="MT">MT</option>
-                        	<option value="PA">PA</option>
-                        	<option value="PB">PB</option>
-                        	<option value="PE">PE</option>
-                        	<option value="PI">PI</option>
-                        	<option value="PR">PR</option>
-                        	<option value="RJ">RJ</option>
-                        	<option value="RN">RN</option>
-                        	<option value="RS">RS</option>
-                        	<option value="RO">RO</option>
-                        	<option value="RR">RR</option>
-                        	<option value="SC">SC</option>
-                        	<option value="SE">SE</option>
-                        	<option value="SP">SP</option>
-                        	<option value="TO">TO</option>
-                         </select>  
+                    	<?php selected_UF($dado['uf'])?> 
                       
                   	</div>
                   	

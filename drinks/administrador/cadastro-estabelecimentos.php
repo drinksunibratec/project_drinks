@@ -1,6 +1,15 @@
 <?php
 require_once ('../config.php');
 require_once ('../biblioteca/menu/menu.php');
+require_once ('../biblioteca/util/mensagens.php');
+
+$codEstabelecimento = $_SESSION['codEstabelecimento'];
+
+// if(isset($_SESSION["mensagem"])){
+//     print $_SESSION["mensagem"];
+//     unset($_SESSION["mensagem"]);
+// }
+
 
 ?>
 
@@ -48,7 +57,7 @@ require_once ('../biblioteca/menu/menu.php');
       jQuery(function($){
              $("#cnpj").mask("99.999.999/9999-99");
              $("#telefone").mask("(99)99999-9999");
-             $("#cep").mask("99999-999");     
+             
       });
 
       
@@ -56,15 +65,51 @@ require_once ('../biblioteca/menu/menu.php');
 
 </head>
 
-
-
-
 <body>
 	<div class="container">
 
-		<h2>Lista de Estabelecimentos</h2>
+	<header>
+		<div class="row">
+    		
+    		<div class="col-sm-6">
+    		
+    		<?php
+              $sql;
+              if($_SESSION['administrador'] == 1){?>
+                 <h2>Lista de Estabelecimentos</h2>
+             <?php }else{?>
+                  <h2>Seus Dados</h2>
+            <?php  }?>
+    		
+        		
+    		</div>
+    		
+    		<?php if (!empty($_SESSION['administrador']) && $_SESSION['administrador'] == 1) { ?>
+        		<div class="col-sm-6 text-right h2" align="right">
+            		<a href="adicionar-estabelecimento.php" class="btn btn-primary">&#10010
+            			Novo estabelecimento</a>
+        		</div>
+    		<?php }?>
+		
+		</div>
+		
+	</header>
+	<?php if (!empty($_SESSION['message'])) :  ?>
+    	<div class="alert alert-<?php echo $_SESSION['type']; ?> alert-dismissible" role="alert">
+    		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    		<?php echo $_SESSION['message']; ?>
+    	</div>
+    	<?php clear_message('message'); clear_message('type'); ?>
+	<?php endif; ?>
+	
+	
   <?php
-$sql = "SELECT * FROM estabelecimento";
+  $sql;
+  if($_SESSION['administrador'] == 1){
+      $sql = "SELECT * FROM estabelecimento";
+  }else{
+      $sql = "SELECT * FROM estabelecimento where codEstabelecimento = " . $codEstabelecimento;
+  }
 $sql = $PDO->query($sql);
 $r = 'excluir';
 if ($sql->rowCount() == 0) {
@@ -78,7 +123,7 @@ if ($sql->rowCount() == 0) {
 } else {
     
     echo '<div class="jumbotron">';
-    echo '<div class="container" style="width:1200px; height: 400px; overflow: auto;">';
+//     echo '<div class="container">';
     echo '<tr>';
     echo '<table class="table table-hover">';
     echo '<thead>';
@@ -122,18 +167,13 @@ if ($sql->rowCount() == 0) {
     }
     echo '</table>';
     echo '</div>';
-    echo '</div>';
+//     echo '</div>';
 }
 ?>
 
 
 </div>
-	<div class="container">
-
-		<a href="adicionar-estabelecimento.php" class="btn btn-success">&#10010
-			Novo estabelecimento</a>
-
-	</div>
+	
 
 	<br>
 	<br>

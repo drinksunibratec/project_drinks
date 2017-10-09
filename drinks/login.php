@@ -1,22 +1,27 @@
 <?php
 require 'config.php';
+require_once ('biblioteca/util/mensagens.php');
 
 session_start();
-
+clear_message('codEstabelecimento');
+clear_message('administrador');
 if (isset($_POST['email']) && empty($_POST['email']) == false) {
     $email = addslashes($_POST['email']);
-    $senha = md5(addslashes($_POST['senha']));
+    $senha = addslashes($_POST['senha']);
     
-    $stmt = $conn->prepare("SELECT * FROM cliente WHERE email = ? and senha = ?");
+    $stmt = $conn->prepare("SELECT * FROM estabelecimento WHERE eMail = ? and senha = ?");
     
     $stmt->bind_param("ss", $email, $senha);
     
-    if ($stmt->execute()) {
-        $cliente = $stmt->get_result()->fetch_assoc();
+    $result = $stmt->execute();
+    
+    if ($result) {
+        $etabelecimento = $stmt->get_result()->fetch_assoc();
         $stmt->close();
         
-        $_SESSION['codEstabelecimento'] = $cliente['codEstabelecimento'];
-        header("Location: administrador/cadastro-cliente.php");
+        $_SESSION['codEstabelecimento'] = $etabelecimento['codEstabelecimento'];
+        $_SESSION['administrador'] = $etabelecimento['administrador'];
+        header("Location: administrador/cadastro-estabelecimentos.php");
     }else{
         echo '<div class="alert alert-danger" role="alert">';
         echo '<strong>Aviso!</strong> Verifique se digitou o login corretamente.';
@@ -46,7 +51,7 @@ if (isset($_POST['email']) && empty($_POST['email']) == false) {
 		<div class="section"></div>
 
 		<div class="container">
-			<div class="z-depth-1 grey lighten-4 row"
+			<div class="z-depth-1 grey lighten-5 row"
 				style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
 
 				<form class="col s12" method="POST">
@@ -66,10 +71,9 @@ if (isset($_POST['email']) && empty($_POST['email']) == false) {
 							<input class='validate' type='password' name='senha'
 								id='password' /> <label for='password'>Coloque sua senha</label>
 						</div>
-						<label style='float: right;'> <a class='pink-text' href='#!'><b>Esqueceu
-									a senha?</b></a>
+						<!-- <label style='float: right;'> <a class='pink-text' href='#!'><b>Esqueceu a senha?</b></a></label> -->
 
-						</label>
+						
 					</div>
 
 					<br />
