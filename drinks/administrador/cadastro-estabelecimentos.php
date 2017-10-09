@@ -76,14 +76,15 @@ if ($sql->rowCount() == 0) {
     echo '<th>Email</th>';
     // echo'<th>bairro</th>';
     // echo'<th>CEP</th>';
-    echo '<th>cidade</th>';
+    echo '<th>Cidade</th>';
     // echo'<th>Latitude</th>';
     // echo'<th>Longitude</th>';
     // echo'<th>Numero</th>';
     // echo'<th>Rua</th>';
     echo '<th>UF</th>';
-    echo '<th>Razao Social</th>';
+    echo '<th>Raz&atilde;o Social</th>';
     echo '<th>Telefone</th>';
+    echo '<th class="text-center">A&ccedil;&otilde;es</th>';
     echo '</tr>';
     echo '</thead>';
     echo '<tbody>';
@@ -104,6 +105,7 @@ if ($sql->rowCount() == 0) {
         echo '<td>' . $estabelecimento['telefone'] . '</td>';
         echo '<td><a href="editar-estabelecimento.php?codEstabelecimento=' . $estabelecimento['codEstabelecimento'] . '" class="btn btn-warning">&#9999; Editar</a></td>';
         echo '<td><a href="excluir-estabelecimento.php?codEstabelecimento=' . $estabelecimento['codEstabelecimento'] . '" class="btn btn-danger">&#10006; Excluir</a></td>';
+        echo '<td><a href="consulta_produto-estabelecimento.php?codEstabelecimento=' . $estabelecimento['codEstabelecimento'] . '" class="btn btn-info">&#x1a; Produtos</a></td>';
         echo '</tbody>';
         echo '</tr>';
     }
@@ -115,27 +117,29 @@ if ($sql->rowCount() == 0) {
 
 
 </div>
-	<a href="adicionar-estabelecimento.php" class="btn btn-success">&#10010
-		Novo estabelecimento</a>
+	<div class="container">
+
+		<a href="adicionar-estabelecimento.php" class="btn btn-success">&#10010
+			Novo estabelecimento</a>
+
+	</div>
+
+	<br>
+	<br>
+
+	<!-- Main jumbotron for a primary marketing message or call to action -->
 
 
-	<div class="container theme-showcase" role="main">
-
-		<br> <br>
-
-		<!-- Main jumbotron for a primary marketing message or call to action -->
-
-
-		<!-- Bootstrap core JavaScript
+	<!-- Bootstrap core JavaScript
     ================================================== -->
-		<!-- Placed at the end of the document so the pages load faster -->
-		<script
-			src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-		<script>window.jQuery || document.write('<script src="js/vendor/jquery.min.js"><\/script>')</script>
-		<script src="../biblioteca/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
-		<script src="../biblioteca/js/docs.min.js"></script>
-		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-		<script src="../biblioteca/js/ie10-viewport-bug-workaround.js"></script>
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="js/vendor/jquery.min.js"><\/script>')</script>
+	<script src="../biblioteca/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+	<script src="../biblioteca/js/docs.min.js"></script>
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="../biblioteca/js/ie10-viewport-bug-workaround.js"></script>
 
 </body>
 </html>

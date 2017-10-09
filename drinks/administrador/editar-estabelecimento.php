@@ -3,24 +3,34 @@ require_once ('../config.php');
 require_once ('../biblioteca/menu/menu.php');
 
 $codEstabelecimento = 0;
+
+
 if (isset($_GET['codEstabelecimento']) && empty($_GET['codEstabelecimento']) == false) {
     $codEstabelecimento = addslashes($_GET['codEstabelecimento']);
 }
-if (isset($_POST['dado']) && empty($_POST['dado']) == false) {
-    $nomeFantasia = addslashes($_POST['nomeFantasia']);
-    $email = addslashes($_POST['email']);
-    $bairro = addslashes($_POST['bairro']);
-    $cep = addslashes($_POST['cep']);
-    $latitude = addslashes($_POST['latitude']);
-    $longitude = addslashes($_POST['longitude']);
-    $numero = addslashes($_POST['numero']);
-    $uf = addslashes($_POST['uf']);
-    $razaoSocial = addslashes($_POST['razaoSocial']);
-    $senha = md5(addslashes($_POST['senha']));
-    $telefone = addslashes($_POST['telefone']);
+if (isset($_POST['cnpj']) && empty($_POST['cnpj']) == false) {
+    $email = $_POST['email'];
+    $bairro = $_POST['bairro'];
+    $cep = $_POST['cep'];
+    $cidade = $_POST['cidade'];
+    $latitude = $_POST['latitude'];
+    $longitude = $_POST['longitude'];
+    $numero = $_POST['numero'];
+    $uf = $_POST['uf'];
+    $rua = $_POST['rua'];
+    $nomeFantasia = $_POST['nomeFantasia'];
+    $razaoSocial = $_POST['razaoSocial'];
+    $senha = md5($_POST['senha']);
+    $telefone = $_POST['telefone'];
     
-    $sql = "UPDATE estabelecimento SET eMail = '$eMail', bairro = '$bairro', cep = '$cep', cidade = '$cidade', latitude ='$latitude', longitude = '$longitude',  numero ='$numero', uf = '$uf', nomeFantasia = '$nomeFantasia', razaoSocial = '$razaoSocial' , senha = '$senha', telefone = '$telefone' WHERE codEstabelecimento = '$codEstabelecimento'";
-    $PDO->query($sql);
+    $sql = "UPDATE estabelecimento SET eMail = '$email', rua = '$rua', bairro = '$bairro', cep = '$cep', cidade = '$cidade', latitude ='$latitude', longitude = '$longitude',  numero ='$numero', uf = '$uf', nomeFantasia = '$nomeFantasia', razaoSocial = '$razaoSocial' , senha = '$senha', telefone = '$telefone' WHERE codEstabelecimento = '$codEstabelecimento'";
+    
+//     $stmt = $conn->prepare("UPDATE estabelecimento SET eMail =?, bairro =?, cep =?, cidade =?, latitude =?, longitude =?, numero =?, uf =?, nomeFantasia =?, razaoSocial =?, senha =?, telefone =?, administrador=? WHERE codEstabelecimento = ?");
+//     $stmt->bind_param("ssssssisssssss", $email, $bairro, $cep, $cidade, $latitude, $longitude, $numero, $uf, $nomeFantasia, $razaoSocial, $senha, $telefone, $codEstabelecimento, $dado['administrador']);
+//     $result = $stmt->execute();
+//     $stmt->close();
+   
+    $result = $PDO->query($sql);
     
     header("Location: cadastro-estabelecimentos.php");
 }
@@ -201,10 +211,6 @@ if ($sql->rowCount() > 0) {
                    	</div>
                	</div>
 				
-				
-				
-			 
-
 			</form>
 		</div>
 	</div>
