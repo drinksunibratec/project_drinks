@@ -5,10 +5,10 @@
     $id = addslashes($_GET['codEstabelecimento']);
   }
 
-  if (isset($_POST['nomeFantasia']) && empty($_POST['nomeFantasia']) == false) {
+  if (isset($_POST['cnpj']) && empty($_POST['cnpj']) == false) {
     $cnpj = addslashes($_POST['cnpj']);
     $nomeFantasia = addslashes($_POST['nomeFantasia']);
-    $email = addslashes($_POST['eMail']);
+    $email = addslashes($_POST['email']);
     $bairro = addslashes($_POST['bairro']);
     $cep = addslashes($_POST['cep']);
     $cidade = addslashes($_POST['cidade']);
@@ -22,10 +22,12 @@
     
 
     $id = 0;
-
-    //"UPDATE estabelecimento SET nomeFantasia = '$nomeFantasia', email = '$email', cep = '$cep', latitude ='$latitude', longitude = '$longitude', 
-    //numero ='$numero', uf = '$uf', razaoSocial = '$razaoSocial' , senha = '$senha', telefone = '$telefone' WHERE codEstabelecimento = '$codEstabelecimento'";
-    $sql = "INSERT INTO estabelecimento SET cnpj = '$cnpj', email = '$eMail', bairro = '$bairro', cep = '$cep', cidade = '$cidade', latitude ='$latitude', longitude = '$longitude',  numero ='$numero', uf = '$uf', nomeFantasia = '$nomeFantasia', razaoSocial = '$razaoSocial' , senha = '$senha', telefone = '$telefone'";
+    $caracters = array("/", "-", ".", "(", ")");
+    $cnpj = str_replace($caracters, "", $cnpj);
+    $telefone = str_replace($caracters, "", $telefone);
+    $cep = str_replace($caracters, "", $cep);
+    
+    $sql = "INSERT INTO estabelecimento (cnpj, eMail, bairro, cep, cidade, latitude, longitude, numero, uf, nomeFantasia, razaoSocial , senha, telefone) values ('$cnpj', '$email', '$bairro', '$cep', '$cidade', '$latitude', '$longitude', '$numero', '$uf', '$nomeFantasia', '$razaoSocial', '$senha', '$telefone')";
     $PDO->query($sql);
 
     header("Location: cadastro-estabelecimentos.php");
@@ -47,7 +49,7 @@
     <script src="../biblioteca/jquery/jquery-1.5.2.min.js"></script>
     <script src="../biblioteca/jquery/jquery.maskedinput-1.3.min.js"></script>
 
-    <title>Editar Usuário</title>
+    <title>Cadastrar Estabelecimento</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../biblioteca/bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -68,78 +70,145 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <!-- MÁSCARA -->
+    <!-- MASCARA -->
      <script>
       jQuery(function($){
-             $("#campoData").mask("99/99/9999");
-             $("#campoCpf").mask("99999999999");     
+             $("#cnpj").mask("99.999.999/9999-99");
+             $("#telefone").mask("(99)99999-9999");
+             $("#cep").mask("99999-999");     
       });
+
+      
      </script>
   </head>
 
-      <div class="container">
-      
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="inicial-administrador.php">Drinks</a>
-          </div>
-          <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li><a href="inicial-administrador.php">Home</a></li>
-              <li class="active"><a href="cadastro-administrador.php">Administrador</a></li>
-              <li><a href="cadastro-cliente.php">Cliente</a></li>              
-              <li><a href="cadastro-funcionario.php">Estabelecimento</a></li>  
-              <li><a href="cadastro-produto">Produtos</a></li>  
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div><!--/.container-fluid -->
-      </nav>
-      
-      <div>
-
-    <div class="jumbotron">
-      <form method = "POST">
-        <h2>Novo Estabelecimento</h2> 
-        CNPJ:<br/> 
-        <input type="text" class="form-control" style="width: 25%;" name="cnpj"  required="true"/>
-        Email:<br/> 
-        <input type="text" class="form-control" style="width: 25%;" name="eMail"  required="true"/>
-        Bairro:<br/> 
-        <input type="text" class="form-control" style="width: 25%;" name="bairro"  required="true"/>
-        CEP:<br/> 
-        <input type="text" class="form-control" style="width: 25%;" name="cep"  required="true"/>
-        Cidade:<br/> 
-        <input type="text" class="form-control" style="width: 25%;" name="cidade"  required="true"/>
-        Latitude:<br/> 
-        <input type="text" class="form-control" style="width: 25%;" name="Latitude"  required="true"/>
-        Longitude:<br/> 
-        <input type="text" class="form-control" style="width: 25%;" name="Longitude"  required="true"/>
-        Numero:<br/> 
-        <input type="text" class="form-control" style="width: 25%;" name="numero"  required="true"/>
-        Rua:<br/> 
-        <input type="text" class="form-control" style="width: 25%;" name="rua"  required="true"/>
-        UF:<br/> 
-        <input type="text" class="form-control" style="width: 25%;" name="uf"  required="true"/>
-        Nome Fantasia:<br/> 
-        <input type="text" class="form-control" style="width: 25%;" name="nomeFantasia"  required="true"/>
-        Razao Social:<br/>
-        <input type="text" class="form-control" style="width: 25%;" name="razaoSocial" required="true"/>
-        Telefone:<br/>
-        <input type="text" class="form-control" style="width: 25%;" name="telefone" />
-        Senha:<br/>
-        <input type="text" class="form-control" style="width: 25%;" name="senha" id="campoSenha" required="true"/>
-       
-
-        <input class="btn btn-success" type="submit" value = "&#10003 Cadastrar" />
-        <a href="cadastro-cliente.php" class="btn btn-danger">&#10005 Cancelar</a>  
-      </form>
+	<div class="container">
+		<h2>Novo Estabelecimento</h2> 
+        <div class="jumbotron">
+            <form method = "POST" data-toggle="validator">
+             <div class="row">
+                    
+                    <div class="form-group col-md-2">
+                      <label for="cnpj">CNPJ</label>
+                      <input type="text" class="form-control" id="cnpj" name="cnpj" required>
+                	</div>
+                    
+                    <div class="form-group col-md-3">
+                      <label for="razaoSocial">Raz&atilde;o Social</label>
+                      <input type="text" class="form-control" name="razaoSocial" required>
+                	</div>
+                    
+                    <div class="form-group col-md-3">
+                      <label for="nomeFantasia">Nome Fantasia</label>
+                      <input type="text" class="form-control" name="nomeFantasia" required>
+                	</div>
+                	
+                	<div class="form-group col-md-4">
+                      <label for="email">E-mail</label>
+                      <input type="email" class="form-control" name="email" placeholder="email@exemplo.com" required>
+                	</div>
+                	                	
+                </div>
+                
+                <div class="row">
+                	<div class="form-group col-md-4">
+                      <label for="rua">Rua</label>
+                      <input type="text" class="form-control" name="rua" required>
+                	</div>
+                	
+                	<div class="form-group col-md-2">
+                      <label for="numero">Numero</label>
+                      <input type="text" class="form-control" name="numero" required>
+                	</div>
+                	
+                	<div class="form-group col-md-3">
+                      <label for="bairro">Bairro</label>
+                      <input type="text" class="form-control" name="bairro" required>
+                	</div>
+                	
+                	<div class="form-group col-md-3">
+                      <label for="cep">CEP</label>
+                      <input type="text" class="form-control" id = "cep" name="cep" required>
+                	</div>
+                
+                </div>
+                
+                <div class=row>
+                	<div class="form-group col-md-4">
+                      <label for="cidade">Cidade</label>
+                      <input type="text" class="form-control" name="cidade" required>
+                	</div>
+                	
+                	<div class="form-group col-md-3">
+                      	<label for="uf">UF</label>
+                    	<select class="form-control selectpicker" name="uf" id="uf" required>
+                        	<option value="">--Selecione--</option>
+                        	<option value="AC">AC</option>
+                        	<option value="AL">AL</option>
+                        	<option value="AM">AM</option>
+                        	<option value="AP">AP</option>
+                        	<option value="BA">BA</option>
+                        	<option value="CE">CE</option>
+                        	<option value="DF">DF</option>
+                        	<option value="ES">ES</option>
+                        	<option value="GO">GO</option>
+                        	<option value="MA">MA</option>
+                        	<option value="MG">MG</option>
+                        	<option value="MS">MS</option>
+                        	<option value="MT">MT</option>
+                        	<option value="PA">PA</option>
+                        	<option value="PB">PB</option>
+                        	<option value="PE">PE</option>
+                        	<option value="PI">PI</option>
+                        	<option value="PR">PR</option>
+                        	<option value="RJ">RJ</option>
+                        	<option value="RN">RN</option>
+                        	<option value="RS">RS</option>
+                        	<option value="RO">RO</option>
+                        	<option value="RR">RR</option>
+                        	<option value="SC">SC</option>
+                        	<option value="SE">SE</option>
+                        	<option value="SP">SP</option>
+                        	<option value="TO">TO</option>
+                         </select>  
+                      
+                  	</div>
+                  	
+                  	
+                  	<div class="form-group col-md-2">
+                      <label for="latitute">Latitude</label>
+                      <input type="text" class="form-control" name="latitude" required>
+                	</div>
+                  	
+                  	<div class="form-group col-md-2">
+                      <label for="longitude">Longitude</label>
+                      <input type="text" class="form-control" name="longitude" required>
+                	</div>
+                </div>
+                
+                <div class=row>
+                	<div class="form-group col-md-3">
+                      <label for="telefone">Telefone</label>
+                      <input type="text" class="form-control" id = "telefone" name="telefone" required>
+                	</div>
+                	
+                	<div class="form-group col-md-3">
+                      <label for="senha">Senha</label>
+                      <input type="password" class="form-control" name="senha" required>
+                	</div>
+                	
+                </div>
+				
+				<div class=row>
+    				<div class="form-group col-md-4">
+    					<input type="submit" value="&#10003 Cadastrar" class="btn btn-primary" /> 
+    					<a href="cadastro-estabelecimentos.php" class="btn btn-danger">&#10005 Cancelar</a>
+                   	</div>
+               	</div>
+            	
+            </form>
+        </div>
+  
   </div>
 
    

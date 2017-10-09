@@ -42,6 +42,17 @@ require_once ('../biblioteca/menu/menu.php');
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
+     <!-- MASCARA -->
+     <script>
+      jQuery(function($){
+             $("#cnpj").mask("99.999.999/9999-99");
+             $("#telefone").mask("(99)99999-9999");
+             $("#cep").mask("99999-999");     
+      });
+
+      
+     </script>
 
 </head>
 
@@ -91,7 +102,7 @@ if ($sql->rowCount() == 0) {
     echo '<tr>';
     
     foreach ($sql->fetchAll() as $estabelecimento) {
-        echo '<td>' . $estabelecimento['cnpj'] . '</td>';
+        echo '<td id="cnpj">' . $estabelecimento['cnpj'] . '</td>';
         echo '<td>' . $estabelecimento['eMail'] . '</td>';
         // echo'<td>'.$estabelecimento['bairro'].'</td>';
         // echo'<td>'.$estabelecimento['cep'].'</td>';
@@ -102,7 +113,7 @@ if ($sql->rowCount() == 0) {
         echo '<td>' . $estabelecimento['cidade'] . '</td>';
         echo '<td>' . $estabelecimento['uf'] . '</td>';
         echo '<td>' . $estabelecimento['razaoSocial'] . '</td>';
-        echo '<td>' . $estabelecimento['telefone'] . '</td>';
+        echo '<td id="telefone">' . $estabelecimento['telefone'] . '</td>';
         echo '<td><a href="editar-estabelecimento.php?codEstabelecimento=' . $estabelecimento['codEstabelecimento'] . '" class="btn btn-warning">&#9999; Editar</a></td>';
         echo '<td><a href="excluir-estabelecimento.php?codEstabelecimento=' . $estabelecimento['codEstabelecimento'] . '" class="btn btn-danger">&#10006; Excluir</a></td>';
         echo '<td><a href="consulta_produto-estabelecimento.php?codEstabelecimento=' . $estabelecimento['codEstabelecimento'] . '" class="btn btn-info">&#x1a; Produtos</a></td>';

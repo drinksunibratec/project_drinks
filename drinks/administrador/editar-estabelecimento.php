@@ -82,6 +82,17 @@ if ($sql->rowCount() > 0) {
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
+    <!-- MASCARA -->
+     <script>
+      jQuery(function($){
+             $("#cnpj").mask("99.999.999/9999-99");
+             $("#telefone").mask("(99)99999-9999");
+             $("#cep").mask("99999-999");     
+      });
+
+      
+     </script>
 </head>
 
 <body>
@@ -93,9 +104,9 @@ if ($sql->rowCount() > 0) {
 
                 <div class="row">
                     
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-3">
                       <label for="cnpj">CNPJ</label>
-                      <input type="text" class="form-control" name="cnpj" value="<?php echo $dado['cnpj']; ?> " readonly>
+                      <input type="text" class="form-control" id="cnpj" name="cnpj" value="<?php echo $dado['cnpj']; ?> " readonly>
                 	</div>
                     
                     <div class="form-group col-md-3">
@@ -108,7 +119,7 @@ if ($sql->rowCount() > 0) {
                       <input type="text" class="form-control" name="nomeFantasia" value="<?php echo $dado['nomeFantasia']; ?>">
                 	</div>
                 	
-                	<div class="form-group col-md-4">
+                	<div class="form-group col-md-3">
                       <label for="email">E-mail</label>
                       <input type="text" class="form-control" name="email" value="<?php echo $dado['eMail']; ?>">
                 	</div>
@@ -123,7 +134,7 @@ if ($sql->rowCount() > 0) {
                 	
                 	<div class="form-group col-md-2">
                       <label for="numero">Numero</label>
-                      <input type="text" class="form-control" name="numero" value="<?php echo $dado['numero']; ?>">
+                      <input type="text" class="form-control" id="numero" name="numero" value="<?php echo $dado['numero']; ?>">
                 	</div>
                 	
                 	<div class="form-group col-md-3">
@@ -133,7 +144,7 @@ if ($sql->rowCount() > 0) {
                 	
                 	<div class="form-group col-md-3">
                       <label for="cep">CEP</label>
-                      <input type="text" class="form-control" name="cep" value="<?php echo $dado['cep']; ?>">
+                      <input type="text" class="form-control" id="cep" name="cep" value="<?php echo $dado['cep']; ?>">
                 	</div>
                 
                 </div>
@@ -194,7 +205,7 @@ if ($sql->rowCount() > 0) {
                 <div class=row>
                 	<div class="form-group col-md-3">
                       <label for="telefone">Telefone</label>
-                      <input type="text" class="form-control" name="telefone" value="<?php echo $dado['telefone']; ?>">
+                      <input type="text" class="form-control" id="telefone" name="telefone" value="<?php echo $dado['telefone']; ?>">
                 	</div>
                 	
                 	<div class="form-group col-md-3">
@@ -207,7 +218,7 @@ if ($sql->rowCount() > 0) {
 				<div class=row>
     				<div class="form-group col-md-4">
     					<input type="submit" value="&#10003 Alterar" class="btn btn-primary" /> 
-    					<a href="cadastro-estabelecimento.php" class="btn btn-danger">&#10005Cancelar</a>
+    					<a href="cadastro-estabelecimentos.php" class="btn btn-danger">&#10005Cancelar</a>
                    	</div>
                	</div>
 				
