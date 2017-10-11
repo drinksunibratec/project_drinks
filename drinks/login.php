@@ -1,27 +1,27 @@
 <?php
-require 'config.php';
-require_once ('biblioteca/util/mensagens.php');
+require_once ('biblioteca/util/Mensagens.php');
+require_once ('biblioteca/functions/DB_Functions.php');
 
 session_start();
-clear_message('codEstabelecimento');
-clear_message('administrador');
+
+
+$mensagens = new Mensagens();
+
+$mensagens->clear_message('codEstabelecimento');
+$mensagens->clear_message('administrador');
+
+
 if (isset($_POST['email']) && empty($_POST['email']) == false) {
     $email = addslashes($_POST['email']);
     $senha = addslashes($_POST['senha']);
     
-    $stmt = $conn->prepare("SELECT * FROM estabelecimento WHERE eMail = ? and senha = ?");
-    
-    $stmt->bind_param("ss", $email, $senha);
-    
-    $result = $stmt->execute();
+    $result = login(ESTABELECIMENTO, $email, $senha);
     
     if ($result) {
-        $etabelecimento = $stmt->get_result()->fetch_assoc();
-        $stmt->close();
+        $_SESSION['codEstabelecimento'] = $result['codEstabelecimento'];
+        $_SESSION['administrador'] = $result['administrador'];
         
-        $_SESSION['codEstabelecimento'] = $etabelecimento['codEstabelecimento'];
-        $_SESSION['administrador'] = $etabelecimento['administrador'];
-        header("Location: administrador/cadastro-estabelecimentos.php");
+        header("Location: administrador/estabelecimento/cadastro-estabelecimentos.php");
     }else{
         echo '<div class="alert alert-danger" role="alert">';
         echo '<strong>Aviso!</strong> Verifique se digitou o login corretamente.';
@@ -61,15 +61,15 @@ if (isset($_POST['email']) && empty($_POST['email']) == false) {
 
 					<div class='row'>
 						<div class='input-field col s12'>
-							<input class='validate' type='email' name='email' id='email' /> <label
-								for='email'>Coloque seu email</label>
+							<input class='validate' type='email' name='email' id='email' required/> <label
+								for='email' >Coloque seu email</label>
 						</div>
 					</div>
 
 					<div class='row'>
 						<div class='input-field col s12'>
 							<input class='validate' type='password' name='senha'
-								id='password' /> <label for='password'>Coloque sua senha</label>
+								id='password' required/> <label for='password'>Coloque sua senha</label>
 						</div>
 						<!-- <label style='float: right;'> <a class='pink-text' href='#!'><b>Esqueceu a senha?</b></a></label> -->
 
@@ -79,7 +79,7 @@ if (isset($_POST['email']) && empty($_POST['email']) == false) {
 					<br />
 					<div class='row'>
 						<button type='submit' name='btn_login'
-							class='col s12 btn btn-large waves-effect indigo'>Login</button>
+							class='col s12 btn btn-large waves-effect indigo'>Entrar</button>
 					</div>
 				</form>
 			</div>

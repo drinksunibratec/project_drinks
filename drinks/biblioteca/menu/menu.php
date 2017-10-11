@@ -15,15 +15,15 @@
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 				
-					<li><a href="cadastro-estabelecimentos.php">Estabelecimentos</a></li>
+					<li><a href="../../administrador/estabelecimento/cadastro-estabelecimentos.php">Estabelecimentos</a></li>
 					<?php if(!empty($_SESSION['administrador']) && $_SESSION['administrador'] == 1){ ?>
-						<li><a href="cadastro-cliente.php">Clientes</a></li>
+						<li><a href="../../administrador/cliente/cadastro-cliente.php">Clientes</a></li>
 					<?php }else{?>
-						<li><a href="cadastrar-produto.php">Produtos</a></li>
+						<li><a href="../../administrador/produto/cadastrar-produto.php">Produtos</a></li>
 					<?php }?>
 					
 					
-					   <li><a href="../login.php">Sair</a></li>
+					   <li><a href="../../login.php">Sair</a></li>
 				</ul>
 				
 			</div>
