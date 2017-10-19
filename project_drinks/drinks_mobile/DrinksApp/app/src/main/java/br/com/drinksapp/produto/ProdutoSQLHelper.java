@@ -14,8 +14,8 @@ public class ProdutoSQLHelper extends SQLiteOpenHelper {
     public static final String TABELA_PRODUTO = "produto";
     public static final String COLUNA_ID = "_id";
     public static final String COLUNA_NOME = "nome";
-    public static final String COLUNA_ESTABELECIMENTO = "estabelecimento";
     public static final String COLUNA_ENDERECO = "endereco";
+    public static final String COLUNA_ESTABELECIMENTO = "estabelecimento";
     public static final String COLUNA_BAIRRO = "bairro";
     public static final String COLUNA_PRECO = "preco";
     public static final String COLUNA_STATUS = "status";
@@ -30,11 +30,11 @@ public class ProdutoSQLHelper extends SQLiteOpenHelper {
                 "CREATE TABLE "+ TABELA_PRODUTO +" (" +
                         COLUNA_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"+
                         COLUNA_NOME     +" TEXT NOT NULL, "+
-                        COLUNA_ESTABELECIMENTO +" TEXT, "+
                         COLUNA_ENDERECO +" TEXT, " +
+                        COLUNA_ESTABELECIMENTO +" TEXT, "+
                         COLUNA_BAIRRO +" TEXT, " +
                         COLUNA_PRECO +" TEXT, " +
-                        COLUNA_STATUS      +" INTEGER, " +
+                        COLUNA_STATUS +" INTEGER, " +
                         COLUNA_ID_SERVIDOR +" INTEGER UNIQUE)");
     }
     @Override

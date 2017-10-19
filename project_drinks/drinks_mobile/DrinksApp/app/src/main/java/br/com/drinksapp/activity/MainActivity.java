@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 import java.util.HashMap;
+
 import br.com.drinksapp.R;
 import br.com.drinksapp.helper.SQLiteHandler;
 import br.com.drinksapp.helper.SessionManager;
@@ -143,12 +144,16 @@ public class MainActivity extends AppCompatActivity
             startActivity(PerfilActivity);
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
+            Intent EstabelecimentoActivity = new Intent(MainActivity.this, br.com.drinksapp.estabelecimento.EstabelecimentoActivity.class);
+            startActivity(EstabelecimentoActivity);
 
         } else if (id == R.id.nav_slideshow) {
             Intent ProdutoActivity = new Intent(MainActivity.this, br.com.drinksapp.produto.ProdutoActivity.class);
             startActivity(ProdutoActivity);
 
         } else if (id == R.id.nav_manage) {
+            Intent PedidoActivity = new Intent(MainActivity.this, br.com.drinksapp.pedido.PedidoActivity.class);
+            startActivity(PedidoActivity);
 
         } else if (id == R.id.nav_share) {
 

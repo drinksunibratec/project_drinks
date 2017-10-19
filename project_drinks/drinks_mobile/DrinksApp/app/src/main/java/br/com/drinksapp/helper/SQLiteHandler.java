@@ -58,7 +58,6 @@ public class SQLiteHandler extends SQLiteOpenHelper {
      * */
     public void addUser(String nome, String email, String telefone) {
         SQLiteDatabase db = this.getWritableDatabase();
-
         ContentValues values = new ContentValues();
         values.put(KEY_NOME, nome);
         values.put(KEY_EMAIL, email);
@@ -67,7 +66,6 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         // Inserting Row
         long id = db.insert(TABLE_USUARIO, null, values);
         db.close(); // Closing database connection
-
         Log.d(TAG, "New user inserted into sqlite: " + id);
     }
 
@@ -77,7 +75,6 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     public HashMap<String, String> getUserDetails() {
         HashMap<String, String> usuario = new HashMap<String, String>();
         String selectQuery = "SELECT  * FROM " + TABLE_USUARIO;
-
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         // Move to first row

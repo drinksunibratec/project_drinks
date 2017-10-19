@@ -11,10 +11,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import br.com.drinksapp.R;
 
-import static br.com.drinksapp.R.id.txtBairro;
-import static br.com.drinksapp.R.id.txtEstabelecimento;
-import static br.com.drinksapp.R.id.txtPreco;
-
 public class ProdutoDialogFragment extends DialogFragment
         implements TextView.OnEditorActionListener {
     private static final String DIALOG_TAG = "editDialog";
