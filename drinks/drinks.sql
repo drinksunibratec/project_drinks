@@ -19,35 +19,35 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `drinks`
+-- Database: `comumana_drinks`
 --
 
--- --------------------------------------------------------
-
 --
--- Estrutura da tabela `cliente`
+-- Estrutura da tabela `usuarios`
 --
 
-CREATE TABLE `cliente` (
-  `id` int(11) NOT NULL,
+CREATE TABLE `usuarios` (
+  `codUsuario` int(11) NOT NULL,
   `nome` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `senha` varchar(80) NOT NULL,
-  `telefone` varchar(80) NOT NULL
-) ENGINE=Aria DEFAULT CHARSET=latin1;
+  `encrypted_password` varchar(80) NOT NULL,
+  `telefone` varchar(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `cliente`
+-- Extraindo dados da tabela `usuarios`
 --
 
-INSERT INTO `cliente` (`id`, `nome`, `email`, `senha`, `telefone`) VALUES
+INSERT INTO `usuarios` (`codUsuario`, `nome`, `email`, `encrypted_password`, `telefone`) VALUES
 (1, 'Emerson', 'ems@gmail.com', '12345', '096954814'),
 (2, 'Tercio Lima', 'terciolima@live.com', 'tercio123', '81996644179'),
 (3, 'Maria Rodrigues', 'maria@gmail.com', 'maria', '088776655'),
 (4, 'Alessandro', 'amlrecife@gmail.com', 'asj88355', '81991369556'),
+(5, 'Italo', 'italo@hotmail.com', 'fEqNCco3Yq9h5ZUglD3CZJT4lBs=', '(12)23456-7'),
 (7, 'Silvio', 'engenheirocedrim@gmail.com', '1', '1'),
 (6, 'Samuel Ronald', 'sronaldlg@gmail.com', '123456', '8199898989'),
 (8, 'Winnie', 'kass.winnie@gmail.com', '1', '1');
+
 
 -- --------------------------------------------------------
 
@@ -95,42 +95,6 @@ INSERT INTO `estabelecimento` (`codEstabelecimento`, `cnpj`, `eMail`, `login`, `
 (18, '99999999999999', 'admin@admin.com', NULL, 'A', '12111111', 'Recife', '0.1', '0.1', 12, NULL, 'AL', 'Teste 3', 'Teste 3', '1223456', '22222222222', 0);
 
 -- --------------------------------------------------------
-
---
--- Estrutura da tabela `estabelecimento_produto`
---
-
-CREATE TABLE `estabelecimento_produto` (
-  `Estabelecimento_codEstabelecimento` int(11) NOT NULL,
-  `produtos_codProduto` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `pedido`
---
-
-CREATE TABLE `pedido` (
-  `codPedido` int(11) NOT NULL,
-  `dataPedido` datetime DEFAULT NULL,
-  `bairro` varchar(50) DEFAULT NULL,
-  `cep` varchar(9) DEFAULT NULL,
-  `cidade` varchar(50) DEFAULT NULL,
-  `latitude` varchar(10) DEFAULT NULL,
-  `longitude` varchar(10) DEFAULT NULL,
-  `numero` int(11) DEFAULT NULL,
-  `rua` varchar(150) DEFAULT NULL,
-  `uf` varchar(2) DEFAULT NULL,
-  `pagamento` varchar(255) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
-  `valorTotal` double DEFAULT NULL,
-  `codCliente` int(11) DEFAULT NULL,
-  `codEstabelecimento` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
 --
 -- Estrutura da tabela `produto`
 --
@@ -141,51 +105,58 @@ CREATE TABLE `produto` (
   `gelada` tinyint(1) DEFAULT NULL,
   `nome` varchar(150) NOT NULL,
   `preco` double NOT NULL,
-  `CodEstabelecimento` int(11) DEFAULT NULL
+  `codEstabelecimento` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `produto`
 --
 
-INSERT INTO `produto` (`codProduto`, `descricao`, `gelada`, `nome`, `preco`, `CodEstabelecimento`) VALUES
-(1, 'Gelada', 0, 'Cerveja', 5.2, 6),
-(3, '', 0, 'Cerveja', 1111, 1),
-(6, 'Cerveja', 0, 'Cerveja', 11, 1),
-(7, 'Cerveja', 0, 'Cerveja22', 11, 1),
-(8, 'Cerveja', 0, 'Cerveja23', 12, 1);
+INSERT INTO `produto` (`codProduto`, `descricao`, `gelada`, `nome`, `preco`, `codEstabelecimento`) VALUES
+(1, 'Gelada', 0, 'Cerveja', 5.20, 6),
+(3, '', 0, 'Cerveja', 11.11, 1),
+(6, 'Cerveja', 0, 'Cerveja', 11.00, 1),
+(7, 'Cerveja', 0, 'Cerveja22', 11.00, 1),
+(8, 'Cerveja', 0, 'Cerveja23', 12.00, 1);
+--
+-- Estrutura da tabela `pedido`
+--
+
+CREATE TABLE `pedido` (
+  `codPedido` int(11) NOT NULL,
+  `dataPedido` datetime NOT NULL,
+  `bairro` varchar(50) NOT NULL,
+  `cep` varchar(9) NOT NULL,
+  `cidade` varchar(50) NOT NULL,
+  `latitude` varchar(10) NOT NULL,
+  `longitude` varchar(10) NOT NULL,
+  `numero` int(11) NOT NULL,
+  `rua` varchar(150) NOT NULL,
+  `uf` varchar(2) NOT NULL,
+  `pagamento` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `valorTotal` double NOT NULL,
+  `codUsuario` int(11) NOT NULL,
+  `codEstabelecimento` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+--
+-- Estrutura para tabela `pedido_produto`
+--
+
+CREATE TABLE IF NOT EXISTS `pedido_produto` (
+  `codPedido` int(11) NOT NULL,
+  `codProduto` int(11) NOT NULL,
+  KEY `FK55E4DBFF3CBCE51E` (`codPedido`),
+  KEY `FK55E4DBFFE4370969` (`codProduto`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `usuarios`
---
-
-CREATE TABLE `usuarios` (
-  `id` int(11) NOT NULL,
-  `nome` varchar(50) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `encrypted_password` varchar(80) NOT NULL,
-  `telefone` varchar(11) DEFAULT NULL
-) ENGINE=Aria DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `usuarios`
---
-
-INSERT INTO `usuarios` (`id`, `nome`, `email`, `encrypted_password`, `telefone`) VALUES
-(2, 'Italo', 'italo@hotmail.com', 'fEqNCco3Yq9h5ZUglD3CZJT4lBs=', '(12)23456-7');
-
---
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `cliente`
---
-ALTER TABLE `cliente`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `estabelecimento`
@@ -195,91 +166,62 @@ ALTER TABLE `estabelecimento`
   ADD UNIQUE KEY `login` (`login`);
 
 --
--- Indexes for table `estabelecimento_produto`
+-- AUTO_INCREMENT for table `estabelecimento`
 --
-ALTER TABLE `estabelecimento_produto`
-  ADD KEY `FK3507CAEB892D605` (`Estabelecimento_codEstabelecimento`),
-  ADD KEY `FK3507CAEE4370969` (`produtos_codProduto`);
+ALTER TABLE `estabelecimento`
+MODIFY `codEstabelecimento` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Indexes for table `pedido`
 --
-ALTER TABLE `pedido`
-  ADD PRIMARY KEY (`codPedido`),
-  ADD KEY `FK8E420365E804EF1A` (`codEstabelecimento`);
-
---
--- Indexes for table `produto`
---
-ALTER TABLE `produto`
-  ADD PRIMARY KEY (`codProduto`),
-  ADD KEY `FK50C666D9E804EF1A` (`CodEstabelecimento`),
-  ADD KEY `FK50C666D9110CBADF` (`codProduto`);
-
---
--- Indexes for table `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `cliente`
---
-ALTER TABLE `cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `estabelecimento`
---
-ALTER TABLE `estabelecimento`
-  MODIFY `codEstabelecimento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
---
+ALTER TABLE `pedido` ADD PRIMARY KEY (`codPedido`);
+  --
 -- AUTO_INCREMENT for table `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `codPedido` int(11) NOT NULL AUTO_INCREMENT;
-
+MODIFY `codPedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  
 --
+-- Indexes for table `produto`
+--
+ALTER TABLE `produto` ADD PRIMARY KEY (`codProduto`);
+
+  --
 -- AUTO_INCREMENT for table `produto`
 --
 ALTER TABLE `produto`
-  MODIFY `codProduto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
+MODIFY `codProduto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
+-- Indexes for table `usuarios`
+--
+ALTER TABLE `usuarios` ADD PRIMARY KEY (`codUsuario`);
+
+  --
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
+MODIFY `codUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  --
 -- Constraints for dumped tables
---
-
---
--- Limitadores para a tabela `estabelecimento_produto`
---
-ALTER TABLE `estabelecimento_produto`
-  ADD CONSTRAINT `FK3507CAEB892D605` FOREIGN KEY (`Estabelecimento_codEstabelecimento`) REFERENCES `estabelecimento` (`codEstabelecimento`),
-  ADD CONSTRAINT `FK3507CAEE4370969` FOREIGN KEY (`produtos_codProduto`) REFERENCES `produto` (`codProduto`);
-
 --
 -- Limitadores para a tabela `pedido`
 --
 ALTER TABLE `pedido`
-  ADD CONSTRAINT `FK8E420365E804EF1A` FOREIGN KEY (`codEstabelecimento`) REFERENCES `estabelecimento` (`codEstabelecimento`);
-
+  ADD CONSTRAINT `FK_codEstabelecimento` FOREIGN KEY (`codEstabelecimento`) REFERENCES `estabelecimento` (`codEstabelecimento`),
+  ADD CONSTRAINT `FK_codUsuario` FOREIGN KEY (`codUsuario`) REFERENCES `usuarios` (`codUsuario`);
+  
 --
 -- Limitadores para a tabela `produto`
 --
 ALTER TABLE `produto`
-  ADD CONSTRAINT `FK50C666D9110CBADF` FOREIGN KEY (`codProduto`) REFERENCES `estabelecimento` (`codEstabelecimento`),
-  ADD CONSTRAINT `FK50C666D9E804EF1A` FOREIGN KEY (`CodEstabelecimento`) REFERENCES `estabelecimento` (`codEstabelecimento`);
+  ADD CONSTRAINT `FK_Produto_Estabelecimento` FOREIGN KEY (`codEstabelecimento`) REFERENCES `estabelecimento` (`codEstabelecimento`);
 COMMIT;
+
+ALTER TABLE `pedido_produto`
+  ADD CONSTRAINT `FK_Pedido_produto_codPedido` FOREIGN KEY (`codPedido`) REFERENCES `pedido` (`codPedido`),
+  ADD CONSTRAINT `FK_Pedido_produto_codProduto` FOREIGN KEY (`codProduto`) REFERENCES `produto` (`codProduto`);
+COMMIT;
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

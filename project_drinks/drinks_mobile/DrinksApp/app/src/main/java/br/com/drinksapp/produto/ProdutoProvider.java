@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 
 public class ProdutoProvider extends ContentProvider {
-    private static final String AUTHORITY = "br.com.drinksapp";
+    private static final String AUTHORITY = "br.com.drinksapp.produto";
     private static final String PATH = "produtos";
     private static final int TIPO_GERAL = 1;
     private static final int TIPO_PRODUTO_ESPECIFICO = 2;

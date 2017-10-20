@@ -6,7 +6,12 @@
         app:actionProviderClass="android.support.v7.widget.ShareActionProvider"
         />
     <item android:id="@+id/acao_editar"
-        android:title="@string/acao_editar"
+        android:title="Entrar"
+        android:visible="false"
         android:icon="@android:drawable/ic_menu_edit"
+        app:showAsAction="always|withText"/>
+
+    <item android:id="@+id/acao_entrar"
+        android:title="Comprar"
         app:showAsAction="always|withText"/>
 </menu>

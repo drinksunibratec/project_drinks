@@ -13,8 +13,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import br.com.drinksapp.R;
+import br.com.drinksapp.activity.MainActivity;
+import br.com.drinksapp.pedido.PedidoActivity;
 
 
 public class ProdutoDetalheFragment extends Fragment {
@@ -42,6 +48,7 @@ public class ProdutoDetalheFragment extends Fragment {
         mProduto = (Produto)
                 getArguments().getSerializable(EXTRA_PRODUTO);
         setHasOptionsMenu(true);
+
     }
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -61,7 +68,12 @@ public class ProdutoDetalheFragment extends Fragment {
             mTextPreco.setText(mProduto.preco);
         }
         return layout;
+
+
     }
+
+
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

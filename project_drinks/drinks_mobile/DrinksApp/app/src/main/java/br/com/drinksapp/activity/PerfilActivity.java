@@ -3,9 +3,7 @@ package br.com.drinksapp.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
-
 import java.util.HashMap;
-
 import br.com.drinksapp.R;
 import br.com.drinksapp.helper.SQLiteHandler;
 import br.com.drinksapp.helper.SessionManager;
@@ -41,4 +39,5 @@ public class PerfilActivity extends AppCompatActivity {
         txtSenha.setText(senha);
         txtTelefone.setText(telefone);
     }
+
 }

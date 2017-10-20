@@ -12,6 +12,7 @@ public class Produto implements Serializable {
     public Status status;
     public long idServidor;
 
+
     public Produto(long id, String nome, String estabelecimento, String endereco, String bairro, String preco,
                    long idServidor, Status status) {
         this.id = id;

@@ -7,31 +7,33 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import br.com.drinksapp.R;
 
 public class ProdutoCursorAdapter extends CursorAdapter {
+
     public ProdutoCursorAdapter(Context context, Cursor cursor) {
         super(context, cursor, 0);
     }
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        TextView txtMessage = (TextView) view.findViewById(R.id.txtNome);
-        TextView txtEstabelecimento = (TextView) view.findViewById(R.id.txtEstabelecimento);
+        TextView txtNome = (TextView) view.findViewById(R.id.txtNome);
         TextView txtBairro = (TextView) view.findViewById(R.id.txtBairro);
         TextView txtPreco = (TextView) view.findViewById(R.id.txtPreco);
+        TextView txtEstabelecimento = (TextView) view.findViewById(R.id.txtEstabelecimento);
 
-        txtMessage.setText(cursor.getString(cursor.getColumnIndex(ProdutoSQLHelper.COLUNA_NOME)));
+        txtNome.setText(cursor.getString(cursor.getColumnIndex(ProdutoSQLHelper.COLUNA_NOME)));
         txtEstabelecimento.setText(cursor.getString(cursor.getColumnIndex(ProdutoSQLHelper.COLUNA_ESTABELECIMENTO)));
         txtBairro.setText(cursor.getString(cursor.getColumnIndex(ProdutoSQLHelper.COLUNA_BAIRRO)));
         txtPreco.setText(cursor.getString(cursor.getColumnIndex(ProdutoSQLHelper.COLUNA_PRECO)));
 
         int status = cursor.getInt(cursor.getColumnIndex(ProdutoSQLHelper.COLUNA_STATUS));
         if (status == Produto.Status.EXCLUIR.ordinal()) {
-            txtMessage.setTextColor(Color.RED);
+            txtNome.setTextColor(Color.RED);
         } else {
-            txtMessage.setTextColor(Color.BLACK);
+            txtNome.setTextColor(Color.BLACK);
         }
     }
     @Override

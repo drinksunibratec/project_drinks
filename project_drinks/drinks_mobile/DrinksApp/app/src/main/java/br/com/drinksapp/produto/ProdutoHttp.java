@@ -17,13 +17,13 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Renevalda Maria on 22/09/2017.
- */
 public class ProdutoHttp {
-    public static final String SERVIDOR = "http://www.comunidademaanaim.org.br:2083/drinks_service";
-    //public static final String SERVIDOR = "http://192.168.0.102/drinks_service";
+    //public static final String SERVIDOR = "http://www.comunidademaanaim.org.br/drinks_service";
+    //private static final String WEBSERVICE_URL = SERVIDOR +"/webserviceproduto.php";
+
+    public static final String SERVIDOR = "http://192.168.0.103/drinks_service";
     private static final String WEBSERVICE_URL = SERVIDOR +"/webserviceproduto.php";
+
     private Context mContext;
     private ProdutoRepositorio mRepositorio;
     public ProdutoHttp(Context ctx) {
@@ -148,8 +148,8 @@ public class ProdutoHttp {
                 Produto p = new Produto(
                         0,
                         produtoJSON.getString("nome"),
-                        produtoJSON.getString("estabelecimento"),
                         produtoJSON.getString("endereco"),
+                        produtoJSON.getString("estabelecimento"),
                         produtoJSON.getString("bairro"),
                         produtoJSON.getString("preco"),
                         produtoJSON.getInt("id"),
@@ -173,8 +173,8 @@ public class ProdutoHttp {
             JSONObject jsonPessoa = new JSONObject();
             jsonPessoa.put("id", produto.idServidor);
             jsonPessoa.put("nome", produto.nome);
-            jsonPessoa.put("estabelecimento", produto.estabelecimento);
             jsonPessoa.put("endereco", produto.endereco);
+            jsonPessoa.put("estabelecimento", produto.estabelecimento);
             jsonPessoa.put("bairro", produto.bairro);
             jsonPessoa.put("preco", produto.preco);
             String json = jsonPessoa.toString();
