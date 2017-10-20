@@ -148,8 +148,8 @@ public class EstabelecimentoHttp {
                 JSONObject estabelecimentoJSON = json.getJSONObject(i);
                 Estabelecimento p = new Estabelecimento(
                         0,
-                        estabelecimentoJSON.getString("nome"),
-                        estabelecimentoJSON.getString("logradouro"),
+                        estabelecimentoJSON.getString("nomeFantasia"),
+                        estabelecimentoJSON.getString("rua"),
                         estabelecimentoJSON.getString("numero"),
                         estabelecimentoJSON.getString("bairro"),
                         estabelecimentoJSON.getString("cidade"),
@@ -177,8 +177,8 @@ public class EstabelecimentoHttp {
         try {
             JSONObject jsonPessoa = new JSONObject();
             jsonPessoa.put("id", estabelecimento.idServidor);
-            jsonPessoa.put("nome", estabelecimento.nome);
-            jsonPessoa.put("logradouro", estabelecimento.logradouro);
+            jsonPessoa.put("nomeFantasia", estabelecimento.nomeFantasia);
+            jsonPessoa.put("rua", estabelecimento.rua);
             jsonPessoa.put("numero", estabelecimento.numero);
             jsonPessoa.put("bairro", estabelecimento.bairro);
             jsonPessoa.put("cidade", estabelecimento.cidade);

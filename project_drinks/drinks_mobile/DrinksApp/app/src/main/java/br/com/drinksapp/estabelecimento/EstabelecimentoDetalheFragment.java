@@ -25,8 +25,8 @@ import br.com.drinksapp.pedido.PedidoActivity;
 public class EstabelecimentoDetalheFragment extends Fragment {
     public static final String TAG_DETALHE = "tagDetalhe";
     private static final String EXTRA_ESTABELECIMENTO = "estabelecimento";
-    TextView mTextNome;
-    TextView mTextLogradouro;
+    TextView mTextNomeFantasia;
+    TextView mTextRua;
     TextView mTextNumero;
     TextView mTextBairro;
     TextView mTextCidade;
@@ -58,8 +58,8 @@ public class EstabelecimentoDetalheFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(
                 R.layout.fragment_detalhe_estabelecimento, container, false);
-        mTextNome = (TextView)layout.findViewById(R.id.txtNome);
-        mTextLogradouro = (TextView)layout.findViewById(R.id.txtLogradouro);
+        mTextNomeFantasia = (TextView)layout.findViewById(R.id.txtNomeFantasia);
+        mTextRua = (TextView)layout.findViewById(R.id.txtRua);
         mTextNumero = (TextView)layout.findViewById(R.id.txtNumero);
         mTextBairro = (TextView)layout.findViewById(R.id.txtBairro);
         mTextCidade = (TextView)layout.findViewById(R.id.txtCidade);
@@ -68,8 +68,8 @@ public class EstabelecimentoDetalheFragment extends Fragment {
         mTextLatitude = (TextView)layout.findViewById(R.id.txtLatitude);
         mTextLongetude = (TextView)layout.findViewById(R.id.txtLongetude);
         if (mEstabelecimento != null) {
-            mTextNome.setText(mEstabelecimento.nome);
-            mTextLogradouro.setText(mEstabelecimento.logradouro);
+            mTextNomeFantasia.setText(mEstabelecimento.nomeFantasia);
+            mTextRua.setText(mEstabelecimento.rua);
             mTextNumero.setText(mEstabelecimento.numero);
             mTextBairro.setText(mEstabelecimento.bairro);
             mTextCidade.setText(mEstabelecimento.cidade);
@@ -94,7 +94,7 @@ public class EstabelecimentoDetalheFragment extends Fragment {
         mShareActionProvider = (ShareActionProvider)
                 MenuItemCompat.getActionProvider(shareItem);
         String texto = getString(R.string.texto_compartilhar,
-                mEstabelecimento.nome);
+                mEstabelecimento.nomeFantasia);
         Intent it = new Intent(Intent.ACTION_SEND);
         it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         it.setType("text/plain");

@@ -9,8 +9,8 @@ public class EstabelecimentoSQLHelper extends SQLiteOpenHelper {
     private static final int VERSAO_BANCO = 1;
     public static final String TABELA_ESTABELECIMENTO = "estabelecimento";
     public static final String COLUNA_ID = "_id";
-    public static final String COLUNA_NOME = "nome";
-    public static final String COLUNA_LOGRADOURO = "logradouro";
+    public static final String COLUNA_NOMEFANTASIA = "nomeFantasia";
+    public static final String COLUNA_RUA = "rua";
     public static final String COLUNA_NUMERO = "numero";
     public static final String COLUNA_BAIRRO = "bairro";
     public static final String COLUNA_CIDADE = "cidade";
@@ -27,8 +27,8 @@ public class EstabelecimentoSQLHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(
                 "CREATE TABLE "+ TABELA_ESTABELECIMENTO +" (" +
                         COLUNA_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                        COLUNA_NOME     +" TEXT NOT NULL, "+
-                        COLUNA_LOGRADOURO +" TEXT, " +
+                        COLUNA_NOMEFANTASIA     +" TEXT NOT NULL, "+
+                        COLUNA_RUA +" TEXT, " +
                         COLUNA_NUMERO +" TEXT, "+
                         COLUNA_BAIRRO +" TEXT, " +
                         COLUNA_CIDADE +" TEXT, " +

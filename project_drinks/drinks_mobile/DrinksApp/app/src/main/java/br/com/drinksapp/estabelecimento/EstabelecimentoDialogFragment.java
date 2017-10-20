@@ -15,8 +15,8 @@ public class EstabelecimentoDialogFragment extends DialogFragment
     private static final String EXTRA_ESTABELECIMENTO = "estabelecimento";
 
 
-    private EditText txtNome;
-    private EditText txtLogradouro;
+    private EditText txtNomeFantasia;
+    private EditText txtRua;
     private EditText txtNumero;
     private EditText txtBairro;
     private EditText txtCidade;
@@ -45,10 +45,10 @@ public class EstabelecimentoDialogFragment extends DialogFragment
                 R.layout.fragment_dialog_estabelecimento, container, false);
 
         mEstabelecimento = (Estabelecimento)getArguments().getSerializable(EXTRA_ESTABELECIMENTO);
-        txtNome = (EditText) layout.findViewById(R.id.txtNome);
-        txtNome.requestFocus();
-        txtLogradouro = (EditText)layout.findViewById(R.id.txtLogradouro);
-        txtLogradouro.setOnEditorActionListener(this);
+        txtNomeFantasia = (EditText) layout.findViewById(R.id.txtNomeFantasia);
+        txtNomeFantasia.requestFocus();
+        txtRua = (EditText)layout.findViewById(R.id.txtRua);
+        txtRua.setOnEditorActionListener(this);
         txtNumero = (EditText)layout.findViewById(R.id.txtNumero);
         txtNumero.setOnEditorActionListener(this);
         txtBairro = (EditText)layout.findViewById(R.id.txtBairro);
@@ -64,8 +64,8 @@ public class EstabelecimentoDialogFragment extends DialogFragment
         txtLongetude = (EditText)layout.findViewById(R.id.txtLongetude);
         txtLongetude.setOnEditorActionListener(this);
         if (mEstabelecimento != null) {
-            txtNome.setText(mEstabelecimento.nome);
-            txtLogradouro.setText(mEstabelecimento.logradouro);
+            txtNomeFantasia.setText(mEstabelecimento.nomeFantasia);
+            txtRua.setText(mEstabelecimento.rua);
             txtNumero.setText(mEstabelecimento.numero);
             txtBairro.setText(mEstabelecimento.bairro);
             txtCidade.setText(mEstabelecimento.cidade);
@@ -87,8 +87,8 @@ public class EstabelecimentoDialogFragment extends DialogFragment
             if (activity instanceof AoSalvarEstabelecimento) {
                 if (mEstabelecimento == null) {
                     mEstabelecimento = new Estabelecimento(
-                            txtNome.getText().toString(),
-                            txtLogradouro.getText().toString(),
+                            txtNomeFantasia.getText().toString(),
+                            txtRua.getText().toString(),
                             txtNumero.getText().toString(),
                             txtBairro.getText().toString(),
                             txtCidade.getText().toString(),
@@ -97,8 +97,8 @@ public class EstabelecimentoDialogFragment extends DialogFragment
                             txtLatitude.getText().toString(),
                             txtLongetude.getText().toString());
                 } else {
-                    mEstabelecimento.nome = txtNome.getText().toString();
-                    mEstabelecimento.logradouro = txtLogradouro.getText().toString();
+                    mEstabelecimento.nomeFantasia = txtNomeFantasia.getText().toString();
+                    mEstabelecimento.rua = txtRua.getText().toString();
                     mEstabelecimento.numero = txtNumero.getText().toString();
                     mEstabelecimento.bairro = txtBairro.getText().toString();
                     mEstabelecimento.cidade = txtCidade.getText().toString();
