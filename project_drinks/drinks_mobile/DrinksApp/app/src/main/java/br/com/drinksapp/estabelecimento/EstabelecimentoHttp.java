@@ -23,7 +23,7 @@ public class EstabelecimentoHttp {
     //private static final String WEBSERVICE_URL = SERVIDOR +"/webserviceproduto.php";
 
     public static final String SERVIDOR = "http://192.168.0.103/drinks_service";
-    private static final String WEBSERVICE_URL = SERVIDOR +"/webserviceestabelecimento.php";
+    private static final String WEBSERVICE_URL = SERVIDOR +"/webservicepedido.php";
 
     private Context mContext;
     private EstabelecimentoRepositorio mRepositorio;
