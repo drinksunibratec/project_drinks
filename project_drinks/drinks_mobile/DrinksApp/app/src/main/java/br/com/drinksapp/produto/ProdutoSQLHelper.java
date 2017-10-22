@@ -13,11 +13,11 @@ public class ProdutoSQLHelper extends SQLiteOpenHelper {
     private static final int VERSAO_BANCO = 1;
     public static final String TABELA_PRODUTO = "produto";
     public static final String COLUNA_ID = "_id";
+    public static final String COLUNA_DESCRICAO = "descricao";
+    public static final String COLUNA_GELADA = "gelada";
     public static final String COLUNA_NOME = "nome";
-    public static final String COLUNA_ENDERECO = "endereco";
-    public static final String COLUNA_ESTABELECIMENTO = "estabelecimento";
-    public static final String COLUNA_BAIRRO = "bairro";
     public static final String COLUNA_PRECO = "preco";
+    public static final String COLUNA_CODESTABELECIMENTO = "codEstabelecimento";
     public static final String COLUNA_STATUS = "status";
     public static final String COLUNA_ID_SERVIDOR = "id_servidor";
 
@@ -29,11 +29,11 @@ public class ProdutoSQLHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(
                 "CREATE TABLE "+ TABELA_PRODUTO +" (" +
                         COLUNA_ID +" INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                        COLUNA_NOME     +" TEXT NOT NULL, "+
-                        COLUNA_ENDERECO +" TEXT, " +
-                        COLUNA_ESTABELECIMENTO +" TEXT, "+
-                        COLUNA_BAIRRO +" TEXT, " +
+                        COLUNA_DESCRICAO     +" TEXT, "+
+                        COLUNA_GELADA +" TEXT, " +
+                        COLUNA_NOME +" TEXT NOT NULL, "+
                         COLUNA_PRECO +" TEXT, " +
+                        COLUNA_CODESTABELECIMENTO +" TEXT, " +
                         COLUNA_STATUS +" INTEGER, " +
                         COLUNA_ID_SERVIDOR +" INTEGER UNIQUE)");
     }

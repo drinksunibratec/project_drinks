@@ -17,11 +17,11 @@ public class ProdutoDialogFragment extends DialogFragment
     private static final String EXTRA_PRODUTO = "produto";
 
 
+    private EditText txtDescricao;
+    private EditText txtGelada;
     private EditText txtNome;
-    private EditText txtEstabelecimento;
-    private EditText txtEndereco;
-    private EditText txtBairro;
     private EditText txtPreco;
+    private EditText txtCodEstabelecimento;
     private Produto mProduto;
 
     public static ProdutoDialogFragment newInstance(Produto produto) {
@@ -45,20 +45,20 @@ public class ProdutoDialogFragment extends DialogFragment
         mProduto = (Produto)getArguments().getSerializable(EXTRA_PRODUTO);
         txtNome = (EditText) layout.findViewById(R.id.txtNome);
         txtNome.requestFocus();
-        txtEstabelecimento = (EditText)layout.findViewById(R.id.txtEstabelecimento);
-        txtEstabelecimento.setOnEditorActionListener(this);
-        txtEndereco = (EditText)layout.findViewById(R.id.txtEndereco);
-        txtEndereco.setOnEditorActionListener(this);
-        txtBairro = (EditText)layout.findViewById(R.id.txtBairro);
-        txtBairro.setOnEditorActionListener(this);
+        txtCodEstabelecimento = (EditText)layout.findViewById(R.id.txtCodEstabelecimento);
+        txtCodEstabelecimento.setOnEditorActionListener(this);
+        txtDescricao = (EditText)layout.findViewById(R.id.txtDescricao);
+        txtDescricao.setOnEditorActionListener(this);
+        txtGelada = (EditText)layout.findViewById(R.id.txtGelada);
+        txtGelada.setOnEditorActionListener(this);
         txtPreco = (EditText)layout.findViewById(R.id.txtPreco);
         txtPreco.setOnEditorActionListener(this);
         if (mProduto != null) {
+            txtDescricao.setText(mProduto.descricao);
+            txtGelada.setText(mProduto.gelada);
             txtNome.setText(mProduto.nome);
-            txtEstabelecimento.setText(mProduto.estabelecimento);
-            txtEndereco.setText(mProduto.endereco);
-            txtBairro.setText(mProduto.bairro);
             txtPreco.setText(mProduto.preco);
+            txtCodEstabelecimento.setText(mProduto.codEstabelecimento);
         }
         // Exibe o teclado virtual ao exibir o Dialog
         getDialog().getWindow().setSoftInputMode(
@@ -73,17 +73,19 @@ public class ProdutoDialogFragment extends DialogFragment
             if (activity instanceof AoSalvarProduto) {
                 if (mProduto == null) {
                     mProduto = new Produto(
+
+                            txtDescricao.getText().toString(),
+                            txtGelada.getText().toString(),
                             txtNome.getText().toString(),
-                            txtEstabelecimento.getText().toString(),
-                            txtEndereco.getText().toString(),
-                            txtBairro.getText().toString(),
-                            txtPreco.getText().toString());
+                            txtPreco.getText().toString(),
+                            txtCodEstabelecimento.getText().toString());
                 } else {
+
+                    mProduto.descricao = txtDescricao.getText().toString();
+                    mProduto.gelada = txtGelada.getText().toString();
                     mProduto.nome = txtNome.getText().toString();
-                    mProduto.estabelecimento = txtEstabelecimento.getText().toString();
-                    mProduto.endereco = txtEndereco.getText().toString();
-                    mProduto.bairro = txtBairro.getText().toString();
                     mProduto.preco = txtPreco.getText().toString();
+                    mProduto.codEstabelecimento = txtCodEstabelecimento.getText().toString();
                 }
                 AoSalvarProduto listener = (AoSalvarProduto) activity;
                 listener.salvouProduto(mProduto);

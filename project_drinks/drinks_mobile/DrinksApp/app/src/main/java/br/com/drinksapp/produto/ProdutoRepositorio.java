@@ -51,11 +51,11 @@ public class ProdutoRepositorio {
     }
     private ContentValues getValues(Produto produto) {
         ContentValues cv = new ContentValues();
+        cv.put(ProdutoSQLHelper.COLUNA_DESCRICAO, produto.descricao);
+        cv.put(ProdutoSQLHelper.COLUNA_GELADA, produto.gelada);
         cv.put(ProdutoSQLHelper.COLUNA_NOME, produto.nome);
-        cv.put(ProdutoSQLHelper.COLUNA_ENDERECO, produto.endereco);
-        cv.put(ProdutoSQLHelper.COLUNA_ESTABELECIMENTO, produto.estabelecimento);
-        cv.put(ProdutoSQLHelper.COLUNA_BAIRRO, produto.bairro);
         cv.put(ProdutoSQLHelper.COLUNA_PRECO, produto.preco);
+        cv.put(ProdutoSQLHelper.COLUNA_CODESTABELECIMENTO, produto.codEstabelecimento);
         cv.put(ProdutoSQLHelper.COLUNA_STATUS, produto.status.ordinal());
         if (produto.idServidor != 0) {
             cv.put(ProdutoSQLHelper.COLUNA_ID_SERVIDOR, produto.idServidor);
@@ -68,27 +68,27 @@ public class ProdutoRepositorio {
                 cursor.getColumnIndex(
                         ProdutoSQLHelper.COLUNA_ID)
         );
+        String descricao = cursor.getString(
+                cursor.getColumnIndex(ProdutoSQLHelper.COLUNA_DESCRICAO)
+        );
+        String gelada = cursor.getString(
+                cursor.getColumnIndex(ProdutoSQLHelper.COLUNA_GELADA)
+        );
         String nome = cursor.getString(
                 cursor.getColumnIndex(ProdutoSQLHelper.COLUNA_NOME)
         );
-        String endereco = cursor.getString(
-                cursor.getColumnIndex(ProdutoSQLHelper.COLUNA_ENDERECO)
-        );
-        String estabelecimento = cursor.getString(
-                cursor.getColumnIndex(ProdutoSQLHelper.COLUNA_ESTABELECIMENTO)
-        );
-        String bairro = cursor.getString(
-                cursor.getColumnIndex(ProdutoSQLHelper.COLUNA_BAIRRO)
-        );
         String preco = cursor.getString(
                 cursor.getColumnIndex(ProdutoSQLHelper.COLUNA_PRECO)
+        );
+        String codEstabelecimento = cursor.getString(
+                cursor.getColumnIndex(ProdutoSQLHelper.COLUNA_CODESTABELECIMENTO)
         );
         int status = cursor.getInt(cursor.getColumnIndex(
                 ProdutoSQLHelper.COLUNA_STATUS));
         long idServidor = cursor.getLong(cursor.getColumnIndex(
                 ProdutoSQLHelper.COLUNA_ID_SERVIDOR));
 
-        Produto produto = new Produto(id, nome, estabelecimento, endereco, bairro, preco,
+        Produto produto = new Produto(id, descricao, gelada, nome, preco, codEstabelecimento,
                 idServidor, Produto.Status.values()[status]);
 
         return produto;

@@ -20,13 +20,11 @@ public class ProdutoCursorAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         TextView txtNome = (TextView) view.findViewById(R.id.txtNome);
-        TextView txtBairro = (TextView) view.findViewById(R.id.txtBairro);
         TextView txtPreco = (TextView) view.findViewById(R.id.txtPreco);
-        TextView txtEstabelecimento = (TextView) view.findViewById(R.id.txtEstabelecimento);
+        TextView txtCodEstabelecimento = (TextView) view.findViewById(R.id.txtCodEstabelecimento);
 
         txtNome.setText(cursor.getString(cursor.getColumnIndex(ProdutoSQLHelper.COLUNA_NOME)));
-        txtEstabelecimento.setText(cursor.getString(cursor.getColumnIndex(ProdutoSQLHelper.COLUNA_ESTABELECIMENTO)));
-        txtBairro.setText(cursor.getString(cursor.getColumnIndex(ProdutoSQLHelper.COLUNA_BAIRRO)));
+        txtCodEstabelecimento.setText(cursor.getString(cursor.getColumnIndex(ProdutoSQLHelper.COLUNA_CODESTABELECIMENTO)));
         txtPreco.setText(cursor.getString(cursor.getColumnIndex(ProdutoSQLHelper.COLUNA_PRECO)));
 
         int status = cursor.getInt(cursor.getColumnIndex(ProdutoSQLHelper.COLUNA_STATUS));
