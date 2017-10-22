@@ -14,8 +14,8 @@ public class EstabelecimentoRepositorio {
     }
     private long inserir(Estabelecimento estabelecimento) {
         estabelecimento.status = Estabelecimento.Status.INSERIR;
-        long id = inserirLocal(estabelecimento, ctx.getContentResolver());
-        return id;
+        long codEstabelecimento = inserirLocal(estabelecimento, ctx.getContentResolver());
+        return codEstabelecimento;
     }
     private int atualizar(Estabelecimento estabelecimento) {
         estabelecimento.status = Estabelecimento.Status.ATUALIZAR;

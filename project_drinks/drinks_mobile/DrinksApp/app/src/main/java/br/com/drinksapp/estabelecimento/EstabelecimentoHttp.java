@@ -123,8 +123,7 @@ public class EstabelecimentoHttp {
         conexao.disconnect();
         return sucesso;
     }
-    private HttpURLConnection abrirConexao(String url,
-                                           String metodo, boolean doOutput) throws Exception{
+    private HttpURLConnection abrirConexao(String url, String metodo, boolean doOutput) throws Exception{
         URL urlCon = new URL(url);
         HttpURLConnection conexao = (HttpURLConnection) urlCon.openConnection();
         conexao.setReadTimeout(15000);
