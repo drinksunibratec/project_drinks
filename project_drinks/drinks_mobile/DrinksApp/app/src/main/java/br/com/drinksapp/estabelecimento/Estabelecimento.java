@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 public class Estabelecimento implements Serializable {
     public long id;
-    public String nome;
-    public String logradouro;
+    public String nomeFantasia;
+    public String rua;
     public String numero;
     public String bairro;
     public String cidade;
@@ -17,11 +17,11 @@ public class Estabelecimento implements Serializable {
     public long idServidor;
 
 
-    public Estabelecimento(long id, String nome, String logradouro, String numero, String bairro, String cidade, String uf, String cep,
+    public Estabelecimento(long id, String nomeFantasia, String rua, String numero, String bairro, String cidade, String uf, String cep,
                            String latitude, String longetude, long idServidor, Status status) {
         this.id = id;
-        this.nome = nome;
-        this.logradouro = logradouro;
+        this.nomeFantasia = nomeFantasia;
+        this.rua = rua;
         this.numero = numero;
         this.bairro = bairro;
         this.cidade = cidade;
@@ -32,13 +32,13 @@ public class Estabelecimento implements Serializable {
         this.idServidor = idServidor;
         this.status = status;
     }
-    public Estabelecimento(String nome, String logradouro, String numero, String bairro, String cidade, String uf, String cep,
+    public Estabelecimento(String nomeFantasia, String rua, String numero, String bairro, String cidade, String uf, String cep,
                            String latitude, String longetude) {
-        this(0, nome, logradouro, numero, bairro, cidade, uf, cep, latitude, longetude, 0, Status.INSERIR);
+        this(0, nomeFantasia, rua, numero, bairro, cidade, uf, cep, latitude, longetude, 0, Status.INSERIR);
     }
     @Override
     public String toString() {
-        return nome;
+        return nomeFantasia;
     }
 
     public enum Status {

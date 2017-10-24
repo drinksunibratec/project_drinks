@@ -31,29 +31,29 @@
             android:layout_height="wrap_content"
             android:inputType="textCapWords"
             android:imeOptions="actionDone"
-            android:id="@+id/txtEstabelecimento"/>
+            android:id="@+id/txtCodEstabelecimento"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/endereco"
+            android:text="Descricao"
             android:id="@+id/textView2"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textCapWords"
             android:imeOptions="actionDone"
-            android:id="@+id/txtEndereco"/>
+            android:id="@+id/txtDescricao"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bairro" />
+            android:text="Gelada" />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textCapWords"
             android:imeOptions="actionDone"
-            android:id="@+id/txtBairro"/>
+            android:id="@+id/txtGelada"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

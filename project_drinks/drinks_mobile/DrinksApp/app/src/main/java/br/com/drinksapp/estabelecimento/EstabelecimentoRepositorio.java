@@ -14,8 +14,8 @@ public class EstabelecimentoRepositorio {
     }
     private long inserir(Estabelecimento estabelecimento) {
         estabelecimento.status = Estabelecimento.Status.INSERIR;
-        long id = inserirLocal(estabelecimento, ctx.getContentResolver());
-        return id;
+        long codEstabelecimento = inserirLocal(estabelecimento, ctx.getContentResolver());
+        return codEstabelecimento;
     }
     private int atualizar(Estabelecimento estabelecimento) {
         estabelecimento.status = Estabelecimento.Status.ATUALIZAR;
@@ -38,7 +38,7 @@ public class EstabelecimentoRepositorio {
         String where = null;
         String[] whereArgs = null;
         if (s != null) {
-            where = EstabelecimentoSQLHelper.COLUNA_NOME +" LIKE ?";
+            where = EstabelecimentoSQLHelper.COLUNA_NOMEFANTASIA +" LIKE ?";
             whereArgs = new String[]{ "%"+ s +"%" };
         }
         return new CursorLoader(
@@ -47,12 +47,12 @@ public class EstabelecimentoRepositorio {
                 null,
                 where,
                 whereArgs,
-                EstabelecimentoSQLHelper.COLUNA_NOME);
+                EstabelecimentoSQLHelper.COLUNA_NOMEFANTASIA);
     }
     private ContentValues getValues(Estabelecimento estabelecimento) {
         ContentValues cv = new ContentValues();
-        cv.put(EstabelecimentoSQLHelper.COLUNA_NOME, estabelecimento.nome);
-        cv.put(EstabelecimentoSQLHelper.COLUNA_LOGRADOURO, estabelecimento.logradouro);
+        cv.put(EstabelecimentoSQLHelper.COLUNA_NOMEFANTASIA, estabelecimento.nomeFantasia);
+        cv.put(EstabelecimentoSQLHelper.COLUNA_RUA, estabelecimento.rua);
         cv.put(EstabelecimentoSQLHelper.COLUNA_NUMERO, estabelecimento.numero);
         cv.put(EstabelecimentoSQLHelper.COLUNA_BAIRRO, estabelecimento.bairro);
         cv.put(EstabelecimentoSQLHelper.COLUNA_CIDADE, estabelecimento.cidade);
@@ -72,11 +72,11 @@ public class EstabelecimentoRepositorio {
                 cursor.getColumnIndex(
                         EstabelecimentoSQLHelper.COLUNA_ID)
         );
-        String nome = cursor.getString(
-                cursor.getColumnIndex(EstabelecimentoSQLHelper.COLUNA_NOME)
+        String nomeFantasia = cursor.getString(
+                cursor.getColumnIndex(EstabelecimentoSQLHelper.COLUNA_NOMEFANTASIA)
         );
-        String logradouro = cursor.getString(
-                cursor.getColumnIndex(EstabelecimentoSQLHelper.COLUNA_LOGRADOURO)
+        String rua = cursor.getString(
+                cursor.getColumnIndex(EstabelecimentoSQLHelper.COLUNA_RUA)
         );
         String numero = cursor.getString(
                 cursor.getColumnIndex(EstabelecimentoSQLHelper.COLUNA_NUMERO)
@@ -103,7 +103,7 @@ public class EstabelecimentoRepositorio {
         int status = cursor.getInt(cursor.getColumnIndex(EstabelecimentoSQLHelper.COLUNA_STATUS));
         long idServidor = cursor.getLong(cursor.getColumnIndex(EstabelecimentoSQLHelper.COLUNA_ID_SERVIDOR));
 
-        Estabelecimento estabelecimento = new Estabelecimento(id, nome, logradouro, numero, bairro, cidade, uf, cep, latitude, londetude,
+        Estabelecimento estabelecimento = new Estabelecimento(id, nomeFantasia, rua, numero, bairro, cidade, uf, cep, latitude, londetude,
                 idServidor, Estabelecimento.Status.values()[status]);
 
         return estabelecimento;

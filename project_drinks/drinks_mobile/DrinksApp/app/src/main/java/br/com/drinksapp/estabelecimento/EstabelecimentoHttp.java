@@ -23,7 +23,7 @@ public class EstabelecimentoHttp {
     //private static final String WEBSERVICE_URL = SERVIDOR +"/webserviceproduto.php";
 
     public static final String SERVIDOR = "http://192.168.0.103/drinks_service";
-    private static final String WEBSERVICE_URL = SERVIDOR +"/webserviceestabelecimento.php";
+    private static final String WEBSERVICE_URL = SERVIDOR +"/webservicepedido.php";
 
     private Context mContext;
     private EstabelecimentoRepositorio mRepositorio;
@@ -123,8 +123,7 @@ public class EstabelecimentoHttp {
         conexao.disconnect();
         return sucesso;
     }
-    private HttpURLConnection abrirConexao(String url,
-                                           String metodo, boolean doOutput) throws Exception{
+    private HttpURLConnection abrirConexao(String url, String metodo, boolean doOutput) throws Exception{
         URL urlCon = new URL(url);
         HttpURLConnection conexao = (HttpURLConnection) urlCon.openConnection();
         conexao.setReadTimeout(15000);
@@ -148,8 +147,8 @@ public class EstabelecimentoHttp {
                 JSONObject estabelecimentoJSON = json.getJSONObject(i);
                 Estabelecimento p = new Estabelecimento(
                         0,
-                        estabelecimentoJSON.getString("nome"),
-                        estabelecimentoJSON.getString("logradouro"),
+                        estabelecimentoJSON.getString("nomeFantasia"),
+                        estabelecimentoJSON.getString("rua"),
                         estabelecimentoJSON.getString("numero"),
                         estabelecimentoJSON.getString("bairro"),
                         estabelecimentoJSON.getString("cidade"),
@@ -177,8 +176,8 @@ public class EstabelecimentoHttp {
         try {
             JSONObject jsonPessoa = new JSONObject();
             jsonPessoa.put("id", estabelecimento.idServidor);
-            jsonPessoa.put("nome", estabelecimento.nome);
-            jsonPessoa.put("logradouro", estabelecimento.logradouro);
+            jsonPessoa.put("nomeFantasia", estabelecimento.nomeFantasia);
+            jsonPessoa.put("rua", estabelecimento.rua);
             jsonPessoa.put("numero", estabelecimento.numero);
             jsonPessoa.put("bairro", estabelecimento.bairro);
             jsonPessoa.put("cidade", estabelecimento.cidade);

@@ -18,19 +18,19 @@ public class EstabelecimentoCursorAdapter extends CursorAdapter {
     }
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        TextView txtNome = (TextView) view.findViewById(R.id.txtNome);
-        TextView txtLogradouro = (TextView) view.findViewById(R.id.txtLogradouro);
+        TextView txtNomeFantasia = (TextView) view.findViewById(R.id.txtNomeFantasia);
+        TextView txtRua = (TextView) view.findViewById(R.id.txtRua);
         TextView txtBairro = (TextView) view.findViewById(R.id.txtBairro);
 
-        txtNome.setText(cursor.getString(cursor.getColumnIndex(EstabelecimentoSQLHelper.COLUNA_NOME)));
-        txtLogradouro.setText(cursor.getString(cursor.getColumnIndex(EstabelecimentoSQLHelper.COLUNA_LOGRADOURO)));
+        txtNomeFantasia.setText(cursor.getString(cursor.getColumnIndex(EstabelecimentoSQLHelper.COLUNA_NOMEFANTASIA)));
+        txtRua.setText(cursor.getString(cursor.getColumnIndex(EstabelecimentoSQLHelper.COLUNA_RUA)));
         txtBairro.setText(cursor.getString(cursor.getColumnIndex(EstabelecimentoSQLHelper.COLUNA_BAIRRO)));
 
         int status = cursor.getInt(cursor.getColumnIndex(EstabelecimentoSQLHelper.COLUNA_STATUS));
         if (status == Estabelecimento.Status.EXCLUIR.ordinal()) {
-            txtNome.setTextColor(Color.RED);
+            txtNomeFantasia.setTextColor(Color.RED);
         } else {
-            txtNome.setTextColor(Color.BLACK);
+            txtNomeFantasia.setTextColor(Color.BLACK);
         }
     }
     @Override

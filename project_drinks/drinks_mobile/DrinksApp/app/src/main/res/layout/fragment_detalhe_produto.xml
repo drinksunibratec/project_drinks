@@ -18,6 +18,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Decrção"
+        android:id="@+id/txtDescricao"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="R$ 00,00"
         android:id="@+id/txtPreco"/>
@@ -26,7 +32,7 @@
         android:layout_height="wrap_content"
         android:text="Estabelecimento"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/txtEstabelecimento"/>
+        android:id="@+id/txtCodEstabelecimento"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -37,22 +43,22 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rua do Estabelecimento"
+            android:text="Gelada"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/txtEndereco"/>
         <TextView
             android:paddingLeft="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=","
+            android:text=":"
             android:textAppearance="?android:attr/textAppearanceMedium" />
         <TextView
             android:paddingLeft="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bairro"
+            android:text="S/N"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/txtBairro"/>
+            android:id="@+id/txtGelada"/>
     </LinearLayout>
     <RatingBar
         android:layout_width="wrap_content"
