@@ -1,8 +1,23 @@
 package br.com.drinksapp.activity;
+
+import android.Manifest;
+import android.app.Dialog;
 import android.content.Intent;
+import android.content.IntentSender;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.Loader;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,22 +27,48 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.TextView;
-import java.util.HashMap;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.List;
 
 import br.com.drinksapp.R;
-import br.com.drinksapp.helper.SQLiteHandler;
-import br.com.drinksapp.helper.SessionManager;
+import br.com.drinksapp.bean.Estabelecimento;
+import br.com.drinksapp.http.EstabelecimentoTask;
+
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        LoaderManager.LoaderCallbacks<List<Estabelecimento>>,
+        OnMapReadyCallback,
+        GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener {
 
-    private TextView txtName;
-    private TextView txtEmail;
-    private Button btnLogout;
-    private SQLiteHandler db;
-    private SessionManager session;
+    private static final int REQUEST_ERRO_PLAY_SERVICES = 1;
+    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
+    private static final float DEFAULT_ZOOM = 17;
+
+    LatLng mOrigem;
+
+    GoogleApiClient mGoogleApiClient;
+
+    LoaderManager mLoader;
+
+    GoogleMap mMap;
+    private boolean mPermissaoLocalizacaoConcedida;
+    private Location mUltimaLocalizacao;
+    private CameraPosition mCameraPosition;
+    private LatLng mDefaultLocation;
 
 
     @Override
@@ -55,51 +96,156 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        mLoader = getSupportLoaderManager();
+        mLoader.initLoader(0, null, this);
 
-        txtName = (TextView) findViewById(R.id.name);
-        txtEmail = (TextView) findViewById(R.id.email);
-        btnLogout = (Button) findViewById(R.id.btnLogout);
+        mDefaultLocation = new LatLng(-8.0475622, -34.8769643);
 
-        // SqLite database handler
-        db = new SQLiteHandler(getApplicationContext());
-        // session manager
-        session = new SessionManager(getApplicationContext());
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+        mGoogleApiClient.connect();
 
-        if (!session.isLoggedIn()) {
-            logoutUser();
+
+
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        updateLocationUI();
+
+        getDeviceLocation();
+
+
+    }
+
+
+    private void getDeviceLocation() {
+
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                android.Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            mPermissaoLocalizacaoConcedida = true;
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                    PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
 
-        // Fetching user details from SQLite
-        HashMap<String, String> usuario = db.getUserDetails();
-        String nome = usuario.get("nome");
-        String email = usuario.get("email");
+        if (mPermissaoLocalizacaoConcedida) {
+            mUltimaLocalizacao = LocationServices.FusedLocationApi
+                    .getLastLocation(mGoogleApiClient);
+        }
+        // Set the map's camera position to the current location of the device.
+        if (mCameraPosition != null) {
+            mMap.moveCamera(CameraUpdateFactory.newCameraPosition(mCameraPosition));
+        } else if (mUltimaLocalizacao != null) {
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                    new LatLng(mUltimaLocalizacao.getLatitude(),
+                            mUltimaLocalizacao.getLongitude()), DEFAULT_ZOOM));
+        } else {
 
-        // Displaying the user details on the screen
-        txtName.setText(nome);
-        txtEmail.setText(email);
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
+            mMap.getUiSettings().setMyLocationButtonEnabled(false);
+        }
+        // A step later in the tutorial adds the code to get the device location.
+    }
 
-        // Logout button click event
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                logoutUser();
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String permissions[],
+                                           @NonNull int[] grantResults) {
+        mPermissaoLocalizacaoConcedida = false;
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    mPermissaoLocalizacaoConcedida = true;
+                }
             }
-        });
+        }
+        updateLocationUI();
+    }
+    private void updateLocationUI() {
+        if (mMap == null) {
+            return;
+        }
+        try {
+            if (mPermissaoLocalizacaoConcedida) {
+                mMap.setMyLocationEnabled(true);
+                mMap.getUiSettings().setMyLocationButtonEnabled(true);
+            } else {
+                mMap.setMyLocationEnabled(false);
+                mMap.getUiSettings().setMyLocationButtonEnabled(false);
+                mUltimaLocalizacao = null;
+                ActivityCompat.requestPermissions(this,
+                        new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                        PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+            }
+        } catch (SecurityException e)  {
+            Log.e("Exception: %s", e.getMessage());
+        }
+    }
 
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        mGoogleApiClient.connect();
     }
 
 
-    private void logoutUser() {
-        session.setLogin(false);
-        db.deleteUsers();
-        // Launching the login activity
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(intent);
-        finish();
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        if(connectionResult.hasResolution()){
+            try {
+                connectionResult.startResolutionForResult(this, REQUEST_ERRO_PLAY_SERVICES);
+            } catch (IntentSender.SendIntentException e) {
+                e.printStackTrace();
+            }
+        }else{
+            exibirMensagemErro(this, connectionResult.getErrorCode());
+        }
+    }
+
+    private void exibirMensagemErro(FragmentActivity activity, final int codigoErro){
+        final String TAG = "DIALOG_ERRO_PLAY_SERVICES";
+
+        if(getSupportFragmentManager().findFragmentByTag(TAG) == null){
+
+
+            DialogFragment erroFragment = new DialogFragment(){
+                @NonNull
+                @Override
+                public Dialog onCreateDialog(Bundle savedInstanceState) {
+                    GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
+                    int result = apiAvailability.isGooglePlayServicesAvailable(getActivity());
+
+                    return apiAvailability.getErrorDialog(getActivity(), result, REQUEST_ERRO_PLAY_SERVICES);
+                }
+            };
+            erroFragment.show(activity.getSupportFragmentManager(), TAG);
+        }
     }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_ERRO_PLAY_SERVICES && resultCode == RESULT_OK) {
+            mGoogleApiClient.connect();
+        }
+    }
 
     @Override
     public void onBackPressed() {
@@ -118,11 +264,40 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+
+    @Override
+    public Loader<List<Estabelecimento>> onCreateLoader(int id, Bundle args) {
+        return new EstabelecimentoTask(this);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<Estabelecimento>> loader, List<Estabelecimento> data) {
+        if (data != null) {
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    protected void onStop() {
+        if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.disconnect();
+        }
+        super.onStop();
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<Estabelecimento>> loader) {
+
+    }
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -139,19 +314,19 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_perfil) {
             Intent PerfilActivity = new Intent(MainActivity.this, PerfilActivity.class);
             startActivity(PerfilActivity);
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_estebalecimentos) {
             Intent EstabelecimentoActivity = new Intent(MainActivity.this, br.com.drinksapp.estabelecimento.EstabelecimentoActivity.class);
             startActivity(EstabelecimentoActivity);
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_produtos) {
             Intent ProdutoActivity = new Intent(MainActivity.this, br.com.drinksapp.produto.ProdutoActivity.class);
             startActivity(ProdutoActivity);
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_pedidos) {
             Intent PedidoActivity = new Intent(MainActivity.this, br.com.drinksapp.pedido.PedidoActivity.class);
             startActivity(PedidoActivity);
 
@@ -165,4 +340,5 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

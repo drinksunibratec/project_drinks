@@ -16,4 +16,6 @@ public class AppConfig {
 
     // Server user register url
     public static String URL_REGISTER = "http://www.comunidademaanaim.org.br/drinks_service/register.php";
+
+    public static final String URL_LISTA_ESTABELECIMENTOS = "https://www.comunidademaanaim.org.br/drinks_service/lista_estabelecimentos.php";
 }

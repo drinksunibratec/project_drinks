@@ -50,4 +50,6 @@
     <string name="btn_enviar_foto">Enviar Foto</string>
     <string name="msg_sucesso">Upload realizado com sucesso</string>
     <string name="msg_falha">Falha ao enviar arquivo</string>
+
+    <string name="google_maps_key">AIzaSyD9NnrPST6IJ8b-Y_Nu09m60yIRbHprhpY</string>
 </resources>

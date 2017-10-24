@@ -18,6 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
+
 import br.com.drinksapp.R;
 import br.com.drinksapp.app.AppConfig;
 import br.com.drinksapp.app.AppController;
@@ -135,7 +136,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         // Launch main activity
                         Intent intent = new Intent(LoginActivity.this,
-                                MainActivity.class);
+                                MapsActivity.class);
                         startActivity(intent);
                         finish();
                     } else {
