@@ -71,6 +71,19 @@ class DB_Functions {
             return NULL;
         }
     }
+	
+	public function listaEstabelecimentos(){
+		$estabelecimentos = null;
+		$sql = "SELECT * from estabelecimento WHERE administrador <> 1";
+
+		$result = $this->conn->query($sql);
+		
+		if ($result->num_rows > 0) {
+			$estabelecimentos = $result->fetch_all(MYSQLI_ASSOC);
+		}
+
+		return $estabelecimentos;
+	}
 
     /**
      * Check user is existed or not
