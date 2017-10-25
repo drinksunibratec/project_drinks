@@ -21,6 +21,7 @@ if (isset($_POST['nome']) && empty($_POST['nome']) == false) {
         }
         
     }
+    $inserir['codEstabelecimento'] = $_SESSION['id'];
     insert(PRODUTO, $inserir);
     
 //     $sql = "INSERT INTO produto (nome, descricao, gelada, preco, CodEstabelecimento) VALUES ( '$nome','$descricao', '$gelada', '$preco', '$codEstabelecimento')";

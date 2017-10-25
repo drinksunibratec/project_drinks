@@ -6,12 +6,16 @@ package br.com.drinksapp.app;
 public class AppConfig {
 
     // Server user login url
-        //public static String URL_LOGIN = "http://www.comunidademaanaim.org.br:2083/drinks_service/login.php";
-    public static String URL_LOGIN = "http://192.168.0.102/drinks_service/login.php";
-
+        //public static String URL_LOGIN = "http://192.168.0.103/drinks_service/login.php";
 
         // Server user register url
-        //public static String URL_REGISTER = "http://www.comunidademaanaim.org.br:2083/drinks_service/register.php";
-    public static String URL_REGISTER = "http://192.168.0.102/drinks_service/register.php";
+        //public static String URL_REGISTER = "http://192.168.0.103/drinks_service/register.php";
 
+    // Server user login url
+    public static String URL_LOGIN = "http://www.comunidademaanaim.org.br/drinks_service/login.php";
+
+    // Server user register url
+    public static String URL_REGISTER = "http://www.comunidademaanaim.org.br/drinks_service/register.php";
+
+    public static final String URL_LISTA_ESTABELECIMENTOS = "https://www.comunidademaanaim.org.br/drinks_service/lista_estabelecimentos.php";
 }

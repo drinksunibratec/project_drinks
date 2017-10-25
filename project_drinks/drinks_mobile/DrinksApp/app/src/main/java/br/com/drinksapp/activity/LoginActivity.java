@@ -1,15 +1,16 @@
 package br.com.drinksapp.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import com.android.volley.Request.Method;
+
+import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
@@ -17,12 +18,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
+
 import br.com.drinksapp.R;
 import br.com.drinksapp.app.AppConfig;
 import br.com.drinksapp.app.AppController;
 import br.com.drinksapp.helper.SQLiteHandler;
 import br.com.drinksapp.helper.SessionManager;
-
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = RegisterActivity.class.getSimpleName();
@@ -106,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
         pDialog.setMessage("Carregando... Aguarde!");
         showDialog();
 
-        StringRequest strReq = new StringRequest(Method.POST,
+        StringRequest strReq = new StringRequest(Request.Method.POST,
                 AppConfig.URL_LOGIN, new Response.Listener<String>() {
 
             @Override
@@ -135,7 +136,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         // Launch main activity
                         Intent intent = new Intent(LoginActivity.this,
-                                MainActivity.class);
+                                MapsActivity.class);
                         startActivity(intent);
                         finish();
                     } else {

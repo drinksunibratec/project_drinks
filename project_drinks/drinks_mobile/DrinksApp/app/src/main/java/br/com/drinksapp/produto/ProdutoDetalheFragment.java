@@ -13,18 +13,24 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import br.com.drinksapp.R;
+import br.com.drinksapp.activity.MainActivity;
+import br.com.drinksapp.pedido.PedidoActivity;
 
 
 public class ProdutoDetalheFragment extends Fragment {
     public static final String TAG_DETALHE = "tagDetalhe";
     private static final String EXTRA_PRODUTO = "produto";
+    TextView mTextDescricao;
+    TextView mTextGelada;
     TextView mTextNome;
-    TextView mTextEstabelecimento;
-    TextView mTextEndereco;
-    TextView mTextBairro;
     TextView mTextPreco;
+    TextView mTextCodEstabelecimento;
     Produto mProduto;
 
     ShareActionProvider mShareActionProvider;
@@ -42,26 +48,32 @@ public class ProdutoDetalheFragment extends Fragment {
         mProduto = (Produto)
                 getArguments().getSerializable(EXTRA_PRODUTO);
         setHasOptionsMenu(true);
+
     }
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(
                 R.layout.fragment_detalhe_produto, container, false);
+        mTextDescricao = (TextView)layout.findViewById(R.id.txtDescricao);
+        mTextGelada = (TextView)layout.findViewById(R.id.txtGelada);
         mTextNome = (TextView)layout.findViewById(R.id.txtNome);
-        mTextEstabelecimento = (TextView)layout.findViewById(R.id.txtEstabelecimento);
-        mTextEndereco = (TextView)layout.findViewById(R.id.txtEndereco);
-        mTextBairro = (TextView)layout.findViewById(R.id.txtBairro);
         mTextPreco = (TextView)layout.findViewById(R.id.txtPreco);
+        mTextCodEstabelecimento = (TextView)layout.findViewById(R.id.txtCodEstabelecimento);
         if (mProduto != null) {
+            mTextDescricao.setText(mProduto.descricao);
+            mTextGelada.setText(mProduto.gelada);
             mTextNome.setText(mProduto.nome);
-            mTextEstabelecimento.setText(mProduto.estabelecimento);
-            mTextEndereco.setText(mProduto.endereco);
-            mTextBairro.setText(mProduto.bairro);
             mTextPreco.setText(mProduto.preco);
+            mTextCodEstabelecimento.setText(mProduto.codEstabelecimento);
         }
         return layout;
+
+
     }
+
+
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

@@ -17,13 +17,13 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Renevalda Maria on 22/09/2017.
- */
 public class ProdutoHttp {
-    public static final String SERVIDOR = "http://www.comunidademaanaim.org.br:2083/drinks_service";
-    //public static final String SERVIDOR = "http://192.168.0.102/drinks_service";
+    //public static final String SERVIDOR = "http://www.comunidademaanaim.org.br/drinks_service";
+    //private static final String WEBSERVICE_URL = SERVIDOR +"/webserviceproduto.php";
+
+    public static final String SERVIDOR = "http://192.168.0.103/drinks_service";
     private static final String WEBSERVICE_URL = SERVIDOR +"/webserviceproduto.php";
+
     private Context mContext;
     private ProdutoRepositorio mRepositorio;
     public ProdutoHttp(Context ctx) {
@@ -147,11 +147,11 @@ public class ProdutoHttp {
                 JSONObject produtoJSON = json.getJSONObject(i);
                 Produto p = new Produto(
                         0,
+                        produtoJSON.getString("descricao"),
+                        produtoJSON.getString("gelada"),
                         produtoJSON.getString("nome"),
-                        produtoJSON.getString("estabelecimento"),
-                        produtoJSON.getString("endereco"),
-                        produtoJSON.getString("bairro"),
                         produtoJSON.getString("preco"),
+                        produtoJSON.getString("codEstabelecimento"),
                         produtoJSON.getInt("id"),
                         Produto.Status.OK);
                 list.add(p);
@@ -172,11 +172,11 @@ public class ProdutoHttp {
         try {
             JSONObject jsonPessoa = new JSONObject();
             jsonPessoa.put("id", produto.idServidor);
+            jsonPessoa.put("descricao", produto.descricao);
+            jsonPessoa.put("gelada", produto.gelada);
             jsonPessoa.put("nome", produto.nome);
-            jsonPessoa.put("estabelecimento", produto.estabelecimento);
-            jsonPessoa.put("endereco", produto.endereco);
-            jsonPessoa.put("bairro", produto.bairro);
             jsonPessoa.put("preco", produto.preco);
+            jsonPessoa.put("codEstabelecimento", produto.codEstabelecimento);
             String json = jsonPessoa.toString();
             return json.getBytes();
         } catch (JSONException e) {

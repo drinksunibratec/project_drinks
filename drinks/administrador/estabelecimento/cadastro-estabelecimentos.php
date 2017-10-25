@@ -45,9 +45,11 @@ if($_SESSION['administrador'] == 1){
         		      botaoNovo('adicionar-estabelecimento.php', '&#10010', 'primary', 'Novo estabelecimento');?>
     		</div>
     		
+
     	</header>
+         
 		<?php $mensagens->imprimirMensagem(); ?>
-	
+
   <?php
   if (count($dados) == 0) {
     echo '<div class="alert alert-danger" role="alert">';
