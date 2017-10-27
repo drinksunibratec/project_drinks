@@ -3,6 +3,7 @@ package br.com.drinksapp.bean;
 import java.io.Serializable;
 
 public class Estabelecimento implements Serializable {
+
     long codEstabelecimento;
     String nomeFantasia;
     String rua;
@@ -12,12 +13,12 @@ public class Estabelecimento implements Serializable {
     String uf;
     String cep;
     String latitude;
-    String longetude;
+    String longitude;
 
 
 
     public Estabelecimento(long codEstabelecimento, String nomeFantasia, String rua, String numero, String bairro, String cidade, String uf, String cep,
-                           String latitude, String longetude) {
+                           String latitude, String longitude) {
         this.codEstabelecimento = codEstabelecimento;
         this.nomeFantasia = nomeFantasia;
         this.rua = rua;
@@ -27,7 +28,7 @@ public class Estabelecimento implements Serializable {
         this.uf = uf;
         this.cep = cep;
         this.latitude = latitude;
-        this.longetude = longetude;
+        this.longitude = longitude;
     }
 
     @Override
@@ -107,11 +108,11 @@ public class Estabelecimento implements Serializable {
         this.latitude = latitude;
     }
 
-    public String getLongetude() {
-        return longetude;
+    public String getLongitude() {
+        return longitude;
     }
 
-    public void setLongetude(String longetude) {
-        this.longetude = longetude;
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 }

@@ -1,12 +1,15 @@
 package br.com.drinksapp.activity;
 
-import android.Manifest;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -31,19 +34,32 @@ import android.view.MenuItem;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResult;
+import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.drinksapp.R;
+import br.com.drinksapp.app.Constantes;
 import br.com.drinksapp.bean.Estabelecimento;
+import br.com.drinksapp.bean.Produto;
+import br.com.drinksapp.http.DBConnectParser;
 import br.com.drinksapp.http.EstabelecimentoTask;
 
 
@@ -54,11 +70,7 @@ public class MainActivity extends AppCompatActivity
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
 
-    private static final int REQUEST_ERRO_PLAY_SERVICES = 1;
-    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
-    private static final float DEFAULT_ZOOM = 17;
 
-    LatLng mOrigem;
 
     GoogleApiClient mGoogleApiClient;
 
@@ -67,9 +79,14 @@ public class MainActivity extends AppCompatActivity
     GoogleMap mMap;
     private boolean mPermissaoLocalizacaoConcedida;
     private Location mUltimaLocalizacao;
-    private CameraPosition mCameraPosition;
     private LatLng mDefaultLocation;
+    private boolean mDeveExibirDialogGPS;
+    private Handler mHandler;
+    private CameraPosition mCameraPosition;
+    private int mTenativas;
 
+    private ProgressDialog pDialog;
+    private List<Estabelecimento> mListaEstabelecimentos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +112,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        mListaEstabelecimentos = new ArrayList<Estabelecimento>();
 
         mLoader = getSupportLoaderManager();
         mLoader.initLoader(0, null, this);
@@ -108,8 +126,139 @@ public class MainActivity extends AppCompatActivity
                 .build();
         mGoogleApiClient.connect();
 
+        mHandler = new Handler();
+        mDeveExibirDialogGPS = savedInstanceState == null;
+
+        pDialog = new ProgressDialog(this);
+        pDialog.setCancelable(false);
 
 
+    }
+
+    @Override
+    public Loader<List<Estabelecimento>> onCreateLoader(int id, Bundle args) {
+        return new EstabelecimentoTask(this);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<Estabelecimento>> loader, List<Estabelecimento> data) {
+        if (data != null) {
+            mListaEstabelecimentos = data;
+            for (Estabelecimento estabelecimento : mListaEstabelecimentos) {
+                Double lat = Double.parseDouble(estabelecimento.getLatitude());
+                Double lng = Double.parseDouble(estabelecimento.getLongitude());
+                LatLng ponto = new LatLng(lat, lng);
+
+                Marker marker = mMap.addMarker(new MarkerOptions()
+                        .position(ponto)
+                        .title(estabelecimento.getNomeFantasia())
+                        .snippet("Bairro: " + estabelecimento.getBairro()));
+                marker.setTag(estabelecimento);
+            }
+
+            mMap.setOnInfoWindowClickListener(new MarkerListener());
+        }
+    }
+
+
+    class MarkerListener implements GoogleMap.OnInfoWindowClickListener{
+
+
+        @Override
+        public void onInfoWindowClick(Marker marker) {
+            Estabelecimento estabelecimento = (Estabelecimento)marker.getTag();
+            new TaskListarProdutos().execute(estabelecimento);
+        }
+    }
+
+    private void showDialog() {
+        if (!pDialog.isShowing())
+            pDialog.show();
+    }
+
+    private void hideDialog() {
+        if (pDialog.isShowing())
+            pDialog.dismiss();
+    }
+
+    private class TaskListarProdutos extends AsyncTask<Estabelecimento, Void, Intent> {
+
+        @Override
+        protected void onPreExecute() {
+            pDialog.setMessage("Carregando... Aguarde!");
+            showDialog();
+        }
+
+        @Override
+        protected Intent doInBackground(Estabelecimento... estabelecimento) {
+            ArrayList<Produto> retorno = null;
+            List<Produto>  produtos = null;
+            Intent it = null;
+            try {
+                produtos =  DBConnectParser.listProdutosPorEstabelecimento(estabelecimento[0]);
+                retorno = new ArrayList<Produto>(produtos);
+                if(retorno != null){
+                    it = new Intent(MainActivity.this, ListaProdutosActivity.class);
+                    it.putParcelableArrayListExtra(Constantes.EXTRA_LISTA_PRODUTOS, retorno);
+                    it.putExtra(Constantes.EXTRA_ESTABELECIMENTO, estabelecimento[0]);
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return it;
+        }
+
+        @Override
+        protected void onPostExecute(Intent it) {
+            startActivity(it);
+            hideDialog();
+
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        outState.putBoolean(Constantes.EXTRA_DIALOG, mDeveExibirDialogGPS);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mDeveExibirDialogGPS = savedInstanceState.getBoolean(Constantes.EXTRA_DIALOG, true);
+    }
+
+    private void verificarStatusGPS(){
+        final LocationRequest locationRequest = LocationRequest.create();
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        final LocationSettingsRequest.Builder locationSetting = new LocationSettingsRequest.Builder();
+        locationSetting.setAlwaysShow(true);
+        locationSetting.addLocationRequest(locationRequest);
+
+        PendingResult<LocationSettingsResult> result = LocationServices.SettingsApi.checkLocationSettings(
+          mGoogleApiClient, locationSetting.build());
+        result.setResultCallback(new ResultCallback<LocationSettingsResult>() {
+            @Override
+            public void onResult(@NonNull LocationSettingsResult locationSettingsResult) {
+                final Status status = locationSettingsResult.getStatus();
+                switch (status.getStatusCode()){
+                    case LocationSettingsStatusCodes.SUCCESS:
+                        getDeviceLocation();
+                        break;
+                    case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+                        if(mDeveExibirDialogGPS){
+                            try {
+                                status.startResolutionForResult(MainActivity.this, Constantes.REQUEST_CHECAR_GPS);
+                                mDeveExibirDialogGPS = false;
+                            } catch (IntentSender.SendIntentException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        break;
+                }
+            }
+        });
     }
 
     @Override
@@ -117,9 +266,7 @@ public class MainActivity extends AppCompatActivity
         mMap = googleMap;
 
         updateLocationUI();
-
         getDeviceLocation();
-
 
     }
 
@@ -133,23 +280,33 @@ public class MainActivity extends AppCompatActivity
         } else {
             ActivityCompat.requestPermissions(this,
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
-                    PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+                    Constantes.PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
 
         if (mPermissaoLocalizacaoConcedida) {
             mUltimaLocalizacao = LocationServices.FusedLocationApi
                     .getLastLocation(mGoogleApiClient);
+
         }
         // Set the map's camera position to the current location of the device.
         if (mCameraPosition != null) {
             mMap.moveCamera(CameraUpdateFactory.newCameraPosition(mCameraPosition));
         } else if (mUltimaLocalizacao != null) {
+            mTenativas = 0;
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                     new LatLng(mUltimaLocalizacao.getLatitude(),
-                            mUltimaLocalizacao.getLongitude()), DEFAULT_ZOOM));
+                            mUltimaLocalizacao.getLongitude()), Constantes.DEFAULT_ZOOM));
         } else {
-
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
+            if(mTenativas < 10){
+                mTenativas++;
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        getDeviceLocation();
+                    }
+                }, 2000);
+            }
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mDefaultLocation, Constantes.DEFAULT_ZOOM));
             mMap.getUiSettings().setMyLocationButtonEnabled(false);
         }
         // A step later in the tutorial adds the code to get the device location.
@@ -161,7 +318,7 @@ public class MainActivity extends AppCompatActivity
                                            @NonNull int[] grantResults) {
         mPermissaoLocalizacaoConcedida = false;
         switch (requestCode) {
-            case PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
+            case Constantes.PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -185,7 +342,7 @@ public class MainActivity extends AppCompatActivity
                 mUltimaLocalizacao = null;
                 ActivityCompat.requestPermissions(this,
                         new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
-                        PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+                        Constantes.PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
             }
         } catch (SecurityException e)  {
             Log.e("Exception: %s", e.getMessage());
@@ -197,6 +354,7 @@ public class MainActivity extends AppCompatActivity
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        verificarStatusGPS();
     }
 
     @Override
@@ -209,7 +367,7 @@ public class MainActivity extends AppCompatActivity
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         if(connectionResult.hasResolution()){
             try {
-                connectionResult.startResolutionForResult(this, REQUEST_ERRO_PLAY_SERVICES);
+                connectionResult.startResolutionForResult(this, Constantes.REQUEST_ERRO_PLAY_SERVICES);
             } catch (IntentSender.SendIntentException e) {
                 e.printStackTrace();
             }
@@ -231,7 +389,7 @@ public class MainActivity extends AppCompatActivity
                     GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
                     int result = apiAvailability.isGooglePlayServicesAvailable(getActivity());
 
-                    return apiAvailability.getErrorDialog(getActivity(), result, REQUEST_ERRO_PLAY_SERVICES);
+                    return apiAvailability.getErrorDialog(getActivity(), result, Constantes.REQUEST_ERRO_PLAY_SERVICES);
                 }
             };
             erroFragment.show(activity.getSupportFragmentManager(), TAG);
@@ -242,9 +400,16 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_ERRO_PLAY_SERVICES && resultCode == RESULT_OK) {
+        if (requestCode == Constantes.REQUEST_ERRO_PLAY_SERVICES && resultCode == RESULT_OK) {
             mGoogleApiClient.connect();
+        }else if(requestCode == Constantes.REQUEST_CHECAR_GPS){
+            if(resultCode == RESULT_OK){
+                mTenativas = 0;
+                mHandler.removeCallbacksAndMessages(null);
+                getDeviceLocation();
+            }
         }
+
     }
 
     @Override
@@ -265,16 +430,6 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    @Override
-    public Loader<List<Estabelecimento>> onCreateLoader(int id, Bundle args) {
-        return new EstabelecimentoTask(this);
-    }
-
-    @Override
-    public void onLoadFinished(Loader<List<Estabelecimento>> loader, List<Estabelecimento> data) {
-        if (data != null) {
-        }
-    }
 
     @Override
     protected void onStart() {
@@ -287,6 +442,7 @@ public class MainActivity extends AppCompatActivity
         if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
             mGoogleApiClient.disconnect();
         }
+        mHandler.removeCallbacksAndMessages(null);
         super.onStop();
     }
 
