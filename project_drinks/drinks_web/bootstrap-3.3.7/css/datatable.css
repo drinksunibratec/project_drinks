@@ -1,0 +1,200 @@
+/* 
+ * Estilo que redefine alguns itens do datatable 
+ *
+ */
+body .ui-datatable table {
+    border-spacing: 0;
+    border-collapse: collapse !important;
+    max-width: 100%;
+    background-color: transparent;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.ui-datatable .ui-datatable-header,.ui-datatable .ui-datatable-footer {
+    padding: 4px 10px;
+    text-align: center;
+}
+
+.ui-datatable .ui-datatable-header {
+    border-bottom: 0 none;
+}
+
+.ui-datatable .ui-datatable-footer {
+    border-top: 0 none;
+}
+
+.ui-datatable th,.ui-datatable tfoot td {
+    padding: 3px;
+    line-height: 1.428571429;
+    vertical-align: middle;
+    border-top: 1px solid #ddd;
+    background-color: #f9f9f9;
+}
+
+body .ui-datatable .ui-datatable-data td,.ui-datatable .ui-datatable-data-empty td
+    {
+    padding: 3px;
+    line-height: 1.428571429;
+    vertical-align: middle;
+    border-top: 1px solid #ddd;
+}
+
+.ui-datatable-data .ui-widget-content {
+    background: none;
+}
+
+.ui-datatable .ui-paginator {
+    margin: 0 auto;
+    padding: 10px 0px 0px 0px !important;
+    text-align: center;
+    font-weight: normal;
+    background: transparent !important;
+    border: none;
+    font-size: 0.9em;
+    color: #666666;
+    vertical-align: middle;
+}
+
+.ui-datatable .ui-paginator-pages>span,.ui-datatable .ui-paginator-pages>a,.ui-paginator-previous,.ui-paginator-next
+    {
+    background-color: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    color: #428BCA;
+    line-height: 1.42857;
+    margin-left: -2px !important;
+    padding: 6px 12px;
+    position: relative;
+    text-decoration: none;
+}
+
+.ui-paginator .ui-paginator-page, .ui-paginator .ui-paginator-pages, .ui-paginator .ui-paginator-next, .ui-paginator .ui-paginator-last, .ui-paginator .ui-paginator-first, .ui-paginator .ui-paginator-prev, .ui-paginator .ui-paginator-current {
+    display: inline-block;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+    outline: medium none;
+    padding: 6px 12px !important;
+    text-decoration: none;
+}
+
+.ui-paginator .ui-paginator-next {
+    margin-left: -13px !important;
+    border-radius: 0px 5px 5px 0px;
+    margin-right: 10px !important;
+}
+
+.ui-paginator .ui-paginator-prev {
+    margin-right: -13px !important;
+    border-radius: 5px 0 0 5px;
+}
+
+
+.ui-paginator-current-page {
+    color: #333333;
+}
+
+.ui-paginator .ui-paginator-next, .ui-paginator .ui-paginator-last, .ui-paginator .ui-paginator-first, .ui-paginator .ui-paginator-prev {
+    background: #fff none repeat scroll 0 0;
+}
+
+.ui-datatable tr.ui-selected td {
+    background-color: #EAEAEA;
+}
+
+.ui-datatable-even {
+    background-color: #FFFFFF !important;
+}
+
+.ui-datatable-odd {
+    background-color: #f9f9f9 !important;
+}
+
+.ui-datatable-even:hover {
+    background-color: #f5f5f5 !important;
+}
+
+.ui-datatable-odd:hover {
+    background-color: #f5f5f5 !important
+}
+
+.ui-datatable .ui-expanded-row-content {
+	background-color: #d9edf7;
+}
+
+.ui-datatable .ui-expanded-row-content table{
+	margin-bottom: 0px;
+}
+
+.ui-widget-content.ui-datatable-empty-message {
+	background-color: #ffffff;
+}
+
+.acoes {
+    width: 80px;
+    text-align: center;
+}
+
+.acoesGrande {
+	width: 150px;
+    text-align: center;
+}
+
+.acoesExtraGrande {
+	width: 220px;
+    text-align: center;
+}
+
+.acoes a, .acoesGrande  a, .acoesExtraGrande a {
+    margin: 0px 1px;
+}
+
+.acoes div, .acoesGrande div, .acoesExtraGrande div {
+	margin: 0 auto;
+}
+
+.coluna-data {
+	text-align: center;
+	width: 120px;
+}
+
+.coluna-data-hora {
+	text-align: center;
+	width: 120px;
+}
+
+.coluna-duplo-texto span {
+	display: inline-block;
+}
+
+.coluna-duplo-texto span.separador {
+	width: 15px;
+	text-align: center;
+}
+
+.texto-tooltip {
+	border-bottom: 1px dashed #BCBCBC;
+}
+
+.icon-tooltip, .texto-tooltip {
+	cursor: help;
+}
+
+.ui-datatable .ui-expanded-row {
+	border-bottom: 1px solid #e0e0e0 !important;
+}
+.coluna-esquerda, .coluna-esquerda-lg {
+	text-align: right;
+}
+
+.coluna-esquerda {
+	width: 120px;
+}
+
+.coluna-esquerda-lg {
+	width: 150px;
+}
+
+.coluna-direita {
+	text-align: left;
+	border-bottom: 1px dotted #ddd !important;
+}
