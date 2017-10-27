@@ -49,6 +49,47 @@ class DB_Functions {
             return false;
         }
     }
+    
+	public function listaEstabelecimentos(){
+	$estabelecimentos = null;
+	$sql = "SELECT * from estabelecimento WHERE administrador <> 1";
+
+	$result = $this->conn->query($sql);
+	
+	if ($result->num_rows > 0) {
+		$estabelecimentos = $result->fetch_all(MYSQLI_ASSOC);
+	}
+
+	return $estabelecimentos;
+	}
+
+	public function listaProdutosPorEstabelecimento($codEstabelecimento){
+		$produtos = null;
+		$sql = "SELECT * FROM produto p WHERE p.codEstabelecimento = " . $codEstabelecimento;
+
+		
+		$result = $this->conn->query($sql);
+		
+		if ($result->num_rows > 0) {
+			$produtos = $result->fetch_all(MYSQLI_ASSOC);
+		}
+
+		return $produtos;
+	}
+	
+	public function listaEstabelecimentoPorId($codEstabelecimento){
+		$produtos = null;
+		$sql = "SELECT * FROM estabelecimento e WHERE e.codEstabelecimento = " . $codEstabelecimento;
+
+		
+		$result = $this->conn->query($sql);
+		
+		if ($result->num_rows > 0) {
+			$produtos = $result->fetch_assoc();
+		}
+
+		return $produtos;
+	}
 
     /**
      * Get user by email and password
