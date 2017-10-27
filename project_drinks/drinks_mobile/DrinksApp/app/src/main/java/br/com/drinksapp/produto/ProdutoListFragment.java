@@ -76,7 +76,7 @@ public class ProdutoListFragment extends ListFragment
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.fragment_list_produto, null);
+        View layout = inflater.inflate(R.layout.list_produtos_layout, null);
         mSwipeLayout = (SwipeRefreshLayout) layout.findViewById(R.id.swipe_container);
         mSwipeLayout.setOnRefreshListener(this);
         mSwipeLayout.setColorSchemeResources(
