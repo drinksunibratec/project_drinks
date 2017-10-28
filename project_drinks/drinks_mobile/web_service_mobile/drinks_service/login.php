@@ -1,15 +1,13 @@
 <?php
 
 /**
- * @author Ravi Tamada
- * @link http://www.androidhive.info/2012/01/android-login-and-registration-with-php-mysql-and-sqlite/ Complete tutorial
+ * @author Silvio Cedrim
+ * 
  */
 
 require_once 'include/DB_Functions.php';
 $db = new DB_Functions();
 
-// json response array
-$response = array("error" => FALSE);
 
 if (isset($_POST['email']) && isset($_POST['senha'])) {
 
@@ -20,24 +18,10 @@ if (isset($_POST['email']) && isset($_POST['senha'])) {
     // get the user by email and password
     $usuario = $db->getUserByEmailAndPassword($email, $senha);
 
-    if ($usuario != false) {
-        // use is found
-        $response["error"] = FALSE;
-        $response["usuario"]["nome"] = $usuario["nome"];
-        $response["usuario"]["email"] = $usuario["email"];
-		$response["usuario"]["telefone"] = $usuario["telefone"];
-        echo json_encode($response);
-    } else {
-        // user is not found with the credentials
-        $response["error"] = TRUE;
-        $response["error_msg"] = "Login ou Senha está errado. Tente Novamente!";
-        echo json_encode($response);
+    if ($usuario) {
+       
+        echo json_encode($usuario);
     }
-} else {
-    // required post params is missing
-    $response["error"] = TRUE;
-    $response["error_msg"] = "Esta faltando email ou senha. Informe-os!";
-    echo json_encode($response);
-}
+} 
 ?>
 
