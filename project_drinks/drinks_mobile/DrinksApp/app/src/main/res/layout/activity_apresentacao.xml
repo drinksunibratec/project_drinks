@@ -1,36 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#dd7001"
     android:layout_height="match_parent"
-    tools:context="br.com.drinksapp.activity.ApresentacaoActivity">
+    android:background="@drawable/gradient_background"
+    android:theme="@style/Theme.MyTheme">
+
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:paddingBottom="24dp"
+        android:paddingLeft="20dp"
+        android:src="@drawable/marca" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_horizontal"
+        android:text="drinks 2017"
+        android:textColor="#454545"
+        android:textSize="12dp" />
 
 
-    <LinearLayout
-        android:id="@+id/bgapresentacao"
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent"
-        android:gravity="center">
 
-        <!--tela de estabelecimento para tablet-->
-
-        <android.support.v7.widget.AppCompatImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/iconapp"/>
-        <Button
-            android:id="@+id/btnLinkToLoginScreen"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dip"
-            android:background="@null"
-            android:text="DrinksApp"
-            android:textAllCaps="false"
-            android:textColor="#ffffff"
-            android:textSize="60dp"/>
-    </LinearLayout>
-
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

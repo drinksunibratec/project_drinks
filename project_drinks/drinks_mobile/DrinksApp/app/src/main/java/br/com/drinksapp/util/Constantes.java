@@ -1,4 +1,4 @@
-package br.com.drinksapp.app;
+package br.com.drinksapp.util;
 
 /**
  * Created by Silvio Cedrim on 26/10/2017.
@@ -13,4 +13,6 @@ public class Constantes {
     public static final String EXTRA_LISTA_PRODUTOS = "EXTRA_LISTA_PRODUTOS";
     public static final String EXTRA_ESTABELECIMENTO = "EXTRA_ESTABELECIMENTO";
     public static final float DEFAULT_ZOOM = 17;
+    public static final String USUARIO_CADASTRADO = "USUARIO_CADASTRADO";
+    public static final int CADASTRAR_USUARIO = 1;
 }

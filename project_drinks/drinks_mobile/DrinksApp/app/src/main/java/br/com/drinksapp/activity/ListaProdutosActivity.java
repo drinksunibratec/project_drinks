@@ -9,7 +9,7 @@ import java.util.List;
 
 import br.com.drinksapp.R;
 import br.com.drinksapp.adapter.ProdutoAdapter;
-import br.com.drinksapp.app.Constantes;
+import br.com.drinksapp.util.Constantes;
 import br.com.drinksapp.bean.Estabelecimento;
 import br.com.drinksapp.bean.Produto;
 
