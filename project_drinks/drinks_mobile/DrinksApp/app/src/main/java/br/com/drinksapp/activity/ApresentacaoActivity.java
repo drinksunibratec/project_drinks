@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Bundle;
 
 import br.com.drinksapp.R;
+import br.com.drinksapp.SaveSharedPreference.MySaveSharedPreference;
 
 public class ApresentacaoActivity extends Activity {
 
@@ -17,13 +18,20 @@ public class ApresentacaoActivity extends Activity {
         setContentView(R.layout.activity_apresentacao);
 
         new Handler().postDelayed(new Runnable() {
+            final long[] codUsuario = {0};
 
             @Override
             public void run() {
-                Intent i = new Intent(ApresentacaoActivity.this, LoginActivity.class);
-               startActivity(i);
-               finish();
-          }
+                codUsuario[0] = MySaveSharedPreference.getUserId(ApresentacaoActivity.this);
+                if (codUsuario[0] != 0) {
+                    Intent i = new Intent(ApresentacaoActivity.this, MainActivity.class);
+                    startActivity(i);
+                }else{
+                    Intent i = new Intent(ApresentacaoActivity.this, LoginActivity.class);
+                    startActivity(i);
+                }
+                finish();
+            }
         }, SPLASH_TIME_OUT);
     }
 }

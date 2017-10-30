@@ -4,14 +4,14 @@ import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.util.ArrayList;
 import java.util.List;
 
-import br.com.drinksapp.app.AppConfig;
+import br.com.drinksapp.util.AppConfig;
 import br.com.drinksapp.bean.Estabelecimento;
 import br.com.drinksapp.bean.ListEstabelecimento;
 import br.com.drinksapp.bean.ListProduto;
 import br.com.drinksapp.bean.Produto;
+import br.com.drinksapp.bean.Usuarios;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -78,6 +78,83 @@ public class DBConnectParser {
         }
 
         return null;
+
+    }
+
+    public static Usuarios login(Usuarios usuario){
+        Response response = null;
+
+        Usuarios retorno = null;
+
+
+        try {
+            OkHttpClient client = new OkHttpClient();
+
+            RequestBody body = new FormBody.Builder()
+                    .add("email", usuario.getEmail())
+                    .add("senha", usuario.getSenha())
+                    .build();
+
+
+            Request request = new Request.Builder()
+                    .url(AppConfig.URL_LOGIN)
+                    .post(body)
+                    .build();
+
+            response = client.newCall(request).execute();
+
+            if(response.networkResponse().code() == HttpURLConnection.HTTP_OK){
+                String json = response.body().string();
+
+                Gson gson = new Gson();
+
+                retorno = gson.fromJson(json, Usuarios.class);
+
+
+            }
+        }catch (IOException e){
+
+        }
+        return retorno;
+
+    }
+
+    public static Usuarios cadastrar(Usuarios usuario){
+        Response response = null;
+
+        Usuarios retorno = null;
+
+
+        try {
+            OkHttpClient client = new OkHttpClient();
+
+            RequestBody body = new FormBody.Builder()
+                    .add("nome", usuario.getNome())
+                    .add("email", usuario.getEmail())
+                    .add("senha", usuario.getSenha())
+                    .add("telefone", usuario.getTelefone())
+                    .build();
+
+
+            Request request = new Request.Builder()
+                    .url(AppConfig.URL_REGISTER)
+                    .post(body)
+                    .build();
+
+            response = client.newCall(request).execute();
+
+            if(response.networkResponse().code() == HttpURLConnection.HTTP_OK){
+                String json = response.body().string();
+
+                Gson gson = new Gson();
+
+                retorno = gson.fromJson(json, Usuarios.class);
+
+            }
+        }catch (IOException e){
+
+        }
+        return retorno;
 
     }
 }

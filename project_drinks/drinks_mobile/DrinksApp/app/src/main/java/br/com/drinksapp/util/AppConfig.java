@@ -1,4 +1,4 @@
-package br.com.drinksapp.app;
+package br.com.drinksapp.util;
 
 /**
  * Created by Renevalda Maria on 18/09/2017.

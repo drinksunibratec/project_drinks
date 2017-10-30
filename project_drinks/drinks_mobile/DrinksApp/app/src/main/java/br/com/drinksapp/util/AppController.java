@@ -1,4 +1,4 @@
-package br.com.drinksapp.app;
+package br.com.drinksapp.util;
 
 import android.app.Application;
 import android.text.TextUtils;

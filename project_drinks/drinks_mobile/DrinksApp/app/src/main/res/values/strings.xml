@@ -9,10 +9,10 @@
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
     <string name="hint_name">Fullname</string>
-    <string name="btn_login">LOGIN</string>
-    <string name="btn_register">REGISTER</string>
-    <string name="btn_link_to_register">Not a member? Sign up now.</string>
-    <string name="btn_link_to_login">Already registred! Login Me.</string>
+    <string name="btn_login">Entrar</string>
+    <string name="btn_register">Salvar</string>
+    <string name="btn_link_to_register">Não é cadastrado? Clique aqui.</string>
+    <string name="btn_link_to_login">Já é cadastrado? Entre aqui.</string>
     <string name="welcome">Welcome</string>
     <string name="btn_logout">LOGOUT</string>
     <string name="name">Fullname</string>
@@ -52,4 +52,9 @@
     <string name="msg_falha">Falha ao enviar arquivo</string>
 
     <string name="google_maps_key">AIzaSyD9NnrPST6IJ8b-Y_Nu09m60yIRbHprhpY</string>
+    <string name="edt_name">Nome</string>
+    <string name="edt_username">Email</string>
+    <string name="edt_password">Senha</string>
+    <string name="edt_telefone">Telefone</string>
+    <string name="tela_cadastro">Cadastro</string>
 </resources>
