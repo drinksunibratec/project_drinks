@@ -4,94 +4,58 @@ require_once ('../menu/menu.php');
 
 
 
-$codEstabelecimento = 0;
-$caracters = array("/", "-", ".", "(", ")", " ");
+$codPedido = 0;
 
 
-if (isset($_GET['codEstabelecimento']) && empty($_GET['codEstabelecimento']) == false) {
-    $codEstabelecimento = addslashes($_GET['codEstabelecimento']);
+if (isset($_GET['$codPedido']) && empty($_GET['$codPedido']) == false) {
+    $codPedido = addslashes($_GET['$codPedido']);
 }
 
-if (isset($_POST['cnpj']) && empty($_POST['cnpj']) == false) {
+if (isset($_POST['$codPedido']) && empty($_POST['$codPedido']) == false) {
     $dados = $_POST;
-    foreach ($dados as $key => $value) {
-        if($key == 'cnpj' || $key == 'telefone' || $key == 'cep'){
-            $dados[$key] = str_replace($caracters, "", $value);
-            
-        }
-        
-    }
+     
+    update('pedido', $codPedido, $dados, '$codPedido');
     
-    update('estabelecimento', $codEstabelecimento, $dados, 'codEstabelecimento');
-    
-    header("Location: cadastro-estabelecimentos.php");
+
 }
 
-$dados = buscarRegistroPorId(ESTABELECIMENTO, $codEstabelecimento, 'codEstabelecimento');
+$dados = buscarRegistroPorId(PEDIDO, $codPedido, '$codPedido');
 
 ?>
-
 <!DOCTYPE html>
 
 <head>
-    <title>Editar Estabelecimento</title>
+    <title>Editar Pedido</title>
 
-     MASCARA 
-     <script>
-      jQuery(function($){
-             $("#cnpj").mask("99.999.999/9999-99");
-             $("#telefone").mask("(99)99999-9999");
-             $("#cep").mask("99999-999");     
-      });
 
-      
-     </script>
-        <?php
-        function mask($val, $mask){
-          $maskared = '';
-          $k = 0;
-          for($i = 0; $i<=strlen($mask)-1; $i++){
-             if($mask[$i] == '#'){
-                if(isset($val[$k]))
-                $maskared .= $val[$k++];
-             }else{
-                if(isset($mask[$i]))
-                $maskared .= $mask[$i];
-             }
-          }
-          return $maskared;
-        }
-        ?>
   </head>
 
 <body>
 	<div class="container">
-		<?php foreach ($dados as $dado) {?>
-		<h3>Dados cadastrais de <?php echo $dado['nomeFantasia']; ?>:</h3>
-		<div class="jumbotron">
+		<?php foreach ($dados as $pedido) {?>
 			<form method="POST">
 
                 <div class="row">
                     
                     <div class="form-group col-md-3">
-                      <label for="cnpj">CNPJ</label>      
-                      <input type="text" class="form-control" id="cnpj" name="cnpj" value="<?php echo $dado['cnpj']; ?> " readonly>
+                      <label for="codPedido">Cod.Pedido</label>      
+                      <input type="text" class="form-control" id="codPedido" name="codPedido" value="<?php echo $dado['codPedido']; ?> " readonly>
                 	</div>
                     
                     <div class="form-group col-md-3">
-                      <label for="razaoSocial">Raz&atilde;o Social</label>
-                      <input type="text" class="form-control" name="razaoSocial" value="<?php echo $dado['razaoSocial']; ?>">
+                      <label for="codUsuario">Cliente</label>
+                      <input type="text" class="form-control" name="codUsuario" value="<?php echo $dado['codUsuario']; ?>">
                 	</div>
                     
                     <div class="form-group col-md-3">
-                      <label for="nomeFantasia">Nome Fantasia</label>
-                      <input type="text" class="form-control" name="nomeFantasia" value="<?php echo $dado['nomeFantasia']; ?>">
+                      <label for="dataPedido">Dt. Pedido</label>
+                      <input type="datetime" class="form-control" name="dataPedido" value="<?php echo $dado['dataPedido']; ?>">
                 	</div>
                 	
                 	<div class="form-group col-md-3">
-                      <label for="email">E-mail</label>
-                      <input type="text" class="form-control" name="email" value="<?php echo $dado['eMail']; ?>">
-                	</div>
+                      	<label for="pagamento">Pagamento</label>
+                    	<?php selected_Status($dado['pagamento'])?>                       
+                  	</div>
                 	                	
                 </div>
                 
@@ -142,15 +106,14 @@ $dados = buscarRegistroPorId(ESTABELECIMENTO, $codEstabelecimento, 'codEstabelec
                 	</div>
                 </div>
                 
-                <div class=row>
-                	<div class="form-group col-md-3">
-                      <label for="telefone">Telefone</label>
-                      <input type="text" class="form-control" id="telefone" name="telefone" value="<?php echo $dado['telefone']; ?>">
-                	</div>
+                       <div class="form-group col-md-3">
+                      	<label for="status">Status</label>
+                    	<?php selected_Status($dado['status'])?>                       
+                  	</div>
                 	
                 	<div class="form-group col-md-3">
-                      <label for="senha">Senha</label>
-                      <input type="password" class="form-control" name="senha" value="<?php echo $dado['senha']; ?>">
+                      <label for="valorTotal">Valor</label>
+                      <input type="text" class="form-control" name="valorTotal" value="<?php echo $dado['valorTotal']; ?>">
                 	</div>
                 	
                 </div>

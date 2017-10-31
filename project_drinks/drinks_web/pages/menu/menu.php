@@ -18,11 +18,11 @@
 					<li><a href="../estabelecimento/lista.php">Estabelecimentos</a></li>
 					<?php if(!empty($_SESSION['administrador']) && $_SESSION['administrador'] == 1){ ?>
 						<li><a href="../cliente/lista.php">Clientes</a></li>
-					<?php }else{?>
-						<li><a href="../produto/lista.php">Produtos</a></li>
-					<?php }?>
+					<?php }
+                                        ?>
+
 					
-					
+					 
 					   <li><a href="../login/login.php">Sair</a></li>
 				</ul>
 				

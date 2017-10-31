@@ -14,5 +14,4 @@ function selected_UF($uf = null)
     echo $select;
 }
 
-
 ?>
