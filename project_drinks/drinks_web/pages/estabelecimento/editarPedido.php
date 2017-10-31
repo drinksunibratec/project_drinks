@@ -44,12 +44,12 @@ $dados = buscarRegistroPorId(PEDIDO, $codPedido, '$codPedido');
                     
                     <div class="form-group col-md-3">
                       <label for="codUsuario">Cliente</label>
-                      <input type="text" class="form-control" name="codUsuario" value="<?php echo $dado['codUsuario']; ?>">
+                      <input type="text" class="form-control" name="codUsuario" value="<?php echo $dado['codUsuario']; ?>"readonly>
                 	</div>
                     
                     <div class="form-group col-md-3">
                       <label for="dataPedido">Dt. Pedido</label>
-                      <input type="datetime" class="form-control" name="dataPedido" value="<?php echo $dado['dataPedido']; ?>">
+                      <input type="datetime" class="form-control" name="dataPedido" value="<?php echo $dado['dataPedido']; ?>"readonly>
                 	</div>
                 	
                 	<div class="form-group col-md-3">
@@ -113,7 +113,7 @@ $dados = buscarRegistroPorId(PEDIDO, $codPedido, '$codPedido');
                 	
                 	<div class="form-group col-md-3">
                       <label for="valorTotal">Valor</label>
-                      <input type="text" class="form-control" name="valorTotal" value="<?php echo $dado['valorTotal']; ?>">
+                      <input type="text" class="form-control" name="valorTotal" value="<?php echo $dado['valorTotal']; ?>"readonly>
                 	</div>
                 	
                 </div>
