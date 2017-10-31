@@ -44,12 +44,13 @@ public class CarrinhoDeComprasActivity extends AppCompatActivity {
 
         mTxtValorTotalPedido = (TextView)findViewById(R.id.txtValorTotalPedido);
 
+        valorTotalPedido = new Double(0);
         for(PedidoProdutos pp : mProdutos){
             valorTotalPedido += pp.getPrecoTotal();
         }
 
         mDAO  = new DAODrinks(this);
-        mTxtValorTotalPedido.setText(String.valueOf(valorTotalPedido));
+        mTxtValorTotalPedido.setText("R$ " + String.valueOf(valorTotalPedido));
 
         mListView.setAdapter(new CarrinhoComprasAdapter(this, mProdutos, mDAO));
     }

@@ -136,7 +136,9 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
-            mQuantidade--;
+            if(mQuantidade > 1){
+                mQuantidade--;
+            }
             mTextQuantidadeProdutos.setText(String.valueOf(mQuantidade));
             mTextPrecoTotal.setText(getString(R.string.txt_total_pedido) + ": R$ " + (mQuantidade * Double.parseDouble(mProduto.getPreco())));
         }

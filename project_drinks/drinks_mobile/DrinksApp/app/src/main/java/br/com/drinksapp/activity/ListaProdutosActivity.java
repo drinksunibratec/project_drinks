@@ -58,7 +58,9 @@ public class ListaProdutosActivity extends AppCompatActivity {
 
     private void inserirProdutos() {
         for (Produto p : mProdutos) {
-            mDAO.insertProduto(p);
+            if(p.getNome() != null){
+                mDAO.insertProduto(p);
+            }
         }
     }
 
