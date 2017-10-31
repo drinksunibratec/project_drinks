@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import br.com.drinksapp.R;
-import br.com.drinksapp.bean.PedidoProdutos;
+import br.com.drinksapp.bean.ItemCarrinhoCompras;
 import br.com.drinksapp.bean.Produto;
 import br.com.drinksapp.db.DAODrinks;
 
@@ -19,19 +19,19 @@ import br.com.drinksapp.db.DAODrinks;
  * Created by Silvio Cedrim on 25/10/2017.
  */
 
-public class CarrinhoComprasAdapter extends ArrayAdapter<PedidoProdutos> {
+public class CarrinhoComprasAdapter extends ArrayAdapter<ItemCarrinhoCompras> {
     Context context;
 
     DAODrinks mDAO;
-    public CarrinhoComprasAdapter(Context context, List<PedidoProdutos> pp,  DAODrinks DAO) {
-        super(context, 0, pp);
+    public CarrinhoComprasAdapter(Context context, List<ItemCarrinhoCompras> cc, DAODrinks DAO) {
+        super(context, 0, cc);
         this.context = context;
         this.mDAO = DAO;
     }
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        PedidoProdutos pp = getItem(position);
+        ItemCarrinhoCompras cc = getItem(position);
 
         ViewHolder holder = null;
 
@@ -49,14 +49,14 @@ public class CarrinhoComprasAdapter extends ArrayAdapter<PedidoProdutos> {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.txtNomeProdutoCarrinho.setText(pp.getProduto().getNome());
-        holder.txtPrecoProdutoCarrinho.setText("R$ " + pp.getPrecoTotal());
-        holder.txtQuantidaderodutoCarrinho.setText(String.valueOf(pp.getQuantidade()));
+        holder.txtNomeProdutoCarrinho.setText(cc.getProduto().getNome());
+        holder.txtPrecoProdutoCarrinho.setText("R$ " + cc.getPrecoTotal());
+        holder.txtQuantidaderodutoCarrinho.setText(String.valueOf(cc.getQuantidade()));
 
         holder.btnBotaoMaisCarrinho.setOnClickListener(new CliqueBotaoMais(
-                holder.txtQuantidaderodutoCarrinho, holder.txtPrecoProdutoCarrinho, pp));
+                holder.txtQuantidaderodutoCarrinho, holder.txtPrecoProdutoCarrinho, cc));
         holder.btnBotaoMenosCarrinho.setOnClickListener(new CliqueBotaoMenos(
-                holder.txtQuantidaderodutoCarrinho, holder.txtPrecoProdutoCarrinho, pp));
+                holder.txtQuantidaderodutoCarrinho, holder.txtPrecoProdutoCarrinho, cc));
 
         return convertView;
     }
@@ -74,12 +74,12 @@ public class CarrinhoComprasAdapter extends ArrayAdapter<PedidoProdutos> {
 
         TextView mTextPrecoTotal;
 
-        PedidoProdutos pp;
+        ItemCarrinhoCompras cc;
 
-        public CliqueBotaoMais(TextView txtQuantidaderoduto, TextView textPrecoTotal, PedidoProdutos pp) {
+        public CliqueBotaoMais(TextView txtQuantidaderoduto, TextView textPrecoTotal, ItemCarrinhoCompras cc) {
             this.mTextQuantidadeProdutos = txtQuantidaderoduto;
             this.mTextPrecoTotal = textPrecoTotal;
-            this.pp = pp;
+            this.cc = cc;
         }
 
         @Override
@@ -87,11 +87,11 @@ public class CarrinhoComprasAdapter extends ArrayAdapter<PedidoProdutos> {
             int mQuantidade = Integer.parseInt(this.mTextQuantidadeProdutos.getText().toString());
             mQuantidade++;
             mTextQuantidadeProdutos.setText(String.valueOf(mQuantidade));
-            mTextPrecoTotal.setText("R$ " + (mQuantidade * pp.getPreco()));
+            mTextPrecoTotal.setText("R$ " + (mQuantidade * cc.getPreco()));
 
             Produto p = new Produto();
-            p.setCodProduto(pp.getProduto().getCodProduto());
-            p.setPreco(String.valueOf(pp.getPreco()));
+            p.setCodProduto(cc.getProduto().getCodProduto());
+            p.setPreco(String.valueOf(cc.getPreco()));
             mDAO.atualizarQuantidadeProdutoNoCarrinho(p, mQuantidade);
         }
     }
@@ -102,13 +102,13 @@ public class CarrinhoComprasAdapter extends ArrayAdapter<PedidoProdutos> {
 
         TextView mTextPrecoTotal;
 
-        PedidoProdutos pp;
+        ItemCarrinhoCompras cc;
 
 
-        public CliqueBotaoMenos(TextView txtQuantidaderoduto, TextView textPrecoTotal, PedidoProdutos pp) {
+        public CliqueBotaoMenos(TextView txtQuantidaderoduto, TextView textPrecoTotal, ItemCarrinhoCompras cc) {
             this.mTextQuantidadeProdutos = txtQuantidaderoduto;
             this.mTextPrecoTotal = textPrecoTotal;
-            this.pp = pp;
+            this.cc = cc;
         }
 
         @Override
@@ -118,11 +118,11 @@ public class CarrinhoComprasAdapter extends ArrayAdapter<PedidoProdutos> {
                 mQuantidade--;
             }
             mTextQuantidadeProdutos.setText(String.valueOf(mQuantidade));
-            mTextPrecoTotal.setText("R$ " + (mQuantidade * pp.getPreco()));
+            mTextPrecoTotal.setText("R$ " + (mQuantidade * cc.getPreco()));
 
             Produto p = new Produto();
-            p.setCodProduto(pp.getProduto().getCodProduto());
-            p.setPreco(String.valueOf(pp.getPreco()));
+            p.setCodProduto(cc.getProduto().getCodProduto());
+            p.setPreco(String.valueOf(cc.getPreco()));
             mDAO.atualizarQuantidadeProdutoNoCarrinho(p, mQuantidade);
         }
     }

@@ -5,21 +5,18 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import br.com.drinksapp.R;
+import br.com.drinksapp.bean.ItemCarrinhoCompras;
 import br.com.drinksapp.bean.Estabelecimento;
-import br.com.drinksapp.bean.PedidoProdutos;
 import br.com.drinksapp.bean.Produto;
 import br.com.drinksapp.db.DAODrinks;
-import br.com.drinksapp.fragment.ProdutoDetalheFragment;
 import br.com.drinksapp.util.Constantes;
 
 public class ProdutoDetalheActivity extends AppCompatActivity {
@@ -155,12 +152,12 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
         public void onClick(View v) {
 
             if (!mDAO.existeProdutoNoCarrinho(mProduto)) {
-                PedidoProdutos pedidoProdutos = new PedidoProdutos();
-                pedidoProdutos.setCodProduto(mProduto.getCodProduto());
-                pedidoProdutos.setQuantidade(mQuantidade);
-                pedidoProdutos.setPreco(Double.parseDouble(mProduto.getPreco()));
-                pedidoProdutos.setCodEstabelcimento(mEstabelecimento.getCodEstabelecimento());
-                mDAO.insertProdutoNoCarrinho(pedidoProdutos);
+                ItemCarrinhoCompras carrinhoCompras = new ItemCarrinhoCompras();
+                carrinhoCompras.setCodProduto(mProduto.getCodProduto());
+                carrinhoCompras.setQuantidade(mQuantidade);
+                carrinhoCompras.setPreco(Double.parseDouble(mProduto.getPreco()));
+                carrinhoCompras.setCodEstabelcimento(mEstabelecimento.getCodEstabelecimento());
+                mDAO.insertProdutoNoCarrinho(carrinhoCompras);
             } else {
                 mDAO.atualizarQuantidadeProdutoNoCarrinho(mProduto, mQuantidade);
             }

@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -16,10 +15,8 @@ import java.util.List;
 
 import br.com.drinksapp.R;
 import br.com.drinksapp.adapter.ProdutoAdapter;
-import br.com.drinksapp.bean.PedidoProdutos;
-import br.com.drinksapp.bean.Usuarios;
+import br.com.drinksapp.bean.ItemCarrinhoCompras;
 import br.com.drinksapp.db.DAODrinks;
-import br.com.drinksapp.fragment.QuantidadeProdutosDialogFragment;
 import br.com.drinksapp.util.Constantes;
 import br.com.drinksapp.bean.Estabelecimento;
 import br.com.drinksapp.bean.Produto;
@@ -120,7 +117,7 @@ public class ListaProdutosActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
-            List<PedidoProdutos> carrinho = mDAO.consultarCarrinhoDeCompras();
+            List<ItemCarrinhoCompras> carrinho = mDAO.consultarCarrinhoDeCompras();
             Intent it = new Intent(context, CarrinhoDeComprasActivity.class);
             it.putParcelableArrayListExtra(Constantes.EXTRA_CARRINHO_COMPRAS, new ArrayList<Parcelable>(carrinho));
             startActivity(it);

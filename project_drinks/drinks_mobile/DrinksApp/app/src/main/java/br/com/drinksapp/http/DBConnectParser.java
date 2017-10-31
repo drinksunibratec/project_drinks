@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.List;
 
+import br.com.drinksapp.bean.Pedido;
+import br.com.drinksapp.bean.PedidoProdutos;
 import br.com.drinksapp.util.AppConfig;
 import br.com.drinksapp.bean.Estabelecimento;
 import br.com.drinksapp.bean.ListEstabelecimento;
@@ -156,5 +158,78 @@ public class DBConnectParser {
         }
         return retorno;
 
+    }
+
+    public static Pedido inserirPedido(Pedido pedido){
+        Response response = null;
+        Gson gson = new Gson();
+
+        String json = gson.toJson(pedido);
+
+        Pedido retorno = null;
+
+        try {
+            OkHttpClient client = new OkHttpClient();
+
+            RequestBody body = new FormBody.Builder()
+                    .add("json_pedido", json)
+                    .build();
+
+
+            Request request = new Request.Builder()
+                    .url(AppConfig.URL_INSERIR_PEDIDO)
+                    .post(body)
+                    .build();
+
+            response = client.newCall(request).execute();
+
+            if(response.networkResponse().code() == HttpURLConnection.HTTP_OK){
+                String resposta = response.body().string();
+
+
+                retorno = gson.fromJson(resposta, Pedido.class);
+
+            }
+
+        }catch (IOException e){
+
+        }
+
+        return retorno;
+    }
+
+    public static boolean inserirProdutosPedido(List<PedidoProdutos> pedidoProdutos){
+        Response response = null;
+        Gson gson = new Gson();
+
+        String json = gson.toJson(pedidoProdutos);
+
+        boolean retorno = false;
+
+        try {
+            OkHttpClient client = new OkHttpClient();
+
+            RequestBody body = new FormBody.Builder()
+                    .add("json_produtos_pedido", json)
+                    .build();
+
+
+            Request request = new Request.Builder()
+                    .url(AppConfig.URL_INSERIR_PRODUTOS_NO_PEDIDO)
+                    .post(body)
+                    .build();
+
+            response = client.newCall(request).execute();
+
+            if(response.networkResponse().code() == HttpURLConnection.HTTP_OK){
+                retorno = true;
+
+            }
+
+        }catch (IOException e){
+
+        }
+
+        return retorno;
     }
 }

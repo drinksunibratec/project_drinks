@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.drinksapp.bean.ItemCarrinhoCompras;
 import br.com.drinksapp.bean.Estabelecimento;
 import br.com.drinksapp.bean.Pedido;
 import br.com.drinksapp.bean.PedidoProdutos;
@@ -171,9 +172,9 @@ public class DAODrinks {
         return quantidade;
     }
 
-    public List<PedidoProdutos> consultarCarrinhoDeCompras() {
+    public List<ItemCarrinhoCompras> consultarCarrinhoDeCompras() {
 
-        List<PedidoProdutos> carrinho = new ArrayList<PedidoProdutos>();
+        List<ItemCarrinhoCompras> carrinho = new ArrayList<ItemCarrinhoCompras>();
         SQLiteDatabase db = mHelper.getReadableDatabase();
         String[] argumentos = null;
 
@@ -208,14 +209,14 @@ public class DAODrinks {
                 produto.setNome(nome);
                 produto.setCodProduto(codProduto);
 
-                PedidoProdutos pedidoProdutos = new PedidoProdutos();
-                pedidoProdutos.setCodEstabelcimento(codEstabelecimento);
-                pedidoProdutos.setQuantidade(quantidade);
-                pedidoProdutos.setPreco(valorUnitario);
-                pedidoProdutos.setPrecoTotal(valorTotal);
-                pedidoProdutos.setProduto(produto);
+                ItemCarrinhoCompras carrinhoCompras = new ItemCarrinhoCompras();
+                carrinhoCompras.setCodEstabelcimento(codEstabelecimento);
+                carrinhoCompras.setQuantidade(quantidade);
+                carrinhoCompras.setPreco(valorUnitario);
+                carrinhoCompras.setPrecoTotal(valorTotal);
+                carrinhoCompras.setProduto(produto);
 
-                carrinho.add(pedidoProdutos);
+                carrinho.add(carrinhoCompras);
             }
         }
         cursor.close();
@@ -295,8 +296,8 @@ public class DAODrinks {
         values.put(DrinksContract.CODPEDIDO, pedido.getCodPedido());
         values.put(DrinksContract.CODUSUARIO, pedido.getUsuario().getCodUsuario());
         values.put(DrinksContract.CODESTABELECIMENTO, pedido.getEstabelecimento().getCodEstabelecimento());
-        values.put(DrinksContract.DATA, dt.format(pedido.getData()));
-        values.put(DrinksContract.PRECO, String.valueOf(pedido.getPreco()));
+        values.put(DrinksContract.DATA, dt.format(pedido.getDataPedido()));
+        values.put(DrinksContract.PRECO, String.valueOf(pedido.getValorTotal()));
 
         return values;
     }
@@ -305,9 +306,9 @@ public class DAODrinks {
         ContentValues values = new ContentValues();
         values.put(DrinksContract.CODPEDIDO, pedidoProdutos.getCodPedido());
         values.put(DrinksContract.CODPRODUTO, pedidoProdutos.getCodProduto());
-        values.put(DrinksContract.QUANTIDADE, pedidoProdutos.getQuantidade());
-        values.put(DrinksContract.PRECO_UNITARIO, pedidoProdutos.getPreco());
-        values.put(DrinksContract.PRECO_TOTAL, pedidoProdutos.getPrecoTotal());
+//        values.put(DrinksContract.QUANTIDADE, pedidoProdutos.getQuantidade());
+//        values.put(DrinksContract.PRECO_UNITARIO, pedidoProdutos.getPreco());
+//        values.put(DrinksContract.PRECO_TOTAL, pedidoProdutos.getPrecoTotal());
 
 
         return values;
@@ -330,15 +331,15 @@ public class DAODrinks {
         return values;
     }
 
-    public void insertProdutoNoCarrinho(PedidoProdutos pedidoProdutos) {
+    public void insertProdutoNoCarrinho(ItemCarrinhoCompras carrinhoCompras) {
         SQLiteDatabase db = mHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(DrinksContract.QUANTIDADE, pedidoProdutos.getQuantidade());
-        values.put(DrinksContract.CODESTABELECIMENTO, pedidoProdutos.getCodEstabelcimento());
-        values.put(DrinksContract.CODPRODUTO, pedidoProdutos.getCodProduto());
-        values.put(DrinksContract.PRECO_UNITARIO, pedidoProdutos.getPreco());
-        values.put(DrinksContract.PRECO_TOTAL, String.valueOf(pedidoProdutos.getPreco() * pedidoProdutos.getQuantidade()));
+        values.put(DrinksContract.QUANTIDADE, carrinhoCompras.getQuantidade());
+        values.put(DrinksContract.CODESTABELECIMENTO, carrinhoCompras.getCodEstabelcimento());
+        values.put(DrinksContract.CODPRODUTO, carrinhoCompras.getCodProduto());
+        values.put(DrinksContract.PRECO_UNITARIO, carrinhoCompras.getPreco());
+        values.put(DrinksContract.PRECO_TOTAL, String.valueOf(carrinhoCompras.getPreco() * carrinhoCompras.getQuantidade()));
 
 
         db.insertOrThrow(DrinksContract.TABLE_NAME_CARRINHO_COMPRAS, null, values);

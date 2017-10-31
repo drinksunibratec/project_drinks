@@ -1,6 +1,5 @@
 package br.com.drinksapp.bean;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,16 +16,50 @@ public class Pedido {
 
     List<PedidoProdutos> pedidoProdutos;
 
-    Date data;
+    long codEstabelecimento;
 
-    double preco;
+    long codUsuario;
 
-    public Pedido(long codPedido, Usuarios usuario, Estabelecimento estabelecimento, Date data, double preco) {
+    String dataPedido;
+
+    double valorTotal;
+
+    String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public long getCodEstabelecimento() {
+        return codEstabelecimento;
+    }
+
+    public void setCodEstabelecimento(long codEstabelecimento) {
+        this.codEstabelecimento = codEstabelecimento;
+    }
+
+    public long getCodUsuario() {
+        return codUsuario;
+    }
+
+    public void setCodUsuario(long codUsuario) {
+        this.codUsuario = codUsuario;
+    }
+
+    public Pedido(long codPedido, Usuarios usuario, Estabelecimento estabelecimento, String dataPedido, double preco) {
         this.codPedido = codPedido;
         this.usuario = usuario;
         this.estabelecimento = estabelecimento;
-        this.data = data;
-        this.preco = preco;
+        this.dataPedido = dataPedido;
+        this.valorTotal = preco;
+    }
+
+    public Pedido() {
+
     }
 
     public List<PedidoProdutos> getPedidoProdutos() {
@@ -61,19 +94,19 @@ public class Pedido {
         this.estabelecimento = estabelecimento;
     }
 
-    public Date getData() {
-        return data;
+    public String getDataPedido() {
+        return dataPedido;
     }
 
-    public void setData(Date data) {
-        this.data = data;
+    public void setDataPedido(String dataPedido) {
+        this.dataPedido = dataPedido;
     }
 
-    public double getPreco() {
-        return preco;
+    public double getValorTotal() {
+        return valorTotal;
     }
 
-    public void setPreco(double preco) {
-        this.preco = preco;
+    public void setValorTotal(double valorTotal) {
+        this.valorTotal = valorTotal;
     }
 }

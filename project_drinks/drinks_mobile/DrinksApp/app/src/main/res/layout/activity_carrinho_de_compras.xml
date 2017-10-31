@@ -36,8 +36,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/lista_carrinho"
-        android:background="@color/cinza_claro_color"
         android:layout_weight="0.1"
+        android:background="@color/cinza_claro_color"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -88,13 +88,14 @@
                 android:layout_alignBottom="@+id/txtTotalPedido"
                 android:layout_alignEnd="@+id/textPrecoTaxaEntrega"
                 android:layout_alignRight="@+id/textPrecoTaxaEntrega"
-                android:textColor="@color/blue_color"
-                android:layout_margin="@dimen/small_padding" />
+                android:layout_margin="@dimen/small_padding"
+                android:textColor="@color/blue_color" />
 
 
         </RelativeLayout>
 
         <Button
+            android:id="@+id/btn_comprar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/small_padding"
