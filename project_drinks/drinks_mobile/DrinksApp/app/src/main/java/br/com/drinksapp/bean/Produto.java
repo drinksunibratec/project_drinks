@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 
 public class Produto implements Parcelable {
-    public long id;
+    public long codProduto;
     public String descricao;
     public String gelada;
     public String nome;
@@ -14,7 +14,7 @@ public class Produto implements Parcelable {
     public Estabelecimento estabelecimento;
 
     protected Produto(Parcel in) {
-        id = in.readLong();
+        codProduto = in.readLong();
         descricao = in.readString();
         gelada = in.readString();
         nome = in.readString();
@@ -34,6 +34,10 @@ public class Produto implements Parcelable {
         }
     };
 
+    public Produto() {
+
+    }
+
     public Estabelecimento getEstabelecimento() {
         return estabelecimento;
     }
@@ -42,8 +46,8 @@ public class Produto implements Parcelable {
         this.estabelecimento = estabelecimento;
     }
 
-    public Produto(long id, String descricao, String gelada, String nome, String preco, String codEstabelecimento) {
-        this.id = id;
+    public Produto(long codProduto, String descricao, String gelada, String nome, String preco, String codEstabelecimento) {
+        this.codProduto = codProduto;
         this.descricao = descricao;
         this.gelada = gelada;
         this.nome = nome;
@@ -54,12 +58,12 @@ public class Produto implements Parcelable {
         this(0, descricao, gelada, nome, preco, codEstabelecimento);
     }
 
-    public long getId() {
-        return id;
+    public long getCodProduto() {
+        return codProduto;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setCodProduto(long codProduto) {
+        this.codProduto = codProduto;
     }
 
     public String getDescricao() {
@@ -109,7 +113,7 @@ public class Produto implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(id);
+        dest.writeLong(codProduto);
         dest.writeString(descricao);
         dest.writeString(gelada);
         dest.writeString(nome);

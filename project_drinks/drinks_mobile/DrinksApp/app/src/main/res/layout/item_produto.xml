@@ -1,69 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:background="#fdf2c0"
+    android:layout_height="wrap_content"
+    android:background="@color/white_color"
     android:orientation="vertical">
 
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/medium_padding">
+
+        <TextView
+            android:id="@+id/txtNomeProdutoLista"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:paddingLeft="@dimen/medium_padding"
+            android:paddingTop="@dimen/medium_padding"
+            android:text="@string/nome"
+            android:textColor="@color/black_color"
+            android:textSize="@dimen/large_text"
+            android:singleLine="false"/>
+
+        <TextView
+            android:id="@+id/txtDescricaoProdutoLista"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/txtNomeProdutoLista"
+            android:paddingLeft="@dimen/medium_padding"
+            android:paddingTop="@dimen/very_small_padding"
+            android:text="Cerveja Antartica gelada"
+            android:textColor="@color/gray_color"
+            android:textSize="@dimen/medium_padding"
+            android:singleLine="false"/>/
+
+        <TextView
+            android:id="@+id/txtPrecoProdutoLista"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/txtDescricaoProdutoLista"
+            android:paddingLeft="@dimen/medium_padding"
+            android:paddingTop="@dimen/very_small_padding"
+            android:text="Preço"
+            android:textColor="@color/blue_color"
+            android:textSize="@dimen/medium_text" />
+
+    </RelativeLayout>
+
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imagmProduto"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_alignBottom="@+id/linearLayout"
-        android:layout_gravity="center"
-        android:src="@drawable/beer_icon" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_gravity="center"
-        android:layout_toEndOf="@+id/imageView2"
-        android:layout_toRightOf="@+id/imageView2"
-        android:background="#fdf2c0"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/txtNomeProduto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="#000000" />
-
-        <TextView
-            android:id="@+id/txtPrecoProduto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="5dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#000000" />
-
-        <TextView
-            android:id="@+id/txtNomeEstabelecimentoProduto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#000000" />
-
-
-    </LinearLayout>
-
-    <ImageButton
-        android:id="@+id/bnt_add_produto_carrinho"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_add_produto"
-        android:layout_marginTop="20dp"
-        android:background="@null"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="15dp"
-        android:layout_marginEnd="15dp" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center"
+        android:paddingRight="@dimen/small_padding"
+        android:paddingTop="@dimen/small_padding"
+        android:src="@mipmap/ic_launcher" />
 
 
 </RelativeLayout>

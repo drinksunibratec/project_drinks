@@ -90,7 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dip"
-                android:background="@color/btn_login_bg"
+                android:background="@color/background_botoes"
                 android:text="@string/btn_register"
                 android:textSize="@dimen/txt_medio_botao"
                 android:textColor="@color/white" />

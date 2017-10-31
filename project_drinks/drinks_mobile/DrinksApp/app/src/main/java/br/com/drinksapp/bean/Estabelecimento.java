@@ -14,11 +14,26 @@ public class Estabelecimento implements Serializable {
     String cep;
     String latitude;
     String longitude;
+    String cnpj;
+    String telefone;
 
+    public String getTelefone() {
+        return telefone;
+    }
 
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
 
-    public Estabelecimento(long codEstabelecimento, String nomeFantasia, String rua, String numero, String bairro, String cidade, String uf, String cep,
-                           String latitude, String longitude) {
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+
+    public Estabelecimento(long codEstabelecimento, String nomeFantasia, String rua, String numero, String bairro, String cidade, String uf, String cep, String latitude, String longitude, String cnpj, String telefone) {
         this.codEstabelecimento = codEstabelecimento;
         this.nomeFantasia = nomeFantasia;
         this.rua = rua;
@@ -29,6 +44,8 @@ public class Estabelecimento implements Serializable {
         this.cep = cep;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.cnpj = cnpj;
+        this.telefone = telefone;
     }
 
     @Override

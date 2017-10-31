@@ -40,7 +40,7 @@ public class ProdutoDetalheActivity extends AppCompatActivity
         ProdutoDetalheFragment fragment = ProdutoDetalheFragment.novaInstancia(produto);
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.detalhe, fragment, ProdutoDetalheFragment.TAG_DETALHE);
+        ft.replace(R.id.contentDetalheProduto, fragment, ProdutoDetalheFragment.TAG_DETALHE);
         ft.commit();
     }
     @Override

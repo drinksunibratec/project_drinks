@@ -86,9 +86,9 @@ public class MainActivity_old extends AppCompatActivity
 
 
 
-//        txtName = (TextView) findViewById(R.id.name);
-//        txtEmail = (TextView) findViewById(R.id.email);
-//        btnLogout = (Button) findViewById(R.id.btnLogout);
+//        txtName = (TextView) findViewById(R.codProduto.name);
+//        txtEmail = (TextView) findViewById(R.codProduto.email);
+//        btnLogout = (Button) findViewById(R.codProduto.btnLogout);
 //
 //        // SqLite database handler
 //        db = new SQLiteHandler(getApplicationContext());

@@ -58,7 +58,7 @@ public class PedidoActivity extends AppCompatActivity
             PedidoDetalheFragment fragment =
                     PedidoDetalheFragment.novaInstancia(pedido);
             FragmentTransaction ft = mFragmentManager.beginTransaction();
-            ft.replace(R.id.detalhe, fragment,
+            ft.replace(R.id.contentDetalheProduto, fragment,
                     PedidoDetalheFragment.TAG_DETALHE);
             ft.commit();
         } else {

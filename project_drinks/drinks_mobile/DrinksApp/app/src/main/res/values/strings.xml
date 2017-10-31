@@ -6,6 +6,7 @@
 
     <string name="action_settings">Settings</string>
 
+
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
     <string name="hint_name">Fullname</string>
@@ -57,4 +58,17 @@
     <string name="edt_password">Senha</string>
     <string name="edt_telefone">Telefone</string>
     <string name="tela_cadastro">Cadastro</string>
+
+    <string name="menu_item_carrinho">Adicionar ao carrinho</string>
+
+    <string name="dialog_produtos_ok">OK</string>
+    <string name="dialog_produtos_cancelar">Cancelar</string>
+    <string name="txt_dialog_produtos">Selecione a quantidade</string>
+    <string name="btn_ver_carrinho">Carrinho</string>
+    <string name="btn_comprar">Comprar</string>
+    <string name="txt_taxa_entrega">Taxa de entrega</string>
+    <string name="txt_valor_taxa_entrega">R$ 8,00</string>
+    <string name="txt_total_pedido">Total do pedido</string>
+    <string name="txt_valor_unitario">Valor Unitário</string>
+    <string name="btn_add_carrinho">Adicionar ao Carrinho</string>
 </resources>

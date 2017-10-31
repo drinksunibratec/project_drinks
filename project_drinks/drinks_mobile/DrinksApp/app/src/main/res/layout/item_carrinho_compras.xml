@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white_color"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/medium_padding"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:id="@+id/txtNomeProdutoCarrinho"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:paddingLeft="@dimen/medium_padding"
+            android:paddingTop="@dimen/medium_padding"
+            android:text="@string/nome"
+            android:textColor="@color/black_color"
+            android:textSize="@dimen/large_text" />
+
+
+
+        <LinearLayout
+            android:id="@+id/layoutValorTotalPorProduto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/small_padding"
+            android:paddingRight="@dimen/large_padding"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
+
+
+            <ImageButton
+                android:id="@+id/btn_menosProdutos_carrinho"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/very_small_padding"
+                android:background="@null"
+                android:src="@drawable/ic_botao_menos" />
+
+            <TextView
+                android:id="@+id/txt_quantidade_produtos_carrinho"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/small_padding"
+                android:text="1"
+                android:textColor="@color/black_color"
+                android:textSize="@dimen/large_text"/>
+
+            <ImageButton
+                android:id="@+id/btn_maisProdutos_carrinho"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/very_small_padding"
+                android:paddingLeft="@dimen/small_padding"
+                android:background="@null"
+                android:src="@drawable/ic_botao_mais" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtPrecoProdutoCarrinho"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/medium_padding"
+            android:paddingTop="@dimen/very_small_padding"
+            android:paddingRight="@dimen/very_large_padding"
+            android:text="Preço"
+            android:textColor="@color/blue_color"
+            android:textSize="@dimen/medium_text"
+            android:layout_below="@+id/layoutValorTotalPorProduto"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>

@@ -15,4 +15,8 @@ public class Constantes {
     public static final float DEFAULT_ZOOM = 17;
     public static final String USUARIO_CADASTRADO = "USUARIO_CADASTRADO";
     public static final int CADASTRAR_USUARIO = 1;
+    public static final String EXTRA_PRODUTO = "EXTRA_PRODUTO";
+    public static final String EXTRA_CARRINHO_COMPRAS = "EXTRA_CARRINHO_COMPRAS";
+    public static final int ADICIONAR_PRODUTOS_AO_CARRINHO = 2;
+    public static int RESULT_BACK = 3;
 }

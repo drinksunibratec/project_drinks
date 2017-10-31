@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#ffcc82</color>
-    <color name="colorPrimaryDark">#ffbc5d</color>
+    <color name="colorPrimaryDark">#ffa424</color>
     <color name="colorAccent">#c4d297</color>
+
+    <color name="background_botoes">#ff9b03</color>
+    <color name="background_botao_mais">#1b3096</color>
 
     <color name="red_color">#A11B22</color>
     <color name="blue_color">#4a7acf</color>
     <color name="white_color">#ffffff</color>
     <color name="black_color">#000000</color>
+    <color name="gray_color">#888888</color>
+    <color name="cinza_claro_color">#ededed</color>
 
     <color name="bg_login">#af7010</color>
     <color name="bg_register">#2e3237</color>
@@ -15,11 +20,13 @@
     <color name="white">#ffffff</color>
     <color name="input_login">#222222</color>
     <color name="input_login_hint">#4e4e4e</color>
-    <color name="input_register">#888888</color>
     <color name="input_register_bg">#3b4148</color>
     <color name="input_register_hint">#5e6266</color>
     <color name="btn_login">#ffffff</color>
-    <color name="btn_login_bg">#ff9b03</color>
+
     <color name="lbl_name">#333333</color>
     <color name="btn_logut_bg">#ffcb5b</color>
+    <color name="backgroun_botao_menos">#d10b0b</color>
+    <color name="botao_mais_pressionado">#4f69e7</color>
+    <color name="botao_mais_focused">#7a8ff5</color>
 </resources>

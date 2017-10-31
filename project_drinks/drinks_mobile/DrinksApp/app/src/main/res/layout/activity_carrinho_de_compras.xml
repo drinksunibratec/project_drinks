@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_color"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/lista_carrinho"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.9"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbarCarrinho"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginBottom="@dimen/small_padding"
+            android:background="@color/colorPrimaryDark"
+            app:layout_collapseMode="pin" />
+
+        <ListView
+            android:id="@+id/lista_produtos_carrinho"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lista_carrinho"
+        android:background="@color/cinza_claro_color"
+        android:layout_weight="0.1"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/small_padding"
+            android:background="@color/white_color">
+
+            <TextView
+                android:id="@+id/txtTaxaEntrega"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="@dimen/small_padding"
+                android:text="@string/txt_taxa_entrega"
+                android:textColor="@color/black_color" />
+
+            <TextView
+                android:id="@+id/textPrecoTaxaEntrega"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/txtTaxaEntrega"
+                android:layout_marginBottom="@dimen/small_padding"
+                android:layout_marginLeft="@dimen/small_padding"
+                android:layout_marginRight="@dimen/small_padding"
+                android:text="@string/txt_valor_taxa_entrega"
+                android:textColor="@color/black_color" />
+
+            <TextView
+                android:id="@+id/txtTotalPedido"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/txtTaxaEntrega"
+                android:layout_margin="@dimen/small_padding"
+                android:text="@string/txt_total_pedido"
+                android:textColor="@color/black_color" />
+
+            <TextView
+                android:id="@+id/txtValorTotalPedido"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/txtTotalPedido"
+                android:layout_alignEnd="@+id/textPrecoTaxaEntrega"
+                android:layout_alignRight="@+id/textPrecoTaxaEntrega"
+                android:textColor="@color/blue_color"
+                android:layout_margin="@dimen/small_padding" />
+
+
+        </RelativeLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/small_padding"
+            android:layout_weight="0.5"
+            android:background="@color/background_botoes"
+            android:text="@string/btn_comprar" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

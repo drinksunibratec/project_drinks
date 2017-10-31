@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import br.com.drinksapp.R;
 import br.com.drinksapp.bean.Usuarios;
+import br.com.drinksapp.db.DAODrinks;
 import br.com.drinksapp.helper.Mask;
 import br.com.drinksapp.helper.SQLiteHandler;
 import br.com.drinksapp.helper.SessionManager;
@@ -31,6 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
     private ProgressDialog pDialog;
     private Usuarios usuario;
     private Toolbar mToolbar;
+    private DAODrinks mDAO;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         mBtnRegister.setOnClickListener(new BotaoCadastrar());
 
+        mDAO = new DAODrinks(this);
 
     }
 
@@ -82,9 +85,8 @@ public class RegisterActivity extends AppCompatActivity {
 
             if(usuario.getErro() == "false"){
 
-//                if(!mDao.existeUsuario(usuario)) {
-//                    mDao.insert(usuario);
-//                }
+
+                mDAO.insertUsuario(usuario);
 
                 Toast.makeText(RegisterActivity.this, "Usuário cadastrado com sucesso!", Toast.LENGTH_LONG).show();
                 getIntent().putExtra(Constantes.USUARIO_CADASTRADO, usuario);

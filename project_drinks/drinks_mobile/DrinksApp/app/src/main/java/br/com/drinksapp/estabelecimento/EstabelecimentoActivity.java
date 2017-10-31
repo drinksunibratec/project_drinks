@@ -59,7 +59,7 @@ public class EstabelecimentoActivity extends AppCompatActivity
             EstabelecimentoDetalheFragment fragment =
                     EstabelecimentoDetalheFragment.novaInstancia(estabelecimento);
             FragmentTransaction ft = mFragmentManager.beginTransaction();
-            ft.replace(R.id.detalhe, fragment,
+            ft.replace(R.id.contentDetalheProduto, fragment,
                     EstabelecimentoDetalheFragment.TAG_DETALHE);
             ft.commit();
         } else {
