@@ -91,6 +91,24 @@ class DB_Functions {
 		return $produtos;
 	}
 
+    public function listaPedidosPorID($codPedido) {
+        $pedidos = null;
+        $sql = "SELECT * FROM pedido p WHERE p.pedido = " .$codPedido;
+
+        $result = $this->conn->query($sql);
+        
+        if ($result->num_rows > 0) {
+            $pedidos = $result->fetch_assoc();
+        }
+
+        return $pedidos;
+    }
+
+    public function listaProdutosPorPedido($codProduto,$codPedido){
+        $produtos = null;
+        $sql = "SELECT nome,descricao FROM pedido p JOIN pedido_produto pp ON pp.codPedido=p.codPedido JOIN produto pr ON pr.codProduto=pp.codProduto WHERE p.codPedido '. $codPedido .' AND pr.codProduto" . $codProduto;
+    }
+
     /**
      * Get user by email and password
      */
