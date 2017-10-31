@@ -1,0 +1,54 @@
+/* 
+ * Estilo que redefine alguns itens do primefaces message 
+ *
+ * Copyright (c) 2013, Linkcon. 
+ * Todos os direitos reservados.
+ */
+.ui-messages-warn,.ui-messages-info,.ui-messages-error,.ui-messages-fatal {
+    padding: 10px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.ui-messages-warn {
+  color: #8a6d3b;
+  background-color: #fcf8e3;
+  border-color: #faebcc;
+}
+
+.ui-messages-info {
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+.ui-messages-error {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+
+.ui-messages-fatal {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+
+.ui-messages-info-icon,.ui-messages-warn-icon,.ui-messages-error-icon,.ui-messages-fatal-icon,.ui-message-info-icon,.ui-message-warn-icon,.ui-message-error-icon,.ui-message-fatal-icon
+    {
+    background: transparent !important;
+}
+
+.ui-messages-info-icon,.ui-messages-warn-icon,.ui-messages-error-icon,.ui-messages-fatal-icon
+    {
+    height: 0 !important;
+    width: 0 !important;
+}
+
+.ui-message-info-icon,.ui-message-warn-icon,.ui-message-error-icon,.ui-message-fatal-icon
+    {
+    height: 0 !important;
+    width: 0 !important;
+}
