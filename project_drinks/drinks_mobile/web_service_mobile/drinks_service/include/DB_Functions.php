@@ -49,6 +49,42 @@ class DB_Functions {
             return false;
         }
     }
+	
+	public function inserirPedido($pedido){
+		foreach ($pedido as $key => $value) {
+			$columns .= trim($key, "'") . ",";
+			$values .= "'$value',";
+		}
+		
+		// remove a ultima virgula
+		$columns = rtrim($columns, ',');
+		$values = rtrim($values, ',');
+		
+		$sql = "INSERT INTO pedido (" . $columns . ") VALUES (" . $values . ");";
+		echo $sql;	
+		$db->query($sql);
+	}
+	
+	public function inserirProdutosDoPedido($input_data){
+		
+		foreach($input_data as $key => $produtos){
+			
+			foreach ($produtos as $key => $value) {
+				$columns .= trim($key, "'") . ",";
+				$values .= "'$value',";
+			}
+			
+			// remove a ultima virgula
+			$columns = rtrim($columns, ',');
+			$values = rtrim($values, ',');
+			
+			$sql = "INSERT INTO pedido_produto (" . $columns . ") VALUES (" . $values . ");";
+			echo $sql;	
+			$db->query($sql);
+		}
+		
+		
+	}
     
 	public function listaEstabelecimentos(){
 	$estabelecimentos = null;
@@ -90,6 +126,23 @@ class DB_Functions {
 
 		return $produtos;
 	}
+	
+	public function consultaUltimoPedido(){
+		$produtos = null;
+		$sql = "SELECT MAX(codPedido) FROM pedido;
+
+		
+		$result = $this->conn->query($sql);
+		
+		if ($result->num_rows > 0) {
+			$produtos = $result->fetch_assoc();
+		}
+
+		return $produtos;
+	}
+	
+
+		
 
     public function listaPedidosPorID($codPedido) {
         $pedidos = null;
