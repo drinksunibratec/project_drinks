@@ -17,11 +17,11 @@ public class PedidoProdutos implements Parcelable {
 
 //    long codEstabelcimento;
 //
-//    double preco;
-//
-//    int quantidade;
-//
-//    double precoTotal;
+    double preco;
+
+    int quantidade;
+
+    double precoTotal;
 //
 //    Produto produto;
 
@@ -41,9 +41,9 @@ public class PedidoProdutos implements Parcelable {
         codProduto = in.readLong();
         codPedido = in.readLong();
 //        codEstabelcimento = in.readLong();
-//        preco = in.readDouble();
-//        quantidade = in.readInt();
-//        precoTotal = in.readDouble();
+        preco = in.readDouble();
+        quantidade = in.readInt();
+        precoTotal = in.readDouble();
 //        produto = in.readParcelable(Produto.class.getClassLoader());
     }
 
@@ -66,29 +66,29 @@ public class PedidoProdutos implements Parcelable {
 //    public void setProduto(Produto produto) {
 //        this.produto = produto;
 //    }
-//    public double getPreco() {
-//        return preco;
-//    }
-//
-//    public void setPreco(double preco) {
-//        this.preco = preco;
-//    }
-//
-//    public int getQuantidade() {
-//        return quantidade;
-//    }
-//
-//    public void setQuantidade(int quantidade) {
-//        this.quantidade = quantidade;
-//    }
-//
-//    public double getPrecoTotal() {
-//        return precoTotal;
-//    }
-//
-//    public void setPrecoTotal(double precoTotal) {
-//        this.precoTotal = precoTotal;
-//    }
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public double getPrecoTotal() {
+        return precoTotal;
+    }
+
+    public void setPrecoTotal(double precoTotal) {
+        this.precoTotal = precoTotal;
+    }
 //
 //    public long getCodEstabelcimento() {
 //        return codEstabelcimento;
@@ -125,9 +125,9 @@ public class PedidoProdutos implements Parcelable {
         dest.writeLong(codProduto);
         dest.writeLong(codPedido);
 //        dest.writeLong(codEstabelcimento);
-//        dest.writeDouble(preco);
-//        dest.writeInt(quantidade);
-//        dest.writeDouble(precoTotal);
+        dest.writeDouble(preco);
+        dest.writeInt(quantidade);
+        dest.writeDouble(precoTotal);
 //        dest.writeParcelable(produto, flags);
     }
 }

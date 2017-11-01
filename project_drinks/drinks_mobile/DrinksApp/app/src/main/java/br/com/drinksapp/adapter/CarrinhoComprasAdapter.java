@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import br.com.drinksapp.R;
@@ -23,10 +24,14 @@ public class CarrinhoComprasAdapter extends ArrayAdapter<ItemCarrinhoCompras> {
     Context context;
 
     DAODrinks mDAO;
-    public CarrinhoComprasAdapter(Context context, List<ItemCarrinhoCompras> cc, DAODrinks DAO) {
+
+    TextView mTxtValorTotal;
+
+    public CarrinhoComprasAdapter(Context context, List<ItemCarrinhoCompras> cc, DAODrinks DAO, TextView txtValorTotal) {
         super(context, 0, cc);
         this.context = context;
         this.mDAO = DAO;
+        this.mTxtValorTotal = txtValorTotal;
     }
 
     @Override
@@ -93,6 +98,11 @@ public class CarrinhoComprasAdapter extends ArrayAdapter<ItemCarrinhoCompras> {
             p.setCodProduto(cc.getProduto().getCodProduto());
             p.setPreco(String.valueOf(cc.getPreco()));
             mDAO.atualizarQuantidadeProdutoNoCarrinho(p, mQuantidade);
+            double valorTotalPedido = mDAO.precoTotalDoCarrinho(cc);
+            DecimalFormat df = new DecimalFormat("#.00");
+            String valor = df.format(valorTotalPedido);
+
+            mTxtValorTotal.setText("R$ " + valor);
         }
     }
 
@@ -124,6 +134,12 @@ public class CarrinhoComprasAdapter extends ArrayAdapter<ItemCarrinhoCompras> {
             p.setCodProduto(cc.getProduto().getCodProduto());
             p.setPreco(String.valueOf(cc.getPreco()));
             mDAO.atualizarQuantidadeProdutoNoCarrinho(p, mQuantidade);
+            double valorTotalPedido = mDAO.precoTotalDoCarrinho(cc);
+
+            DecimalFormat df = new DecimalFormat("#.00");
+            String valor = df.format(valorTotalPedido);
+
+            mTxtValorTotal.setText("R$ " + valor);
         }
     }
 

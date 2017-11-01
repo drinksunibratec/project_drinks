@@ -23,8 +23,7 @@
             android:paddingTop="@dimen/medium_padding"
             android:text="@string/nome"
             android:textColor="@color/black_color"
-            android:textSize="@dimen/large_text"
-            android:singleLine="false"/>
+            android:textSize="@dimen/medium_text"/>
 
         <TextView
             android:id="@+id/txtDescricaoProdutoLista"
@@ -37,8 +36,7 @@
             android:paddingTop="@dimen/very_small_padding"
             android:text="Cerveja Antartica gelada"
             android:textColor="@color/gray_color"
-            android:textSize="@dimen/medium_padding"
-            android:singleLine="false"/>/
+            android:textSize="@dimen/small_text"/>/
 
         <TextView
             android:id="@+id/txtPrecoProdutoLista"
@@ -51,14 +49,14 @@
             android:paddingTop="@dimen/very_small_padding"
             android:text="Preço"
             android:textColor="@color/blue_color"
-            android:textSize="@dimen/medium_text" />
+            android:textSize="@dimen/small_text" />
 
     </RelativeLayout>
 
     <ImageView
         android:id="@+id/imagmProduto"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"

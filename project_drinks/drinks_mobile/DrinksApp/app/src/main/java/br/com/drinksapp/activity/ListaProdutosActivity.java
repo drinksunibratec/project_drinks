@@ -43,7 +43,7 @@ public class ListaProdutosActivity extends AppCompatActivity {
         mBtnCarrinho.setOnClickListener(new BotaoCarrinho(this));
 
         mDAO = new DAODrinks(this);
-        mDAO.delete();
+        mDAO.deleteCarrinhoCompras();
 
         ajustarLista();
         inserirProdutos();
@@ -86,6 +86,12 @@ public class ListaProdutosActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        mDAO.deleteCarrinhoCompras();
     }
 
     class ClickProduto implements AdapterView.OnItemClickListener {

@@ -124,7 +124,7 @@ public class DAODrinks {
         db.close();
     }
 
-    public void delete() {
+    public void deleteCarrinhoCompras() {
         SQLiteDatabase db = mHelper.getWritableDatabase();
         db.delete(DrinksContract.TABLE_NAME_CARRINHO_COMPRAS,
                 null,
@@ -170,6 +170,28 @@ public class DAODrinks {
         cursor.close();
         db.close();
         return quantidade;
+    }
+
+    public double precoTotalDoCarrinho(ItemCarrinhoCompras cc) {
+        double valorTotal = 0;
+        SQLiteDatabase db = mHelper.getReadableDatabase();
+        String[] argumentos = null;
+
+        String sql = "SELECT sum(" + DrinksContract.PRECO_TOTAL + ")    as " + DrinksContract.PRECO_TOTAL + "  FROM " + DrinksContract.TABLE_NAME_CARRINHO_COMPRAS + " WHERE " + DrinksContract.CODPRODUTO + " = ?";
+
+        argumentos = new String[]{String.valueOf(cc.getProduto().getCodProduto())};
+
+        Cursor cursor = db.rawQuery(sql, argumentos);
+
+        if (cursor.getCount() > 0) {
+            int idxPrecoTotal = cursor.getColumnIndex(DrinksContract.PRECO_TOTAL);
+            if (cursor.moveToFirst()) {
+                valorTotal = cursor.getInt(idxPrecoTotal);
+            }
+        }
+        cursor.close();
+        db.close();
+        return valorTotal;
     }
 
     public List<ItemCarrinhoCompras> consultarCarrinhoDeCompras() {

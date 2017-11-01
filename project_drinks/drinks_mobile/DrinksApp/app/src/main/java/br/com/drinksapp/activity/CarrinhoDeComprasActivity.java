@@ -1,6 +1,7 @@
 package br.com.drinksapp.activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,7 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,10 +62,13 @@ public class CarrinhoDeComprasActivity extends AppCompatActivity {
             valorTotalPedido += cc.getPrecoTotal();
         }
 
-        mDAO  = new DAODrinks(this);
-        mTxtValorTotalPedido.setText("R$ " + String.valueOf(valorTotalPedido));
+        DecimalFormat df = new DecimalFormat("#.00");
+        String valor = df.format(valorTotalPedido);
 
-        mListView.setAdapter(new CarrinhoComprasAdapter(this, mCarrinho, mDAO));
+        mDAO  = new DAODrinks(this);
+        mTxtValorTotalPedido.setText("R$ " + valor);
+
+        mListView.setAdapter(new CarrinhoComprasAdapter(this, mCarrinho, mDAO, mTxtValorTotalPedido));
 
         mBtnComprar = (Button)findViewById(R.id.btn_comprar);
 
@@ -111,6 +117,9 @@ public class CarrinhoDeComprasActivity extends AppCompatActivity {
                 PedidoProdutos p = new PedidoProdutos();
                 p.setCodPedido(retorno.getCodPedido());
                 p.setCodProduto(carrinhoTemp.get(i).getProduto().getCodProduto());
+                p.setPreco(carrinhoTemp.get(i).getPreco());
+                p.setPrecoTotal(carrinhoTemp.get(i).getPrecoTotal());
+                p.setQuantidade(carrinhoTemp.get(i).getQuantidade());
                 produtos.add(p);
             }
 
@@ -120,7 +129,13 @@ public class CarrinhoDeComprasActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(Boolean params) {
+        protected void onPostExecute(Boolean inseriu) {
+            if(inseriu){
+                Toast.makeText(getApplicationContext(), "Seu pedido foi gerado com sucesso!", Toast.LENGTH_LONG).show();
+                mDAO.deleteCarrinhoCompras();
+                Intent it = new Intent(CarrinhoDeComprasActivity.this, MainActivity.class);
+                startActivity(it);
+            }
 
 
         }

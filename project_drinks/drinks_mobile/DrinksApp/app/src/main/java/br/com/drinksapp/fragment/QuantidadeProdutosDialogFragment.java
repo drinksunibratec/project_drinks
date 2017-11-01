@@ -86,12 +86,12 @@ public class QuantidadeProdutosDialogFragment extends DialogFragment {
             int quantidade = mNumberPicker.getValue();
 
             if(!mDAO.existeProdutoNoCarrinho(mProduto)){
-                PedidoProdutos pedidoProdutos = new PedidoProdutos();
-                pedidoProdutos.setCodProduto(mProduto.getCodProduto());
-                pedidoProdutos.setQuantidade(quantidade);
-                pedidoProdutos.setPreco(Double.parseDouble(mProduto.getPreco()));
-                pedidoProdutos.setCodEstabelcimento(mEstabelecimento.getCodEstabelecimento());
-                mDAO.insertProdutoNoCarrinho(pedidoProdutos);
+//                PedidoProdutos pedidoProdutos = new PedidoProdutos();
+//                pedidoProdutos.setCodProduto(mProduto.getCodProduto());
+//                pedidoProdutos.setQuantidade(quantidade);
+//                pedidoProdutos.setPreco(Double.parseDouble(mProduto.getPreco()));
+//                pedidoProdutos.setCodEstabelcimento(mEstabelecimento.getCodEstabelecimento());
+//                mDAO.insertProdutoNoCarrinho(pedidoProdutos);
 
             }else{
 

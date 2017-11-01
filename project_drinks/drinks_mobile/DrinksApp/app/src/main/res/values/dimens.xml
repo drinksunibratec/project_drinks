@@ -15,6 +15,7 @@
 
     <dimen name="large_text">24sp</dimen>
     <dimen name="medium_text">20sp</dimen>
+    <dimen name="small_text">16sp</dimen>
 
     <dimen name="gridSpacing">18dp</dimen>
     <dimen name="txt_medio_botao">18dp</dimen>
