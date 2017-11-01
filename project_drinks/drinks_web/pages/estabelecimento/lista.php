@@ -80,7 +80,7 @@ if($_SESSION['administrador'] == 1){
             						<td id="telefone"><?php echo $estabelecimento['telefone']; ?></td>
             						<td align="center">
             							<a title="Alterar" href="editar.php?codEstabelecimento=<?php echo  $estabelecimento['codEstabelecimento']?>" class="btn btn-sm btn-warning" >&#9999; Alterar</a>
-               							<a title="Excluir" id="btn-excluir" href="excluir.php?codEstabelecimento=<?php echo $estabelecimento['codEstabelecimento']?>" class="btn btn-sm btn-danger tooltipBtn">&#10006; Excluir</a>
+               							
                							<a href="../produto/lista.php?codEstabelecimento=<?php echo  $estabelecimento['codEstabelecimento']?>" class="btn btn-sm btn-info">&#x1a; Produtos</a>
                						</td>
             					</tr>
