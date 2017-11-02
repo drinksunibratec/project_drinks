@@ -32,7 +32,7 @@ require_once ('../../resources/util/array_uf.php');
        
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <script src="../../resources/jquery/jquery-1.5.2.min.js"></script>
-    	<script src="../../resouces/jquery/jquery.maskedinput-1.3.min.js"></script>
+    	<script src="../../resources/jquery/jquery.maskedinput-1.3.min.js"></script>
         
         
     </head>

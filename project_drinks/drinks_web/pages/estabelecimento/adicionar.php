@@ -2,7 +2,8 @@
   
 require_once ('../include/header.php');
 require_once ('../menu/menu.php');
- 
+
+
   if (isset($_POST['cnpj']) && empty($_POST['cnpj']) == false) {
 
       $caracters = array("/", "-", ".", "(", ")");
@@ -23,47 +24,49 @@ require_once ('../menu/menu.php');
   }
 ?>
 
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
     <title>Cadastrar Estabelecimento</title>
-
-    <!-- MASCARA -->
+			
+    <!-- MASCARA  --> 
      <script>
       jQuery(function($){
              $("#cnpj").mask("99.999.999/9999-99");
-             $("#telefone").mask("(99)99999-9999");
+             $("#telefone").mask("(99) 99999-9999");
              $("#cep").mask("99999-999");     
-      });
-
+      }); 
       
-     </script>
+ </script>    
   </head>
-
+	<body>
 	<div class="container">
 		<h2>Novo Estabelecimento</h2> 
         <div class="jumbotron">
             <form method = "POST" data-toggle="validator">
              <div class="row">
                     
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-3">
                       <label for="cnpj">CNPJ</label>
                       <input type="text" class="form-control" id="cnpj" name="cnpj" required>
-                	</div>
+                    </div>
                     
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-5">
                       <label for="razaoSocial">Raz&atilde;o Social</label>
-                      <input type="text" class="form-control" name="razaoSocial" required>
+                      <input type="text" class="form-control" name="razaoSocial"  maxlength="100" required>
                 	</div>
                     
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-5">
                       <label for="nomeFantasia">Nome Fantasia</label>
-                      <input type="text" class="form-control" name="nomeFantasia" required>
+                      <input type="text" class="form-control" name="nomeFantasia" maxlength="100" required>
                 	</div>
                 	
                 	<div class="form-group col-md-4">
                       <label for="email">E-mail</label>
-                      <input type="email" class="form-control" name="email" placeholder="email@exemplo.com" required>
+                      <input type="email" class="form-control" name="email"
+                      		 placeholder="email@exemplo.com" maxlength="100" required>
                 	</div>
                 	                	
                 </div>
@@ -71,20 +74,20 @@ require_once ('../menu/menu.php');
                 <div class="row">
                 	<div class="form-group col-md-4">
                       <label for="rua">Rua</label>
-                      <input type="text" class="form-control" name="rua" required>
+                      <input type="text" class="form-control" name="rua" maxlength="150" required>
                 	</div>
                 	
                 	<div class="form-group col-md-2">
                       <label for="numero">Numero</label>
-                      <input type="text" class="form-control" name="numero" required>
+                      <input type="text" class="form-control" name="numero" maxlength="6" required>
                 	</div>
                 	
                 	<div class="form-group col-md-3">
                       <label for="bairro">Bairro</label>
-                      <input type="text" class="form-control" name="bairro" required>
+                      <input type="text" class="form-control" name="bairro" maxlength="50" required>
                 	</div>
                 	
-                	<div class="form-group col-md-3">
+                	<div class="form-group col-md-2">
                       <label for="cep">CEP</label>
                       <input type="text" class="form-control" id = "cep" name="cep" required>
                 	</div>
@@ -94,7 +97,7 @@ require_once ('../menu/menu.php');
                 <div class=row>
                 	<div class="form-group col-md-4">
                       <label for="cidade">Cidade</label>
-                      <input type="text" class="form-control" name="cidade" required>
+                      <input type="text" class="form-control" name="cidade" maxlength="50" required>
                 	</div>
                 	
                 	<div class="form-group col-md-3">
@@ -135,13 +138,14 @@ require_once ('../menu/menu.php');
                   	
                   	<div class="form-group col-md-2">
                       <label for="latitute">Latitude</label>
-                      <input type="text" class="form-control" name="latitude" required>
+                      <input type="text" class="form-control" name="latitude" maxlength="10" required>
                 	</div>
                   	
                   	<div class="form-group col-md-2">
                       <label for="longitude">Longitude</label>
-                      <input type="text" class="form-control" name="longitude" required>
-                	</div>
+                      <input type="text" class="form-control" name="longitude" maxlength="10" required>
+                	</div>                	
+     
                 </div>
                 
                 <div class=row>
@@ -152,7 +156,7 @@ require_once ('../menu/menu.php');
                 	
                 	<div class="form-group col-md-3">
                       <label for="senha">Senha</label>
-                      <input type="password" class="form-control" name="senha" required>
+                      <input type="password" class="form-control" name="senha" maxlength="16" required>
                 	</div>
                 	
                 </div>

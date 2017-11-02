@@ -1,7 +1,9 @@
 <?php
 require_once ('../include/header.php');
 require_once ('../menu/menu.php');
-$dados = buscarTodosOsRegistros('cliente');
+
+
+$dados = buscarTodosOsRegistros('USUARIOS');
 ?>
 
 
@@ -26,17 +28,22 @@ $dados = buscarTodosOsRegistros('cliente');
             					<th>Nome</th>
             					<th>E-mail</th>
             					<th>Telefone</th>
+            					<th>Valores Totais</th>
             				</tr>
             			</thead>
             			
-            			<?php foreach ($dados as $usuario){ 
+            			<?php foreach ($dados as $usuarios){ 
             			?>
             			
             			<tbody>
             				<tr>
-            					<td><?php echo $usuario['nome']; ?></td>
-            					<td><?php echo $usuario['email']; ?></td>
-            					<td><?php echo $usuario['telefone']; ?></td>
+            					<td><?php echo $usuarios['nome']; ?></td>
+            					<td><?php echo $usuarios['email']; ?></td>
+            					<td><?php echo $usuarios['telefone']; ?></td>
+            					<td><?php echo "Total em compras" ?></td>
+                    <!-- Consulta onde relaciono ID do cliente independente do estabelecimento
+                            e somo os valores pagos. Implementaçaõ a ser discutida!
+                    SELECT SUM(valorTotal) FROM `pedido` WHERE codUsuario := codUsuario -->
             				</tr>
             			</tbody>
             			
