@@ -4,6 +4,8 @@ require_once ('../include/header.php');
 require_once ('../menu/menu.php');
 
 
+$retorno_cep = null;
+
   if (isset($_POST['cnpj']) && empty($_POST['cnpj']) == false) {
 
       $caracters = array("/", "-", ".", "(", ")");
@@ -22,8 +24,16 @@ require_once ('../menu/menu.php');
 
     header("Location: lista.php");
   }
+  
+  // Instancia a classe Apenas para Teste
+//   $gmaps = new gMaps('AIzaSyC4kbdgWgM1Vu8hxmED-D8QZqrp-zlOxyc');
+//   // Pega os dados (latitude, longitude e zoom) do endereço:
+//   $endereco = 'Av. Brasil, 1453, Rio de Janeiro, RJ';
+//   $dados = $gmaps->geoLocal($endereco);
+//   // Exibe os dados encontrados:
+//   print_r($dados->lat);
+//   print_r($dados->lng);
 ?>
-
 
 
 <!DOCTYPE html>
@@ -39,13 +49,61 @@ require_once ('../menu/menu.php');
              $("#cep").mask("99999-999");     
       }); 
       
- </script>    
+ 	</script>
+ 	
+ 	<script>
+ 	 function buscarEndereco(formName)
+                    {
+                    	var cep = $("input[name='cep']").val();
+                    	cep = cep.replace('-', '');
+                    	$("#mensagem").html(' (Consultando CEP ...)');
+        				$.getScript("http://cep.republicavirtual.com.br/web_cep.php?formato=javascript&cep="+cep, function(){
+        			  		if(resultadoCEP["resultado"]){
+        						$("#logradouro").val(unescape(resultadoCEP["logradouro"]));
+        						$("#bairro").val(unescape(resultadoCEP["bairro"]));
+        						$("#cidade").val(unescape(resultadoCEP["cidade"]));
+            					$("#uf").val(unescape(resultadoCEP["uf"]));
+        					}
+         
+        					$("#mensagem").html('');
+        					$("#numero").focus();
+        					
+        				});	
+                    }              	
+
+     </script>
+     
+     <!-- Abrindo Mapa -->
+     <script src="http://maps.google.com/maps?file=api&v=2&key={AIzaSyC4kbdgWgM1Vu8hxmED-D8QZqrp-zlOxyc}" type="text/javascript"></script>
+    
+ 	<?php //Favor Não deletear, ainda em implemetação!
+//     if (GBrowserIsCompatible()) {
+//         var map = new GMap2(document.getElementById("googleMap"));
+//         var lat = {LATITUDE}; // Latitude do marcador
+//         var lon = {LONGITUDE}; // Longitude do marcador
+//         var zoom = {ZOOM}; // Zoom
+    
+//         map.addControl(new GMapTypeControl());
+//         map.addControl(new GLargeMapControl());
+//         map.setCenter(new GLatLng(lat, lon), zoom);
+    
+//         var marker = new GMarker(new GLatLng(lat,lon));
+    
+//         GEvent.addListener(marker, "click", function() {
+//           marker.openInfoWindowHtml("Texto");
+//         });
+    
+//         map.addOverlay(marker);
+//         map.setCenter(point, zoom);
+//     }?>
+
+ 	
   </head>
 	<body>
 	<div class="container">
 		<h2>Novo Estabelecimento</h2> 
         <div class="jumbotron">
-            <form method = "POST" data-toggle="validator">
+            <form id="formInscricao" method = "POST" data-toggle="validator">
              <div class="row">
                     
                     <div class="form-group col-md-3">
@@ -72,32 +130,37 @@ require_once ('../menu/menu.php');
                 </div>
                 
                 <div class="row">
+                
+                   	<div class="form-group col-md-3">
+                    <label for="cep">CEP<span id='mensagem'></span></label>
+                	<input id="cep" name="cep" type="text" class="form-control" placeholder="Digite seu CEP..."
+                		onblur="javascript:buscarEndereco('formInscricao')"/>
+					</div>
+				</div>	
+				
+				<div class="row">
                 	<div class="form-group col-md-4">
                       <label for="rua">Rua</label>
-                      <input type="text" class="form-control" name="rua" maxlength="150" required>
+                      <input id="logradouro" type="text" class="form-control" name="rua" maxlength="150" required>
                 	</div>
                 	
                 	<div class="form-group col-md-2">
                       <label for="numero">Numero</label>
-                      <input type="text" class="form-control" name="numero" maxlength="6" required>
+                      <input id="numero" type="text" class="form-control" name="numero" maxlength="6" required>
                 	</div>
                 	
                 	<div class="form-group col-md-3">
                       <label for="bairro">Bairro</label>
-                      <input type="text" class="form-control" name="bairro" maxlength="50" required>
-                	</div>
-                	
-                	<div class="form-group col-md-2">
-                      <label for="cep">CEP</label>
-                      <input type="text" class="form-control" id = "cep" name="cep" required>
-                	</div>
+                      <input id="bairro" type="text" class="form-control" name="bairro" maxlength="50" required>
+                	</div>         	
+
                 
                 </div>
                 
                 <div class=row>
                 	<div class="form-group col-md-4">
                       <label for="cidade">Cidade</label>
-                      <input type="text" class="form-control" name="cidade" maxlength="50" required>
+                      <input id="cidade" type="text" class="form-control" name="cidade" maxlength="50" required>
                 	</div>
                 	
                 	<div class="form-group col-md-3">
@@ -138,12 +201,12 @@ require_once ('../menu/menu.php');
                   	
                   	<div class="form-group col-md-2">
                       <label for="latitute">Latitude</label>
-                      <input type="text" class="form-control" name="latitude" maxlength="10" required>
+                      <input id="latitude" type="text" class="form-control" name="latitude" maxlength="10" required>
                 	</div>
                   	
                   	<div class="form-group col-md-2">
                       <label for="longitude">Longitude</label>
-                      <input type="text" class="form-control" name="longitude" maxlength="10" required>
+                      <input id="longitude" type="text" class="form-control" name="longitude" maxlength="10" required>
                 	</div>                	
      
                 </div>
@@ -157,10 +220,12 @@ require_once ('../menu/menu.php');
                 	<div class="form-group col-md-3">
                       <label for="senha">Senha</label>
                       <input type="password" class="form-control" name="senha" maxlength="16" required>
-                	</div>
-                	
+                	</div>                	
                 </div>
-				
+                
+                <div class=row>
+                	<div id="googleMap" max-width="500px" max-height="500px"></div>
+				</div>
 				<div class=row>
     				<div class="form-group col-md-4">
     					<input type="submit" value="&#10003 Cadastrar" class="btn btn-primary" /> 
