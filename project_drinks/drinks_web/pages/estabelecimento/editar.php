@@ -36,37 +36,23 @@ $dados = buscarRegistroPorId(ESTABELECIMENTO, $codEstabelecimento, 'codEstabelec
 <head>
     <title>Editar Estabelecimento</title>
 
-     MASCARA 
+     <!-- MASCARA  -->
      <script>
       jQuery(function($){
              $("#cnpj").mask("99.999.999/9999-99");
-             $("#telefone").mask("(99)99999-9999");
+             $("#telefone").mask("(99) 99999-9999");
              $("#cep").mask("99999-999");     
       });
 
-      
-     </script>
-        <?php
-        function mask($val, $mask){
-          $maskared = '';
-          $k = 0;
-          for($i = 0; $i<=strlen($mask)-1; $i++){
-             if($mask[$i] == '#'){
-                if(isset($val[$k]))
-                $maskared .= $val[$k++];
-             }else{
-                if(isset($mask[$i]))
-                $maskared .= $mask[$i];
-             }
-          }
-          return $maskared;
-        }
-        ?>
+	</script>
+	
   </head>
 
 <body>
 	<div class="container">
+	
 		<?php foreach ($dados as $dado) {?>
+		
 		<h3>Dados cadastrais de <?php echo $dado['nomeFantasia']; ?>:</h3>
 		<div class="jumbotron">
 			<form method="POST">
@@ -78,12 +64,12 @@ $dados = buscarRegistroPorId(ESTABELECIMENTO, $codEstabelecimento, 'codEstabelec
                       <input type="text" class="form-control" id="cnpj" name="cnpj" value="<?php echo $dado['cnpj']; ?> " readonly>
                 	</div>
                     
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-5">
                       <label for="razaoSocial">Raz&atilde;o Social</label>
                       <input type="text" class="form-control" name="razaoSocial" value="<?php echo $dado['razaoSocial']; ?>">
                 	</div>
                     
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-5">
                       <label for="nomeFantasia">Nome Fantasia</label>
                       <input type="text" class="form-control" name="nomeFantasia" value="<?php echo $dado['nomeFantasia']; ?>">
                 	</div>

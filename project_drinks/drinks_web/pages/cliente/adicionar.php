@@ -55,11 +55,11 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <!-- MÁSCARA -->
+    <!-- MASCARA -->
      <script>
       jQuery(function($){
              $("#campoData").mask("99/99/9999");
-             $("#campoCpf").mask("99999999999");     
+             $("#campoCpf").mask("999.999.999-99");     
       });
      </script>
   </head>
