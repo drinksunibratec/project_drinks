@@ -14,7 +14,17 @@ if($_SESSION['administrador'] == 1){
     $dados = buscarRegistroPorId(ESTABELECIMENTO, $codEstabelecimento, 'codEstabelecimento');
 }
 
-
+//M�scara para retorno na Listagem!
+function Mask($mask,$str){
+    
+    $str = str_replace(" ","",$str);
+    
+    for($i=0;$i<strlen($str);$i++){
+        $mask[strpos($mask,"#")] = $str[$i];
+    }
+    
+    return $mask;
+}
 ?>
 
 <!DOCTYPE html>
@@ -22,15 +32,17 @@ if($_SESSION['administrador'] == 1){
     <head>
         <title>Administração de Estabelicimento</title>
         
-<!--         MASCARA 
+        <!--MASCARA -->
          <script>
           jQuery(function($){
                  $("#cnpj").mask("99.999.999/9999-99");
-                 $("#telefone").mask("(99)99999-9999");
+                 $("#telefone").mask("(99) 99999-9999");
                  
           });
-         </script>-->
-       <!--FUNÇÃO PARA PESQUISA-->  
+         </script>
+
+         
+       <!--FUNC�O PARA PESQUISA-->  
        <script>
         $(document).ready(function(){
           $("#myInput").on("keyup", function() {
@@ -83,13 +95,13 @@ if($_SESSION['administrador'] == 1){
             				
             				<tbody id="myTable">
             					<tr>
-            						<td id="cnpj"><?php echo $estabelecimento['cnpj']; ?></td>
+            						<td id="cnpj"><?php echo Mask('##.###.###/####-##',$estabelecimento['cnpj']); ?></td>
             						<td><?php echo $estabelecimento['razaoSocial']; ?></td>
             						<td><?php echo $estabelecimento['eMail']; ?></td>
             						<td><?php echo $estabelecimento['bairro']; ?></td>
             						<td><?php echo $estabelecimento['cidade']; ?></td>
             						<td><?php echo $estabelecimento['uf']; ?></td>
-            						<td id="telefone"><?php echo $estabelecimento['telefone']; ?></td>
+            						<td id="telefone"><?php echo Mask('## #####-####',$estabelecimento['telefone']); ?></td>
             						<td align="center">
             							<a title="Alterar" href="editar.php?codEstabelecimento=<?php echo  $estabelecimento['codEstabelecimento']?>" class="btn btn-sm btn-warning" >&#9999; Alterar</a>
                							<a title="Excluir" id="btn-excluir" href="excluir.php?codEstabelecimento=<?php echo $estabelecimento['codEstabelecimento']?>" class="btn btn-sm btn-danger tooltipBtn">&#10006; Excluir</a>

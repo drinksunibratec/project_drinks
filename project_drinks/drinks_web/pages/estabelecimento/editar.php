@@ -44,7 +44,8 @@ $dados = buscarRegistroPorId(ESTABELECIMENTO, $codEstabelecimento, 'codEstabelec
              $("#cep").mask("99999-999");     
       });
 
-
+	</script>
+	
   </head>
 
 <body>
@@ -65,19 +66,17 @@ $dados = buscarRegistroPorId(ESTABELECIMENTO, $codEstabelecimento, 'codEstabelec
                     
                     <div class="form-group col-md-5">
                       <label for="razaoSocial">Raz&atilde;o Social</label>
-                      <input type="text" class="form-control" name="razaoSocial" 
-                          maxlength="100" value="<?php echo $dado['razaoSocial']; ?>">
+                      <input type="text" class="form-control" name="razaoSocial" value="<?php echo $dado['razaoSocial']; ?>">
                 	</div>
                     
                     <div class="form-group col-md-5">
                       <label for="nomeFantasia">Nome Fantasia</label>
-                      <input type="text" class="form-control" name="nomeFantasia"
-                          maxlength="100"value="<?php echo $dado['nomeFantasia']; ?>">
+                      <input type="text" class="form-control" name="nomeFantasia" value="<?php echo $dado['nomeFantasia']; ?>">
                 	</div>
                 	
                 	<div class="form-group col-md-3">
                       <label for="email">E-mail</label>
-                      <input type="text" class="form-control" name="email" maxlength="100" value="<?php echo $dado['eMail']; ?>">
+                      <input type="text" class="form-control" name="email" value="<?php echo $dado['eMail']; ?>">
                 	</div>
                 	                	
                 </div>
@@ -85,17 +84,17 @@ $dados = buscarRegistroPorId(ESTABELECIMENTO, $codEstabelecimento, 'codEstabelec
                 <div class="row">
                 	<div class="form-group col-md-4">
                       <label for="rua">Rua</label>
-                      <input type="text" class="form-control" name="rua" maxlength="150" value="<?php echo $dado['rua']; ?>">
+                      <input type="text" class="form-control" name="rua" value="<?php echo $dado['rua']; ?>">
                 	</div>
                 	
                 	<div class="form-group col-md-2">
                       <label for="numero">Numero</label>
-                      <input type="text" class="form-control" id="numero" name="numero" maxlength="6" value="<?php echo $dado['numero']; ?>">
+                      <input type="text" class="form-control" id="numero" name="numero" value="<?php echo $dado['numero']; ?>">
                 	</div>
                 	
                 	<div class="form-group col-md-3">
                       <label for="bairro">Bairro</label>
-                      <input type="text" class="form-control" name="bairro"  maxlength="50" value="<?php echo $dado['bairro']; ?>">
+                      <input type="text" class="form-control" name="bairro" value="<?php echo $dado['bairro']; ?>">
                 	</div>
                 	
                 	<div class="form-group col-md-3">
@@ -108,7 +107,7 @@ $dados = buscarRegistroPorId(ESTABELECIMENTO, $codEstabelecimento, 'codEstabelec
                 <div class=row>
                 	<div class="form-group col-md-4">
                       <label for="cidade">Cidade</label>
-                      <input type="text" class="form-control" name="cidade" maxlength="50" value="<?php echo $dado['cidade']; ?>">
+                      <input type="text" class="form-control" name="cidade" value="<?php echo $dado['cidade']; ?>">
                 	</div>
                 	
                 	<div class="form-group col-md-3">
@@ -120,12 +119,12 @@ $dados = buscarRegistroPorId(ESTABELECIMENTO, $codEstabelecimento, 'codEstabelec
                   	
                   	<div class="form-group col-md-2">
                       <label for="latitute">Latitude</label>
-                      <input type="text" class="form-control" name="latitude" maxlength="10" value="<?php echo $dado['latitude']; ?>">
+                      <input type="text" class="form-control" name="latitude" value="<?php echo $dado['latitude']; ?>">
                 	</div>
                   	
                   	<div class="form-group col-md-2">
                       <label for="longitude">Longitude</label>
-                      <input type="text" class="form-control" name="longitude" maxlength="10" value="<?php echo $dado['longitude']; ?>">
+                      <input type="text" class="form-control" name="longitude" value="<?php echo $dado['longitude']; ?>">
                 	</div>
                 </div>
                 
@@ -137,7 +136,7 @@ $dados = buscarRegistroPorId(ESTABELECIMENTO, $codEstabelecimento, 'codEstabelec
                 	
                 	<div class="form-group col-md-3">
                       <label for="senha">Senha</label>
-                      <input type="password" class="form-control" name="senha" maxlength="16" value="<?php echo $dado['senha']; ?>">
+                      <input type="password" class="form-control" name="senha" value="<?php echo $dado['senha']; ?>">
                 	</div>
                 	
                 </div>
