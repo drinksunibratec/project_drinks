@@ -2,14 +2,33 @@
 require_once ('../include/header.php');
 require_once ('../menu/menu.php');
 
-$mensagens = new Mensagens();
-$codEstabelecimento = null;
-if (isset($_GET['codEstabelecimento']) && empty($_GET['codEstabelecimento']) == false) {
-    $codEstabelecimento = $_GET['codEstabelecimento'];
-}else{
-    $codEstabelecimento = $_SESSION['codEstabelecimento'];
+//$mensagens = new Mensagens();
+//$codEstabelecimento = null;
+//if (isset($_GET['codEstabelecimento']) && empty($_GET['codEstabelecimento']) == false) {
+//    $codEstabelecimento = $_GET['codEstabelecimento'];
+//}else{
+//    $codEstabelecimento = $_SESSION['codEstabelecimento'];
+//}
+//$dados = buscarRegistroPorId(PRODUTO,  $codEstabelecimento, 'codEstabelecimento');
+
+
+$host = "localhost";
+$user = "root";
+$senha = "";
+$banco = "comumana_drinks";
+$estabelecimento = $_GET['codEstabelecimento'];
+
+$mysqli = new mysqli($host, $user, $senha, $banco);
+if($mysqli->connect_errno){
+    echo 'Falha na Conexão: ('.$mysqli->connect_errno.')'.$mysqli->connect_error;
 }
-$dados = buscarRegistroPorId('produto',  $codEstabelecimento, 'codEstabelecimento');
+
+//$consulta = "SELECT p.descricao, p.gelada, p.nome, p.preco "
+//        . "FROM produto as p "
+//        . "INNER JOIN estabelecimento as e on "
+//        . "(e.codEstabelecimento = p.codEstabelecimento)";
+$consulta = "SELECT * FROM produto WHERE codEstabelecimento='$estabelecimento'";
+$con = $mysqli->query($consulta)or die($mysqli->error);
 ?>
 
 
@@ -37,38 +56,45 @@ $dados = buscarRegistroPorId('produto',  $codEstabelecimento, 'codEstabeleciment
 
 		</header>
  		<div class="row">
-        	<?php $mensagens->imprimirMensagem(); ?>
+        	<?php //$mensagens->imprimirMensagem(); ?>
     	</div>
     	<div class="row">
         		<div class="panel panel-default">
-        		<div class="panel-heading">Lista de Produtos</div>
+        		<div class="panel-heading"></div>
         			<div class="panel-body">
 
             			<!-- TABLE -->
-            		<table class="table table-bordered table-striped">
+            		<table border="1" class="table table-bordered table-striped">
             			<thead  class="blue-grey lighten-4">
             				<tr>
             					<th>Nome</th>
-            					<th>Pre&ccedil;o</th>
-            					<th>Descri&ccedil;&atilde;o</th>
+            					<th>Preço</th>
+            					<th>Descrição</th>
             					<th>Gelada</th>
-            					<th>A&ccedil;&otilde;es</th>
+            					<th>Ações</th>
             				</tr>
             			</thead>
             			
-            			<?php foreach ($dados as $produto){ 
+            			<?php // foreach ($dados as $produto){ 
+                                    while ($dados = $con->fetch_array()){//pegando cada uma das colunas e armazena na variavel dados
             			?>
             			
             			<tbody>
             				<tr>
-            					<td><?php echo $produto['nome']; ?></td>
-            					<td><?php echo $produto['preco']; ?></td>
-            					<td><?php echo $produto['descricao']; ?></td>
-            					<td><?php echo $produto['gelada']; ?></td>
+            					<td><?php echo $dados['nome']; ?></td>
+            					<td><?php echo $dados['preco']; ?></td>
+            					<td><?php echo $dados['descricao']; ?></td>
+            					<td><?php echo $dados['gelada']; ?></td>
             					<td align="center">
-        							<a title="Alterar" href="editar.php?codProduto=<?php echo  $produto['codProduto']?>" class="btn btn-sm btn-warning" >&#9999; Alterar</a>
-           							<a title="Excluir" id="btn-excluir" href="excluir.php?codEstabelecimento=<?php echo $produto['codProduto']?>" class="btn btn-sm btn-danger tooltipBtn">&#10006; Excluir</a>
-           						</td>
+                                                    <a title="Alterar" href="editar.php?codProduto=<?php echo  
+                                                    $produto['codProduto']?>" class="btn btn-sm btn-warning" >&#9999; 
+                                                        Alterar</a>
+                                                    <a title="Excluir" id="btn-excluir" 
+                                                       href="excluir.php?codEstabelecimento=
+                                                           <?php echo $produto['codProduto']?>" 
+                                                           class="btn btn-sm btn-danger tooltipBtn">
+                                                        &#10006; Excluir</a>
+                                                </td>
             				</tr>
             			</tbody>
             			
