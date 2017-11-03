@@ -77,7 +77,7 @@ if($_SESSION['administrador'] == 1){
             						<td><?php echo $estabelecimento['bairro']; ?></td>
             						<td><?php echo $estabelecimento['cidade']; ?></td>
             						<td><?php echo $estabelecimento['uf']; ?></td>
-            						<td id="telefone"><?php echo Mask('(##) #####-#####',$estabelecimento['telefone']); ?></td>
+            						<td id="telefone"><?php echo Mask('(##) #####-####',$estabelecimento['telefone']); ?></td>
             						<td align="center">
             							<a title="Alterar" href="editar.php?codEstabelecimento=<?php echo  $estabelecimento['codEstabelecimento']?>" class="btn btn-sm btn-warning" >&#9999; Alterar</a>
                							

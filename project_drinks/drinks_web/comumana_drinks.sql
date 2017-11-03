@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost:3306
--- Tempo de GeraÃ§Ã£o: 27/10/2017 Ã s 21:42
+-- Tempo de GeraÃ§Ã£o: 27/10/2017 Ã s 21:42
 -- VersÃ£o do servidor: 5.5.56-MariaDB-cll-lve
 -- VersÃ£o do PHP: 5.6.20
 
@@ -34,8 +34,8 @@ CREATE TABLE IF NOT EXISTS `estabelecimento` (
   `bairro` varchar(50) DEFAULT NULL,
   `cep` varchar(9) DEFAULT NULL,
   `cidade` varchar(50) DEFAULT NULL,
-  `latitude` varchar(10) DEFAULT NULL,
-  `longitude` varchar(10) DEFAULT NULL,
+  `latitude` varchar(12) DEFAULT NULL,
+  `longitude` varchar(12) DEFAULT NULL,
   `numero` int(11) DEFAULT NULL,
   `rua` varchar(150) DEFAULT NULL,
   `uf` varchar(2) DEFAULT NULL,
@@ -52,22 +52,15 @@ CREATE TABLE IF NOT EXISTS `estabelecimento` (
 -- Fazendo dump de dados para tabela `estabelecimento`
 --
 
-INSERT INTO `estabelecimento` (`codEstabelecimento`, `cnpj`, `eMail`, `login`, `bairro`, `cep`, `cidade`, `latitude`, `longitude`, `numero`, `rua`, `uf`, `nomeFantasia`, `razaoSocial`, `senha`, `telefone`, `administrador`) VALUES
-(1, '12345678912345', 'silviocedrim@outlook.com', NULL, 'A', '55555000', 'Recife', '-8.0634838', '-34.87286', 12, 'Rua B', 'PE', 'Teste', 'Teste', '123456', '11111111111', 0),
-(3, '24582745000174', 'admin@admin.com', 'admin', '', '', 'Recife', '', '', 0, '', 'PE', 'SuperAdmin', 'SuperAdmin', '123456', '99999999994', 1),
-(6, '11112222222222', 'postoa@gmail.com', 'postoa', 'B', '22222222', 'Recife', '-8.0621664', '-34.87249', 23, 'Rua A', 'PE', 'Posto A', 'Posto A', '123456', '23333333333', 0),
-(7, '11111111111111', 'qteste@gmail.com', NULL, 'A', '11111111', 'Recife', '0.1', '0.1', 12, 'Rua B', 'PE', 'Teste', 'Teste', '123456', '11111111111', 0),
-(8, '11111111111111', 'teste1@gmail.com', NULL, 'A', '11111111', 'Recife', '0.1', '0.1', 12, 'Rua B', 'PE', 'Teste 1', 'Teste 1', '123456', '11111111111', 0),
-(10, '23344444444444', 'teste3@gmail.com', NULL, 'A', '22222222', 'D', '0.1', '0.1', 12, NULL, 'AC', 'Teste 3', 'Teste 3', 'c20ad4d76fe97759', '11111111111', 0),
-(11, '55555555555555', 'teste4@gmail.com', NULL, 'D', '88888888', 'Recife', '0.1', '0.1', 14, NULL, 'PE', 'Teste 4', 'Teste 4', '202cb962ac59075b', '33333333333', 0),
-(12, '55555555555555', 'a@g.com', NULL, 'S', '99999999', 'S', '0.3', '0.4', 1, NULL, 'PA', 'Teste 5', 'Teste 5', '202cb962ac59075b', '33333333333', 0),
-(13, '44444444444444', 'a@gmail.com', NULL, 'A', '32222222', 'Recife', '0.1', '0.1', 12, NULL, 'AL', 'Teste 3', 'Teste final', '1223456', '22222222222', 0),
-(14, '11111111111111', 'teste3@gmail.com', NULL, 'A', '11111111', 'Recife', '-8.0420327', '-34.89108', 12, NULL, 'AM', 'Teste 3', 'Teste', '123', '22222222222', 0),
-(15, '11111111111111', 'teste3@gmail.com', NULL, 'A', '22222222', 'Recife', '0.1', '0.1', 12, NULL, 'AL', 'Teste 3', 'Teste 3', '123', '___________', 0),
-(17, '77777777777777', 'teste3@gmail.com', NULL, 'A', '33333333', 'Recife', '0.1', '0.1', 12, NULL, 'AP', 'Teste 3', 'Teste 3', '123456', '23333333333', 0),
-(18, '99999999999999', 'admin@admin.com', NULL, 'A', '12111111', 'Recife', '0.1', '0.1', 12, NULL, 'AL', 'Teste 3', 'Teste 3', '1223456', '22222222222', 0);
+INSERT INTO `estabelecimento` (`codEstabelecimento`, `cnpj`, `eMail`, `login`, `bairro`, `cep`, `cidade`, `latitude`, `longitude`, `numero`, `rua`, `uf`, `nomeFantasia`, `razaoSocial`, `senha`, `telefone`, `administrador`)VALUES
+(1, '99999999999999', 'admin@admin.com', 'admin', '', '', '', '', '', '', '', '', 'SuperAdmin', 'SuperAdmin', '123456', '99999999999', 1),
+(2, '10657358000145', 'gerencia@saladereboco.com.br', 'saladereboco', 'Cordeiro', '50720740', 'Recife', '-8.0536974', '-34.9222478', 264, 'Rua Gregório Júnio', 'PE', 'Sala de Reboco', 'Sala De Reboco Bar & Comedoria Ltda - Me', '123456', '81999750204', 0),
+(3, '11004583000145', 'afabricabar@hotmail.com', 'fabrica', 'Carmo', '53120160', 'Olinda', '-8.0144249', '-34.8475361', 9, 'Travessa Municipal', 'PE', 'A Fábrica Bar', 'A Fabrica Bar e Restaurante Ltda - Me', '123456', '81987209705', 0),
+(4, '10636838000120', 'grutabar.camaragibe@gmail.com', 'grutabar', 'Vila da Fabrica', '54759135', 'Camaragibe', '-8.0139369', '-34.9788453', 387, 'Rua Carlos Alberto de Menezes', 'PE', 'GRUTA BAR', 'M J DE SOUZA BAR - ME', '123456', '81999998146', 0),
+(5, '12972637000129', 'betosbaroficial@gmail.com', 'betosbar', 'Candeias', '54440620', 'Jaboatao Dos Guararapes', '-8.0139369', '-34.9788453', 4738, 'Av. Bernardo Vieira De Melo', 'PE', 'BetoS Bar', 'BetoS Restaurante e Pizzaria Ltda - Epp', '123456', '8134692995', 0),
+(6, '09202813000139', 'bardobarriga@gmail.com', 'bardobarriga', 'Pilar', '53900000', 'Ilha de Itamaraca', '-8.0139369', '-34.9788453', 30, 'Rua Assunção', 'PE', 'Bar Do Barriga O Rei Da Tainha', 'Bar Do Barriga O Rei Da Tainha', 'c20ad4d76fe97759', '81991915773', 0);
 
--- --------------------------------------------------------
+-- Bar Do Barriga O Rei Da Tainha terá dados fictícios, pois não foram encontrados na rede;----------------------------------------------
 
 --
 -- Estrutura para tabela `pedido`
@@ -155,10 +148,10 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 --
 
 INSERT INTO `usuarios` (`codUsuario`, `nome`, `email`, `encrypted_password`, `telefone`) VALUES
-(10, 'Emerson Francisco Da Silva', 'ems@gmail.com', 'jLIjfQZ5yojbZGTqxg2pY0VROWQ=', '(81)98685-4814'),
-(12, 'Tercio', 'terciosky@gmail.com', 'QL0AFWMIX8NRZTKeof9cXsvbvu8=', '81996644179'),
-(13, 'Juliana', 'souza3408@gmail.com', 'a15q4UVZBErnR7WyvhHqQ2Sq/p0=', '(81)98622-6795'),
-(14, 'Silvio', 'engeheirocedrim@gmail.com', 'fEqNCco3Yq9h5ZUglD3CZJT4lBs=', '(81)99823-7293');
+(1, 'Emerson Francisco', 'ems@gmail.com', 'jLIjfQZ5yojbZGTqxg2pY0VROWQ=', '81986854814'),
+(2, 'Tercio Lima', 'terciosky@gmail.com', 'QL0AFWMIX8NRZTKeof9cXsvbvu8=', '81996644179'),
+(3, 'Juliana', 'souza3408@gmail.com', 'a15q4UVZBErnR7WyvhHqQ2Sq/p0=', '81986226795'),
+(4, 'Silvio', 'engeheirocedrim@gmail.com', 'fEqNCco3Yq9h5ZUglD3CZJT4lBs=', '81998237293');
 
 --
 -- RestriÃ§Ãµes para dumps de tabelas

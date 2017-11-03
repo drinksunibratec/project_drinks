@@ -39,7 +39,7 @@ $dados = buscarTodosOsRegistros('USUARIOS');
             				<tr>
             					<td><?php echo $usuarios['nome']; ?></td>
             					<td><?php echo $usuarios['email']; ?></td>
-            					<td><?php echo $usuarios['telefone']; ?></td>
+            					<td><?php echo Mask('(##) #####-####',$usuarios['telefone']); ?></td>
             					<td><?php echo "Total em compras" ?></td>
                     <!-- Consulta onde relaciono ID do cliente independente do estabelecimento
                             e somo os valores pagos. Implementaçaõ a ser discutida!

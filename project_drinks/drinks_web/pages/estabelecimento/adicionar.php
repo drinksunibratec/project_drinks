@@ -201,12 +201,12 @@ $retorno_cep = null;
                   	
                   	<div class="form-group col-md-2">
                       <label for="latitute">Latitude</label>
-                      <input id="latitude" type="text" class="form-control" name="latitude" maxlength="10" required>
+                      <input id="latitude" type="text" class="form-control" name="latitude" maxlength="12" required>
                 	</div>
                   	
                   	<div class="form-group col-md-2">
                       <label for="longitude">Longitude</label>
-                      <input id="longitude" type="text" class="form-control" name="longitude" maxlength="10" required>
+                      <input id="longitude" type="text" class="form-control" name="longitude" maxlength="12" required>
                 	</div>                	
      
                 </div>
