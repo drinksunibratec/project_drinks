@@ -56,4 +56,21 @@ function Mask($mask,$str){
     
     return $mask;    
 }
+
+//Obtençao de Lat. Lng
+function busca_coord($address){
+          
+        $address = urlencode($_POST["logradouro"] . "," . $_POST["numero"] . "," . $_POST["bairro"] . "," . $_POST["cidade"] . "," . $_POST["uf"]);
+//         echo $address;
+//         echo "<br>";
+        $geocode = file_get_contents('http://maps.google.com/maps/api/geocode/json?address=' . $address . '&sensor=false');
+        $output = json_decode($geocode);
+        $address = $output->results[0]->formatted_address;
+        $lat = $output->results[0]->geometry->location->lat;
+        $long = $output->results[0]->geometry->location->lng;
+        
+        echo $lat['latitude'];
+        echo $long['longitude'];
+}
+
 ?>

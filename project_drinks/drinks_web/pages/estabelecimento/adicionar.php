@@ -24,15 +24,6 @@ $retorno_cep = null;
 
     header("Location: lista.php");
   }
-  
-  // Instancia a classe Apenas para Teste
-//   $gmaps = new gMaps('AIzaSyC4kbdgWgM1Vu8hxmED-D8QZqrp-zlOxyc');
-//   // Pega os dados (latitude, longitude e zoom) do endereço:
-//   $endereco = 'Av. Brasil, 1453, Rio de Janeiro, RJ';
-//   $dados = $gmaps->geoLocal($endereco);
-//   // Exibe os dados encontrados:
-//   print_r($dados->lat);
-//   print_r($dados->lng);
 ?>
 
 
@@ -66,13 +57,12 @@ $retorno_cep = null;
         					}
          
         					$("#mensagem").html('');
-        					$("#numero").focus();
-        					
-        				});	
-                    }              	
-
+        					$("#numero").focus();        					
+        				});
+                   }            	
      </script>
      
+   
      <!-- Abrindo Mapa -->
      <script src="http://maps.google.com/maps?file=api&v=2&key={AIzaSyC4kbdgWgM1Vu8hxmED-D8QZqrp-zlOxyc}" type="text/javascript"></script>
     

@@ -2,7 +2,7 @@
 
 function selected_Pagamento($pagamento = null)
 {
-    $array_pagamento = array("Especie","Cartao","ViaApp");
+    $array_pagamento = array("ESPECIE","CARTAO","VIA_APP");
     $select = '<select class="form-control selectpicker" name="pagamento" id="pagamento" required>';
     $select .= '<option value="">--Selecione--</option>';
     foreach($array_pagamento as $val){
