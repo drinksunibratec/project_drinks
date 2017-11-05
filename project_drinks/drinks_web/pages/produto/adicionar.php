@@ -29,7 +29,7 @@ if (isset($_POST['nome']) && empty($_POST['nome']) == false) {
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-
+<meta charset="UTF-8">
 <title>Cadastrar Produto</title>
 
 <!-- MASCARA -->
@@ -83,7 +83,7 @@ if (isset($_POST['nome']) && empty($_POST['nome']) == false) {
 			<div class=row>
 				<div class="form-group col-md-4">
 					<input type="submit" value="&#10003 Cadastrar" class="btn btn-primary" /> 
-					<a href="adicionar.php" class="btn btn-danger">&#10005 Cancelar</a>
+					<a href="lista.php" class="btn btn-danger">&#10005 Cancelar</a>
 				</div>
 			</div>
 

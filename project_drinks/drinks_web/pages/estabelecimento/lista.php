@@ -18,6 +18,7 @@ if ($_SESSION['administrador'] == 1) {
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+<meta charset="UTF-8">
 <title>Administração de Estabelicimento</title>
 
 <!-- MASCARA -->

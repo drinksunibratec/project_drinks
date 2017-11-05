@@ -2,31 +2,28 @@
 require_once ('../include/header.php');
 require_once ('../menu/menu.php');
 
-// $mensagens = new Mensagens();
-// $codEstabelecimento = null;
-// if (isset($_GET['codEstabelecimento']) && empty($_GET['codEstabelecimento']) == false) {
-// $codEstabelecimento = $_GET['codEstabelecimento'];
-// }else{
-// $codEstabelecimento = $_SESSION['codEstabelecimento'];
-// }
-// $dados = buscarRegistroPorId(PRODUTO, $codEstabelecimento, 'codEstabelecimento');
+$mensagens = new Mensagens();
+$codEstabelecimento = null;
+    if (isset($_GET['codEstabelecimento']) && empty($_GET['codEstabelecimento']) == false) {
+$codEstabelecimento = $_GET['codEstabelecimento'];
+}else{
+$codEstabelecimento = $_SESSION['codEstabelecimento'];
+}
+$dados = buscarRegistroPorId(PRODUTO, $codEstabelecimento, 'codEstabelecimento');
 
 $host = "localhost";
 $user = "root";
 $senha = "";
 $banco = "comumana_drinks";
-$estabelecimento = $_GET['codEstabelecimento'];
+//$estabelecimento = $_GET['codEstabelecimento'];
 
 $mysqli = new mysqli($host, $user, $senha, $banco);
 if ($mysqli->connect_errno) {
     echo 'Falha na Conexão: (' . $mysqli->connect_errno . ')' . $mysqli->connect_error;
 }
 
-// $consulta = "SELECT p.descricao, p.gelada, p.nome, p.preco "
-// . "FROM produto as p "
-// . "INNER JOIN estabelecimento as e on "
-// . "(e.codEstabelecimento = p.codEstabelecimento)";
-$consulta = "SELECT * FROM produto WHERE codEstabelecimento='$estabelecimento'";
+
+$consulta = "SELECT * FROM produto WHERE codEstabelecimento=$codEstabelecimento";
 $con = $mysqli->query($consulta) or die($mysqli->error);
 ?>
 
@@ -36,6 +33,7 @@ $con = $mysqli->query($consulta) or die($mysqli->error);
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+<meta charset="UTF-8">
 <title>Administração de Produtos</title>
 
 <!--FUN��O PARA PESQUISA-->
@@ -85,7 +83,6 @@ $con = $mysqli->query($consulta) or die($mysqli->error);
 								<th>Nome</th>
 								<th>Preço</th>
 								<th>Descrição</th>
-								<th>Gelada</th>
 								<th>Ações</th>
 							</tr>
 						</thead>
@@ -98,16 +95,15 @@ $con = $mysqli->query($consulta) or die($mysqli->error);
             			<tbody id="myTable">
 							<tr>
 								<td><?php echo $dados['nome']; ?></td>
-								<td><?php echo $dados['preco']; ?></td>
+								<td><?php echo "R$ ".$dados['preco']; ?></td>
 								<td><?php echo $dados['descricao']; ?></td>
-								<td><?php echo $dados['gelada']; ?></td>
 								<td align="center"><a title="Alterar"
 									href="editar.php?codProduto=<?php
                 echo $produto['codProduto']?>"
 									class="btn btn-sm btn-warning">&#9999; Alterar</a> <a
 									title="Excluir" id="btn-excluir"
 									href="excluir.php?codEstabelecimento=
-                                                           <?php echo $produto['codProduto']?>"
+                                    <?php echo $produto['codProduto']?>"
 									class="btn btn-sm btn-danger tooltipBtn"> &#10006; Excluir</a>
 								</td>
 							</tr>
