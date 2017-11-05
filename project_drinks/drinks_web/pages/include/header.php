@@ -4,8 +4,6 @@ require_once ('../../resources/functions/DB_Functions.php');
 require_once ('../../resources/functions/Functions.php');
 require_once ('../../resources/util/Mensagens.php');
 require_once ('../../resources/util/array_uf.php');
-require_once ('../../resources/util/gMaps.php');
-require_once ('../../resources/util/geo.php');
 
 
 ?>
