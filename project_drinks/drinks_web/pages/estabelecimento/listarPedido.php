@@ -3,17 +3,27 @@
 require_once ('../include/header.php');
 require_once ('../menu/menu.php');
 
-$codEstabelecimento = $_SESSION['codPedido'];
-
-
 $mensagens = new Mensagens();
-$dados = null;
-
-if($_SESSION['administrador'] == 1){
-    $dados = buscarTodosOsRegistros(PEDIDO);
+$codEstabelecimento = null;
+if (isset($_GET['codEstabelecimento']) && empty($_GET['codEstabelecimento']) == false) {
+    $codEstabelecimento = $_GET['codEstabelecimento'];
 }else{
-    $dados = buscarRegistroPorId(PEDIDO, $codPedido, 'codPedido');
+    $codEstabelecimento = $_SESSION['codEstabelecimento'];
 }
+$dados = buscarRegistroPorId(PEDIDO, $codEstabelecimento, 'codEstabelecimento');
+
+$host = "localhost";
+$user = "root";
+$senha = "";
+$banco = "comumana_drinks";
+
+$mysqli = new mysqli($host, $user, $senha, $banco);
+if ($mysqli->connect_errno) {
+    echo 'Falha na Conexão: (' . $mysqli->connect_errno . ')' . $mysqli->connect_error;
+}
+
+// $nome = "SELECT usuarios.nome FROM pedido,usuarios,estabelecimento WHERE pedido.codUsuario = usuarios.codUsuario and pedido.codEstabelecimento=estabelecimento.$codEstabelecimento";
+// $con = $mysqli->query($consulta) or die($mysqli->error);
 ?>
 
 <!DOCTYPE html>
@@ -46,28 +56,25 @@ if($_SESSION['administrador'] == 1){
             						<th>CodPedido</th>
             						<th>Cliente</th>
             						<th>Data Pedido</th>
-            						<th>Bairro</th>
-            						<th>Cidade</th>
+            						<th>Pagamento</th>
+            						<th>Vl. Total</th>
             						<th>Status</th>
-            						<th>Valor</th>
             						<th align="center">A&ccedil;&otilde;es</th>
             					</tr>
             				</thead>
             				
-            				<?php foreach ($dados as $pedido){ 
-            				?>
+            				<?php foreach ($dados as $pedido){?> 
             				
             				<tbody>
             					<tr>
-            						<td id="codPedido"><?php echo $pedido.['codPedido']; ?></td>
-            						<td><?php echo $pedido[$cliente->$nome]; ?></td>
+            						<td id="codPedido"><?php echo $pedido['codPedido']; ?></td>
+            						<td><?php echo $pedido['codUsuario']; ?></td>
             						<td><?php echo $pedido['dataPedido']; ?></td>
-            						<td><?php echo $pedido['bairro']; ?></td>
-            						<td><?php echo $pedido['cidade']; ?></td>
+            						<td><?php echo $pedido['pagamento']; ?></td>
+            						<td><?php echo "R$ ".$pedido['valorTotal']; ?></td>
             						<td><?php echo $pedido['status']; ?></td>
-            						<td><?php echo $pedido['valorTotal']; ?></td>
             						<td align="center">
-            						<a title="Detalhes" href="editarPedido.php?codPedido=<?php echo  $pedido['codPedido']?>" class="btn btn-sm btn-warning" >&#9999; Detalhes</a>
+            						<a title="Detalhes" href="detalhesPedido.php?codPedido=<?php echo  $dados['codPedido']?>" class="btn btn-sm btn-warning" >&#9999; Detalhes</a>
                						</td>
             					</tr>
             				</tbody>

@@ -15,7 +15,6 @@ $host = "localhost";
 $user = "root";
 $senha = "";
 $banco = "comumana_drinks";
-//$estabelecimento = $_GET['codEstabelecimento'];
 
 $mysqli = new mysqli($host, $user, $senha, $banco);
 if ($mysqli->connect_errno) {
@@ -97,12 +96,11 @@ $con = $mysqli->query($consulta) or die($mysqli->error);
 								<td><?php echo $dados['nome']; ?></td>
 								<td><?php echo "R$ ".$dados['preco']; ?></td>
 								<td><?php echo $dados['descricao']; ?></td>
-								<td align="center"><a title="Alterar"
-									href="editar.php?codProduto=<?php
-                echo $produto['codProduto']?>"
-									class="btn btn-sm btn-warning">&#9999; Alterar</a> <a
-									title="Excluir" id="btn-excluir"
-									href="excluir.php?codEstabelecimento=
+								<td align="center">
+								<a title="Alterar" href="editar_produto.php?codProduto=<?php
+                                    echo $produto['codProduto']?>"
+									class="btn btn-sm btn-warning">&#9999; Alterar</a>
+									<a title="Excluir" id="btn-excluir"	href="excluir.php?codEstabelecimento=
                                     <?php echo $produto['codProduto']?>"
 									class="btn btn-sm btn-danger tooltipBtn"> &#10006; Excluir</a>
 								</td>

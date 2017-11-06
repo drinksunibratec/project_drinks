@@ -123,4 +123,24 @@ function insert($table = null, $data = null)
     }
     close_database($database);
 }
+
+function buscarPorRegitro($table1 = null, $table2 = null, $nomeId1 = null, $nomeId2 = null)
+{
+    $found = null;
+    try {
+        $database = open_database();
+        
+        //SELECT usuarios.nome FROM pedido, usuarios WHERE pedido.codUsuario = usuarios.codUsuario 
+        $sql = "SELECT * FROM " . $table1 . ",".$table2 . " WHERE " . $nomeId1 . " = " .$nomeId2 . ";" ;
+        $result = $database->query($sql);
+        if ($result->num_rows > 0) {
+            $found = $result->fetch_all(MYSQLI_ASSOC);
+        }
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+    return $found;
+}
     

@@ -52,13 +52,13 @@ if (isset($_POST['nome']) && empty($_POST['nome']) == false) {
 			<div class="row">
 
 				<div class="form-group col-md-3">
-					<label for="nome">Nome</label> <input type="text"
-						class="form-control" id="nome" name="nome" required>
+					<label for="nome">Nome</label>
+					<input type="text" class="form-control" id="nome" name="nome" required>
 				</div>
 
 				<div class="form-group col-md-3">
-					<label for="descricao">Descri&ccedil;&atilde;o</label> <input
-						type="text" class="form-control" name="descricao" required>
+					<label for="descricao">Descri&ccedil;&atilde;o</label>
+					<input type="text" class="form-control" name="descricao" required>
 				</div>
 			</div>
 
@@ -68,14 +68,14 @@ if (isset($_POST['nome']) && empty($_POST['nome']) == false) {
 					<select class="form-control selectpicker" name="gelada" id="gelada" required>
 							<option value="">--Selecione--</option>
                         	<option value="1">SIM</option>
-                        	<option value="0">N√ÉO</option>
+                        	<option value="0">N√O</option>
 					</select>
 					
 				</div>
 
 				<div class="form-group col-md-3">
-					<label for="preco">Pre&ccedil;o</label> <input type="text"
-						class="form-control" id="preco" name="preco" required>
+					<label for="preco">Pre&ccedil;o</label>
+					<input type="text" class="form-control" id="preco" name="preco" required>
 				</div>
 
 			</div>

@@ -39,8 +39,7 @@ $retorno_cep = null;
              $("#cnpj").mask("99.999.999/9999-99");
              $("#telefone").mask("(99) 99999-9999");
              $("#cep").mask("99999-999");     
-      }); 
-      
+      });       
  	</script>
  	
  	<script>
@@ -63,32 +62,7 @@ $retorno_cep = null;
                    }            	
      </script>
      
-   
-     <!-- Abrindo Mapa -->
-     <script src="http://maps.google.com/maps?file=api&v=2&key={AIzaSyC4kbdgWgM1Vu8hxmED-D8QZqrp-zlOxyc}" type="text/javascript"></script>
-    
- 	<?php //Favor Não deletear, ainda em implemetação!
-//     if (GBrowserIsCompatible()) {
-//         var map = new GMap2(document.getElementById("googleMap"));
-//         var lat = {LATITUDE}; // Latitude do marcador
-//         var lon = {LONGITUDE}; // Longitude do marcador
-//         var zoom = {ZOOM}; // Zoom
-    
-//         map.addControl(new GMapTypeControl());
-//         map.addControl(new GLargeMapControl());
-//         map.setCenter(new GLatLng(lat, lon), zoom);
-    
-//         var marker = new GMarker(new GLatLng(lat,lon));
-    
-//         GEvent.addListener(marker, "click", function() {
-//           marker.openInfoWindowHtml("Texto");
-//         });
-    
-//         map.addOverlay(marker);
-//         map.setCenter(point, zoom);
-//     }?>
 
- 	
   </head>
 	<body>
 	<div class="container">
@@ -120,8 +94,7 @@ $retorno_cep = null;
                 	                	
                 </div>
                 
-                <div class="row">
-                
+                <div class="row">                
                    	<div class="form-group col-md-3">
                     <label for="cep">CEP<span id='mensagem'></span></label>
                 	<input id="cep" name="cep" type="text" class="form-control" placeholder="Digite seu CEP..."
@@ -143,20 +116,18 @@ $retorno_cep = null;
                 	<div class="form-group col-md-3">
                       <label for="bairro">Bairro</label>
                       <input id="bairro" type="text" class="form-control" name="bairro" maxlength="50" required>
-                	</div>         	
-
-                
+                	</div>      	
                 </div>
                 
                 <div class=row>
                 	<div class="form-group col-md-4">
                       <label for="cidade">Cidade</label>
                       <input id="cidade" type="text" class="form-control" name="cidade" maxlength="50" required>
-                	</div>
+                </div>
                 	
-                	<div class="form-group col-md-3">
-                      	<label for="uf">UF</label>
-                    	<select class="form-control selectpicker" name="uf" id="uf" required>
+                <div class="form-group col-md-3">
+                    <label for="uf">UF</label>
+                    <select class="form-control selectpicker" name="uf" id="uf" required>
                         	<option value="">--Selecione--</option>
                         	<option value="AC">AC</option>
                         	<option value="AL">AL</option>
@@ -185,10 +156,8 @@ $retorno_cep = null;
                         	<option value="SE">SE</option>
                         	<option value="SP">SP</option>
                         	<option value="TO">TO</option>
-                         </select>  
-                      
-                  	</div>
-                  	
+                         </select>                       
+                  </div>                  	
                   	
                   	<div class="form-group col-md-2">
                       <label for="latitute">Latitude</label>
@@ -198,9 +167,8 @@ $retorno_cep = null;
                   	<div class="form-group col-md-2">
                       <label for="longitude">Longitude</label>
                       <input id="longitude" type="text" class="form-control" name="longitude" maxlength="12" required>
-                	</div>                	
-     
-                </div>
+                	</div>               	
+               	</div>
                 
                 <div class=row>
                 	<div class="form-group col-md-3">
@@ -214,9 +182,6 @@ $retorno_cep = null;
                 	</div>                	
                 </div>
                 
-                <div class=row>
-                	<div id="googleMap" max-width="500px" max-height="500px"></div>
-				</div>
 				<div class=row>
     				<div class="form-group col-md-4">
     					<input type="submit" value="&#10003 Cadastrar" class="btn btn-primary" /> 
@@ -227,6 +192,6 @@ $retorno_cep = null;
             </form>
         </div>
   
-  </div>
+  	</div>
   </body>
 </html>
