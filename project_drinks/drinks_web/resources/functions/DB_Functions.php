@@ -142,5 +142,16 @@ function buscarPorRegitro($table1 = null, $table2 = null, $nomeId1 = null, $nome
     }
     close_database($database);
     return $found;
+    
+//     SELECT
+//     pedido.codPedido, pedido.dataPedido, usuarios.nome, pedido_produto.codProduto,produto.nome,
+//     pedido_produto.preco, pedido_produto.quantidade,pedido_produto.precoTotal,
+//     produto.gelada,pedido.rua,pedido.bairro,pedido.numero,pedido.cidade,
+//     pedido.pagamento,pedido.status,pedido.valorTotal
+//     FROM pedido,pedido_produto,usuarios,produto
+//     WHERE pedido.codPedido = pedido_produto.codPedido
+//     AND produto.codEstabelecimento = pedido.codEstabelecimento
+//     AND produto.codProduto = pedido_produto.preco
+//     AND pedido.codUsuario = usuarios.codUsuario;
 }
     
