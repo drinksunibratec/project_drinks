@@ -34,8 +34,11 @@ $con = $mysqli->query($consulta) or die($mysqli->error);
 <head>
 <meta charset="UTF-8">
 <title>Administração de Produtos</title>
-
-<!--FUN��O PARA PESQUISA-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--FUN��O PARA PESQUISA-->
 <script>
         $(document).ready(function(){
           $("#myInput").on("keyup", function() {
@@ -45,7 +48,9 @@ $con = $mysqli->query($consulta) or die($mysqli->error);
             });
           });
         });
-        </script>
+</script>
+
+
 
 </head>
 
@@ -91,27 +96,43 @@ $con = $mysqli->query($consulta) or die($mysqli->error);
             while ($dados = $con->fetch_array()) { // pegando cada uma das colunas e armazena na variavel dados
                 ?>
             			
-            			<tbody id="myTable">
-							<tr>
-								<td><?php echo $dados['nome']; ?></td>
-								<td><?php echo "R$ ".$dados['preco']; ?></td>
-								<td><?php echo $dados['descricao']; ?></td>
-								<td align="center">
-								<a title="Alterar" href="editar_produto.php?codProduto=<?php
+                    <tbody id="myTable">
+				<tr>
+                                    <td><?php echo $dados['nome']; ?></td>
+                                    <td><?php echo "R$ ".$dados['preco']; ?></td>
+                                    <td><?php echo $dados['descricao']; ?></td>
+                                    <td align="center">
+                                    <a title="Alterar" href="editar_produto.php?codProduto=<?php
                                     echo $produto['codProduto']?>"
-									class="btn btn-sm btn-warning">&#9999; Alterar</a>
-									<a title="Excluir" id="btn-excluir"	href="excluir.php?codEstabelecimento=
-                                    <?php echo $produto['codProduto']?>"
-									class="btn btn-sm btn-danger tooltipBtn"> &#10006; Excluir</a>
-								</td>
-							</tr>
-						</tbody>
+                                    class="btn btn-sm btn-warning">&#9999; Alterar</a>
+                                    
+                                    <a name="excluir" title="Excluir" id="btn-excluir" href="lista.php?codEstabelecimento= <?php echo $produto['codProduto']?>'"
+                                    class="btn btn-sm btn-danger tooltipBtn"> &#10006; Excluir</a>
+                                    </td>
+				</tr>
+                    </tbody>
             			
-            			<?php }?>
+            	<?php }?>
             			
             		</table>
 					<!-- END TABLE -->
 				</div>
+                                <?php
+                                
+                                if(isset($_POST['excluir'])){
+                                    //REGISTRO DOS DADOS
+                                    //Verificar se a seção foi aberta
+                                    if (!isset($_SESSION))
+                                        session_start ();
+                                    
+                                    $codProdutoDel = intval($_GET['codEstabelecimento']);
+                                
+                                    $sql_code = "DELETE FROM produto WHERE codigo = '$codProdutoDel'";
+                                    $sql_query = $mysqli->query($sql_code) or die($mysqli->error);
+                                    
+                                    header("Location: lista.php");
+                                }
+                                ?>
 			</div>
 		</div>
 	</div>

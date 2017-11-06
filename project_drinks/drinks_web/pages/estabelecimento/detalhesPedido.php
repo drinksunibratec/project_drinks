@@ -27,9 +27,7 @@ $dados = buscarRegistroPorId(PEDIDO, $codPedido, 'codPedido');
 
 <body>
 	<div class="container">
-		
 		<?php foreach ($dados as $pedido) {?>
-		
 			<form method="POST">
 
                 <div class="row">

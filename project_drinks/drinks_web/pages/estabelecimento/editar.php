@@ -26,7 +26,7 @@ if (isset($_POST['cnpj']) && empty($_POST['cnpj']) == false) {
     
     update('estabelecimento', $codEstabelecimento, $dados, 'codEstabelecimento');
     
-    header("Location: cadastro-estabelecimentos.php");
+    header("Location: lista.php");
 }
 
 $dados = buscarRegistroPorId(ESTABELECIMENTO, $codEstabelecimento, 'codEstabelecimento');
