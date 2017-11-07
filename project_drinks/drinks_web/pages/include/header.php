@@ -19,8 +19,6 @@ require_once ('../../resources/util/array_uf.php');
         <meta name="author" content="">
         
         <!-- CSS -->
-        <link href="theme.css" rel="stylesheet">
-    	<link href="jumbotron.css" rel="stylesheet">
         <link href="../../bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
         <link href="../../bootstrap-3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
 		<link href="../../bootstrap-3.3.7/css/estilo.css" rel="stylesheet" />        
@@ -30,7 +28,6 @@ require_once ('../../resources/util/array_uf.php');
         <link type="text/css" rel="stylesheet" href="../../bootstrap-3.3.7/css/bootstrap.css?ln=css" />
         <link type="text/css" rel="stylesheet" href="../../bootstrap-3.3.7/css/sb-admin.css?ln=css" />
        
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <script src="../../resources/jquery/jquery-1.5.2.min.js"></script>
     	<script src="../../resources/jquery/jquery.maskedinput-1.3.min.js"></script>
         
