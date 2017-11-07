@@ -4,27 +4,12 @@ require_once ('../menu/menu.php');
 
 $mensagens = new Mensagens();
 $codEstabelecimento = null;
-    if (isset($_GET['codEstabelecimento']) && empty($_GET['codEstabelecimento']) == false) {
-$codEstabelecimento = $_GET['codEstabelecimento'];
+if (isset($_GET['codEstabelecimento']) && empty($_GET['codEstabelecimento']) == false) {
+    $codEstabelecimento = $_GET['codEstabelecimento'];
 }else{
-$codEstabelecimento = $_SESSION['codEstabelecimento'];
+    $codEstabelecimento = $_SESSION['codEstabelecimento'];
 }
 $dados = buscarRegistroPorId(PRODUTO, $codEstabelecimento, 'codEstabelecimento');
-
-$host = "localhost";
-$user = "root";
-$senha = "";
-$banco = "comumana_drinks";
-
-$mysqli = new mysqli($host, $user, $senha, $banco);
-if ($mysqli->connect_errno) {
-    echo 'Falha na Conexão: (' . $mysqli->connect_errno . ')' . $mysqli->connect_error;
-}
-
-
-$consulta = "SELECT * FROM produto WHERE codEstabelecimento=$codEstabelecimento";
-$con = $mysqli->query($consulta) or die($mysqli->error);
-
 ?>
 
 
@@ -33,13 +18,12 @@ $con = $mysqli->query($consulta) or die($mysqli->error);
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
+
+	<meta charset="UTF-8">
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+       
 <title>Administração de Produtos</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!--FUN��O PARA PESQUISA-->
 <script>
         $(document).ready(function(){
           $("#myInput").on("keyup", function() {
@@ -90,33 +74,34 @@ $con = $mysqli->query($consulta) or die($mysqli->error);
 							</tr>
 						</thead>
             			
-            			<?php
-            // foreach ($dados as $produto){
-            while ($dados = $con->fetch_array()) { // pegando cada uma das colunas e armazena na variavel dados
+            	<?php
+            	if(count($dados) > 0){
+            	        foreach ($dados as $produto){
                 ?>
             			
                     <tbody id="myTable">
-				<tr>
-                                    <td><?php echo $dados['nome']; ?></td>
-                                    <td><?php echo "R$ ".$dados['preco']; ?></td>
-                                    <td><?php echo $dados['descricao']; ?></td>
-                                    <td align="center">
-                                        <a title="Alterar" href="editar.php?codProduto=<?php echo  $dados['codProduto']?>"
-									class="btn btn-sm btn-warning">&#9999; Alterar</a>
-                                  <?php 
-                                  if(isset($_POST['excluir'])){
-                                  $codProduto = $_GET['codProduto'];
-                                  buscarRegistroPorId(PRODUTO, $codProduto);
-                                    deleta(PRODUTO, "where codProduto = ".$codProduto);
-                                  }
-                                  ?>
-                                    <a name="excluir" title="Excluir" id="btn-excluir" href="lista.php?codEstabelecimento= <?php echo $dados['codProduto']?>'"
-                                       class="btn btn-sm btn-danger tooltipBtn"> &#10006; Excluir</a>
-                                    </td>
-				</tr>
+    					<tr>
+                            <td><?php echo $produto['nome']; ?></td>
+                            <td><?php echo "R$ ".$produto['preco']; ?></td>
+                            <td><?php echo $produto['descricao']; ?></td>
+                            <td align="center">
+                                <a title="Alterar" href="editar.php?codProduto=<?php echo  $produto['codProduto']?>"
+    						class="btn btn-sm btn-warning">&#9999; Alterar</a>
+                          <?php 
+//                           if(isset($_POST['excluir'])){
+//                           $codProduto = $_GET['codProduto'];
+//                           buscarRegistroPorId(PRODUTO, $codProduto);
+//                             deleta(PRODUTO, "where codProduto = ".$codProduto);
+//                           }
+                          ?>
+                            <a title="Excluir" id="btn-excluir" href="lista.php?codEstabelecimento= <?php echo $produto['codProduto']?>'"
+                               class="btn btn-sm btn-danger tooltipBtn"> &#10006; Excluir</a>
+                            </td>
+    					</tr>
                     </tbody>
             			
-            	<?php }?>
+            	<?php }
+                    }?>
             			
             		</table>
 					<!-- END TABLE -->
