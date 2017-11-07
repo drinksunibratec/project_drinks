@@ -42,7 +42,7 @@ $dados = buscarRegistroPorId(PRODUTO, $codEstabelecimento, 'codEstabelecimento')
 		<header>
 			<div class="row">
 				<div class="col-sm-6">
-					<h2>Lista de Produtos</h2>
+					<h2></h2>
 				</div>
 				<div class="col-sm-6 text-right h2" align="right">
 					<a href="adicionar.php" class="btn btn-sm btn-primary">&#10010;
@@ -57,7 +57,7 @@ $dados = buscarRegistroPorId(PRODUTO, $codEstabelecimento, 'codEstabelecimento')
     	</div>
 		<div class="row">
 			<div class="panel panel-default">
-				<div class="panel-heading"></div>
+				<div class="panel-heading">Lista de Produtos</div>
 				<div class="panel-body">
 
 					<input class="form-control" id="myInput" type="text"

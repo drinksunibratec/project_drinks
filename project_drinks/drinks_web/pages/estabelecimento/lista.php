@@ -54,7 +54,7 @@ if ($_SESSION['administrador'] == 1) {
 			<div class="row">
         		<?php
         
-tituloDaListagem('Lista de Estabelecimentos', 'Seus Dados');
+        tituloDaListagem('', '');
         botaoNovo('adicionar.php', '&#10010', 'primary', 'Novo estabelecimento');
         ?>
     		</div>
