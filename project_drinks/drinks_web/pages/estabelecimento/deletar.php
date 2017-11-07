@@ -1,6 +1,5 @@
 <?php
 include (HEADER_TEMPLATE);
-;
 
 if (isset($_GET['codEstabelecimento']) && empty($_GET['codEstabelecimento']) == false) {
     $codEstabelecimento = addslashes($_GET['codEstabelecimento']);

@@ -13,5 +13,6 @@ define("ESTABELECIMENTO", "estabelecimento");
 define("PRODUTO", "produto");
 define("CLIENTE", "cliente");
 define("USUARIOS", "usuarios");
+define("PEDIDO", "pedido");
 
 ?>

@@ -2,27 +2,6 @@
 require_once ('../include/header.php');
 require_once ('../menu/menu.php');
 
-
-//if (isset($_POST['nome']) && empty($_POST['nome']) == false) {
-//    
-//    $caracters = array(
-//        "R",
-//        "$"
-//    );
-//    
-//    $inserir = $_POST;
-//    foreach ($inserir as $key => $value) {
-//        if($key == 'preco'){
-//            $inserir[$key] = str_replace($caracters, "", $value);
-//            
-//        }
-//        
-//    }
-//    $inserir['codEstabelecimento'] = $_SESSION['id'];
-//    insert(PRODUTO, $inserir);
-//    
-//    header("Location: lista.php");
-//}
 $host = "localhost";
 $user = "root";
 $senha = "";
@@ -33,6 +12,9 @@ $mysqli = new mysqli($host, $user, $senha, $banco);
 if($mysqli->connect_errno){
     echo 'Falha na Conexão: ('.$mysqli->connect_errno.')'.$mysqli->connect_error;
 }
+
+$codProduto = $_GET['codProduto'];
+$codEstabelecimento = $_GET['codEstabelecimento'];
 
 if(isset($_POST['confirmar'])){
     //REGISTRO DOS DADOS
@@ -56,22 +38,16 @@ if(isset($_POST['confirmar'])){
     
     if(strlen($_SESSION['preco']) == 0)
         $erro[] = "Preencha o preço do produto.";
-    
+        
     //INSERÇÃO NO BANCO
 //    if (count($erro) == 0){
-        $sql_code = "INSERT INTO produto ("
-                . "descricao, "
-                . "gelada, "
-                . "nome, "
-                . "preco, "
-                . "codEstabelecimento)"
-                . "VALUES("
-                . "'$_SESSION[descricao]',"
-                . "'$_SESSION[gelada]',"
-                . "'$_SESSION[nome]',"
-                . "'$_SESSION[preco]',"
-                . "'$_SESSION[codEstabelecimento]'"
-                . ");";
+        $sql_code = "UPDATE produto SET("
+                . "descricao = '$_SESSION[descricao]', "
+                . "gelada = '$_SESSION[gelada]', "
+                . "nome = '$_SESSION[nome]', "
+                . "preco = '$_SESSION[preco]',"
+                . "codEstabelecimento = '$codEstabelecimento'"
+                . "WHERE codProduto = '$codProduto');";
         $confirma = $mysqli->query($sql_code)or die($mysqli->error);
 //        $estabelecimento = $_GET['codEstabelecimento'];
 //        $consulta = "SELECT * FROM produto WHERE codEstabelecimento='$estabelecimento'";
@@ -92,6 +68,20 @@ if(isset($_POST['confirmar'])){
 //        } else {
 //            $erro[] = $confirma;
 //        }
+}else{
+    
+    $sql_code = "SELECT * FROM produto WHERE codProduto = '$codProduto'";
+    $sql_query = $mysqli->query($sql_code)or die($mysqli->error);
+    $linha = $sql_query->fetch_assoc();
+    
+    if (!isset($_SESSION))
+        session_start ();
+    
+//     $_SESSION[descricao] = $linha['descricao'];
+//     $_SESSION[gelada] = $linha['gelada'];
+//     $_SESSION[nome] = $linha['nome'];
+//     $_SESSION[preco] = $linha['preco'];    
+     
 }
 
 ?>

@@ -4,6 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/xampp/htdocs/projeto_final/drinks_web/pages/produto/adicionar.php</file>
+            <file>file:/C:/xampp/htdocs/projeto_final/drinks_web/pages/produto/editar.php</file>
+            <file>file:/C:/xampp/htdocs/projeto_final/drinks_web/pages/cliente/excluir-cliente.php</file>
+            <file>file:/C:/xampp/htdocs/projeto_final/drinks_web/resources/functions/DB_Functions.php</file>
             <file>file:/C:/xampp/htdocs/projeto_final/drinks_web/pages/produto/lista.php</file>
         </group>
     </open-files>

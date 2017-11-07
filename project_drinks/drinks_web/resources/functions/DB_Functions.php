@@ -143,4 +143,23 @@ function buscarPorRegitro($table1 = null, $table2 = null, $nomeId1 = null, $nome
     close_database($database);
     return $found;
 }
+
+function deleta($tabela, $where=NULL){
+    //MONTAR SQL
+    $delete = "DELETE FROM {$tabela} {$where}";
+    //CONECTOU?
+    if($conn = open_database()){
+        if(mysqli_query($delete, $conn)){
+            //FECHAR CONEXAO
+            close_database($conn);
+            return true;
+        }else {
+            //MOSTRAR A MENSAGEM DE ERRO
+            echo "QUERY INVALIDA {$delete}";
+            return FALSE;
+        }
+    } else {
+        return FALSE;
+    }
+}
     

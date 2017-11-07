@@ -24,6 +24,7 @@ if ($mysqli->connect_errno) {
 
 $consulta = "SELECT * FROM produto WHERE codEstabelecimento=$codEstabelecimento";
 $con = $mysqli->query($consulta) or die($mysqli->error);
+
 ?>
 
 
@@ -49,8 +50,6 @@ $con = $mysqli->query($consulta) or die($mysqli->error);
           });
         });
 </script>
-
-
 
 </head>
 
@@ -102,12 +101,17 @@ $con = $mysqli->query($consulta) or die($mysqli->error);
                                     <td><?php echo "R$ ".$dados['preco']; ?></td>
                                     <td><?php echo $dados['descricao']; ?></td>
                                     <td align="center">
-                                    <a title="Alterar" href="editar_produto.php?codProduto=<?php
-                                    echo $produto['codProduto']?>"
-                                    class="btn btn-sm btn-warning">&#9999; Alterar</a>
-                                    
-                                    <a name="excluir" title="Excluir" id="btn-excluir" href="lista.php?codEstabelecimento= <?php echo $produto['codProduto']?>'"
-                                    class="btn btn-sm btn-danger tooltipBtn"> &#10006; Excluir</a>
+                                        <a title="Alterar" href="editar.php?codProduto=<?php echo  $dados['codProduto']?>"
+									class="btn btn-sm btn-warning">&#9999; Alterar</a>
+                                  <?php 
+                                  if(isset($_POST['excluir'])){
+                                  $codProduto = $_GET['codProduto'];
+                                  buscarRegistroPorId(PRODUTO, $codProduto);
+                                    deleta(PRODUTO, "where codProduto = ".$codProduto);
+                                  }
+                                  ?>
+                                    <a name="excluir" title="Excluir" id="btn-excluir" href="lista.php?codEstabelecimento= <?php echo $dados['codProduto']?>'"
+                                       class="btn btn-sm btn-danger tooltipBtn"> &#10006; Excluir</a>
                                     </td>
 				</tr>
                     </tbody>
@@ -119,19 +123,19 @@ $con = $mysqli->query($consulta) or die($mysqli->error);
 				</div>
                                 <?php
                                 
-                                if(isset($_POST['excluir'])){
-                                    //REGISTRO DOS DADOS
-                                    //Verificar se a seção foi aberta
-                                    if (!isset($_SESSION))
-                                        session_start ();
-                                    
-                                    $codProdutoDel = intval($_GET['codEstabelecimento']);
-                                
-                                    $sql_code = "DELETE FROM produto WHERE codigo = '$codProdutoDel'";
-                                    $sql_query = $mysqli->query($sql_code) or die($mysqli->error);
-                                    
-                                    header("Location: lista.php");
-                                }
+//                                if(isset($_POST['excluir'])){
+//                                    //REGISTRO DOS DADOS
+//                                    //Verificar se a seção foi aberta
+//                                    if (!isset($_SESSION))
+//                                        session_start ();
+//                                    
+//                                    $codProdutoDel = intval($_GET['codEstabelecimento']);
+//                                
+//                                    $sql_code = "DELETE FROM produto WHERE codigo = '$codProdutoDel'";
+//                                    $sql_query = $mysqli->query($sql_code) or die($mysqli->error);
+//                                    
+//                                    header("Location: lista.php");
+//                                }
                                 ?>
 			</div>
 		</div>
