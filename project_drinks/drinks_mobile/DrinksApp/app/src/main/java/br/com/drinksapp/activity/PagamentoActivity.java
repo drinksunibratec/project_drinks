@@ -210,8 +210,7 @@ public class PagamentoActivity extends AppCompatActivity implements DialogListen
         @Override
         protected Boolean doInBackground(List<ItemCarrinhoCompras>... params) {
 
-            int checkedRadioButtonId = mRadioPagamento.getCheckedRadioButtonId();
-
+            
             ItemCarrinhoCompras carrinhoCompras = params[0].get(0);
 
             Pedido pedido = new Pedido();
