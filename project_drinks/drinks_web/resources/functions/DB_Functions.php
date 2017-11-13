@@ -124,14 +124,18 @@ function insert($table = null, $data = null)
     close_database($database);
 }
 
-function buscarPorRegitro($table1 = null, $table2 = null, $nomeId1 = null, $nomeId2 = null)
+function detalhesPedido()
 {
     $found = null;
     try {
-        $database = open_database();
-        
-        //SELECT usuarios.nome FROM pedido, usuarios WHERE pedido.codUsuario = usuarios.codUsuario 
-        $sql = "SELECT * FROM " . $table1 . ",".$table2 . " WHERE " . $nomeId1 . " = " .$nomeId2 . ";" ;
+        $database = open_database();        
+            
+        $sql = "SELECT * FROM pedido,pedido_produto,usuarios,produto
+        WHERE pedido.codPedido = pedido_produto.codPedido
+        AND pedido.codUsuario = usuarios.codUsuario
+        AND produto.codProduto = pedido_produto.codProduto
+        AND pedido.codPedido = pedido_produto.codPedido
+        ORDER BY pedido.codPedido;" ;
         $result = $database->query($sql);
         if ($result->num_rows > 0) {
             $found = $result->fetch_all(MYSQLI_ASSOC);

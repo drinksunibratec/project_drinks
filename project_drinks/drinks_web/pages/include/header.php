@@ -29,8 +29,7 @@ require_once ('../../resources/util/array_uf.php');
         <link type="text/css" rel="stylesheet" href="../../bootstrap-3.3.7/css/sb-admin.css?ln=css" />
        
         <script src="../../resources/jquery/jquery-1.5.2.min.js"></script>
-    	<script src="../../resources/jquery/jquery.maskedinput-1.3.min.js"></script>
-        
+    	<script src="../../resources/jquery/jquery.maskedinput-1.3.min.js"></script>        
         
     </head>
 </html>
