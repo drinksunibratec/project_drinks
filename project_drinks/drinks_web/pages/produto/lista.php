@@ -53,7 +53,7 @@ $dados = buscarRegistroPorId(PRODUTO, $codEstabelecimento, 'codEstabelecimento')
 
 		</header>
 		<div class="row">
-        	<?php //$mensagens->imprimirMensagem(); ?>
+        	<?php $mensagens->imprimirMensagem(); ?>
     	</div>
 		<div class="row">
 			<div class="panel panel-default">

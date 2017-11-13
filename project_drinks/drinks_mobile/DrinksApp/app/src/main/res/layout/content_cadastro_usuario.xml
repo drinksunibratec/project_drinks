@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dip"
                 android:background="@color/background_botoes"
-                android:text="@string/btn_register"
+                android:text="@string/txt_salvar"
                 android:textSize="@dimen/txt_medio_botao"
                 android:textColor="@color/white" />
 

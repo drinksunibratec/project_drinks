@@ -1,22 +1,18 @@
 package br.com.drinksapp.activity;
 
 import android.os.AsyncTask;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import br.com.drinksapp.R;
 import br.com.drinksapp.bean.Usuarios;
 import br.com.drinksapp.db.DAODrinks;
-import br.com.drinksapp.helper.Mask;
-import br.com.drinksapp.helper.SQLiteHandler;
-import br.com.drinksapp.helper.SessionManager;
+import br.com.drinksapp.util.Mask;
 import br.com.drinksapp.http.DBConnectParser;
 import br.com.drinksapp.util.Constantes;
 import br.com.drinksapp.util.Validator;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;

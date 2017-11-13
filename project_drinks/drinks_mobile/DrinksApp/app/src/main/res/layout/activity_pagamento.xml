@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cinza_claro_color"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.9"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbarPagamento"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginBottom="@dimen/small_padding"
+            android:background="@color/colorPrimary"
+            app:layout_collapseMode="pin" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/cinza_claro_color"
+            android:gravity="left"
+            android:orientation="horizontal"
+            android:padding="@dimen/medium_padding">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_cards" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/medium_padding"
+                android:text="@string/txt_pagamento_entrega"
+                android:textColor="@color/black_color"
+                android:textSize="@dimen/medium_text" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:divider="@drawable/border_radio_button"
+            android:gravity="left"
+            android:orientation="horizontal"
+            android:padding="@dimen/medium_padding">
+
+            <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@drawable/border_radio_button"
+                android:id="@+id/radio_pagamento"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/radio_dinheiro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/small_padding"
+                    android:buttonTint="@color/red_color"
+                    android:text="@string/dinheiro"
+                    android:textColor="@color/black_color" />
+
+                <RadioButton
+                    android:id="@+id/radio_cartao_debito"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/red_color"
+                    android:text="@string/cartao_debito"
+                    android:textColor="@color/black_color" />
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/cinza_claro_color"
+            android:gravity="left"
+            android:orientation="horizontal"
+            android:padding="@dimen/medium_padding">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_location" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/medium_padding"
+                android:text="@string/txt_endereco_entrega"
+                android:textColor="@color/black_color"
+                android:textSize="@dimen/medium_text" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/cinza_claro_color"
+            android:divider="@drawable/border_radio_button"
+            android:gravity="left"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/edt_cep"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/medium_padding"
+                android:background="@color/white_color"
+                android:drawableRight="@drawable/account_location"
+                android:hint="@string/edt_cep"
+                android:inputType="number"
+                android:padding="@dimen/small_padding"
+                android:textColor="@color/input_login"
+                android:textColorHint="@color/input_login_hint" />
+
+            <Button
+                android:id="@+id/btnConsultarEndreco"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_cep"
+                android:textColor="@color/btn_login"
+                android:background="@color/gray_color"
+                android:textSize="@dimen/txt_medio_botao" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:divider="@drawable/border_radio_button"
+            android:gravity="left"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/medium_padding">
+
+            <TextView
+                android:id="@+id/txtLogradouro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:paddingLeft="@dimen/medium_padding"
+                android:paddingTop="@dimen/medium_padding"
+                android:textColor="@color/black_color"
+                android:textSize="@dimen/small_text" />
+
+            <TextView
+                android:id="@+id/txtComplemento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/txtLogradouro"
+                android:paddingLeft="@dimen/medium_padding"
+                android:paddingTop="@dimen/very_small_padding"
+                android:textColor="@color/gray_color"
+                android:textSize="@dimen/small_text" />/
+
+            <TextView
+                android:id="@+id/txtBairro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/txtComplemento"
+                android:paddingLeft="@dimen/medium_padding"
+                android:paddingTop="@dimen/very_small_padding"
+                android:textColor="@color/gray_color"
+                android:textSize="@dimen/small_text" />/
+
+            <Button
+                android:id="@+id/btnRealizarPedido"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:background="@drawable/click_botao"
+                android:text="@string/btn_realizar_pedido"
+                android:textColor="@color/btn_login"
+                android:textSize="@dimen/txt_medio_botao" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

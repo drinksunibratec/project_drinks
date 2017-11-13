@@ -129,7 +129,7 @@ class DB_Functions {
 	
 	public function consultaUltimoPedido(){
 		$produtos = null;
-		$sql = "SELECT MAX(codPedido) FROM pedido;
+		$sql = "SELECT MAX(codPedido) FROM pedido";
 
 		
 		$result = $this->conn->query($sql);

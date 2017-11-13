@@ -1,28 +1,16 @@
 package br.com.drinksapp.adapter;
 
-import android.app.Dialog;
-import android.app.ListActivity;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.List;
 
 import br.com.drinksapp.R;
-import br.com.drinksapp.activity.ListaProdutosActivity;
 import br.com.drinksapp.bean.Produto;
-import br.com.drinksapp.fragment.QuantidadeProdutosDialogFragment;
 
 /**
  * Created by Silvio Cedrim on 25/10/2017.

@@ -5,11 +5,6 @@ package br.com.drinksapp.util;
  */
 public class AppConfig {
 
-    // Server user login url
-        //public static String URL_LOGIN = "http://192.168.0.103/drinks_service/login.php";
-
-        // Server user register url
-        //public static String URL_REGISTER = "http://192.168.0.103/drinks_service/register.php";
 
     // Server user login url
     public static String URL_LOGIN = "http://www.comunidademaanaim.org.br/drinks_service/login.php";
@@ -21,4 +16,11 @@ public class AppConfig {
     public static final String URL_LISTA_PRODUTOS_POR_ESTABELECIMENTO = "https://www.comunidademaanaim.org.br/drinks_service/lista_produtos_por_estabelecimento.php";
     public static final String URL_INSERIR_PEDIDO = "https://www.comunidademaanaim.org.br/drinks_service/insert_pedido.php";
     public static final String URL_INSERIR_PRODUTOS_NO_PEDIDO = "https://www.comunidademaanaim.org.br/drinks_service/inserir_produtos_pedido.php";
+
+    public static final String APP_KEY = "6CTKkcmHuqSnl90jz58KxXe5DMDld9gi";
+
+    public static final String CORREIOS_APP_KEY = "Z6Urr77Dz3H9UXv6j6buyC1FsLV8kPoobq8ho1LqXB4yEVyh";
+
+    public static final String URL_CORREIOS = "https://webmaniabr.com/api/1/cep/";
+    public static final String COMPLEMENTO_URL_CORREIOS = "/?app_key=" + APP_KEY + "&app_secret=" + CORREIOS_APP_KEY;
 }
