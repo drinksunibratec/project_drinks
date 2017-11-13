@@ -16,7 +16,7 @@
 				<ul class="nav navbar-nav">
 				
 					<li><a href="../estabelecimento/lista.php">Estabelecimentos</a></li>
-                                        <li><a href="../estabelecimento/detalhesPedido.php">Pedidos</a></li>
+                                        <li><a href="../estabelecimento/listarPedido.php">Pedidos</a></li>
                                         <li><a href="../produto/lista.php">Produtos</a></li>
 					<?php if(!empty($_SESSION['administrador']) && $_SESSION['administrador'] == 1){ ?>
 						<li><a href="../cliente/lista.php">Clientes</a></li>

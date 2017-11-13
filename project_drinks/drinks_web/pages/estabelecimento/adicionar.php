@@ -36,30 +36,76 @@ $retorno_cep = null;
     <!-- MASCARA  --> 
      <script>
       jQuery(function($){
-             $("#cnpj").mask("99.999.999/9999-99");
-             $("#telefone").mask("(99) 99999-9999");
-             $("#cep").mask("99999-999");     
+
+    	  $('#loading_lat').hide();
+    	  $('#loading_lng').hide();
+    	  $('#loading').hide();
+          
+          $("#cnpj").mask("99.999.999/9999-99");
+          $("#telefone").mask("(99) 99999-9999");
+          $("#cep").mask("99999-999");     
       });       
  	</script>
  	
  	<script>
- 	 function buscarEndereco(formName)
-                    {
-                    	var cep = $("input[name='cep']").val();
-                    	cep = cep.replace('-', '');
-                    	$("#mensagem").html(' (Consultando CEP ...)');
-        				$.getScript("http://cep.republicavirtual.com.br/web_cep.php?formato=javascript&cep="+cep, function(){
-        			  		if(resultadoCEP["resultado"]){
-        						$("#logradouro").val(unescape(resultadoCEP["logradouro"]));
-        						$("#bairro").val(unescape(resultadoCEP["bairro"]));
-        						$("#cidade").val(unescape(resultadoCEP["cidade"]));
-            					$("#uf").val(unescape(resultadoCEP["uf"]));
-        					}
-         
-        					$("#mensagem").html('');
-        					$("#numero").focus();        					
-        				});
-                   }            	
+
+
+ 	var rua;
+	var bairro;
+	var cidade;
+	var uf;
+	
+ 	function buscarLatLong(formName)
+ 	{
+ 	 	var num = $("input[name=numero]").val();
+
+ 	 	var address = rua + ',' + bairro + ',' + num + ',' + cidade + ',' + uf;
+ 	 	$("#mensagem").html(' (Consultando Coordenadas...)');
+
+ 	 	$.getJSON('http://maps.google.com/maps/api/geocode/json?address=' + address + '&sensor=false', function (data) {
+
+ 			if(data.status == 'OK')
+ 			{
+    			var lat = data.results[0].geometry.location.lat;
+    			var lng = data.results[0].geometry.location.lng;
+     			
+    			$("#latitude").val(lat);
+    			$("#longitude").val(lng);
+ 	 		}
+ 			
+ 		});
+ 		$("#mensagem").html('');
+
+		$('#loading_lat').show();
+  	 	$('#loading_lng').show();
+
+
+ 	 }
+ 	function buscarEndereco(formName)
+    {
+    	var cep = $("input[name='cep']").val();
+    	cep = cep.replace('-', '');
+    
+    	$('#loading').show();    
+    		$.getScript("http://cep.republicavirtual.com.br/web_cep.php?formato=javascript&cep="+cep, function(){
+    
+      		if(resultadoCEP["resultado"]){
+    
+    	  		rua =  unescape(resultadoCEP["logradouro"]);
+    	  		bairro = unescape(resultadoCEP["bairro"]);
+    	  		cidade = unescape(resultadoCEP["cidade"]);
+    	  		uf = unescape(resultadoCEP["uf"]);          			  		
+    	  		
+    			$("#logradouro").val(rua);
+    			$("#bairro").val(bairro);
+    			$("#cidade").val(cidade);
+    			$("#uf").val(uf);
+    		
+    		}
+      		$('#loading').hide();
+    		$("#numero").focus();        					
+    	});
+    }            	
      </script>
      
 
@@ -96,7 +142,7 @@ $retorno_cep = null;
                 
                 <div class="row">                
                    	<div class="form-group col-md-3">
-                    <label for="cep">CEP<span id='mensagem'></span></label>
+                    <label for="cep">CEP<img id="loading" width="100" height="70" src="../../resources/img/loading.gif"/></label>
                 	<input id="cep" name="cep" type="text" class="form-control" placeholder="Digite seu CEP..."
                 		onblur="javascript:buscarEndereco('formInscricao')"/>
 					</div>
@@ -110,7 +156,7 @@ $retorno_cep = null;
                 	
                 	<div class="form-group col-md-2">
                       <label for="numero">Numero</label>
-                      <input id="numero" type="text" class="form-control" name="numero" maxlength="6" required>
+                      <input id="numero" type="text" class="form-control" name="numero" maxlength="6" required onblur="javascript:buscarLatLong('formInscricao')"/>
                 	</div>
                 	
                 	<div class="form-group col-md-3">
@@ -160,12 +206,12 @@ $retorno_cep = null;
                   </div>                  	
                   	
                   	<div class="form-group col-md-2">
-                      <label for="latitute">Latitude</label>
+                      <label for="latitute">Latitude<img id="loading_lat" width="20" height="20" style="margin-left: 10px" src="../../resources/img/check.png"/></label>
                       <input id="latitude" type="text" class="form-control" name="latitude" maxlength="12" required>
                 	</div>
                   	
                   	<div class="form-group col-md-2">
-                      <label for="longitude">Longitude</label>
+                      <label for="longitude">Longitude<img id="loading_lng" width="20" height="20" style="margin-left: 10px" src="../../resources/img/check.png"/></label>
                       <input id="longitude" type="text" class="form-control" name="longitude" maxlength="12" required>
                 	</div>               	
                	</div>

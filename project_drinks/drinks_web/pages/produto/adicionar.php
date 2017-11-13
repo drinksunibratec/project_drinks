@@ -146,7 +146,7 @@ if(isset($_POST['confirmar'])){
 					<select class="form-control selectpicker" name="gelada" id="gelada" required>
 							<option value="">--Selecione--</option>
                         	<option value="1">SIM</option>
-                        	<option value="0">N√ÉO</option>
+                        	<option value="0">N√O</option>
 					</select>
 					
 				</div>
