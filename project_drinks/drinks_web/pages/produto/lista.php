@@ -2,14 +2,16 @@
 require_once ('../include/header.php');
 require_once ('../menu/menu.php');
 
+$codEstabelecimento = $_SESSION['codEstabelecimento'];
+
 $mensagens = new Mensagens();
-$codEstabelecimento = null;
-if (isset($_GET['codEstabelecimento']) && empty($_GET['codEstabelecimento']) == false) {
-    $codEstabelecimento = $_GET['codEstabelecimento'];
-}else{
-    $codEstabelecimento = $_SESSION['codEstabelecimento'];
+$dados = null;
+
+if ($_SESSION['administrador'] == 1) {
+    $dados = buscarTodosOsRegistros(PRODUTO);
+} else {
+    $dados = buscarRegistroPorId(PRODUTO, $codEstabelecimento, 'codEstabelecimento');
 }
-$dados = buscarRegistroPorId(PRODUTO, $codEstabelecimento, 'codEstabelecimento');
 ?>
 
 
@@ -85,7 +87,11 @@ $dados = buscarRegistroPorId(PRODUTO, $codEstabelecimento, 'codEstabelecimento')
                             <td><?php echo "R$ ".$produto['preco']; ?></td>
                             <td><?php echo $produto['descricao']; ?></td>
                             <td align="center">
-                                <a title="Alterar" href="editar.php?codProduto=<?php echo  $produto['codProduto']?>"
+                                <a title="Alterar" href="editar.php?codProduto=<?php echo  $produto['codProduto']?>
+                                   &nome=<?php echo  $produto['nome']?>
+                                   &descricao=<?php echo  $produto['descricao']?>
+                                   &gelada=<?php echo  $produto['gelada']?>
+                                   &preco=<?php echo  $produto['preco']?>"
     						class="btn btn-sm btn-warning">&#9999; Alterar</a>
                           <?php 
 //                           if(isset($_POST['excluir'])){
@@ -94,7 +100,7 @@ $dados = buscarRegistroPorId(PRODUTO, $codEstabelecimento, 'codEstabelecimento')
 //                             deleta(PRODUTO, "where codProduto = ".$codProduto);
 //                           }
                           ?>
-                            <a title="Excluir" id="btn-excluir" href="lista.php?codEstabelecimento= <?php echo $produto['codProduto']?>'"
+                            <a title="Excluir" id="btn-excluir" href="deletar.php?codProduto= <?php echo $produto['codProduto']?>"
                                class="btn btn-sm btn-danger tooltipBtn"> &#10006; Excluir</a>
                             </td>
     					</tr>
@@ -107,20 +113,6 @@ $dados = buscarRegistroPorId(PRODUTO, $codEstabelecimento, 'codEstabelecimento')
 					<!-- END TABLE -->
 				</div>
                                 <?php
-                                
-//                                if(isset($_POST['excluir'])){
-//                                    //REGISTRO DOS DADOS
-//                                    //Verificar se a seção foi aberta
-//                                    if (!isset($_SESSION))
-//                                        session_start ();
-//                                    
-//                                    $codProdutoDel = intval($_GET['codEstabelecimento']);
-//                                
-//                                    $sql_code = "DELETE FROM produto WHERE codigo = '$codProdutoDel'";
-//                                    $sql_query = $mysqli->query($sql_code) or die($mysqli->error);
-//                                    
-//                                    header("Location: lista.php");
-//                                }
                                 ?>
 			</div>
 		</div>
