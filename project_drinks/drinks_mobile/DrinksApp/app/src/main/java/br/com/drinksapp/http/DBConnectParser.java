@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.List;
 
+import br.com.drinksapp.bean.ListPedido;
 import br.com.drinksapp.bean.Pedido;
 import br.com.drinksapp.bean.PedidoProdutos;
 import br.com.drinksapp.util.AppConfig;
@@ -52,6 +53,7 @@ public class DBConnectParser {
 
     }
 
+
     public static List<Produto> listProdutosPorEstabelecimento(Estabelecimento estabelecimento) throws IOException {
         Response response = null;
 
@@ -83,7 +85,7 @@ public class DBConnectParser {
 
     }
 
-    public static Usuarios login(Usuarios usuario){
+    public static Usuarios login(Usuarios usuario) {
         Response response = null;
 
         Usuarios retorno = null;
@@ -105,7 +107,7 @@ public class DBConnectParser {
 
             response = client.newCall(request).execute();
 
-            if(response.networkResponse().code() == HttpURLConnection.HTTP_OK){
+            if (response.networkResponse().code() == HttpURLConnection.HTTP_OK) {
                 String json = response.body().string();
 
                 Gson gson = new Gson();
@@ -114,14 +116,14 @@ public class DBConnectParser {
 
 
             }
-        }catch (IOException e){
+        } catch (IOException e) {
 
         }
         return retorno;
 
     }
 
-    public static Usuarios cadastrar(Usuarios usuario){
+    public static Usuarios cadastrar(Usuarios usuario) {
         Response response = null;
 
         Usuarios retorno = null;
@@ -145,7 +147,7 @@ public class DBConnectParser {
 
             response = client.newCall(request).execute();
 
-            if(response.networkResponse().code() == HttpURLConnection.HTTP_OK){
+            if (response.networkResponse().code() == HttpURLConnection.HTTP_OK) {
                 String json = response.body().string();
 
                 Gson gson = new Gson();
@@ -153,14 +155,14 @@ public class DBConnectParser {
                 retorno = gson.fromJson(json, Usuarios.class);
 
             }
-        }catch (IOException e){
+        } catch (IOException e) {
 
         }
         return retorno;
 
     }
 
-    public static Pedido inserirPedido(Pedido pedido){
+    public static Pedido inserirPedido(Pedido pedido) {
         Response response = null;
         Gson gson = new Gson();
 
@@ -183,7 +185,7 @@ public class DBConnectParser {
 
             response = client.newCall(request).execute();
 
-            if(response.networkResponse().code() == HttpURLConnection.HTTP_OK){
+            if (response.networkResponse().code() == HttpURLConnection.HTTP_OK) {
                 String resposta = response.body().string();
 
 
@@ -191,14 +193,98 @@ public class DBConnectParser {
 
             }
 
-        }catch (IOException e){
+        } catch (IOException e) {
 
         }
 
         return retorno;
     }
 
-    public static boolean inserirProdutosPedido(List<PedidoProdutos> pedidoProdutos){
+    public static List<Pedido> listarPedidosdeCliente(Usuarios usuario) {
+        Response response = null;
+        Gson gson = new Gson();
+
+        List<Pedido> retorno = null;
+
+        try {
+            OkHttpClient client = new OkHttpClient();
+
+            RequestBody body = new FormBody.Builder()
+                    .add("codUsuario", String.valueOf(usuario.getCodUsuario()))
+                    .build();
+
+
+            Request request = new Request.Builder()
+                    .url(AppConfig.URL_BUCAR_PEDIDOS_CLIENTE)
+                    .post(body)
+                    .build();
+
+            response = client.newCall(request).execute();
+
+            if (response.networkResponse().code() == HttpURLConnection.HTTP_OK) {
+                String resposta = response.body().string();
+
+
+                ListPedido listPedido = gson.fromJson(resposta, ListPedido.class);
+
+                if (listPedido != null) {
+                    List<Pedido> pedidos = listPedido.getPedidos();
+                    for(int i = 0; i < pedidos.size(); i++){
+                        long codEstabelecimento = pedidos.get(i).getCodEstabelecimento();
+                        Estabelecimento estabelecimento = consultarEstabelecimento(String.valueOf(codEstabelecimento));
+                        pedidos.get(i).setEstabelecimento(estabelecimento);
+                    }
+                    return pedidos;
+                }
+
+            }
+
+        } catch (IOException e) {
+
+        }
+
+        return retorno;
+    }
+
+    public static Estabelecimento consultarEstabelecimento(String codEstabelecimento) {
+        Response response = null;
+        Gson gson = new Gson();
+
+        List<Pedido> retorno = null;
+
+        try {
+            OkHttpClient client = new OkHttpClient();
+
+            RequestBody body = new FormBody.Builder()
+                    .add("codEstabelecimento", codEstabelecimento)
+                    .build();
+
+
+            Request request = new Request.Builder()
+                    .url(AppConfig.URL_CONSULTA_ESTABELECIMENTO)
+                    .post(body)
+                    .build();
+
+            response = client.newCall(request).execute();
+
+            if (response.networkResponse().code() == HttpURLConnection.HTTP_OK) {
+                String resposta = response.body().string();
+
+
+                Estabelecimento estabelecimento = gson.fromJson(resposta, Estabelecimento.class);
+
+                return estabelecimento;
+
+            }
+
+        } catch (IOException e) {
+
+        }
+
+        return null;
+    }
+
+    public static boolean inserirProdutosPedido(List<PedidoProdutos> pedidoProdutos) {
         Response response = null;
         Gson gson = new Gson();
 
@@ -221,12 +307,12 @@ public class DBConnectParser {
 
             response = client.newCall(request).execute();
 
-            if(response.networkResponse().code() == HttpURLConnection.HTTP_OK){
+            if (response.networkResponse().code() == HttpURLConnection.HTTP_OK) {
                 retorno = true;
 
             }
 
-        }catch (IOException e){
+        } catch (IOException e) {
 
         }
 

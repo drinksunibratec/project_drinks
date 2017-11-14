@@ -22,4 +22,6 @@ public class Constantes {
     public static final String DIALOG_FRAGMENT = "DIALOG_FRAGMENT";
     public static final String EXTRA_COMPLEMENTO = "EXTRA_COMPLEMENTO";
     public static int RESULT_BACK = 3;
+
+    public static final int RESULT_OK = -1;
 }

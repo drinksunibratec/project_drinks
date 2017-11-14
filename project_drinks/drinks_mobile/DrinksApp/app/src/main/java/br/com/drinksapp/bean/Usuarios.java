@@ -44,6 +44,10 @@ public class Usuarios implements Serializable {
     public Usuarios() {
     }
 
+    public Usuarios(long codUsuario) {
+        this.codUsuario = codUsuario;
+    }
+
     public Usuarios(String nome, String email, String senha, String telefone) {
         this.nome = nome;
         this.email = email;

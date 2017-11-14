@@ -40,6 +40,29 @@ public class Pedido {
 
     String CEP;
 
+    String pagamento;
+
+    /*
+    Dados para consulta de listagem de pedidos
+     */
+    double preco; //do produto
+
+    public String getPagamento() {
+        return pagamento;
+    }
+
+    public void setPagamento(String pagamento) {
+        this.pagamento = pagamento;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+
     public String getCEP() {
         return CEP;
     }
