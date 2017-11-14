@@ -124,18 +124,50 @@ function insert($table = null, $data = null)
     close_database($database);
 }
 
-function detalhesPedido()
+function detalhesPedido($nomeId = null)
 {
     $found = null;
     try {
         $database = open_database();        
             
-        $sql = "SELECT * FROM pedido,pedido_produto,usuarios,produto
-        WHERE pedido.codPedido = pedido_produto.codPedido
-        AND pedido.codUsuario = usuarios.codUsuario
-        AND produto.codProduto = pedido_produto.codProduto
-        AND pedido.codPedido = pedido_produto.codPedido
-        ORDER BY pedido.codPedido;" ;
+        $sql = "SELECT pedido.codPedido,pedido.dataPedido, pedido.bairro,
+                pedido.cidade,pedido.rua,pedido.numero,pedido.pagamento,
+                pedido.status,pedido.valorTotal,usuarios.nome AS usuario,
+                usuarios.telefone,usuarios.email,pedido_produto.codProduto,
+                pedido_produto.preco,pedido_produto.quantidade,
+                pedido_produto.precoTotal,produto.nome
+
+                FROM pedido,pedido_produto,usuarios,produto, estabelecimento
+
+                WHERE pedido.codPedido = pedido_produto.codPedido
+                AND pedido.codUsuario = usuarios.codUsuario
+                AND produto.codProduto = pedido_produto.codProduto
+                AND pedido.codPedido = pedido_produto.codPedido
+                AND pedido.codEstabelecimento = estabelecimento.codEstabelecimento
+                AND pedido.codEstabelecimento = ".$nomeId.
+                " GROUP BY pedido.codPedido;" ;
+        
+        $result = $database->query($sql);
+        if ($result->num_rows > 0) {
+            $found = $result->fetch_all(MYSQLI_ASSOC);
+        }
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+    return $found;
+}
+
+function listarPedido($nomeId = null)
+{
+    $found = null;
+    try {
+        $database = open_database();
+        
+        $sql = "SELECT * FROM pedido,usuarios
+        WHERE pedido.codUsuario = usuarios.codUsuario
+        AND pedido.codEstabelecimento = ".$nomeId. ";" ;
         $result = $database->query($sql);
         if ($result->num_rows > 0) {
             $found = $result->fetch_all(MYSQLI_ASSOC);

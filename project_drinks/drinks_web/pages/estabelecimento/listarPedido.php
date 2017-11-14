@@ -8,8 +8,10 @@ if (isset($_GET['codEstabelecimento']) && empty($_GET['codEstabelecimento']) == 
 }else{
     $codEstabelecimento = $_SESSION['codEstabelecimento'];
 }
-$dados = buscarRegistroPorId(PEDIDO, $codEstabelecimento, 'codEstabelecimento');
-$dado = detalhesPedido();
+//$dados = buscarRegistroPorId(PEDIDO, $codEstabelecimento, 'codEstabelecimento');
+$dados = listarPedido($codEstabelecimento);
+$dado= detalhesPedido($codEstabelecimento);
+
 ?>
 
 
@@ -61,14 +63,14 @@ $dado = detalhesPedido();
 						</thead>
             			
             	<?php
-            	if(count($dados) > 0){
-            	        foreach ($dados as $pedido){
+            	if(count($dado) > 0){
+            	        foreach ($dado as $pedido){
                 ?>
             			
                     <tbody id="myTable">
     					<tr>
                             <td><?php echo $pedido['codPedido']; ?></td>
-                            <td><?php echo $pedido['codUsuario']; ?></td>
+                            <td><?php echo $pedido['usuario']; ?></td>
                             <td><?php echo $pedido['dataPedido']; ?></td>
 							<td><?php echo $pedido['pagamento']; ?></td>
 							<td><?php echo "R$ ".$pedido['valorTotal']; ?></td>
@@ -98,7 +100,7 @@ $dado = detalhesPedido();
                                     
                                     <div class="form-group col-md-7">
                                       <label for="codUsuario">Cliente</label>
-                                      <input type="text" class="form-control" name="codUsuario" value="<?php echo $pedido['codUsuario']; ?>"readonly>
+                                      <input type="text" class="form-control" name="codUsuario" value="<?php echo $pedido['usuario']; ?>"readonly>
                                 	</div>
                             	</div>
                             	
@@ -117,6 +119,17 @@ $dado = detalhesPedido();
                                 	</div>
                             	</div>
                             	
+								<div class"container-fluid">
+                                <div class="row">
+                                    <div class="col-md-1">Cod.</div>                                  
+                                    <div class="col-md-5">Produto</div>
+                                    <div class="col-md-2">Vl. Unit.</div>
+                                    <div class="col-md-2">Qtd</div>
+                                    <div class="col-md-2">Vl. Total</div>
+                                  </div>
+                                </div>
+                                <br><br>
+
                             	<div class="row">
                                 	<div class="form-group col-md-7">
                                       <label for="rua">Rua</label>
@@ -139,20 +152,22 @@ $dado = detalhesPedido();
                                   	<input type="text" class="form-control" name="cidade" value="<?php echo $pedido['cidade']; ?>">
                             		</div>             	
                             	</div>
-                            	
-                            	
-                            	 	
-                			</div>
-                              
+                    				<div class="form-group col-md-4">
+                    					<label for="status">Status</label> 
+                    					<select class="form-control selectpicker" name="status" id="status" required>
+                    							<option value=""><?php echo $pedido['status']; ?></option>
+                                            	<option value="1">CANCELADO</option>
+                                            	<option value="0">ENTREGUE</option>
+                    					</select>
+                    				</div>                        
                               
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                <button type="button" class="btn btn-primary">Salvar Alterações</button>
+                                <button type="button" class="btn btn-primary" >Salvar Alterações</button>
                               </div>
-                             </div>
-                            
+                              
+                             </div>                            
                           </div>
-                        </div>
                         <!--Fim Modal -->
                     </tbody>
             			
