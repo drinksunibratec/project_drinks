@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:layout_marginBottom="@dimen/small_padding"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/colorPrimary"
             app:layout_collapseMode="pin" />
 
         <ListView
@@ -43,7 +43,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/small_padding"
+            android:layout_marginTop="@dimen/medium_padding"
             android:background="@color/white_color">
 
             <TextView
@@ -100,7 +100,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/small_padding"
             android:layout_weight="0.5"
+            android:drawableRight="@drawable/ic_arrow_forward"
             android:background="@color/background_botoes"
+            android:textColor="@color/btn_login"
             android:text="@string/btn_comprar" />
 
 

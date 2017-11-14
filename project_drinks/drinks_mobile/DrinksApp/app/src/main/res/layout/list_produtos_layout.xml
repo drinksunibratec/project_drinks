@@ -8,7 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.9"
+        android:layout_weight="0.8"
         android:orientation="vertical">
 
         <ListView
@@ -23,14 +23,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.1"
+        android:layout_weight="0.2"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/btn_carrinho"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/small_padding"
+            android:layout_marginTop="@dimen/small_padding"
+            android:textColor="@color/btn_login"
+            android:drawableRight="@drawable/ic_arrow_forward"
             android:background="@drawable/click_botao"
             android:text="@string/btn_ver_carrinho" />
 

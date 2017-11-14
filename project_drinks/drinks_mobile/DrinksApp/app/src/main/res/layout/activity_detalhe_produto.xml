@@ -1,15 +1,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white_color"
     android:gravity="center"
-    android:orientation="vertical"
-    android:background="@color/white_color">
+    android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_detalhe_produto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorPrimary"
         android:minHeight="?attr/actionBarSize">
 
         <LinearLayout
@@ -21,8 +21,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Test"
-                android:textSize="@dimen/large_text"
-                android:textColor="@color/black_color" />
+                android:textColor="@color/black_color"
+                android:textSize="@dimen/large_text" />
 
         </LinearLayout>
 
@@ -39,8 +39,8 @@
         android:id="@+id/txtNomeProdutoDetalhe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/large_padding"
         android:paddingLeft="@dimen/medium_padding"
+        android:paddingTop="@dimen/large_padding"
         android:text="Nome do Produto"
         android:textColor="@color/black_color"
         android:textSize="@dimen/large_text" />
@@ -49,19 +49,19 @@
         android:id="@+id/txtDescricaoProdutoDetalhe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/small_padding"
         android:paddingBottom="10dp"
         android:paddingLeft="@dimen/medium_padding"
+        android:paddingTop="@dimen/small_padding"
         android:text="Decrição"
         android:textColor="@color/gray_color"
-        android:textSize="@dimen/medium_padding"/>
+        android:textSize="@dimen/medium_padding" />
 
     <LinearLayout
         android:id="@+id/layoutValorTotalPorProduto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:background="@color/cinza_claro_color"
+        android:orientation="horizontal"
         android:padding="@dimen/large_padding">
 
         <TextView
@@ -78,9 +78,9 @@
             android:id="@+id/btn_menosProdutos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/very_small_padding"
-            android:paddingLeft="@dimen/very_large_padding"
             android:background="@null"
+            android:paddingLeft="@dimen/very_large_padding"
+            android:paddingTop="@dimen/very_small_padding"
             android:src="@drawable/ic_botao_menos" />
 
         <TextView
@@ -90,15 +90,15 @@
             android:paddingLeft="@dimen/small_padding"
             android:text="1"
             android:textColor="@color/black_color"
-            android:textSize="@dimen/large_text"/>
+            android:textSize="@dimen/large_text" />
 
         <ImageButton
             android:id="@+id/btn_maisProdutos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/very_small_padding"
-            android:paddingLeft="@dimen/small_padding"
             android:background="@null"
+            android:paddingLeft="@dimen/small_padding"
+            android:paddingTop="@dimen/very_small_padding"
             android:src="@drawable/ic_botao_mais" />
 
 
@@ -113,34 +113,32 @@
             android:id="@+id/txt_valor_total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/small_padding"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
             android:layout_marginRight="@dimen/medium_padding"
+            android:paddingLeft="@dimen/small_padding"
             android:text="@string/txt_total_pedido"
             android:textColor="@color/black_color"
-            android:textSize="@dimen/medium_text"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            />
+            android:textSize="@dimen/medium_text" />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="@dimen/small_padding">
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btn_add_carrinho"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/btn_add_carrinho"
+            android:layout_alignParentBottom="true"
             android:background="@color/background_botoes"
-            android:layout_alignParentBottom="true"/>
+            android:text="@string/btn_add_carrinho"
+            android:textColor="@color/btn_login"
+            android:textSize="@dimen/txt_medio_botao" />
 
     </RelativeLayout>
-
-
 
 
 </LinearLayout>

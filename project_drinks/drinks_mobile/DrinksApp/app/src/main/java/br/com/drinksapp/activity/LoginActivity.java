@@ -13,8 +13,6 @@ import android.widget.Toast;
 import br.com.drinksapp.R;
 import br.com.drinksapp.SaveSharedPreference.MySaveSharedPreference;
 import br.com.drinksapp.bean.Usuarios;
-import br.com.drinksapp.helper.SQLiteHandler;
-import br.com.drinksapp.helper.SessionManager;
 import br.com.drinksapp.http.DBConnectParser;
 import br.com.drinksapp.util.Constantes;
 import br.com.drinksapp.util.Validator;
@@ -26,8 +24,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mEdtEmail;
     private EditText mEdtSenha;
     private ProgressDialog pDialog;
-    private SessionManager session;
-    private SQLiteHandler db;
     Usuarios usuario;
 
     @Override
@@ -44,7 +40,6 @@ public class LoginActivity extends AppCompatActivity {
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
 
-        db = new SQLiteHandler(getApplicationContext());
         mBtnLogin.setOnClickListener(new BotaoLogin());
         // Link to Register Screen
         mBtnLinkToRegister.setOnClickListener(new LinkCadastrar());

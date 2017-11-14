@@ -11,7 +11,7 @@
     <string name="hint_password">Password</string>
     <string name="hint_name">Fullname</string>
     <string name="btn_login">Entrar</string>
-    <string name="btn_register">Salvar</string>
+    <string name="txt_salvar">Salvar</string>
     <string name="btn_link_to_register">Não é cadastrado? Clique aqui.</string>
     <string name="btn_link_to_login">Já é cadastrado? Entre aqui.</string>
     <string name="welcome">Welcome</string>
@@ -71,4 +71,17 @@
     <string name="txt_total_pedido">Total do pedido</string>
     <string name="txt_valor_unitario">Valor Unitário</string>
     <string name="btn_add_carrinho">Adicionar ao Carrinho</string>
+    <string name="txt_pagamento_entrega">Pague na entrega</string>
+    <string name="dinheiro">Dinheiro</string>
+    <string name="cartao_debito">Cartão Débito</string>
+    <string name="edt_cep">CEP</string>
+    <string name="btn_cep">Consultar</string>
+    <string name="edt_logradouro">Logradouro</string>
+    <string name="edt_bairro">Bairro</string>
+    <string name="edt_cidade">Cidade</string>
+    <string name="edt_UF">Estado</string>
+    <string name="btn_realizar_pedido">Realizar Pedido</string>
+    <string name="edt_numero">Número</string>
+    <string name="txt_endereco_entrega">Endereço de entrega</string>
+    <string name="edt_complemento">Complemento</string>
 </resources>

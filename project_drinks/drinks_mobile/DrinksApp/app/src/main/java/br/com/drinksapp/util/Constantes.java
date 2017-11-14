@@ -18,5 +18,8 @@ public class Constantes {
     public static final String EXTRA_PRODUTO = "EXTRA_PRODUTO";
     public static final String EXTRA_CARRINHO_COMPRAS = "EXTRA_CARRINHO_COMPRAS";
     public static final int ADICIONAR_PRODUTOS_AO_CARRINHO = 2;
+    public static final String EXTRA_NUMERO = "EXTRA_NUMERO";
+    public static final String DIALOG_FRAGMENT = "DIALOG_FRAGMENT";
+    public static final String EXTRA_COMPLEMENTO = "EXTRA_COMPLEMENTO";
     public static int RESULT_BACK = 3;
 }

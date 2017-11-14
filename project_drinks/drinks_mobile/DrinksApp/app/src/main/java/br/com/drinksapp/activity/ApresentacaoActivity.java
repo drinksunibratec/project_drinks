@@ -16,7 +16,6 @@ public class ApresentacaoActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apresentacao);
-        MySaveSharedPreference.clearSharedPreference(this);
 
         new Handler().postDelayed(new Runnable() {
             final long[] codUsuario = {0};
