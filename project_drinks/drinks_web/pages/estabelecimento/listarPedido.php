@@ -8,9 +8,9 @@ if (isset($_GET['codEstabelecimento']) && empty($_GET['codEstabelecimento']) == 
 }else{
     $codEstabelecimento = $_SESSION['codEstabelecimento'];
 }
-//$dados = buscarRegistroPorId(PEDIDO, $codEstabelecimento, 'codEstabelecimento');
-$dados = listarPedido($codEstabelecimento);
+
 $dado= detalhesPedido($codEstabelecimento);
+update('pedido', $codPedido, $dado, 'codPedido');
 
 ?>
 
@@ -163,7 +163,7 @@ $dado= detalhesPedido($codEstabelecimento);
                               
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                <button type="button" class="btn btn-primary" >Salvar Alterações</button>
+                                <button type="submit" class="btn btn-primary">Salvar Alterações</button>
                               </div>
                               
                              </div>                            
