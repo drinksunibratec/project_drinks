@@ -42,10 +42,7 @@ public class Pedido {
 
     String pagamento;
 
-    /*
-    Dados para consulta de listagem de pedidos
-     */
-    double preco; //do produto
+
 
     public String getPagamento() {
         return pagamento;
@@ -53,14 +50,6 @@ public class Pedido {
 
     public void setPagamento(String pagamento) {
         this.pagamento = pagamento;
-    }
-
-    public double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(double preco) {
-        this.preco = preco;
     }
 
     public String getCEP() {

@@ -18,6 +18,9 @@ public class AppConfig {
     public static final String URL_INSERIR_PEDIDO = "https://www.comunidademaanaim.org.br/drinks_service/insert_pedido.php";
     public static final String URL_BUCAR_PEDIDOS_CLIENTE = "https://www.comunidademaanaim.org.br/drinks_service/lista_pedido_de_usuario.php";
     public static final String URL_INSERIR_PRODUTOS_NO_PEDIDO = "https://www.comunidademaanaim.org.br/drinks_service/inserir_produtos_pedido.php";
+    public static final String URL_LISTAR_PRODUTOS_NO_PEDIDO = "https://www.comunidademaanaim.org.br/drinks_service/lista_produtos_por_pedido.php";
+
+
 
     public static final String APP_KEY = "6CTKkcmHuqSnl90jz58KxXe5DMDld9gi";
 

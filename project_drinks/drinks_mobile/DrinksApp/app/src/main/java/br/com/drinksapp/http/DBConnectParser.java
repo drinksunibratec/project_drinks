@@ -7,6 +7,7 @@ import java.net.HttpURLConnection;
 import java.util.List;
 
 import br.com.drinksapp.bean.ListPedido;
+import br.com.drinksapp.bean.ListProdutosPedido;
 import br.com.drinksapp.bean.Pedido;
 import br.com.drinksapp.bean.PedidoProdutos;
 import br.com.drinksapp.util.AppConfig;
@@ -233,8 +234,68 @@ public class DBConnectParser {
                         long codEstabelecimento = pedidos.get(i).getCodEstabelecimento();
                         Estabelecimento estabelecimento = consultarEstabelecimento(String.valueOf(codEstabelecimento));
                         pedidos.get(i).setEstabelecimento(estabelecimento);
+
+                        long codPedido = pedidos.get(i).getCodPedido();
+                        List<PedidoProdutos> produtos = listarProdutosDoPedidos(String.valueOf(codPedido));
+                        pedidos.get(i).setPedidoProdutos(produtos);
                     }
                     return pedidos;
+                }
+
+            }
+
+        } catch (IOException e) {
+
+        }
+
+        return retorno;
+    }
+
+    public static List<PedidoProdutos> listarProdutosDoPedidos(String codPedido) {
+        Response response = null;
+        Gson gson = new Gson();
+
+        List<PedidoProdutos> retorno = null;
+
+        try {
+            OkHttpClient client = new OkHttpClient();
+
+            RequestBody body = new FormBody.Builder()
+                    .add("codPedido", codPedido)
+                    .build();
+
+
+            Request request = new Request.Builder()
+                    .url(AppConfig.URL_LISTAR_PRODUTOS_NO_PEDIDO)
+                    .post(body)
+                    .build();
+
+            response = client.newCall(request).execute();
+
+            if (response.networkResponse().code() == HttpURLConnection.HTTP_OK) {
+                String resposta = response.body().string();
+
+
+                ListProdutosPedido listProdutosPedido = gson.fromJson(resposta, ListProdutosPedido.class);
+
+                if (listProdutosPedido != null) {
+
+                    retorno =  listProdutosPedido.getProdutos();
+                    for(int i = 0; i < retorno.size(); i++){
+                        String nome = retorno.get(i).getNome();
+                        String descricao = retorno.get(i).getDescricao();
+                        double preco = retorno.get(i).getPreco();
+
+                        Produto p = new Produto();
+                        p.setNome(nome);
+                        p.setDescricao(descricao);
+                        p.setPreco(String.valueOf(preco));
+
+                        retorno.get(i).setProduto(p);
+
+                    }
+
+                    return retorno;
                 }
 
             }

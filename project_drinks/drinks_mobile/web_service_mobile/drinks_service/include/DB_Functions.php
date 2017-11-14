@@ -69,7 +69,21 @@ class DB_Functions {
 	
 	public function listarPedidosDeUsuario($codUsuario){
 		$pedidos = null;
-		$sql = "select p.codPedido, p.dataPedido, p.codEstabelecimento,	p.status,p.valorTotal, pr.nome,	pr.preco, pp.quantidade, pp.precoTotal, p.pagamento from pedido p join pedido_produto pp on pp.codPedido = p.codPedido join produto pr on pr.codProduto = pp.codProduto WHERE p.codUsuario = " . $codUsuario;
+		$sql = "select * from pedido p WHERE p.codUsuario = " . $codUsuario;
+
+		
+		$result = $this->conn->query($sql);
+		
+		if ($result->num_rows > 0) {
+			$pedidos = $result->fetch_all(MYSQLI_ASSOC);
+		}
+
+		return $pedidos;
+	}
+	
+	public function listarProdutosPedidos($codPedido){
+		$pedidos = null;
+		$sql = "select pr.nome,	pr.preco, pr.descricao, pp.quantidade, pp.precoTotal from pedido_produto pp join produto pr on pr.codProduto = pp.codProduto WHERE pp.codPedido = " . $codPedido;
 
 		
 		$result = $this->conn->query($sql);

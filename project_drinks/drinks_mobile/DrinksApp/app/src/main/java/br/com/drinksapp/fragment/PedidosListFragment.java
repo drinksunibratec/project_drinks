@@ -1,8 +1,11 @@
 package br.com.drinksapp.fragment;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +23,7 @@ import br.com.drinksapp.adapter.PedidosAdapter;
 import br.com.drinksapp.bean.Pedido;
 import br.com.drinksapp.bean.PedidoProdutos;
 import br.com.drinksapp.bean.Usuarios;
+import br.com.drinksapp.http.DBConnectParser;
 import br.com.drinksapp.http.PedidosTask;
 import br.com.drinksapp.interfaces.OnPedidoClick;
 
@@ -27,17 +31,16 @@ import br.com.drinksapp.interfaces.OnPedidoClick;
  * Created by Silvio Cedrim on 14/11/2017.
  */
 
-public class PedidosListFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<Pedido>> {
+public class PedidosListFragment extends Fragment {
 
     private ListView mListView;
 
-    LoaderManager mLoader;
-
     List<Pedido> mPedidos;
 
-    List<PedidoProdutos> mPedidosProdutos;
+
 
     TextView mTxtListaVazia;
+    private ProgressDialog pDialog;
 
 
     public PedidosListFragment() {
@@ -52,39 +55,60 @@ public class PedidosListFragment extends Fragment implements LoaderManager.Loade
 
         mPedidos = new ArrayList<Pedido>();
 
-        mLoader = getLoaderManager();
-        mLoader.initLoader(0, null, this);
+        Usuarios usuario = new Usuarios(MySaveSharedPreference.getUserId(getActivity()));
 
-        if (mPedidos.size() == 0) {
-            mListView.setEmptyView(mTxtListaVazia);
-        } else {
-            mListView.setAdapter(new PedidosAdapter(getActivity(), mPedidos));
-            mListView.setOnItemClickListener(new ListViewHeroi());
-        }
+        pDialog = new ProgressDialog(getActivity());
+        pDialog.setCancelable(false);
+        initTask(usuario);
 
-        // Inflate the layout for this fragment
         return layout;
     }
 
-    @Override
-    public Loader<List<Pedido>> onCreateLoader(int id, Bundle args) {
-        long codUusario = MySaveSharedPreference.getUserId(getActivity());
-        Usuarios usuario = new Usuarios(codUusario);
-        return new PedidosTask(getActivity(), usuario);
+
+    private void showDialog() {
+        if (!pDialog.isShowing())
+            pDialog.show();
     }
 
-    @Override
-    public void onLoadFinished(Loader<List<Pedido>> loader, List<Pedido> data) {
-        if (data != null) {
-            mPedidos = data;
-            mListView.setAdapter(new PedidosAdapter(getActivity(), data));
+    private void hideDialog() {
+        if (pDialog.isShowing())
+            pDialog.dismiss();
+    }
+
+
+
+
+    void initTask(Usuarios usuario){
+        new TaskPedidos().execute(usuario);
+    }
+
+    class TaskPedidos extends AsyncTask<Usuarios, Void, Void>{
+        @Override
+        protected void onPreExecute() {
+            pDialog.setMessage("Carregando... aguarde!");
+            showDialog();
+        }
+
+        @Override
+        protected Void doInBackground(Usuarios... params) {
+            mPedidos = DBConnectParser.listarPedidosdeCliente(params[0]);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            if (mPedidos.size() == 0) {
+                mTxtListaVazia.setVisibility(View.VISIBLE);
+                mListView.setEmptyView(mTxtListaVazia);
+            } else {
+                mTxtListaVazia.setVisibility(View.INVISIBLE);
+                mListView.setAdapter(new PedidosAdapter(getActivity(), mPedidos));
+                mListView.setOnItemClickListener(new ListViewHeroi());
+            }
+            hideDialog();
         }
     }
 
-    @Override
-    public void onLoaderReset(Loader<List<Pedido>> loader) {
-
-    }
 
     class ListViewHeroi implements AdapterView.OnItemClickListener {
 

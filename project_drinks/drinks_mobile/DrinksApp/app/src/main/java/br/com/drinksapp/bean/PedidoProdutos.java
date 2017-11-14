@@ -15,36 +15,62 @@ public class PedidoProdutos implements Parcelable {
 
     long codPedido;
 
-//    long codEstabelcimento;
-//
     double preco;
 
     int quantidade;
 
     double precoTotal;
-//
-//    Produto produto;
+
+    Produto produto;
+
+    /*
+    Produto
+     */
+
+    String nome;
+
+    String descricao;
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
+
+    public static Creator<PedidoProdutos> getCREATOR() {
+        return CREATOR;
+    }
 
     public PedidoProdutos() {
     }
 
-//    public PedidoProdutos(long codProduto, long codPedido, long codEstabelcimento, double preco, int quantidade, double precoTotal) {
-//        this.codProduto = codProduto;
-//        this.codPedido = codPedido;
-//        this.codEstabelcimento = codEstabelcimento;
-//        this.preco = preco;
-//        this.quantidade = quantidade;
-//        this.precoTotal = precoTotal;
-//    }
-
     protected PedidoProdutos(Parcel in) {
         codProduto = in.readLong();
         codPedido = in.readLong();
-//        codEstabelcimento = in.readLong();
+        nome = in.readString();
+        descricao = in.readString();
         preco = in.readDouble();
         quantidade = in.readInt();
         precoTotal = in.readDouble();
-//        produto = in.readParcelable(Produto.class.getClassLoader());
+        produto = in.readParcelable(Produto.class.getClassLoader());
     }
 
     public static final Creator<PedidoProdutos> CREATOR = new Creator<PedidoProdutos>() {
@@ -59,13 +85,6 @@ public class PedidoProdutos implements Parcelable {
         }
     };
 
-    //    public Produto getProduto() {
-//        return produto;
-//    }
-//
-//    public void setProduto(Produto produto) {
-//        this.produto = produto;
-//    }
     public double getPreco() {
         return preco;
     }
@@ -89,14 +108,6 @@ public class PedidoProdutos implements Parcelable {
     public void setPrecoTotal(double precoTotal) {
         this.precoTotal = precoTotal;
     }
-//
-//    public long getCodEstabelcimento() {
-//        return codEstabelcimento;
-//    }
-//
-//    public void setCodEstabelcimento(long codEstabelcimento) {
-//        this.codEstabelcimento = codEstabelcimento;
-//    }
 
     public long getCodProduto() {
         return codProduto;
@@ -124,10 +135,12 @@ public class PedidoProdutos implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(codProduto);
         dest.writeLong(codPedido);
-//        dest.writeLong(codEstabelcimento);
         dest.writeDouble(preco);
         dest.writeInt(quantidade);
         dest.writeDouble(precoTotal);
-//        dest.writeParcelable(produto, flags);
+        dest.writeParcelable(produto, flags);
+        dest.writeString(nome);
+        dest.writeString(descricao);
     }
 }
+
