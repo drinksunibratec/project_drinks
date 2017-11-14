@@ -105,7 +105,7 @@ $dado= detalhesPedido($codEstabelecimento);
                             
                               <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title text-center" id="myModalLabel"><?php echo "Pedido de Número: " . $pedido['codPedido']; ?></h4>
+                                <h4 class="modal-title text-center" id="myModalLabel"><?php echo "Pedido de Nï¿½mero: " . $pedido['codPedido']; ?></h4>
                               </div>
                               
                               <!-- Dados no Modal-->
@@ -137,7 +137,7 @@ $dado= detalhesPedido($codEstabelecimento);
                                 	</div>
                             	</div>
                             	
-								<div class"container-fluid">
+								<div class="container-fluid">
                                 <div class="row">
                                     <div class="col-md-1">Cod.</div>                                  
                                     <div class="col-md-5">Produto</div>
@@ -181,7 +181,7 @@ $dado= detalhesPedido($codEstabelecimento);
                               
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                                <button type="submit" class="btn btn-primary">Salvar Alteraï¿½ï¿½es</button>
                               </div>
                               
                              </div>                            

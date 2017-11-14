@@ -16,7 +16,7 @@ if (isset($_POST['email']) && empty($_POST['email']) == false) {
     $senha = addslashes($_POST['senha']);
     
     $result = login(ESTABELECIMENTO, $email, $senha);
-    
+    $_SESSION['idEstabelecimento'] = 5;
     if ($result) {
         $_SESSION['codEstabelecimento'] = $result['codEstabelecimento'];
         $_SESSION['administrador'] = $result['administrador'];

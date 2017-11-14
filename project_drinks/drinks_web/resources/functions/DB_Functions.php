@@ -83,7 +83,7 @@ function update($table = null, $id = 0, $data = null, $nomeId)
     try {
         
         $database->query($sql);
-        
+//        $_SESSION['message'] = $sql;
         $_SESSION['message'] = 'Registro atualizado com sucesso.';
         $_SESSION['type'] = 'success';
     } catch (Exception $e) {
@@ -110,11 +110,13 @@ function insert($table = null, $data = null)
     $values = rtrim($values, ',');
     
     $sql = "INSERT INTO " . $table . "($columns)" . " VALUES " . "($values);";
+    
     try {
         
         $database->query($sql);
         
         $_SESSION['message'] = 'Registro cadastrado com sucesso.';
+//        $_SESSION['message'] = $sql;
         $_SESSION['type'] = 'success';
     } catch (Exception $e) {
         
@@ -180,22 +182,5 @@ function listarPedido($nomeId = null)
     return $found;
 }
 
-function deleta($tabela, $where=NULL){
-    //MONTAR SQL
-    $delete = "DELETE FROM {$tabela} {$where}";
-    //CONECTOU?
-    if($conn = open_database()){
-        if(mysqli_query($delete, $conn)){
-            //FECHAR CONEXAO
-            close_database($conn);
-            return true;
-        }else {
-            //MOSTRAR A MENSAGEM DE ERRO
-            echo "QUERY INVALIDA {$delete}";
-            return FALSE;
-        }
-    } else {
-        return FALSE;
-    }
-}
+
     
