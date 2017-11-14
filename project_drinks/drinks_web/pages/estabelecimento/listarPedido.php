@@ -10,7 +10,7 @@ if (isset($_GET['codEstabelecimento']) && empty($_GET['codEstabelecimento']) == 
 }
 
 $dado= detalhesPedido($codEstabelecimento);
-update('pedido', $codPedido, $dado, 'codPedido');
+//update('pedido', $codEstabelecimento, $dado, 'codPedido');
 
 ?>
 
