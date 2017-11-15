@@ -52,7 +52,9 @@ $dados = buscarRegistroPorId(ESTABELECIMENTO, $codEstabelecimento, 'codEstabelec
 <body>
 	<div class="container">
 	
-		<?php foreach ($dados as $dado) {?>
+		<?php 
+		if(count($dados) > 0){
+		foreach ($dados as $dado) {?>
 		
 		<h3>Dados cadastrais de <?php echo $dado['nomeFantasia']; ?>:</h3>
 		<div class="jumbotron">
@@ -134,13 +136,13 @@ $dados = buscarRegistroPorId(ESTABELECIMENTO, $codEstabelecimento, 'codEstabelec
 					<div class="form-group col-md-2">
 						<label for="latitute">Latitude</label> <input type="text"
 							class="form-control" name="latitude"
-							value="<?php echo $dado['latitude']; ?>">
+							value="<?php echo $dado['latitude']; ?>" maxlength="14">
 					</div>
 
 					<div class="form-group col-md-2">
 						<label for="longitude">Longitude</label> <input type="text"
 							class="form-control" name="longitude"
-							value="<?php echo $dado['longitude']; ?>">
+							value="<?php echo $dado['longitude']; ?>" maxlength="14">
 					</div>
 				</div>
 
@@ -148,13 +150,13 @@ $dados = buscarRegistroPorId(ESTABELECIMENTO, $codEstabelecimento, 'codEstabelec
 					<div class="form-group col-md-3">
 						<label for="telefone">Telefone</label> <input type="text"
 							class="form-control" name="telefone"
-							value="<?php echo $dado['telefone']; ?>">
+							value="<?php echo Mask('(##) #####-####',$dado['telefone']); ?>" maxlength="11">
 					</div>
 
 					<div class="form-group col-md-3">
 						<label for="senha">Senha</label> <input type="password"
 							class="form-control" name="senha"
-							value="<?php echo $dado['senha']; ?>">
+							value="<?php echo $dado['senha']; ?>"maxlength="16">
 					</div>
 
 				</div>
@@ -169,7 +171,8 @@ $dados = buscarRegistroPorId(ESTABELECIMENTO, $codEstabelecimento, 'codEstabelec
 
 			</form>
 		</div>
-		<?php }?>
+		<?php }
+		}?>
 	</div>
 
 </body>

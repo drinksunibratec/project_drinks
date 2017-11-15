@@ -167,7 +167,9 @@ function listarPedido($nomeId = null)
     try {
         $database = open_database();
         
-        $sql = "SELECT * FROM pedido,usuarios
+        $sql = "SELECT pedido.codPedido,pedido.dataPedido,pedido.pagamento,
+                pedido.status,pedido.valorTotal,usuarios.nome AS usuario
+        FROM pedido,usuarios
         WHERE pedido.codUsuario = usuarios.codUsuario
         AND pedido.codEstabelecimento = ".$nomeId. ";" ;
         $result = $database->query($sql);

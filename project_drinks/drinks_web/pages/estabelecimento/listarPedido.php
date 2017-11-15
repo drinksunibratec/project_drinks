@@ -9,7 +9,8 @@ if (isset($_GET['codEstabelecimento']) && empty($_GET['codEstabelecimento']) == 
     $codEstabelecimento = $_SESSION['codEstabelecimento'];
 }
 
-$dado= detalhesPedido($codEstabelecimento);
+$detalhe= detalhesPedido($codEstabelecimento);
+$dados= listarPedido($codEstabelecimento);
 //update('pedido', $codEstabelecimento, $dado, 'codPedido');
 
 ?>
@@ -66,8 +67,8 @@ $dado= detalhesPedido($codEstabelecimento);
                 $count_Nov = null;
                 $faturamentoBruto = null;
                 $ticket = null;
-            	if(count($dado) > 0){
-            	        foreach ($dado as $pedido){
+            	if(count($dados) > 0){
+            	        foreach ($dados as $pedido){
 
                         
                           if(count($pedido['codPedido']) > 0){
@@ -77,9 +78,7 @@ $dado= detalhesPedido($codEstabelecimento);
                         if($pedido['valorTotal'] > 0){
                             $faturamentoBruto = $pedido['valorTotal'] + $faturamentoBruto;
                             $ticket = $faturamentoBruto / $count_Nov;
-                        }
-                      
-                        
+                        }                     
                         
 
                 ?>
