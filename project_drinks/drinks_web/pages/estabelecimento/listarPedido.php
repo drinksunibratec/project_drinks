@@ -11,10 +11,9 @@ if (isset($_GET['codEstabelecimento']) && empty($_GET['codEstabelecimento']) == 
 
 $detalhe= detalhesPedido($codEstabelecimento);
 $dados= listarPedido($codEstabelecimento);
-//update('pedido', $codEstabelecimento, $dado, 'codPedido');
+//update('pedido', $codEstabelecimento, $dados, 'codPedido');
 
 ?>
-
 
 
 
@@ -135,7 +134,7 @@ $dados= listarPedido($codEstabelecimento);
                                       <input type="text" class="form-control" name="valorTotal" value="<?php echo "R$ " . $pedido['valorTotal']; ?>"readonly>
                                 	</div>
                             	</div>
-                            	
+                            	<!-- Laço para verificar quantos são os produtos e add na grid -->
 								<div class="container-fluid">
                                 <div class="row">
                                     <div class="col-md-1">Cod.</div>                                  
