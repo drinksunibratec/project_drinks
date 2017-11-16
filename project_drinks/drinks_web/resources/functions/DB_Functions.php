@@ -147,7 +147,7 @@ function detalhesPedido($nomeId = null)
                 AND pedido.codPedido = pedido_produto.codPedido
                 AND pedido.codEstabelecimento = estabelecimento.codEstabelecimento
                 AND pedido.codEstabelecimento = ".$nomeId.
-                " GROUP BY pedido.codPedido;" ;
+                " GROUP BY pedido_produto.codProduto;" ;
         
         $result = $database->query($sql);
         if ($result->num_rows > 0) {
@@ -167,11 +167,29 @@ function listarPedido($nomeId = null)
     try {
         $database = open_database();
         
-        $sql = "SELECT pedido.codPedido,pedido.dataPedido,pedido.pagamento,
-                pedido.status,pedido.valorTotal,usuarios.nome AS usuario
-        FROM pedido,usuarios
-        WHERE pedido.codUsuario = usuarios.codUsuario
-        AND pedido.codEstabelecimento = ".$nomeId. ";" ;
+        $sql = "SELECT pedido.codPedido,pedido.dataPedido, pedido.bairro,
+                pedido.cidade,pedido.rua,pedido.numero,pedido.pagamento,
+                pedido.status,pedido.valorTotal,usuarios.nome AS usuario,
+                usuarios.telefone,usuarios.email,pedido_produto.codProduto,
+                pedido_produto.preco,pedido_produto.quantidade,
+                pedido_produto.precoTotal,produto.nome
+            
+                FROM pedido,pedido_produto,usuarios,produto, estabelecimento
+            
+                WHERE pedido.codPedido = pedido_produto.codPedido
+                AND pedido.codUsuario = usuarios.codUsuario
+                AND produto.codProduto = pedido_produto.codProduto
+                AND pedido.codPedido = pedido_produto.codPedido
+                AND pedido.codEstabelecimento = estabelecimento.codEstabelecimento
+                AND pedido.codEstabelecimento = ".$nomeId.
+                " GROUP BY pedido.codPedido;" ;
+        
+//         $sql = "SELECT pedido.codPedido,pedido.dataPedido,pedido.bairro,
+//                 pedido.cidade,pedido.rua,pedido.numero,pedido.pagamento,
+//                 pedido.status,pedido.valorTotal,usuarios.nome AS usuario
+//         FROM pedido,usuarios
+//         WHERE pedido.codUsuario = usuarios.codUsuario
+//         AND pedido.codEstabelecimento = ".$nomeId. ";" ;
         $result = $database->query($sql);
         if ($result->num_rows > 0) {
             $found = $result->fetch_all(MYSQLI_ASSOC);
