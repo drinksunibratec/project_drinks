@@ -21,7 +21,7 @@
                             
     					<?php }?>
     					
-							<li><a href="../estabelecimento/listarPedido.php">Pedidos</a></li>
+							<li><a href="../pedido/listarPedido.php">Pedidos</a></li>
                             <li><a href="../produto/lista.php">Produtos</a></li>
                             <li><a href="../estabelecimento/relatorios.php">Relatorios</a></li>
 					 

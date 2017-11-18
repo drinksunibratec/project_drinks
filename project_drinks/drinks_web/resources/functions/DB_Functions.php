@@ -126,7 +126,7 @@ function insert($table = null, $data = null)
     close_database($database);
 }
 
-function detalhesPedido($nomeId = null)
+function detalhesPedido($nomeId = null, $codPed = null)
 {
     $found = null;
     try {
@@ -147,7 +147,8 @@ function detalhesPedido($nomeId = null)
                 AND pedido.codPedido = pedido_produto.codPedido
                 AND pedido.codEstabelecimento = estabelecimento.codEstabelecimento
                 AND pedido.codEstabelecimento = ".$nomeId.
-                " GROUP BY pedido_produto.codProduto;" ;
+                " AND pedido.codPedido = " .$codPed.
+                " GROUP BY pedido_produto.codPedido;" ;
         
         $result = $database->query($sql);
         if ($result->num_rows > 0) {
@@ -184,12 +185,6 @@ function listarPedido($nomeId = null)
                 AND pedido.codEstabelecimento = ".$nomeId.
                 " GROUP BY pedido.codPedido;" ;
         
-//         $sql = "SELECT pedido.codPedido,pedido.dataPedido,pedido.bairro,
-//                 pedido.cidade,pedido.rua,pedido.numero,pedido.pagamento,
-//                 pedido.status,pedido.valorTotal,usuarios.nome AS usuario
-//         FROM pedido,usuarios
-//         WHERE pedido.codUsuario = usuarios.codUsuario
-//         AND pedido.codEstabelecimento = ".$nomeId. ";" ;
         $result = $database->query($sql);
         if ($result->num_rows > 0) {
             $found = $result->fetch_all(MYSQLI_ASSOC);
@@ -202,5 +197,40 @@ function listarPedido($nomeId = null)
     return $found;
 }
 
+function itens($nomeId = null, $codPed=null)
+{
+    $found = null;
+    try {
+        $database = open_database();
+        
+        $sql = "SELECT pedido.codPedido,pedido.dataPedido, pedido.bairro,
+                pedido.cidade,pedido.rua,pedido.numero,pedido.pagamento,
+                pedido.status,pedido.valorTotal,usuarios.nome AS usuario,
+                usuarios.telefone,usuarios.email,pedido_produto.codProduto,
+                pedido_produto.preco,pedido_produto.quantidade,
+                pedido_produto.precoTotal,produto.nome
+            
+                FROM pedido,pedido_produto,usuarios,produto, estabelecimento
+            
+                WHERE pedido.codPedido = pedido_produto.codPedido
+                AND pedido.codUsuario = usuarios.codUsuario
+                AND produto.codProduto = pedido_produto.codProduto
+                AND pedido.codPedido = pedido_produto.codPedido
+                AND pedido.codEstabelecimento = estabelecimento.codEstabelecimento
+                AND pedido.codEstabelecimento = ".$nomeId.
+                " AND pedido.codPedido = " .$codPed.
+                " ORDER BY pedido_produto.codProduto;" ;
+        
+        $result = $database->query($sql);
+        if ($result->num_rows > 0) {
+            $found = $result->fetch_all(MYSQLI_ASSOC);
+        }
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+    return $found;
+}
 
     
