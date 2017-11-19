@@ -5,11 +5,11 @@ require_once ('../menu/menu.php');
 $codEstabelecimento = null;
 if (isset($_GET['codEstabelecimento']) && empty($_GET['codEstabelecimento']) == false) {
     $codEstabelecimento = $_GET['codEstabelecimento'];
-}else{
+} else {
     $codEstabelecimento = $_SESSION['codEstabelecimento'];
 }
 
-$dado= listarPedido($codEstabelecimento);
+$dado = listarPedido($codEstabelecimento);
 
 ?>
 
@@ -19,10 +19,12 @@ $dado= listarPedido($codEstabelecimento);
 <html lang="pt-br">
 <head>
 
-	<meta charset="UTF-8">
- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-       
+<meta charset="UTF-8">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <title>Lista de Pedidos</title>
 </head>
 
@@ -34,27 +36,28 @@ $dado= listarPedido($codEstabelecimento);
 				<div class="panel-body">
            			
             	<?php
-                $count_Nov = null;
-                $faturamentoBruto = null;
-                $ticket = null;
-            	if(count($dado) > 0){
-            	        foreach ($dado as $pedido){
-
-                        
-                          if(count($pedido['codPedido']) > 0){
-                          $count_Nov++;  
-                        }
-
-                        if($pedido['valorTotal'] > 0){
-                            $faturamentoBruto = $pedido['valorTotal'] + $faturamentoBruto;
-                            $ticket = $faturamentoBruto / $count_Nov;
-                        }                  
-
-                ?>
+            $count_Nov = null;
+            $faturamentoBruto = null;
+            $ticket = null;
+            if (count($dado) > 0) {
+                foreach ($dado as $pedido) {
+                    
+                    if (count($pedido['codPedido']) > 0) {
+                        $count_Nov ++;
+                    }
+                    
+                    if ($pedido['valorTotal'] > 0) {
+                        $faturamentoBruto = $pedido['valorTotal'] + $faturamentoBruto;
+                        $ticket = $faturamentoBruto / $count_Nov;
+                    }
+                    
+                    ?>
                 
-                    <div id="barchart_material" style="width: 900px; height: 500px;"></div>
-                    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-                    <script type="text/javascript">
+                    <div id="barchart_material"
+						style="width: 900px; height: 500px;"></div>
+					<script type="text/javascript"
+						src="https://www.gstatic.com/charts/loader.js"></script>
+					<script type="text/javascript">
                     google.charts.load('current', {'packages':['bar']});
                     google.charts.setOnLoadCallback(drawChart);
 
@@ -81,8 +84,11 @@ $dado= listarPedido($codEstabelecimento);
       }
     </script>
             			
-            	<?php }
-                    }?>            			
+            	<?php
+                
+}
+            }
+            ?>            			
 				
 				</div>
 			</div>

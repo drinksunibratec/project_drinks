@@ -134,10 +134,10 @@ function detalhesPedido($nomeId = null, $codPed = null)
             
         $sql = "SELECT pedido.codPedido,pedido.dataPedido, pedido.bairro,
                 pedido.cidade,pedido.rua,pedido.numero,pedido.pagamento,
-                pedido.status,pedido.valorTotal,usuarios.nome AS usuario,
-                usuarios.telefone,usuarios.email,pedido_produto.codProduto,
-                pedido_produto.preco,pedido_produto.quantidade,
-                pedido_produto.precoTotal,produto.nome
+                pedido.status,pedido.valorTotal,pedido.codUsuario,
+                usuarios.nome AS usuario,usuarios.telefone,usuarios.email,
+                pedido_produto.codProduto,pedido_produto.preco,
+                pedido_produto.quantidade,pedido_produto.precoTotal,produto.nome
 
                 FROM pedido,pedido_produto,usuarios,produto, estabelecimento
 
@@ -170,10 +170,10 @@ function listarPedido($nomeId = null)
         
         $sql = "SELECT pedido.codPedido,pedido.dataPedido, pedido.bairro,
                 pedido.cidade,pedido.rua,pedido.numero,pedido.pagamento,
-                pedido.status,pedido.valorTotal,usuarios.nome AS usuario,
-                usuarios.telefone,usuarios.email,pedido_produto.codProduto,
-                pedido_produto.preco,pedido_produto.quantidade,
-                pedido_produto.precoTotal,produto.nome
+                pedido.status,pedido.valorTotal,pedido.codUsuario,
+                usuarios.nome AS usuario,usuarios.telefone,usuarios.email,
+                pedido_produto.codProduto,pedido_produto.preco,
+                pedido_produto.quantidade,pedido_produto.precoTotal,produto.nome
             
                 FROM pedido,pedido_produto,usuarios,produto, estabelecimento
             
@@ -205,10 +205,10 @@ function itens($nomeId = null, $codPed=null)
         
         $sql = "SELECT pedido.codPedido,pedido.dataPedido, pedido.bairro,
                 pedido.cidade,pedido.rua,pedido.numero,pedido.pagamento,
-                pedido.status,pedido.valorTotal,usuarios.nome AS usuario,
-                usuarios.telefone,usuarios.email,pedido_produto.codProduto,
-                pedido_produto.preco,pedido_produto.quantidade,
-                pedido_produto.precoTotal,produto.nome
+                pedido.status,pedido.valorTotal,pedido.codUsuario,
+                usuarios.nome AS usuario,usuarios.telefone,usuarios.email,
+                pedido_produto.codProduto,pedido_produto.preco,
+                pedido_produto.quantidade,pedido_produto.precoTotal,produto.nome
             
                 FROM pedido,pedido_produto,usuarios,produto, estabelecimento
             
@@ -232,5 +232,3 @@ function itens($nomeId = null, $codPed=null)
     close_database($database);
     return $found;
 }
-
-    

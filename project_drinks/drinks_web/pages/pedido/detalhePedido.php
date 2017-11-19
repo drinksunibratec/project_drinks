@@ -1,10 +1,16 @@
 <?php
+/*
+ *
+ * Created by Tercio Lima on 17/11/2017
+ *
+ */
 require_once ('../include/header.php');
 require_once ('../menu/menu.php');
 
 $codEstabelecimento = null;
 $codPedido = null;
 $mensagens = new Mensagens();
+
 
 if (isset($_GET['codEstabelecimento']) && empty($_GET['codEstabelecimento']) == false) {
     $codEstabelecimento = $_GET['codEstabelecimento'];
@@ -14,31 +20,26 @@ if (isset($_GET['codEstabelecimento']) && empty($_GET['codEstabelecimento']) == 
 
 if (isset($_GET['codPedido']) && empty($_GET['codPedido']) == false) {
     $codPedido = addslashes($_GET['codPedido']);
+      
+}
+
+if (isset($_POST['codPedido']) && empty($_POST['codPedido']) == false) {
+    $dados = $_POST;
+    
+      
+    update(PEDIDO, $codPedido, $dados, 'codPedido');
+    
+    header("Location: detalhePedido.php");
+    
 }
 
 $dados = detalhesPedido($codEstabelecimento, $codPedido);
 $pdo = itens($codEstabelecimento, $codPedido);
 
-// update(PEDIDO, $codPedido , $pdo, 'codPedido');
-
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-
-<!-- MASCARA -->
-<script>
-jQuery(function($){
-    $('#preco').maskMoney({prefix:'R$ ', allowNegative: false, thousands:'.', decimal:',', affixesStay: false});
-});
-    </script>
-</head>
-
-
-<body>
-
-
 <body>
 	<div class="container">
 	
@@ -94,24 +95,21 @@ if (count($dados) > 0) {
 									<th>Preço</th>
 									<th>Quant.</th>
 									<th>Pr. Total</th>
-									<th></th>
 								</tr>
 							</thead>
 							<tbody>
 							
                            <?php
-        
-        foreach ($pdo as $row) {
-            echo '<tr>';
-            echo '<td>' . $row['codProduto'] . '</td>';
-            echo '<td>' . $row['nome'] . '</td>';
-            echo '<td>' . "R$ " . $row['preco'] . '</td>';
-            echo '<td>' . $row['quantidade'] . '</td>';
-            echo '<td>' . "R$ " . $row['precoTotal'] . '</td>';
-            echo '<td>' . '<a title="Excluir" id="btn-excluir" href="deletar.php?codProduto=' . $row['codProduto'] . '"' . 'class="btn btn-sm btn-danger tooltipBtn"> &#10006; Excluir</a>' . '</td>';
-            echo '</tr>';
-        }
-        ?>
+                            foreach ($pdo as $row) {
+                                echo '<tr>';
+                                echo '<td>' . $row['codProduto'] . '</td>';
+                                echo '<td>' . $row['nome'] . '</td>';
+                                echo '<td>' . "R$ " . $row['preco'] . '</td>';
+                                echo '<td>' . $row['quantidade'] . '</td>';
+                                echo '<td>' . "R$ " . $row['precoTotal'] . '</td>';
+                                echo '</tr>';
+                            }
+                            ?>
                                                                         
                         </tbody>
 						</table>
@@ -144,17 +142,12 @@ if (count($dados) > 0) {
 								value="<?php echo $pedido['cidade']; ?>">
 						</div>
 					</div>
-					<div class="form-group col-md-4">
-						<!-- Div Status -->
-						<label for="status">Status</label> <select
-							class="form-control selectpicker" name="status" id="status"
-							required>
-							<option value="">
-                                                    <?php echo $pedido['status']; ?>
-                                                </option>
-							<option value="1">CANCELADO</option>
-							<option value="0">ENTREGUE</option>
-						</select>
+
+					<div class="row">
+						<div class="form-group col-md-4">
+							<label for="status">Status</label>
+                            	<?php selected_Status($pedido['status'])?>
+                            </div>
 					</div>
 
 					<div class=row>

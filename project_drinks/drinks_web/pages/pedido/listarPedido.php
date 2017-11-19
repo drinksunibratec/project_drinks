@@ -1,4 +1,9 @@
 <?php
+/*
+ *
+ * Created by Tercio Lima on 05/11/2017
+ *
+ */
 require_once ('../include/header.php');
 require_once ('../menu/menu.php');
 
@@ -49,7 +54,6 @@ $dados = listarPedido($codEstabelecimento);
 					<input class="form-control" id="myInput" type="text"
 						placeholder="Pesquisar..." style="width: 400px;"> <br>
 
-					<!-- TABLE -->
 					<table border="1" class="table table-bordered table-striped">
 						<thead class="blue-grey lighten-4">
 							<tr>
@@ -75,10 +79,9 @@ $dados = listarPedido($codEstabelecimento);
 								<td><?php echo $pedido['pagamento']; ?></td>
 								<td><?php echo "R$ ".$pedido['valorTotal']; ?></td>
 								<td><?php echo $pedido['status']; ?></td>
-								<td align="center">
-                                <a title="Detalhes" href="detalhePedido.php?codPedido=<?php echo  $pedido['codPedido']?>"
-    						class="btn btn-sm btn-warning">&#9999; Detalhes</a>
-									</td>
+								<td align="center"><a title="Detalhes"
+									href="detalhePedido.php?codPedido=<?php echo  $pedido['codPedido']?>"
+									class="btn btn-sm btn-warning">&#9999; Detalhes</a></td>
 							</tr>
 						</tbody>						
                                 <?php
@@ -86,13 +89,7 @@ $dados = listarPedido($codEstabelecimento);
                             }
                             ?>
                         </table>
-					<!-- END TABLE -->
-
-					<!-- *** Inicio Modal *** -->
-
-					<!--Fim Modal -->
-					<!--Aqui era o Fim PHP -->
-
+                        
 				</div>
 			</div>
 		</div>
