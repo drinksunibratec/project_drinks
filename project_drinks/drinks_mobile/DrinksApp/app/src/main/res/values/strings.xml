@@ -26,7 +26,7 @@
     <string name="sobre_mensagem">Em desenvolvimento...</string>
     <string name="sobre_botao_site">Site</string>
     <string name="nome">Nome</string>
-    <string name="endereco">Endereço</string>
+    <string name="rua">Endereço</string>
     <string name="classificacao">Classificação</string>
     <string name="acao_delete">Excluir</string>
     <plurals name="numero_selecionados">
@@ -85,4 +85,12 @@
     <string name="txt_endereco_entrega">Endereço de entrega</string>
     <string name="edt_complemento">Complemento</string>
     <string name="txtListaVazia">Você ainda não realizou pedidos.</string>
+
+    <string name="estabelecimento">Estabelecimento</string>
+    <string name="produtos">Produtos</string>
+    <string name="status">Status</string>
+    <string name="data_pedido">Data do Pedido</string>
+    <string name="valor_total_pedido">Valor total</string>
+    <string name="txt_detalhes_pedido">Detalhes do Pedido</string>
 </resources>
+

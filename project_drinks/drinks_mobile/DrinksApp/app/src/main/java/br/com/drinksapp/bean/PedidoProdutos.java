@@ -9,7 +9,7 @@ import java.io.Serializable;
  * Created by Silvio Cedrim on 28/10/2017.
  */
 
-public class PedidoProdutos implements Parcelable {
+public class PedidoProdutos implements Serializable {
 
     long codProduto;
 
@@ -55,9 +55,6 @@ public class PedidoProdutos implements Parcelable {
         this.produto = produto;
     }
 
-    public static Creator<PedidoProdutos> getCREATOR() {
-        return CREATOR;
-    }
 
     public PedidoProdutos() {
     }
@@ -73,17 +70,6 @@ public class PedidoProdutos implements Parcelable {
         produto = in.readParcelable(Produto.class.getClassLoader());
     }
 
-    public static final Creator<PedidoProdutos> CREATOR = new Creator<PedidoProdutos>() {
-        @Override
-        public PedidoProdutos createFromParcel(Parcel in) {
-            return new PedidoProdutos(in);
-        }
-
-        @Override
-        public PedidoProdutos[] newArray(int size) {
-            return new PedidoProdutos[size];
-        }
-    };
 
     public double getPreco() {
         return preco;
@@ -126,21 +112,5 @@ public class PedidoProdutos implements Parcelable {
     }
 
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(codProduto);
-        dest.writeLong(codPedido);
-        dest.writeDouble(preco);
-        dest.writeInt(quantidade);
-        dest.writeDouble(precoTotal);
-        dest.writeParcelable(produto, flags);
-        dest.writeString(nome);
-        dest.writeString(descricao);
-    }
 }
 

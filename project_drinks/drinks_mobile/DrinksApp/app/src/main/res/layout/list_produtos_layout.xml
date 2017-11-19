@@ -30,7 +30,6 @@
             android:id="@+id/btn_carrinho"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_padding"
             android:textColor="@color/btn_login"
             android:drawableRight="@drawable/ic_arrow_forward"
             android:background="@drawable/click_botao"

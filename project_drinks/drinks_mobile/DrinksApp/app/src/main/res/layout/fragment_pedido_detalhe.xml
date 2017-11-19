@@ -1,0 +1,117 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_color"
+    android:orientation="vertical"
+    tools:context="br.com.drinksapp.activity.PedidoDetalheActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/cinza_claro_color"
+        android:gravity="left"
+        android:orientation="horizontal"
+        android:padding="@dimen/medium_padding">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_truck_delivery" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/medium_padding"
+            android:text="@string/txt_detalhes_pedido"
+            android:textColor="@color/black_color"
+            android:textSize="@dimen/medium_text" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white_color"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtNomeEstabelecimentoDetalhe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/medium_padding"
+            android:layout_marginTop="@dimen/medium_padding"
+            android:text="Nome"
+            android:textColor="@color/black_color"
+            android:textSize="@dimen/medium_padding" />
+
+
+        <TextView
+            android:id="@+id/txtValorTotalDetalhe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/medium_padding"
+            android:paddingTop="8dp"
+            android:text="Preço"
+            android:textColor="@color/black_color"
+            android:textSize="@dimen/small_text" />
+
+        <TextView
+            android:id="@+id/txtStatusDetalhe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/medium_padding"
+            android:paddingTop="8dp"
+            android:text="Status"
+            android:textColor="@color/black_color"
+            android:textSize="@dimen/small_text" />
+
+        <TextView
+            android:id="@+id/txtDataPedidoDetalhe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/very_small_padding"
+            android:layout_marginLeft="@dimen/medium_padding"
+            android:paddingTop="8dp"
+            android:text="Data"
+            android:textColor="@color/black_color"
+            android:textSize="@dimen/very_small_text" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/cinza_claro_color"
+        android:gravity="left"
+        android:orientation="horizontal"
+        android:padding="@dimen/medium_padding">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_beer" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/medium_padding"
+            android:text="@string/produtos"
+            android:textColor="@color/black_color"
+            android:textSize="@dimen/medium_text" />
+
+
+    </LinearLayout>
+
+
+    <ListView
+        android:id="@+id/lista_produto_detalhe_pedidos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white_color" />
+
+</LinearLayout>
+
+

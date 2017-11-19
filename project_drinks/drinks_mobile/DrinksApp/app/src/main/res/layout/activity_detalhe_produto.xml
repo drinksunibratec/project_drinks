@@ -79,7 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:paddingLeft="@dimen/very_large_padding"
+            android:paddingLeft="@dimen/very_very_large_padding"
             android:paddingTop="@dimen/very_small_padding"
             android:src="@drawable/ic_botao_menos" />
 
@@ -115,7 +115,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_marginRight="@dimen/medium_padding"
+            android:layout_marginRight="@dimen/large_padding"
             android:paddingLeft="@dimen/small_padding"
             android:text="@string/txt_total_pedido"
             android:textColor="@color/black_color"

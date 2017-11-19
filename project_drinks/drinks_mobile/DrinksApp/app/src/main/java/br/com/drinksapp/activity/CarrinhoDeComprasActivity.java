@@ -23,6 +23,7 @@ import br.com.drinksapp.adapter.CarrinhoComprasAdapter;
 import br.com.drinksapp.bean.ItemCarrinhoCompras;
 import br.com.drinksapp.bean.Pedido;
 import br.com.drinksapp.bean.PedidoProdutos;
+import br.com.drinksapp.bean.Produto;
 import br.com.drinksapp.db.DAODrinks;
 import br.com.drinksapp.http.DBConnectParser;
 import br.com.drinksapp.util.Constantes;
@@ -48,7 +49,8 @@ public class CarrinhoDeComprasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_carrinho_de_compras);
 
-        mCarrinho = getIntent().getParcelableArrayListExtra(Constantes.EXTRA_CARRINHO_COMPRAS);
+        Bundle bundle = (Bundle)getIntent().getExtras().get(Constantes.EXTRA_BUNDLE);
+        mCarrinho = (List<ItemCarrinhoCompras>)bundle.getSerializable(Constantes.EXTRA_CARRINHO_COMPRAS);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarCarrinho);
         setSupportActionBar(toolbar);
@@ -89,62 +91,10 @@ public class CarrinhoDeComprasActivity extends AppCompatActivity {
             pDialog.dismiss();
     }
 
-    private class TaskCadastrarCarrinho extends AsyncTask<List<ItemCarrinhoCompras>, Void, Boolean> {
-
-        @Override
-        protected void onPreExecute() {
-            pDialog.setMessage("Criando pedido ... Aguarde!");
-            showDialog();
-        }
-
-        @Override
-        protected Boolean doInBackground(List<ItemCarrinhoCompras>... params) {
-
-            ItemCarrinhoCompras carrinhoCompras = params[0].get(0);
-
-            Pedido pedido = new Pedido();
-            pedido.setCodEstabelecimento(carrinhoCompras.getCodEstabelcimento());
-            pedido.setCodUsuario(MySaveSharedPreference.getUserId(getApplicationContext()));
-            pedido.setValorTotal(valorTotalPedido);
-            pedido.setDataPedido(Util.getDataAtual());
-            pedido.setStatus("AGUARDANDO");
-
-
-            Pedido retorno = DBConnectParser.inserirPedido(pedido);
-            List<PedidoProdutos> produtos = new ArrayList<PedidoProdutos>();
-            List<ItemCarrinhoCompras> carrinhoTemp = params[0];
-
-            for(int i = 0; i < carrinhoTemp.size(); i++){
-                PedidoProdutos p = new PedidoProdutos();
-                p.setCodPedido(retorno.getCodPedido());
-                p.setCodProduto(carrinhoTemp.get(i).getProduto().getCodProduto());
-                p.setPreco(carrinhoTemp.get(i).getPreco());
-                p.setPrecoTotal(carrinhoTemp.get(i).getPrecoTotal());
-                p.setQuantidade(carrinhoTemp.get(i).getQuantidade());
-                produtos.add(p);
-            }
-
-            boolean inseriu = DBConnectParser.inserirProdutosPedido(produtos);
-
-            return inseriu;
-        }
-
-        @Override
-        protected void onPostExecute(Boolean inseriu) {
-            if(inseriu){
-                Toast.makeText(getApplicationContext(), "Seu pedido foi gerado com sucesso!", Toast.LENGTH_LONG).show();
-                mDAO.deleteCarrinhoCompras();
-                Intent it = new Intent(CarrinhoDeComprasActivity.this, MainActivity.class);
-                startActivity(it);
-            }
-
-
-        }
-    }
-
-    private void initAsyncTask(List<ItemCarrinhoCompras> carrinhoComprases){
-        TaskCadastrarCarrinho taskCadastrarCarrinho = new TaskCadastrarCarrinho();
-        taskCadastrarCarrinho.execute(carrinhoComprases);
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        setResult(Constantes.ADICIONAR_PRODUTOS_AO_CARRINHO);
     }
 
     class BotaoComprar implements View.OnClickListener{
@@ -152,12 +102,12 @@ public class CarrinhoDeComprasActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
-//            initAsyncTask(mCarrinho);
-
             Intent it = new Intent(CarrinhoDeComprasActivity.this, PagamentoActivity.class);
 
             List<ItemCarrinhoCompras> carrinho = mDAO.consultarCarrinhoDeCompras();
-            it.putParcelableArrayListExtra(Constantes.EXTRA_CARRINHO_COMPRAS, new ArrayList<Parcelable>(carrinho));
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(Constantes.EXTRA_CARRINHO_COMPRAS, new ArrayList<ItemCarrinhoCompras>(carrinho));
+            it.putExtra(Constantes.EXTRA_BUNDLE, bundle);
             startActivity(it);
         }
     }

@@ -75,22 +75,19 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.ListaProdutosActivity" />
         </activity>
-
-        <activity android:name=".activity.PagamentoActivity"
+        <activity
+            android:name=".activity.PagamentoActivity"
             android:parentActivityName=".activity.CarrinhoDeComprasActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.CarrinhoDeComprasActivity" />
         </activity>
-
         <activity android:name=".activity.PerfilActivity" />
-
         <activity
             android:name=".activity.MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".activity.ListaProdutosActivity" />
-
-
+        <activity android:name=".activity.PedidoDetalheActivity"></activity>
     </application>
 
 </manifest>

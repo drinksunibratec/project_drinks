@@ -77,13 +77,13 @@ public class CarrinhoComprasAdapter extends ArrayAdapter<ItemCarrinhoCompras> {
 
         TextView mTextQuantidadeProdutos;
 
-        TextView mTextPrecoTotal;
+        TextView mTextPrecoTotalCarrinho;
 
         ItemCarrinhoCompras cc;
 
-        public CliqueBotaoMais(TextView txtQuantidaderoduto, TextView textPrecoTotal, ItemCarrinhoCompras cc) {
+        public CliqueBotaoMais(TextView txtQuantidaderoduto, TextView textPrecoTotalCarrinho, ItemCarrinhoCompras cc) {
             this.mTextQuantidadeProdutos = txtQuantidaderoduto;
-            this.mTextPrecoTotal = textPrecoTotal;
+            this.mTextPrecoTotalCarrinho = textPrecoTotalCarrinho;
             this.cc = cc;
         }
 
@@ -92,7 +92,7 @@ public class CarrinhoComprasAdapter extends ArrayAdapter<ItemCarrinhoCompras> {
             int mQuantidade = Integer.parseInt(this.mTextQuantidadeProdutos.getText().toString());
             mQuantidade++;
             mTextQuantidadeProdutos.setText(String.valueOf(mQuantidade));
-            mTextPrecoTotal.setText("R$ " + (mQuantidade * cc.getPreco()));
+            mTextPrecoTotalCarrinho.setText("R$ " + (mQuantidade * cc.getPreco()));
 
             Produto p = new Produto();
             p.setCodProduto(cc.getProduto().getCodProduto());
@@ -110,14 +110,14 @@ public class CarrinhoComprasAdapter extends ArrayAdapter<ItemCarrinhoCompras> {
 
         TextView mTextQuantidadeProdutos;
 
-        TextView mTextPrecoTotal;
+        TextView mTextPrecoTotalCarrinho;
 
         ItemCarrinhoCompras cc;
 
 
         public CliqueBotaoMenos(TextView txtQuantidaderoduto, TextView textPrecoTotal, ItemCarrinhoCompras cc) {
             this.mTextQuantidadeProdutos = txtQuantidaderoduto;
-            this.mTextPrecoTotal = textPrecoTotal;
+            this.mTextPrecoTotalCarrinho = textPrecoTotal;
             this.cc = cc;
         }
 
@@ -128,7 +128,7 @@ public class CarrinhoComprasAdapter extends ArrayAdapter<ItemCarrinhoCompras> {
                 mQuantidade--;
             }
             mTextQuantidadeProdutos.setText(String.valueOf(mQuantidade));
-            mTextPrecoTotal.setText("R$ " + (mQuantidade * cc.getPreco()));
+            mTextPrecoTotalCarrinho.setText("R$ " + (mQuantidade * cc.getPreco()));
 
             Produto p = new Produto();
             p.setCodProduto(cc.getProduto().getCodProduto());

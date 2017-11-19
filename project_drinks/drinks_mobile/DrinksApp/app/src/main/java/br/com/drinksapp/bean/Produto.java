@@ -3,8 +3,10 @@ package br.com.drinksapp.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
 
-public class Produto implements Parcelable {
+
+public class Produto implements Serializable {
     public long codProduto;
     public String descricao;
     public String gelada;
@@ -21,18 +23,6 @@ public class Produto implements Parcelable {
         preco = in.readString();
         codEstabelecimento = in.readString();
     }
-
-    public static final Creator<Produto> CREATOR = new Creator<Produto>() {
-        @Override
-        public Produto createFromParcel(Parcel in) {
-            return new Produto(in);
-        }
-
-        @Override
-        public Produto[] newArray(int size) {
-            return new Produto[size];
-        }
-    };
 
     public Produto() {
 
@@ -106,18 +96,4 @@ public class Produto implements Parcelable {
         this.codEstabelecimento = codEstabelecimento;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(codProduto);
-        dest.writeString(descricao);
-        dest.writeString(gelada);
-        dest.writeString(nome);
-        dest.writeString(preco);
-        dest.writeString(codEstabelecimento);
-    }
 }

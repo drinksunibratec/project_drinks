@@ -1,12 +1,13 @@
 package br.com.drinksapp.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Silvio Cedrim on 28/10/2017.
  */
 
-public class Pedido {
+public class Pedido implements Serializable{
 
     long codPedido;
 
@@ -26,7 +27,7 @@ public class Pedido {
 
     String status;
 
-    String endereco;
+    String rua;
 
     int numero;
 
@@ -74,12 +75,12 @@ public class Pedido {
         this.nome = nome;
     }
 
-    public String getEndereco() {
-        return endereco;
+    public String getRua() {
+        return rua;
     }
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    public void setRua(String rua) {
+        this.rua = rua;
     }
 
     public int getNumero() {

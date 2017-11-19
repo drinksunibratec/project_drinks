@@ -98,7 +98,6 @@
             android:id="@+id/btn_comprar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/small_padding"
             android:layout_weight="0.5"
             android:drawableRight="@drawable/ic_arrow_forward"
             android:background="@color/background_botoes"

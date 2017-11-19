@@ -64,7 +64,8 @@ public class ListaProdutosActivity extends AppCompatActivity {
     private void ajustarLista() {
         mProdutos = new ArrayList<Produto>();
         mEstabelecimento = (Estabelecimento) getIntent().getSerializableExtra(Constantes.EXTRA_ESTABELECIMENTO);
-        List<Produto> result = getIntent().getParcelableArrayListExtra(Constantes.EXTRA_LISTA_PRODUTOS);
+        Bundle bundle = (Bundle)getIntent().getExtras().get(Constantes.EXTRA_BUNDLE);
+        List<Produto> result = (List<Produto>)bundle.getSerializable(Constantes.EXTRA_PRODUTO);
 
         for (Produto p : result) {
             p.setEstabelecimento(mEstabelecimento);
@@ -92,6 +93,7 @@ public class ListaProdutosActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         mDAO.deleteCarrinhoCompras();
+
     }
 
     class ClickProduto implements AdapterView.OnItemClickListener {
@@ -108,7 +110,9 @@ public class ListaProdutosActivity extends AppCompatActivity {
             Produto produto = (Produto) parent.getItemAtPosition(position);
 
             Intent it = new Intent(context, ProdutoDetalheActivity.class);
-            it.putExtra(Constantes.EXTRA_PRODUTO, produto);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(Constantes.EXTRA_PRODUTO, produto);
+            it.putExtra(Constantes.EXTRA_BUNDLE, bundle);
             it.putExtra(Constantes.EXTRA_ESTABELECIMENTO, produto.getEstabelecimento());
             startActivityForResult(it, Constantes.ADICIONAR_PRODUTOS_AO_CARRINHO);
         }
@@ -125,7 +129,9 @@ public class ListaProdutosActivity extends AppCompatActivity {
         public void onClick(View v) {
             List<ItemCarrinhoCompras> carrinho = mDAO.consultarCarrinhoDeCompras();
             Intent it = new Intent(context, CarrinhoDeComprasActivity.class);
-            it.putParcelableArrayListExtra(Constantes.EXTRA_CARRINHO_COMPRAS, new ArrayList<Parcelable>(carrinho));
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(Constantes.EXTRA_CARRINHO_COMPRAS, new ArrayList<ItemCarrinhoCompras>(carrinho));
+            it.putExtra(Constantes.EXTRA_BUNDLE, bundle);
             startActivity(it);
         }
     }

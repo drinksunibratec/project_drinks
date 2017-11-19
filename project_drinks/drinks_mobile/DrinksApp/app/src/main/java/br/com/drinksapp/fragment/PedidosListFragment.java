@@ -4,9 +4,6 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.AsyncTaskLoader;
-import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,10 +18,8 @@ import br.com.drinksapp.R;
 import br.com.drinksapp.SaveSharedPreference.MySaveSharedPreference;
 import br.com.drinksapp.adapter.PedidosAdapter;
 import br.com.drinksapp.bean.Pedido;
-import br.com.drinksapp.bean.PedidoProdutos;
 import br.com.drinksapp.bean.Usuarios;
 import br.com.drinksapp.http.DBConnectParser;
-import br.com.drinksapp.http.PedidosTask;
 import br.com.drinksapp.interfaces.OnPedidoClick;
 
 /**
@@ -97,20 +92,22 @@ public class PedidosListFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            if (mPedidos.size() == 0) {
+            if (mPedidos == null && mPedidos.size() == 0) {
                 mTxtListaVazia.setVisibility(View.VISIBLE);
                 mListView.setEmptyView(mTxtListaVazia);
             } else {
                 mTxtListaVazia.setVisibility(View.INVISIBLE);
                 mListView.setAdapter(new PedidosAdapter(getActivity(), mPedidos));
-                mListView.setOnItemClickListener(new ListViewHeroi());
+                mListView.setOnItemClickListener(new ListViewPedido());
             }
             hideDialog();
         }
     }
 
 
-    class ListViewHeroi implements AdapterView.OnItemClickListener {
+
+
+    class ListViewPedido implements AdapterView.OnItemClickListener {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

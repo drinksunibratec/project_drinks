@@ -177,11 +177,9 @@ public class DAODrinks {
         SQLiteDatabase db = mHelper.getReadableDatabase();
         String[] argumentos = null;
 
-        String sql = "SELECT sum(" + DrinksContract.PRECO_TOTAL + ")    as " + DrinksContract.PRECO_TOTAL + "  FROM " + DrinksContract.TABLE_NAME_CARRINHO_COMPRAS + " WHERE " + DrinksContract.CODPRODUTO + " = ?";
+        String sql = "SELECT sum(" + DrinksContract.PRECO_TOTAL + ")    as " + DrinksContract.PRECO_TOTAL + "  FROM " + DrinksContract.TABLE_NAME_CARRINHO_COMPRAS;
 
-        argumentos = new String[]{String.valueOf(cc.getProduto().getCodProduto())};
-
-        Cursor cursor = db.rawQuery(sql, argumentos);
+        Cursor cursor = db.rawQuery(sql, null);
 
         if (cursor.getCount() > 0) {
             int idxPrecoTotal = cursor.getColumnIndex(DrinksContract.PRECO_TOTAL);

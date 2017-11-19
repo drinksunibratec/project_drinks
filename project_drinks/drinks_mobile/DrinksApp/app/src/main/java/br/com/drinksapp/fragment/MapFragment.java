@@ -184,7 +184,9 @@ public class MapFragment extends Fragment
                 retorno = new ArrayList<Produto>(produtos);
                 if(retorno != null){
                     it = new Intent(getActivity(), ListaProdutosActivity.class);
-                    it.putParcelableArrayListExtra(Constantes.EXTRA_LISTA_PRODUTOS, retorno);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(Constantes.EXTRA_PRODUTO, retorno);
+                    it.putExtra(Constantes.EXTRA_BUNDLE, bundle);
                     it.putExtra(Constantes.EXTRA_ESTABELECIMENTO, estabelecimento[0]);
                 }
 

@@ -15,6 +15,7 @@ import android.widget.EditText;
 import br.com.drinksapp.R;
 import br.com.drinksapp.interfaces.DialogListener;
 import br.com.drinksapp.util.Constantes;
+import br.com.drinksapp.util.Validator;
 
 public class ComplementoEnderecoDialogFragment extends DialogFragment {
 
@@ -82,6 +83,9 @@ public class ComplementoEnderecoDialogFragment extends DialogFragment {
 
         @Override
         public void onClick(View v) {
+
+            Validator.validateNotNull(mEdtNumero,"Preencha o campo número");
+
             int numero = Integer.parseInt( mEdtNumero.getText().toString());
             String complento = mEdtComplemento.getText().toString();
 

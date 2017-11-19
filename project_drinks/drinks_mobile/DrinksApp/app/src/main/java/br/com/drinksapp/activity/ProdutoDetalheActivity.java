@@ -56,7 +56,8 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detalhe_produto);
 
         Intent it = getIntent();
-        mProduto = it.getParcelableExtra(Constantes.EXTRA_PRODUTO);
+        Bundle bundle = (Bundle)getIntent().getExtras().get(Constantes.EXTRA_BUNDLE);
+        mProduto = (Produto)bundle.getSerializable(Constantes.EXTRA_PRODUTO);
         mEstabelecimento = (Estabelecimento) it.getSerializableExtra(Constantes.EXTRA_ESTABELECIMENTO);
 
         mTextDescricao = (TextView) findViewById(R.id.txtDescricaoProdutoDetalhe);

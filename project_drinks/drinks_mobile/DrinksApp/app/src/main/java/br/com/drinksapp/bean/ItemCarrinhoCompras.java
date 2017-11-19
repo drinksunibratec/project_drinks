@@ -3,11 +3,13 @@ package br.com.drinksapp.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
+
 /**
  * Created by Silvio Cedrim on 28/10/2017.
  */
 
-public class ItemCarrinhoCompras implements Parcelable {
+public class ItemCarrinhoCompras implements Serializable {
 
     long codProduto;
 
@@ -24,47 +26,9 @@ public class ItemCarrinhoCompras implements Parcelable {
     Produto produto;
 
 
-    public ItemCarrinhoCompras(Parcel in) {
-        codProduto = in.readLong();
-        codPedido = in.readLong();
-        codEstabelcimento = in.readLong();
-        preco = in.readDouble();
-        quantidade = in.readInt();
-        precoTotal = in.readDouble();
-        produto = in.readParcelable(Produto.class.getClassLoader());
-    }
-
     public ItemCarrinhoCompras() {
 
     }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(codProduto);
-        dest.writeLong(codPedido);
-        dest.writeLong(codEstabelcimento);
-        dest.writeDouble(preco);
-        dest.writeInt(quantidade);
-        dest.writeDouble(precoTotal);
-        dest.writeParcelable(produto, flags);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    public static final Creator<ItemCarrinhoCompras> CREATOR = new Creator<ItemCarrinhoCompras>() {
-        @Override
-        public ItemCarrinhoCompras createFromParcel(Parcel in) {
-            return new ItemCarrinhoCompras(in);
-        }
-
-        @Override
-        public ItemCarrinhoCompras[] newArray(int size) {
-            return new ItemCarrinhoCompras[size];
-        }
-    };
 
     public Produto getProduto() {
         return produto;

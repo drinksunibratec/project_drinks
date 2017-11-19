@@ -3,15 +3,16 @@ package br.com.drinksapp.activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.annotation.IdRes;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,6 +57,8 @@ public class PagamentoActivity extends AppCompatActivity implements DialogListen
 
     int mNumero;
 
+    String mPagamento;
+
     String mComplemento;
 
     String mLogradouro;
@@ -79,7 +82,8 @@ public class PagamentoActivity extends AppCompatActivity implements DialogListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pagamento);
 
-        mCarrinho = getIntent().getParcelableArrayListExtra(Constantes.EXTRA_CARRINHO_COMPRAS);
+        Bundle bundle = (Bundle)getIntent().getExtras().get(Constantes.EXTRA_BUNDLE);
+        mCarrinho = (List<ItemCarrinhoCompras>)bundle.getSerializable(Constantes.EXTRA_CARRINHO_COMPRAS);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarPagamento);
         setSupportActionBar(toolbar);
@@ -116,6 +120,13 @@ public class PagamentoActivity extends AppCompatActivity implements DialogListen
         mBtnRealizarPedido.setOnClickListener(new BotaoRealizarPedido());
 
         mRadioPagamento = (RadioGroup)findViewById(R.id.radio_pagamento);
+        mRadioPagamento.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                RadioButton button = (RadioButton) group.findViewById(checkedId);
+                mPagamento = button.getText().toString();
+            }
+        });
 
     }
 
@@ -134,9 +145,11 @@ public class PagamentoActivity extends AppCompatActivity implements DialogListen
         mNumero = parametros.getInt(Constantes.EXTRA_NUMERO);
         mComplemento = parametros.getString(Constantes.EXTRA_COMPLEMENTO);
 
-        mTxtLogradouro.setText(mLogradouro);
         if(mComplemento != null && !mComplemento.equals("")){
+            mTxtLogradouro.setText(mLogradouro);
             mTxtComplemento.setText(mNumero + " - "  + mComplemento);
+        }else{
+            mTxtLogradouro.setText(mLogradouro + ", " + mNumero);
         }
         mTxtBairro.setText(mBairro + " - " + mCidade + " - " + mUf);
 
@@ -199,6 +212,7 @@ public class PagamentoActivity extends AppCompatActivity implements DialogListen
         taskCadastrarCarrinho.execute(cep);
     }
 
+
     private class TaskCadastrarCarrinho extends AsyncTask<List<ItemCarrinhoCompras>, Void, Boolean> {
 
         @Override
@@ -219,14 +233,15 @@ public class PagamentoActivity extends AppCompatActivity implements DialogListen
             pedido.setValorTotal(valorTotalPedido);
             pedido.setDataPedido(Util.getDataAtual());
             pedido.setStatus("AGUARDANDO");
-            pedido.setEndereco(mLogradouro);
+            pedido.setRua(mLogradouro);
             pedido.setNumero(mNumero);
             pedido.setBairro(mBairro);
             pedido.setCidade(mCidade);
             pedido.setUf(mUf);
             pedido.setComplemento(mComplemento);
-            pedido.setNumero(R.id.edt_numero);
+            pedido.setNumero(mNumero);
             pedido.setCEP(mCEP);
+            pedido.setPagamento(mPagamento);
 
 
 
