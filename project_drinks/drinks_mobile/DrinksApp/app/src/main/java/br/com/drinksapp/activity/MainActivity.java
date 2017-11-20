@@ -82,6 +82,8 @@ public class MainActivity extends AppCompatActivity implements OnPedidoClick {
 
     PedidosListFragment mPedidosListFragment;
 
+    EstabelecimentosFavoritosFragment mEstabelecimentosFavoritosFragment;
+
     ViewPager mViewPager;
 
     @Override
@@ -101,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements OnPedidoClick {
     private void buildViewPager() {
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
         selectorPageAdapter = new SelectorPageAdapter(getSupportFragmentManager());
-
+        mViewPager.setOffscreenPageLimit(2);
         mViewPager.setAdapter(selectorPageAdapter);
 
         TabLayout tab = (TabLayout) findViewById(R.id.tabs);
@@ -130,13 +132,19 @@ public class MainActivity extends AppCompatActivity implements OnPedidoClick {
                         mMapFragment = new MapFragment();
                     }
                     return mMapFragment;
-
-                default:
-
+                case 1:
                     if (mPedidosListFragment == null) {
                         mPedidosListFragment = new PedidosListFragment();
                     }
                     return mPedidosListFragment;
+
+                default:
+
+                    if (mEstabelecimentosFavoritosFragment == null) {
+                        mEstabelecimentosFavoritosFragment = new EstabelecimentosFavoritosFragment();
+                    }
+                    return mEstabelecimentosFavoritosFragment;
+
 
             }
 
@@ -144,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements OnPedidoClick {
 
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
 
         @Override
@@ -153,8 +161,9 @@ public class MainActivity extends AppCompatActivity implements OnPedidoClick {
                 case 0:
                     return "Mapa";
                 case 1:
-                default:
                     return "Pedidos";
+                default:
+                    return "Estabelecimentos Favoritos";
             }
         }
     }

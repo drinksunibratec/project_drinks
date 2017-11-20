@@ -15,6 +15,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.Loader;
@@ -59,7 +60,7 @@ public class MapFragment extends Fragment
         implements LoaderManager.LoaderCallbacks<List<Estabelecimento>>,
         OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener{
+        GoogleApiClient.OnConnectionFailedListener {
 
     GoogleApiClient mGoogleApiClient;
 
@@ -120,6 +121,7 @@ public class MapFragment extends Fragment
         return layout;
     }
 
+
     @Override
     public Loader<List<Estabelecimento>> onCreateLoader(int id, Bundle args) {
         return new EstabelecimentoTask(getActivity());
@@ -146,12 +148,12 @@ public class MapFragment extends Fragment
     }
 
 
-    class MarkerListener implements GoogleMap.OnInfoWindowClickListener{
+    class MarkerListener implements GoogleMap.OnInfoWindowClickListener {
 
 
         @Override
         public void onInfoWindowClick(Marker marker) {
-            Estabelecimento estabelecimento = (Estabelecimento)marker.getTag();
+            Estabelecimento estabelecimento = (Estabelecimento) marker.getTag();
             new TaskListarProdutos().execute(estabelecimento);
         }
     }
@@ -177,12 +179,12 @@ public class MapFragment extends Fragment
         @Override
         protected Intent doInBackground(Estabelecimento... estabelecimento) {
             ArrayList<Produto> retorno = null;
-            List<Produto>  produtos = null;
+            List<Produto> produtos = null;
             Intent it = null;
             try {
-                produtos =  DBConnectParser.listProdutosPorEstabelecimento(estabelecimento[0]);
+                produtos = DBConnectParser.listProdutosPorEstabelecimento(estabelecimento[0]);
                 retorno = new ArrayList<Produto>(produtos);
-                if(retorno != null){
+                if (retorno != null) {
                     it = new Intent(getActivity(), ListaProdutosActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putSerializable(Constantes.EXTRA_PRODUTO, retorno);
@@ -213,12 +215,13 @@ public class MapFragment extends Fragment
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if(savedInstanceState != null){
+        if (savedInstanceState != null) {
             mDeveExibirDialogGPS = savedInstanceState.getBoolean(Constantes.EXTRA_DIALOG, true);
         }
+
     }
 
-    private void verificarStatusGPS(){
+    private void verificarStatusGPS() {
         final LocationRequest locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         final LocationSettingsRequest.Builder locationSetting = new LocationSettingsRequest.Builder();
@@ -231,12 +234,12 @@ public class MapFragment extends Fragment
             @Override
             public void onResult(@NonNull LocationSettingsResult locationSettingsResult) {
                 final Status status = locationSettingsResult.getStatus();
-                switch (status.getStatusCode()){
+                switch (status.getStatusCode()) {
                     case LocationSettingsStatusCodes.SUCCESS:
                         getDeviceLocation();
                         break;
                     case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
-                        if(mDeveExibirDialogGPS){
+                        if (mDeveExibirDialogGPS) {
                             try {
                                 status.startResolutionForResult(getActivity(), Constantes.REQUEST_CHECAR_GPS);
                                 mDeveExibirDialogGPS = false;
@@ -286,7 +289,7 @@ public class MapFragment extends Fragment
                     new LatLng(mUltimaLocalizacao.getLatitude(),
                             mUltimaLocalizacao.getLongitude()), Constantes.DEFAULT_ZOOM));
         } else {
-            if(mTenativas < 10){
+            if (mTenativas < 10) {
                 mTenativas++;
                 mHandler.postDelayed(new Runnable() {
                     @Override
@@ -317,6 +320,7 @@ public class MapFragment extends Fragment
         }
         updateLocationUI();
     }
+
     private void updateLocationUI() {
         if (mMap == null) {
             return;
@@ -333,7 +337,7 @@ public class MapFragment extends Fragment
                         new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                         Constantes.PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
             }
-        } catch (SecurityException e)  {
+        } catch (SecurityException e) {
             Log.e("Exception: %s", e.getMessage());
         }
     }
@@ -354,24 +358,24 @@ public class MapFragment extends Fragment
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        if(connectionResult.hasResolution()){
+        if (connectionResult.hasResolution()) {
             try {
                 connectionResult.startResolutionForResult(getActivity(), Constantes.REQUEST_ERRO_PLAY_SERVICES);
             } catch (IntentSender.SendIntentException e) {
                 e.printStackTrace();
             }
-        }else{
+        } else {
             exibirMensagemErro(getActivity(), connectionResult.getErrorCode());
         }
     }
 
-    private void exibirMensagemErro(FragmentActivity activity, final int codigoErro){
+    private void exibirMensagemErro(FragmentActivity activity, final int codigoErro) {
         final String TAG = "DIALOG_ERRO_PLAY_SERVICES";
 
-        if(getFragmentManager().findFragmentByTag(TAG) == null){
+        if (getFragmentManager().findFragmentByTag(TAG) == null) {
 
 
-            DialogFragment erroFragment = new DialogFragment(){
+            DialogFragment erroFragment = new DialogFragment() {
                 @NonNull
                 @Override
                 public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -391,8 +395,8 @@ public class MapFragment extends Fragment
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Constantes.REQUEST_ERRO_PLAY_SERVICES && resultCode == Constantes.RESULT_OK) {
             mGoogleApiClient.connect();
-        }else if(requestCode == Constantes.REQUEST_CHECAR_GPS){
-            if(resultCode == Constantes.RESULT_OK){
+        } else if (requestCode == Constantes.REQUEST_CHECAR_GPS) {
+            if (resultCode == Constantes.RESULT_OK) {
                 mTenativas = 0;
                 mHandler.removeCallbacksAndMessages(null);
                 getDeviceLocation();

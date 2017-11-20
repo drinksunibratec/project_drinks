@@ -33,6 +33,9 @@ public class Estabelecimento implements Serializable {
         this.cnpj = cnpj;
     }
 
+    public Estabelecimento() {
+    }
+
     public Estabelecimento(long codEstabelecimento, String nomeFantasia, String rua, String numero, String bairro, String cidade, String uf, String cep, String latitude, String longitude, String cnpj, String telefone) {
         this.codEstabelecimento = codEstabelecimento;
         this.nomeFantasia = nomeFantasia;

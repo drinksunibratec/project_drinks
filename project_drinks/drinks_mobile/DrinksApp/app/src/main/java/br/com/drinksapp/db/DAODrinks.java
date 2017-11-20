@@ -4,11 +4,15 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
+import android.renderscript.Sampler;
+import android.support.annotation.RequiresApi;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.drinksapp.SaveSharedPreference.MySaveSharedPreference;
 import br.com.drinksapp.bean.ItemCarrinhoCompras;
 import br.com.drinksapp.bean.Estabelecimento;
 import br.com.drinksapp.bean.Pedido;
@@ -26,8 +30,12 @@ public class DAODrinks {
 
     SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
 
+    Context mContext;
+
     public DAODrinks(Context context) {
         this.mHelper = new DrinksSQLHelper(context);
+        mContext = context;
+//        mContext.deleteDatabase(this.mHelper.getDatabaseName());
     }
 
     public long insertUsuario(Usuarios usuario) {
@@ -40,6 +48,7 @@ public class DAODrinks {
         db.close();
         return id;
     }
+
 
     public void insertEstabelecimento(Estabelecimento estabelecimento) {
         SQLiteDatabase db = mHelper.getWritableDatabase();
@@ -74,7 +83,91 @@ public class DAODrinks {
     }
 
 
+    public void insertEstabelecimentoFavorito(Estabelecimento estabelecimento) {
+        SQLiteDatabase db = mHelper.getWritableDatabase();
 
+        ContentValues values = new ContentValues();
+        values.put(DrinksContract.CODESTABELECIMENTO, estabelecimento.getCodEstabelecimento());
+        values.put(DrinksContract.CODUSUARIO, MySaveSharedPreference.getUserId(mContext));
+
+        db.insertOrThrow(DrinksContract.TABLE_NAME_ESTABELECIMENTOS_FAVORITOS, null, values);
+
+        db.close();
+    }
+
+    public void insertProdutoFavorito(Produto produto) {
+        SQLiteDatabase db = mHelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(DrinksContract.CODESTABELECIMENTO, produto.getCodProduto());
+        values.put(DrinksContract.CODUSUARIO, MySaveSharedPreference.getUserId(mContext));
+
+        db.insertOrThrow(DrinksContract.TABLE_NAME_PRODUTOS_FAVORITOS, null, values);
+
+        db.close();
+    }
+
+    public boolean isEstabelecimentoFavorito(Estabelecimento estabelecimento) {
+        SQLiteDatabase db = mHelper.getReadableDatabase();
+
+        String sql = "SELECT COUNT(*) FROM " + DrinksContract.TABLE_NAME_ESTABELECIMENTOS_FAVORITOS;
+
+        String[] argumentos = null;
+
+        sql += " WHERE " + DrinksContract.CODESTABELECIMENTO + " = ?";
+        argumentos = new String[]{String.valueOf(estabelecimento.getCodEstabelecimento())};
+
+        Cursor cursor = db.rawQuery(sql, argumentos);
+        boolean existe = false;
+        if (cursor != null) {
+            cursor.moveToFirst();
+            existe = cursor.getInt(0) > 0;
+
+            db.close();
+            cursor.close();
+        }
+        return existe;
+    }
+
+    public boolean isProdutoFavorito(Produto produto) {
+        SQLiteDatabase db = mHelper.getReadableDatabase();
+
+        String sql = "SELECT COUNT(*) FROM " + DrinksContract.TABLE_NAME_PRODUTOS_FAVORITOS;
+
+        String[] argumentos = null;
+
+        sql += " WHERE " + DrinksContract.CODPRODUTO + " = ?";
+        argumentos = new String[]{String.valueOf(produto.getCodProduto())};
+
+        Cursor cursor = db.rawQuery(sql, argumentos);
+        boolean existe = false;
+        if (cursor != null) {
+            cursor.moveToFirst();
+            existe = cursor.getInt(0) > 0;
+
+            db.close();
+            cursor.close();
+        }
+        return existe;
+    }
+
+    public int deleteEstabelecimentoFavorito(Estabelecimento estabelecimento) {
+        SQLiteDatabase db = mHelper.getWritableDatabase();
+        int linhasAfetadas = db.delete(DrinksContract.TABLE_NAME_ESTABELECIMENTOS_FAVORITOS,
+                DrinksContract.CODESTABELECIMENTO + " = ?",
+                new String[]{String.valueOf(estabelecimento.getCodEstabelecimento())});
+        db.close();
+        return linhasAfetadas;
+    }
+
+    public int deleteProdutoFavorito(Produto produto) {
+        SQLiteDatabase db = mHelper.getWritableDatabase();
+        int linhasAfetadas = db.delete(DrinksContract.TABLE_NAME_PRODUTOS_FAVORITOS,
+                DrinksContract.CODPRODUTO + " = ?",
+                new String[]{String.valueOf(produto.getCodProduto())});
+        db.close();
+        return linhasAfetadas;
+    }
 
     public long insertPedido(Pedido pedido) {
         SQLiteDatabase db = mHelper.getWritableDatabase();
@@ -110,7 +203,7 @@ public class DAODrinks {
         return existe;
     }
 
-    public void atualizarQuantidadeProdutoNoCarrinho(Produto produto, int quantidade){
+    public void atualizarQuantidadeProdutoNoCarrinho(Produto produto, int quantidade) {
         SQLiteDatabase db = mHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -205,7 +298,7 @@ public class DAODrinks {
                 "P." + DrinksContract.CODPRODUTO + ", " +
                 "C." + DrinksContract.CODESTABELECIMENTO +
                 " FROM " + DrinksContract.TABLE_NAME_CARRINHO_COMPRAS + " C " +
-                " JOIN "  + DrinksContract.TABLE_NAME_PRODUTO + " P ON P." + DrinksContract.CODPRODUTO + " = C." + DrinksContract.CODPRODUTO;
+                " JOIN " + DrinksContract.TABLE_NAME_PRODUTO + " P ON P." + DrinksContract.CODPRODUTO + " = C." + DrinksContract.CODPRODUTO;
 
         Cursor cursor = db.rawQuery(sql, argumentos);
 
@@ -252,7 +345,7 @@ public class DAODrinks {
         String sql = "SELECT * " +
                 " FROM " + DrinksContract.TABLE_NAME_PRODUTO + " WHERE " + DrinksContract.CODESTABELECIMENTO + " = ?";
 
-        Cursor cursor = db.rawQuery(sql, new String[]{ String.valueOf(estabelecimento.getCodEstabelecimento()) });
+        Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(estabelecimento.getCodEstabelecimento())});
 
         if (cursor.getCount() > 0) {
             int idxCodProduto = cursor.getColumnIndex(DrinksContract.CODPRODUTO);
@@ -284,6 +377,58 @@ public class DAODrinks {
         cursor.close();
         db.close();
         return produtos;
+    }
+
+    public List<Estabelecimento> consultarEstabelecimentosFavoritos() {
+
+        List<Estabelecimento> estabelecimentos = new ArrayList<Estabelecimento>();
+        SQLiteDatabase db = mHelper.getReadableDatabase();
+
+        String sql = "SELECT E." + DrinksContract.CODESTABELECIMENTO + ", " +
+                "E." + DrinksContract.NOMEFANTASIA + ", " +
+                "E." + DrinksContract.RUA + ", " +
+                "E." + DrinksContract.NUMERO + ", " +
+                "E." + DrinksContract.BAIRRO + ", " +
+                "E." + DrinksContract.CIDADE + ", " +
+                "E." + DrinksContract.UF +
+                " FROM " + DrinksContract.TABLE_NAME_ESTABELECIMENTOS_FAVORITOS + " F " +
+                " JOIN " + DrinksContract.TABLE_NAME_ESTABELECIMENTO + " E ON E." + DrinksContract.CODESTABELECIMENTO + " = F." + DrinksContract.CODESTABELECIMENTO;
+
+        Cursor cursor = db.rawQuery(sql, null);
+
+        if (cursor.getCount() > 0) {
+            int idxCodEstabelecimento = cursor.getColumnIndex(DrinksContract.CODESTABELECIMENTO);
+            int idxNome = cursor.getColumnIndex(DrinksContract.NOMEFANTASIA);
+            int idxRua = cursor.getColumnIndex(DrinksContract.RUA);
+            int idxNumero = cursor.getColumnIndex(DrinksContract.NUMERO);
+            int idxBairro = cursor.getColumnIndex(DrinksContract.BAIRRO);
+            int idxCidade = cursor.getColumnIndex(DrinksContract.CIDADE);
+            int idxEstado = cursor.getColumnIndex(DrinksContract.UF);
+
+            while (cursor.moveToNext()) {
+                long codEstabelecimento = cursor.getLong(idxCodEstabelecimento);
+                String nome = cursor.getString(idxNome);
+                String rua = cursor.getString(idxRua);
+                int numero = cursor.getInt(idxNumero);
+                String bairro = cursor.getString(idxBairro);
+                String cidade = cursor.getString(idxCidade);
+                String estado = cursor.getString(idxEstado);
+
+                Estabelecimento estabelecimento = new Estabelecimento();
+                estabelecimento.setCodEstabelecimento(codEstabelecimento);
+                estabelecimento.setNomeFantasia(nome);
+                estabelecimento.setRua(rua);
+                estabelecimento.setNumero(String.valueOf(numero));
+                estabelecimento.setBairro(bairro);
+                estabelecimento.setCidade(cidade);
+                estabelecimento.setUf(estado);
+
+                estabelecimentos.add(estabelecimento);
+            }
+        }
+        cursor.close();
+        db.close();
+        return estabelecimentos;
     }
 
 

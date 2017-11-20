@@ -18,6 +18,7 @@ public class DrinksSQLHelper extends SQLiteOpenHelper{
 
         public DrinksSQLHelper(Context context) {
             super(context, NOME_BANCO, null, VERSAO_BANCO);
+
         }
 
         @Override
@@ -30,6 +31,8 @@ public class DrinksSQLHelper extends SQLiteOpenHelper{
             db.execSQL(DrinksContract.SQL_CREATE_PEDIDO_PRODUTO);
             db.execSQL(DrinksContract.SQL_CREATE_PEDIDO_ENDERECO_ENTREGA);
             db.execSQL(DrinksContract.SQL_CREATE_CARRINHO_COMPRAS);
+            db.execSQL(DrinksContract.SQL_CREATE_ESTABELECIMENTOS_FAVORITOS);
+            db.execSQL(DrinksContract.SQL_CREATE_PRODUTOS_FAVORITOS);
 
         }
 
@@ -42,6 +45,8 @@ public class DrinksSQLHelper extends SQLiteOpenHelper{
             db.execSQL("DROP TABLE IF EXISTS " + DrinksContract.TABLE_NAME_PEDIDO_PRODUTO);
             db.execSQL("DROP TABLE IF EXISTS " + DrinksContract.TABLE_NAME_ENDERECO_ENTREGA);
             db.execSQL("DROP TABLE IF EXISTS " + DrinksContract.SQL_CREATE_CARRINHO_COMPRAS);
+            db.execSQL("DROP TABLE IF EXISTS " + DrinksContract.SQL_CREATE_ESTABELECIMENTOS_FAVORITOS);
+            db.execSQL("DROP TABLE IF EXISTS " + DrinksContract.SQL_CREATE_PRODUTOS_FAVORITOS);
 
             // create new tables
             onCreate(db);

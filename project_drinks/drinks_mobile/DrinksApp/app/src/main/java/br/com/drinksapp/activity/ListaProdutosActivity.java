@@ -4,11 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +33,15 @@ public class ListaProdutosActivity extends AppCompatActivity {
 
     Estabelecimento mEstabelecimento;
 
+    TextView mTxtNomeEstabelecimento;
+
+    TextView mTxtEnderecoEstabelecimento;
+
     DAODrinks mDAO;
 
     Button mBtnCarrinho;
+
+    FloatingActionButton fab;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,8 +49,14 @@ public class ListaProdutosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_produtos_layout);
         mListView = (ListView) findViewById(R.id.listaProdutos);
+
+        mTxtNomeEstabelecimento = (TextView)findViewById(R.id.txtNomeEstabelecimentoProdutos);
+        mTxtEnderecoEstabelecimento = (TextView)findViewById(R.id.txtEnderecoEstabelecimentoProdutos) ;
+
         mBtnCarrinho = (Button) findViewById(R.id.btn_carrinho);
         mBtnCarrinho.setOnClickListener(new BotaoCarrinho(this));
+        fab = (FloatingActionButton) findViewById(R.id.fab_estabelecimento_favorito);
+        fab.setOnClickListener(new BotaoFavorito());
 
         mDAO = new DAODrinks(this);
         mDAO.deleteCarrinhoCompras();
@@ -48,6 +64,11 @@ public class ListaProdutosActivity extends AppCompatActivity {
         ajustarLista();
         inserirProdutos();
         mDAO.insertEstabelecimento(mEstabelecimento);
+
+        mTxtNomeEstabelecimento.setText(mEstabelecimento.getNomeFantasia());
+        mTxtEnderecoEstabelecimento.setText(mEstabelecimento.getRua() + ", " + mEstabelecimento.getNumero() + " - " + mEstabelecimento.getCidade() + " - " + mEstabelecimento.getUf());
+        toggleFavorito();
+
         mListView.setAdapter(new ProdutoAdapter(this, mProdutos));
         mListView.setOnItemClickListener(new ClickProduto(this));
 
@@ -136,5 +157,25 @@ public class ListaProdutosActivity extends AppCompatActivity {
         }
     }
 
+    public void toggleFavorito(){
+        fab.setImageResource(
+                mDAO.isEstabelecimentoFavorito(mEstabelecimento) ? R.drawable.ic_remove_favoritos : R.drawable.ic_add_favorito
+        );
+    }
+
+    class BotaoFavorito implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            if (mDAO.isEstabelecimentoFavorito(mEstabelecimento)) {
+                mDAO.deleteEstabelecimentoFavorito(mEstabelecimento);
+            } else {
+                mDAO.insertEstabelecimentoFavorito(mEstabelecimento);
+            }
+            toggleFavorito();
+            EventBus.getDefault().post(mEstabelecimento);
+
+        }
+    }
 
 }

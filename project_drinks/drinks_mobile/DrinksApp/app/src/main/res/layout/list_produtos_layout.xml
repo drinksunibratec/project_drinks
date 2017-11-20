@@ -2,38 +2,121 @@
     android:id="@+id/swipe_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/cinza_claro_color">
+    android:background="@color/white_color"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.8"
+        android:background="@color/cinza_claro_color"
+        android:orientation="horizontal"
+        android:padding="@dimen/medium_padding">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_home_marker" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/medium_padding"
+            android:text="@string/estabelecimento"
+            android:textColor="@color/black_color"
+            android:textSize="@dimen/medium_text" />
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white_color"
         android:orientation="vertical">
 
-        <ListView
-            android:id="@+id/listaProdutos"
+        <TextView
+            android:id="@+id/txtNomeEstabelecimentoProdutos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/medium_padding"
+            android:layout_marginTop="@dimen/medium_padding"
+            android:text="Nome"
+            android:textColor="@color/black_color"
+            android:textSize="@dimen/medium_padding" />
+
+
+        <TextView
+            android:id="@+id/txtEnderecoEstabelecimentoProdutos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtNomeEstabelecimentoProdutos"
+            android:layout_marginLeft="@dimen/medium_padding"
+            android:paddingTop="8dp"
+            android:text="Endereço"
+            android:textColor="@color/black_color"
+            android:textSize="@dimen/very_small_text"
+            android:layout_marginBottom="@dimen/medium_padding"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_estabelecimento_favorito"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add_favorito"
+            android:layout_marginEnd="11dp"
+            android:layout_marginRight="11dp"
+            android:background="@color/colorFloatButton"
+            android:foregroundTint="@android:color/white"
+            android:layout_alignTop="@+id/txtNomeEstabelecimentoProdutos"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/cinza_claro_color"
+        android:gravity="left"
+        android:orientation="horizontal"
+        android:padding="@dimen/medium_padding">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_beer" />
+
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:padding="@dimen/small_padding" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/medium_padding"
+            android:text="@string/produtos"
+            android:textColor="@color/black_color"
+            android:textSize="@dimen/medium_text" />
+
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.2"
-        android:orientation="horizontal">
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/listaProdutos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8" />
 
         <Button
             android:id="@+id/btn_carrinho"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/btn_login"
-            android:drawableRight="@drawable/ic_arrow_forward"
+            android:layout_weight="0.1"
             android:background="@drawable/click_botao"
-            android:text="@string/btn_ver_carrinho" />
+            android:drawableRight="@drawable/ic_arrow_forward"
+            android:text="@string/btn_ver_carrinho"
+            android:textColor="@color/btn_login" />
 
     </LinearLayout>
 

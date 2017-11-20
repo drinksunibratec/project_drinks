@@ -87,6 +87,8 @@
     <string name="txtListaVazia">Você ainda não realizou pedidos.</string>
 
     <string name="estabelecimento">Estabelecimento</string>
+    <string name="endereco">Endereço</string>
+    <string name="estabelecimento_favorito">Estabelecimentos Favoritos</string>
     <string name="produtos">Produtos</string>
     <string name="status">Status</string>
     <string name="data_pedido">Data do Pedido</string>

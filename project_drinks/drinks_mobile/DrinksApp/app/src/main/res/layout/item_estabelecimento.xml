@@ -1,65 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:background="#fdf2c0"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white_color"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:layout_marginTop="5dp"
-        android:background="#f7e8a7"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/medium_padding">
 
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_gravity="center"
-            android:layout_height="60dp"
-            android:src="@drawable/estabelecimento"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:background="#f7e8a7"
+        <TextView
+            android:id="@+id/txtNomeEstabelecimentoFavorito"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical">
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:paddingLeft="@dimen/medium_padding"
+            android:paddingTop="@dimen/medium_padding"
+            android:text="@string/nome"
+            android:textColor="@color/black_color"
+            android:textSize="@dimen/medium_text" />
 
-            <TextView
-                android:paddingLeft="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Nome do Estabelecimento"
-                android:id="@+id/txtNomeFantasia"/>
+        <TextView
+            android:id="@+id/txtEnderecoEstabelecimentoFavorito"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/txtNomeEstabelecimentoFavorito"
+            android:paddingLeft="@dimen/medium_padding"
+            android:paddingTop="@dimen/very_small_padding"
+            android:text="@string/endereco"
+            android:textColor="@color/gray_color"
+            android:textSize="@dimen/small_text" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+    </RelativeLayout>
 
-                <TextView
-                    android:paddingLeft="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Logradouro"
-                    android:id="@+id/txtRua"/>
-                <TextView
-                    android:paddingLeft="1dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text=","/>
-                <TextView
-                    android:paddingLeft="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Bairro"
-                    android:id="@+id/txtBairro"/>
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
-</LinearLayout>
+    <ImageView
+        android:id="@+id/imagemEstabelecimento"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center"
+        android:paddingRight="@dimen/small_padding"
+        android:paddingTop="@dimen/small_padding"
+        android:src="@drawable/estabelecimento" />
+</RelativeLayout>

@@ -6,6 +6,7 @@
 
     <color name="background_botoes">#ff9b03</color>
     <color name="background_botao_mais">#1b3096</color>
+    <color name="colorFloatButton">#de0719</color>
 
     <color name="red_color">#A11B22</color>
     <color name="blue_color">#4a7acf</color>
