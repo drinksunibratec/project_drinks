@@ -2,6 +2,7 @@ package br.com.drinksapp.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -11,6 +12,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.greenrobot.eventbus.EventBus;
 
 import br.com.drinksapp.R;
 import br.com.drinksapp.bean.ItemCarrinhoCompras;
@@ -46,6 +49,8 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
 
     DAODrinks mDAO;
 
+    FloatingActionButton fab;
+
     private Estabelecimento mEstabelecimento;
 
     Button mBtnAdicionarAoCarrinho;
@@ -69,6 +74,8 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
         mBotaoMais = (ImageButton) findViewById(R.id.btn_maisProdutos);
         mBotaoMenos = (ImageButton) findViewById(R.id.btn_menosProdutos);
         mBtnAdicionarAoCarrinho = (Button) findViewById(R.id.btn_add_carrinho);
+        fab = (FloatingActionButton) findViewById(R.id.fab_produtos_favoritos);
+        fab.setOnClickListener(new BotaoFavorito());
 
         mBotaoMais.setOnClickListener(new CliqueBotaoMais());
         mBotaoMenos.setOnClickListener(new CliqueBotaoMenos());
@@ -87,6 +94,8 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
             if(mQuantidade == 0){
                 mQuantidade = Integer.parseInt(mTextQuantidadeProdutos.getText().toString());
             }
+
+            toggleFavorito();
 
             mTextDescricao.setText(mProduto.descricao);
             mTextNome.setText(mProduto.nome);
@@ -169,5 +178,26 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
             finish();
         }
 
+    }
+
+    public void toggleFavorito(){
+        fab.setImageResource(
+                mDAO.isProdutoFavorito(mProduto) ? R.drawable.ic_remove_favoritos : R.drawable.ic_add_favorito
+        );
+    }
+
+    class BotaoFavorito implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            if (mDAO.isProdutoFavorito(mProduto)) {
+                mDAO.deleteProdutoFavorito(mProduto);
+            } else {
+                mDAO.insertProdutoFavorito(mProduto);
+            }
+            toggleFavorito();
+            EventBus.getDefault().post(mProduto);
+
+        }
     }
 }

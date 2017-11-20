@@ -1,4 +1,5 @@
-package br.com.drinksapp.activity;
+package br.com.drinksapp.fragment;
+
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,38 +16,41 @@ import java.util.List;
 
 import br.com.drinksapp.R;
 import br.com.drinksapp.adapter.EstabelecimentosFavoritosAdapter;
+import br.com.drinksapp.adapter.ProdutoAdapter;
 import br.com.drinksapp.bean.Estabelecimento;
+import br.com.drinksapp.bean.Produto;
 import br.com.drinksapp.db.DAODrinks;
 
-/**
- * Created by Silvio Cedrim on 19/11/2017.
- */
+public class ProdutosFavoritosFragment extends Fragment {
 
-public class EstabelecimentosFavoritosFragment extends Fragment{
-
-    List<Estabelecimento> mEstabelecimentos;
+    List<Produto> mProdutos;
 
     ListView mListView;
 
     DAODrinks mDAO;
 
-    EstabelecimentosFavoritosAdapter mAdapter;
+    ProdutoAdapter mAdapter;
+
+
+    public ProdutosFavoritosFragment() {
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mDAO = new DAODrinks(getActivity());
 
-        mEstabelecimentos = mDAO.consultarEstabelecimentosFavoritos();
-        mAdapter = new EstabelecimentosFavoritosAdapter(getActivity(), mEstabelecimentos);
+        mProdutos = mDAO.consultarProdutosFavoritos();
+        mAdapter = new ProdutoAdapter(getActivity(), mProdutos);
         EventBus.getDefault().register(this);
-
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.fragment_lista_estabelecimentos_favoritos, container, false);
-        mListView = (ListView)layout.findViewById(R.id.listaEstabelecimentosFavoritos);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        View layout = inflater.inflate(R.layout.fragment_produtos_favoritos, container, false);
+        mListView = (ListView)layout.findViewById(R.id.listaProdutosFavoritos);
         mListView.setAdapter(mAdapter);
 
         return  layout;
@@ -59,9 +63,10 @@ public class EstabelecimentosFavoritosFragment extends Fragment{
     }
 
     @Subscribe
-    public void atualizar(Estabelecimento estabelecimento){
-        mEstabelecimentos.clear();
-        mEstabelecimentos.addAll(mDAO.consultarEstabelecimentosFavoritos());
+    public void atualizar(Produto produto){
+        mProdutos.clear();
+        mProdutos.addAll(mDAO.consultarProdutosFavoritos());
         mAdapter.notifyDataSetChanged();
     }
+
 }

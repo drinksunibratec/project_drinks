@@ -99,7 +99,7 @@ public class DAODrinks {
         SQLiteDatabase db = mHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(DrinksContract.CODESTABELECIMENTO, produto.getCodProduto());
+        values.put(DrinksContract.CODPRODUTO, produto.getCodProduto());
         values.put(DrinksContract.CODUSUARIO, MySaveSharedPreference.getUserId(mContext));
 
         db.insertOrThrow(DrinksContract.TABLE_NAME_PRODUTOS_FAVORITOS, null, values);
@@ -370,6 +370,50 @@ public class DAODrinks {
                 produto.setGelada(gelada);
                 produto.setPreco(String.valueOf(valorUnitario));
                 produto.setCodEstabelecimento(String.valueOf(codEstabelecimento));
+
+                produtos.add(produto);
+            }
+        }
+        cursor.close();
+        db.close();
+        return produtos;
+    }
+
+    public List<Produto> consultarProdutosFavoritos() {
+
+        List<Produto> produtos = new ArrayList<Produto>();
+        SQLiteDatabase db = mHelper.getReadableDatabase();
+
+        String sql = "SELECT P." + DrinksContract.CODPRODUTO + ", " +
+                "P." + DrinksContract.NOME + ", " +
+                "P." + DrinksContract.PRECO + ", " +
+                "P." + DrinksContract.DESCRICAO + ", " +
+                "P." + DrinksContract.GELADA +
+                " FROM " + DrinksContract.TABLE_NAME_PRODUTOS_FAVORITOS + " F " +
+                " JOIN " + DrinksContract.TABLE_NAME_PRODUTO + " P ON P." + DrinksContract.CODPRODUTO + " = F." + DrinksContract.CODPRODUTO;
+
+        Cursor cursor = db.rawQuery(sql, null);
+
+        if (cursor.getCount() > 0) {
+            int idxCodProduto = cursor.getColumnIndex(DrinksContract.CODPRODUTO);
+            int idxNomeProduto = cursor.getColumnIndex(DrinksContract.NOME);
+            int idxValorUnitario = cursor.getColumnIndex(DrinksContract.PRECO);
+            int idxDescricao = cursor.getColumnIndex(DrinksContract.DESCRICAO);
+            int idxGelada = cursor.getColumnIndex(DrinksContract.GELADA);
+
+            while (cursor.moveToNext()) {
+                long codProduto = cursor.getLong(idxCodProduto);
+                String nome = cursor.getString(idxNomeProduto);
+                String descricao = cursor.getString(idxDescricao);
+                String gelada = cursor.getString(idxGelada);
+                Double valorUnitario = cursor.getDouble(idxValorUnitario);
+
+                Produto produto = new Produto();
+                produto.setNome(nome);
+                produto.setCodProduto(codProduto);
+                produto.setDescricao(descricao);
+                produto.setGelada(gelada);
+                produto.setPreco(String.valueOf(valorUnitario));
 
                 produtos.add(produto);
             }
