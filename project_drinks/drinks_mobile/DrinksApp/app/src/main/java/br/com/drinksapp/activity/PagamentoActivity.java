@@ -94,7 +94,7 @@ public class PagamentoActivity extends AppCompatActivity implements DialogListen
             valorTotalPedido += cc.getPrecoTotal();
         }
 
-        pDialog = new ProgressDialog(this);
+        pDialog = new ProgressDialog(this, R.style.MyDialogTheme);
         pDialog.setCancelable(false);
 
         mDAO  = new DAODrinks(this);

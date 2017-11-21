@@ -230,7 +230,7 @@ public class DBConnectParser {
 
                 if (listPedido != null) {
                     List<Pedido> pedidos = listPedido.getPedidos();
-                    for(int i = 0; i < pedidos.size(); i++){
+                    for (int i = 0; i < pedidos.size(); i++) {
                         long codEstabelecimento = pedidos.get(i).getCodEstabelecimento();
                         Estabelecimento estabelecimento = consultarEstabelecimento(String.valueOf(codEstabelecimento));
                         pedidos.get(i).setEstabelecimento(estabelecimento);
@@ -249,6 +249,38 @@ public class DBConnectParser {
         }
 
         return retorno;
+    }
+
+    public static Pedido atualizarStatusPedido(Pedido pedido) throws IOException {
+        Response response = null;
+        Gson gson = new Gson();
+
+        Pedido retorno = null;
+
+        OkHttpClient client = new OkHttpClient();
+
+        RequestBody body = new FormBody.Builder()
+                .add("codPedido", String.valueOf(pedido.getCodPedido()))
+                .add("status", pedido.getStatus())
+                .build();
+
+
+        Request request = new Request.Builder()
+                .url(AppConfig.URL_ATUALIZAR_SITUACAO_PEDIDO)
+                .post(body)
+                .build();
+
+        response = client.newCall(request).execute();
+
+        if (response.networkResponse().code() == HttpURLConnection.HTTP_OK) {
+            String resposta = response.body().string();
+
+            retorno = gson.fromJson(resposta, Pedido.class);
+
+        }
+
+        return retorno;
+
     }
 
     public static List<PedidoProdutos> listarProdutosDoPedidos(String codPedido) {
@@ -280,8 +312,8 @@ public class DBConnectParser {
 
                 if (listProdutosPedido != null) {
 
-                    retorno =  listProdutosPedido.getProdutos();
-                    for(int i = 0; i < retorno.size(); i++){
+                    retorno = listProdutosPedido.getProdutos();
+                    for (int i = 0; i < retorno.size(); i++) {
                         String nome = retorno.get(i).getNome();
                         String descricao = retorno.get(i).getDescricao();
                         double preco = retorno.get(i).getPreco();

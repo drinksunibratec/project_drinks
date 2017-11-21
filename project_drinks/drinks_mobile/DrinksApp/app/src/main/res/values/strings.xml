@@ -96,5 +96,9 @@
     <string name="valor_total_pedido">Valor total</string>
     <string name="txt_detalhes_pedido">Detalhes do Pedido</string>
     <string name="pedidos">Pedidos</string>
+    <string name="confirmar_cancelamento">Deseja cancelar o seu pedido?</string>
+    <string name="dialog_cancelamento">Cancelamento de Pedido</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
 </resources>
 

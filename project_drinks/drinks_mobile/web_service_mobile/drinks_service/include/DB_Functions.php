@@ -67,6 +67,28 @@ class DB_Functions {
 		$this->conn->query($sql);
 	}
 	
+	public function updateSituacaoPedido($codPedido, $situacao){
+	
+		$sql = "UPDATE pedido SET status = '" . $situacao . "' WHERE codPedido = " . $codPedido;
+		error_log("Update situação pedido:" . $sql );
+		$this->conn->query($sql);
+	
+	}
+	
+	public function consultaPedidoPorId($codPedido){
+		$pedido = null;
+		$sql = "SELECT * FROM pedido where codPedido = " . $codPedido;
+
+		
+		$result = $this->conn->query($sql);
+		
+		if ($result->num_rows > 0) {
+			$pedido = $result->fetch_assoc();
+		}
+
+		return $pedido;
+	}
+	
 	public function listarPedidosDeUsuario($codUsuario){
 		$pedidos = null;
 		$sql = "select * from pedido p WHERE p.codUsuario = " . $codUsuario;

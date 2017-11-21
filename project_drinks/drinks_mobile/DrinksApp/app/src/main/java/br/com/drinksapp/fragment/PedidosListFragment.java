@@ -32,9 +32,6 @@ public class PedidosListFragment extends Fragment {
 
     List<Pedido> mPedidos;
 
-
-
-    TextView mTxtListaVazia;
     private ProgressDialog pDialog;
 
 
@@ -46,7 +43,6 @@ public class PedidosListFragment extends Fragment {
                              Bundle saListViewvedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_list_pedidos, container, false);
         mListView = (ListView) layout.findViewById(R.id.listPedidos);
-        mTxtListaVazia = (TextView) layout.findViewById(R.id.txtListaVazia);
 
         mPedidos = new ArrayList<Pedido>();
 
@@ -71,13 +67,11 @@ public class PedidosListFragment extends Fragment {
     }
 
 
-
-
-    void initTask(Usuarios usuario){
+    void initTask(Usuarios usuario) {
         new TaskPedidos().execute(usuario);
     }
 
-    class TaskPedidos extends AsyncTask<Usuarios, Void, Void>{
+    class TaskPedidos extends AsyncTask<Usuarios, Void, Void> {
         @Override
         protected void onPreExecute() {
             pDialog.setMessage("Carregando... aguarde!");
@@ -92,19 +86,11 @@ public class PedidosListFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            if (mPedidos == null && mPedidos.size() == 0) {
-                mTxtListaVazia.setVisibility(View.VISIBLE);
-                mListView.setEmptyView(mTxtListaVazia);
-            } else {
-                mTxtListaVazia.setVisibility(View.INVISIBLE);
-                mListView.setAdapter(new PedidosAdapter(getActivity(), mPedidos));
-                mListView.setOnItemClickListener(new ListViewPedido());
-            }
+            mListView.setAdapter(new PedidosAdapter(getActivity(), mPedidos));
+            mListView.setOnItemClickListener(new ListViewPedido());
             hideDialog();
         }
     }
-
-
 
 
     class ListViewPedido implements AdapterView.OnItemClickListener {

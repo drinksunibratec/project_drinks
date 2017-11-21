@@ -32,7 +32,7 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white_color"
@@ -40,7 +40,7 @@
 
         <TextView
             android:id="@+id/txtNomeEstabelecimentoDetalhe"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/medium_padding"
             android:layout_marginTop="@dimen/medium_padding"
@@ -51,19 +51,21 @@
 
         <TextView
             android:id="@+id/txtValorTotalDetalhe"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/medium_padding"
             android:paddingTop="8dp"
+            android:layout_below="@+id/txtNomeEstabelecimentoDetalhe"
             android:text="Preço"
             android:textColor="@color/black_color"
             android:textSize="@dimen/small_text" />
 
         <TextView
             android:id="@+id/txtStatusDetalhe"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/medium_padding"
+            android:layout_below="@+id/txtValorTotalDetalhe"
             android:paddingTop="8dp"
             android:text="Status"
             android:textColor="@color/black_color"
@@ -71,15 +73,27 @@
 
         <TextView
             android:id="@+id/txtDataPedidoDetalhe"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/very_small_padding"
             android:layout_marginLeft="@dimen/medium_padding"
+            android:layout_below="@+id/txtStatusDetalhe"
             android:paddingTop="8dp"
             android:text="Data"
             android:textColor="@color/black_color"
             android:textSize="@dimen/very_small_text" />
-    </LinearLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_cacel_pedido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/txtStatusDetalhe"
+            android:layout_marginEnd="@dimen/medium_padding"
+            android:layout_marginRight="@dimen/medium_padding"
+            android:src="@drawable/ic_cancel" />
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

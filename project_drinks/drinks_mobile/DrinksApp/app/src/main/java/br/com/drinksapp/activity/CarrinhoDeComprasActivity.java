@@ -77,7 +77,7 @@ public class CarrinhoDeComprasActivity extends AppCompatActivity {
 
         mBtnComprar.setOnClickListener(new BotaoComprar());
 
-        pDialog = new ProgressDialog(this);
+        pDialog = new ProgressDialog(this, R.style.MyDialogTheme);
         pDialog.setCancelable(false);
     }
 
