@@ -52,14 +52,14 @@
             android:background="@color/white"
             android:divider="@drawable/border_radio_button"
             android:gravity="left"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:padding="@dimen/medium_padding">
 
             <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/radio_pagamento"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:divider="@drawable/border_radio_button"
-                android:id="@+id/radio_pagamento"
                 android:orientation="vertical">
 
                 <RadioButton
@@ -79,6 +79,38 @@
                     android:text="@string/cartao_debito"
                     android:textColor="@color/black_color" />
             </RadioGroup>
+
+            <RelativeLayout
+                android:id="@+id/layout_bandeira_cartao"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/small_padding"
+                android:clickable="true">
+
+                <ImageView
+                    android:id="@+id/imagemBandeira"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="11dp"
+                    android:layout_marginStart="11dp" />
+
+                <TextView
+                    android:id="@+id/txtBandeira"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_toEndOf="@+id/imagemBandeira"
+                    android:layout_toRightOf="@+id/imagemBandeira"
+                    android:textColor="@color/black_color"
+                    android:textSize="@dimen/medium_text" />
+
+            </RelativeLayout>
+
 
         </LinearLayout>
 
@@ -131,9 +163,9 @@
                 android:id="@+id/btnConsultarEndreco"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/gray_color"
                 android:text="@string/btn_cep"
                 android:textColor="@color/btn_login"
-                android:background="@color/gray_color"
                 android:textSize="@dimen/txt_medio_botao" />
 
         </LinearLayout>

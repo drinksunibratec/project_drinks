@@ -3,36 +3,35 @@ package br.com.drinksapp.fragment;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import br.com.drinksapp.R;
+import br.com.drinksapp.interfaces.DialogBandeiraCartaoListener;
 import br.com.drinksapp.interfaces.DialogComplementosEnderecoListener;
 import br.com.drinksapp.util.Constantes;
-import br.com.drinksapp.util.Validator;
 
-public class ComplementoEnderecoDialogFragment extends DialogFragment {
+public class BandeiraCartaoDialogFragment extends DialogFragment {
 
     View mLayout;
 
-    EditText mEdtNumero;
+    DialogBandeiraCartaoListener mListener;
 
-    EditText mEdtComplemento;
+    RadioGroup mRadioBandeira;
 
-    DialogComplementosEnderecoListener mListener;
 
-    Button mBtnComplemento;
 
-    private static ComplementoEnderecoDialogFragment instancia = null;
+    private static BandeiraCartaoDialogFragment instancia = null;
 
-    public static ComplementoEnderecoDialogFragment getInstancia() {
+    public static BandeiraCartaoDialogFragment getInstancia() {
         if (instancia == null) {
-            instancia = new ComplementoEnderecoDialogFragment();
+            instancia = new BandeiraCartaoDialogFragment();
             return instancia;
         }
         return instancia;
@@ -42,12 +41,24 @@ public class ComplementoEnderecoDialogFragment extends DialogFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        mLayout = inflater.inflate(R.layout.dialog_fragment_numero_complemento, null);
+        mLayout = inflater.inflate(R.layout.dialog_fragment_bandeira_cartao, null);
 
-        mEdtNumero = (EditText) mLayout.findViewById(R.id.edt_numero);
-        mEdtComplemento = (EditText) mLayout.findViewById(R.id.edt_complemento);
-        mBtnComplemento = (Button)mLayout.findViewById(R.id.btnDialogComplementos);
-        mBtnComplemento.setOnClickListener(new BotaoSalvar());
+        mRadioBandeira = (RadioGroup) mLayout.findViewById(R.id.radio_bandeira_cartao);
+        mRadioBandeira.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                RadioButton button = (RadioButton) group.findViewById(checkedId);
+                String bandeira =  button.getText().toString();
+
+                Bundle bundle = new Bundle();
+                bundle.putInt(Constantes.EXTRA_ID_BANDEIRA, checkedId);
+                bundle.putString(Constantes.EXTRA_BANDEIRA, bandeira);
+
+
+                mListener.onChancheRadioButton(BandeiraCartaoDialogFragment.this, bundle);
+
+            }
+        });
     }
 
 
@@ -69,7 +80,7 @@ public class ComplementoEnderecoDialogFragment extends DialogFragment {
         // Verify that the host activity implements the callback interface
         try {
             // Instantiate the NoticeDialogListener so we can send events to the host
-            mListener = (DialogComplementosEnderecoListener) activity;
+            mListener = (DialogBandeiraCartaoListener) activity;
         } catch (ClassCastException e) {
             // The activity doesn't implement the interface, throw exception
             throw new ClassCastException(activity.toString()
@@ -78,24 +89,7 @@ public class ComplementoEnderecoDialogFragment extends DialogFragment {
     }
 
 
-    class BotaoSalvar implements View.OnClickListener {
 
-        @Override
-        public void onClick(View v) {
-
-            Validator.validateNotNull(mEdtNumero,"Preencha o campo número");
-
-            int numero = Integer.parseInt( mEdtNumero.getText().toString());
-            String complento = mEdtComplemento.getText().toString();
-
-            Bundle bundle = new Bundle();
-            bundle.putInt(Constantes.EXTRA_NUMERO, numero);
-            bundle.putString(Constantes.EXTRA_COMPLEMENTO, complento);
-
-            mListener.onDialogPositiveClick(ComplementoEnderecoDialogFragment.this, bundle);
-
-        }
-    }
 
 
 

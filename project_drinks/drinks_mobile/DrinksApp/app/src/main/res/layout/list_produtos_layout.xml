@@ -38,7 +38,7 @@
             android:id="@+id/txtNomeEstabelecimentoProdutos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/medium_padding"
+            android:layout_marginLeft="@dimen/small_text"
             android:layout_marginTop="@dimen/medium_padding"
             android:text="Nome"
             android:textColor="@color/black_color"

@@ -40,9 +40,13 @@ public class Constantes {
 
     public static final String EXTRA_COMPLEMENTO = "EXTRA_COMPLEMENTO";
 
-    public static int RESULT_BACK = 3;
+    public static final int RESULT_BACK = 3;
 
     public static final int RESULT_OK = -1;
 
     public static final String TAG_DETALHE = "tagDetalhe";
+
+    public static final String EXTRA_BANDEIRA = "EXTRA_BANDEIRA";
+
+    public static final String EXTRA_ID_BANDEIRA = "EXTRA_ID_BANDEIRA";
 }

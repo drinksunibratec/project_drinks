@@ -43,7 +43,15 @@ public class Pedido implements Serializable{
 
     String pagamento;
 
+    String bandeiraCartao;
 
+    public String getBandeiraCartao() {
+        return bandeiraCartao;
+    }
+
+    public void setBandeiraCartao(String bandeiraCartao) {
+        this.bandeiraCartao = bandeiraCartao;
+    }
 
     public String getPagamento() {
         return pagamento;

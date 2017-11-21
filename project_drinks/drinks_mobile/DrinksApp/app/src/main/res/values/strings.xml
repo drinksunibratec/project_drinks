@@ -100,5 +100,13 @@
     <string name="dialog_cancelamento">Cancelamento de Pedido</string>
     <string name="sim">Sim</string>
     <string name="nao">Não</string>
+    <string name="master">Master</string>
+    <string name="visa">Visa</string>
+    <string name="bandeira_cartao">Escolha a bandeira de seu cartão</string>
+    <string name="bandeira">Bandeira</string>
+
+    <string name="status_aguardando">AGUARDANDO</string>
+    <string name="status_cancelado">CANCELADO</string>
+
 </resources>
 

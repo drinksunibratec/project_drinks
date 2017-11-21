@@ -7,7 +7,7 @@ import android.support.v4.app.DialogFragment;
  * Created by Silvio Cedrim on 12/11/2017.
  */
 
-public interface DialogListener {
+public interface DialogComplementosEnderecoListener {
     void onDialogPositiveClick(DialogFragment dialog, Bundle parametros);
     void onDialogNegativeClick(DialogFragment dialog, Bundle parametros);
 

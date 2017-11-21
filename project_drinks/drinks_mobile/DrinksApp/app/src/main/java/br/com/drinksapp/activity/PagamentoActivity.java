@@ -12,10 +12,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,16 +32,18 @@ import br.com.drinksapp.bean.ItemCarrinhoCompras;
 import br.com.drinksapp.bean.Pedido;
 import br.com.drinksapp.bean.PedidoProdutos;
 import br.com.drinksapp.db.DAODrinks;
+import br.com.drinksapp.fragment.BandeiraCartaoDialogFragment;
 import br.com.drinksapp.fragment.ComplementoEnderecoDialogFragment;
 import br.com.drinksapp.http.DBConnectParser;
+import br.com.drinksapp.interfaces.DialogBandeiraCartaoListener;
 import br.com.drinksapp.util.Mask;
 import br.com.drinksapp.http.ConnectCEP;
-import br.com.drinksapp.interfaces.DialogListener;
+import br.com.drinksapp.interfaces.DialogComplementosEnderecoListener;
 import br.com.drinksapp.util.Constantes;
 import br.com.drinksapp.util.Util;
 import br.com.drinksapp.util.Validator;
 
-public class PagamentoActivity extends AppCompatActivity implements DialogListener {
+public class PagamentoActivity extends AppCompatActivity implements DialogComplementosEnderecoListener, DialogBandeiraCartaoListener {
 
     List<ItemCarrinhoCompras> mCarrinho;
 
@@ -54,6 +60,8 @@ public class PagamentoActivity extends AppCompatActivity implements DialogListen
     TextView mTxtBairro;
 
     TextView mTxtComplemento;
+
+    TextView mTxtBandeira;
 
     int mNumero;
 
@@ -75,7 +83,13 @@ public class PagamentoActivity extends AppCompatActivity implements DialogListen
 
     String mCEP;
 
+    String mBandeira;
+
     RadioGroup mRadioPagamento;
+
+    ImageView mImagemBandeira;
+
+    RelativeLayout mLayoutBandeira;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +113,16 @@ public class PagamentoActivity extends AppCompatActivity implements DialogListen
 
         mDAO  = new DAODrinks(this);
 
+        mLayoutBandeira = (RelativeLayout)findViewById(R.id.layout_bandeira_cartao);
+        mLayoutBandeira.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BandeiraCartaoDialogFragment dialogFragment = BandeiraCartaoDialogFragment.getInstancia();
+                dialogFragment.show(getSupportFragmentManager(), Constantes.DIALOG_FRAGMENT);
+            }
+        });
+
+
         mEdtCep = (EditText)findViewById(R.id.edt_cep);
         mEdtCep.addTextChangedListener(Mask.insert("#####-###", mEdtCep));
         mEdtCep.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -116,6 +140,9 @@ public class PagamentoActivity extends AppCompatActivity implements DialogListen
         mBtnCEP.setOnClickListener(new BotaoCEP());
         mBtnCEP.setEnabled(false);
 
+        mTxtBandeira = (TextView)findViewById(R.id.txtBandeira);
+        mImagemBandeira = (ImageView)findViewById(R.id.imagemBandeira);
+
         mBtnRealizarPedido = (Button) findViewById(R.id.btnRealizarPedido);
         mBtnRealizarPedido.setOnClickListener(new BotaoRealizarPedido());
 
@@ -125,8 +152,14 @@ public class PagamentoActivity extends AppCompatActivity implements DialogListen
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 RadioButton button = (RadioButton) group.findViewById(checkedId);
                 mPagamento = button.getText().toString();
+
+                if(checkedId == R.id.radio_cartao_debito){
+                    BandeiraCartaoDialogFragment dialogFragment = BandeiraCartaoDialogFragment.getInstancia();
+                    dialogFragment.show(getSupportFragmentManager(), Constantes.DIALOG_FRAGMENT);
+                }
             }
         });
+
 
     }
 
@@ -164,6 +197,31 @@ public class PagamentoActivity extends AppCompatActivity implements DialogListen
 
     @Override
     public void onDialogNegativeClick(DialogFragment dialog, Bundle parametros) {
+
+    }
+
+    @Override
+    public void onChancheRadioButton(DialogFragment dialog, Bundle parametros) {
+
+        int id = parametros.getInt(Constantes.EXTRA_ID_BANDEIRA);
+        mBandeira = parametros.getString(Constantes.EXTRA_BANDEIRA);
+        mTxtBandeira.setText(getString(R.string.bandeira) + ": " + mBandeira);
+
+        switch (id){
+            case R.id.radio_mastercard:
+                mImagemBandeira.setImageResource(R.drawable.ic_mastercard);
+                break;
+            case R.id.radio_visa:
+                mImagemBandeira.setImageResource(R.drawable.ic_visa);
+                break;
+        }
+
+        Fragment prev = getSupportFragmentManager().findFragmentByTag(Constantes.DIALOG_FRAGMENT);
+        if (prev != null) {
+            DialogFragment df = (DialogFragment) prev;
+            df.dismiss();
+        }
+
 
     }
 
@@ -232,7 +290,7 @@ public class PagamentoActivity extends AppCompatActivity implements DialogListen
             pedido.setCodUsuario(MySaveSharedPreference.getUserId(getApplicationContext()));
             pedido.setValorTotal(valorTotalPedido);
             pedido.setDataPedido(Util.getDataAtual());
-            pedido.setStatus("AGUARDANDO");
+            pedido.setStatus(getString(R.string.status_aguardando));
             pedido.setRua(mLogradouro);
             pedido.setNumero(mNumero);
             pedido.setBairro(mBairro);
@@ -243,7 +301,9 @@ public class PagamentoActivity extends AppCompatActivity implements DialogListen
             pedido.setCEP(mCEP);
             pedido.setPagamento(mPagamento);
 
-
+            if(mPagamento.equals(getString(R.string.cartao_debito))){
+                pedido.setBandeiraCartao(mBandeira);
+            }
 
             Pedido retorno = DBConnectParser.inserirPedido(pedido);
             List<PedidoProdutos> produtos = new ArrayList<PedidoProdutos>();

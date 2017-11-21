@@ -101,7 +101,7 @@ public class PedidoDetalheFragment extends Fragment {
 
             fab = (FloatingActionButton) layout.findViewById(R.id.fab_cacel_pedido);
             fab.setOnClickListener(new BotaoCancelar());
-            if(!mPedido.getStatus().equals("AGUARDANDO")){
+            if(!mPedido.getStatus().equals(getString(R.string.status_aguardando))){
                 fab.setVisibility(View.INVISIBLE);
             }
 
@@ -137,7 +137,7 @@ public class PedidoDetalheFragment extends Fragment {
         @Override
         protected void onPostExecute(Pedido pedido) {
 
-            if(pedido.getStatus().equals("CANCELADO")){
+            if(pedido.getStatus().equals(getString(R.string.status_cancelado))){
                 mTxtStatusDetalhe.setText(getString(R.string.status) + ": "  + mPedido.getStatus());
                 fab.setVisibility(View.INVISIBLE);
                 Toast.makeText(getActivity(), "Pedido cancelado com sucesso!", Toast.LENGTH_LONG).show();
@@ -161,7 +161,7 @@ public class PedidoDetalheFragment extends Fragment {
 
             builder.setPositiveButton(R.string.sim, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
-                    mPedido.setStatus("CANCELADO");
+                    mPedido.setStatus(getString(R.string.status_cancelado));
                     dialog.dismiss();
                     initTaskAtualizarStatusPedido(mPedido);
                 }
