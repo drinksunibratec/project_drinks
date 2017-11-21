@@ -65,7 +65,7 @@ function buscarRegistroPorId($table = null, $id = null, $nomeId = null)
     return $found;
 }
 
-function update($table = null, $id = 0, $data = null, $nomeId)
+function update($table = null, $id = 0, $data = null, $nomeId=null)
 {
     $items = null;
     $database = open_database();
@@ -79,6 +79,7 @@ function update($table = null, $id = 0, $data = null, $nomeId)
     $sql = "UPDATE " . $table;
     $sql .= " SET $items";
     $sql .= " WHERE " . $nomeId . " = " . $id . ";";
+//    echo $sql;
     
     try {
         
@@ -184,7 +185,7 @@ function listarPedido($nomeId = null)
                 AND pedido.codEstabelecimento = estabelecimento.codEstabelecimento
                 AND pedido.codEstabelecimento = ".$nomeId.
                 " GROUP BY pedido.codPedido;" ;
-        
+//        echo "$sql";
         $result = $database->query($sql);
         if ($result->num_rows > 0) {
             $found = $result->fetch_all(MYSQLI_ASSOC);
@@ -200,29 +201,29 @@ function listarPedido($nomeId = null)
 function itens($nomeId = null, $codPed=null)
 {
     $found = null;
+    
     try {
         $database = open_database();
         
-        $sql = "SELECT pedido.codPedido,pedido.dataPedido, pedido.bairro,
-                pedido.cidade,pedido.rua,pedido.numero,pedido.pagamento,
-                pedido.status,pedido.valorTotal,pedido.codUsuario,
-                usuarios.nome AS usuario,usuarios.telefone,usuarios.email,
-                pedido_produto.codProduto,pedido_produto.preco,
-                pedido_produto.quantidade,pedido_produto.precoTotal,produto.nome
-            
-                FROM pedido,pedido_produto,usuarios,produto, estabelecimento
-            
-                WHERE pedido.codPedido = pedido_produto.codPedido
-                AND pedido.codUsuario = usuarios.codUsuario
-                AND produto.codProduto = pedido_produto.codProduto
-                AND pedido.codPedido = pedido_produto.codPedido
-                AND pedido.codEstabelecimento = estabelecimento.codEstabelecimento
-                AND pedido.codEstabelecimento = ".$nomeId.
-                " AND pedido.codPedido = " .$codPed.
-                " ORDER BY pedido_produto.codProduto;" ;
-        
+        $sql = "SELECT p.codPedido, p.dataPedido, p.bairro, p.cidade, p.rua, p.numero, p.pagamento,
+            p.status, p.valorTotal, p.codUsuario, u.nome, u.telefone, u.email, pp.codProduto, pp.preco,
+            pp.quantidade, pp.precoTotal, pr.nome            
+            FROM pedido as p
+            inner join pedido_produto as pp on
+            (pp.codPedido = p.codPedido)
+            inner join usuarios as u on
+            (u.codUsuario = p.codUsuario)
+            inner join produto as pr on
+            (pr.codProduto = pp.codProduto)
+            inner join estabelecimento as e on
+            (e.codEstabelecimento = p.codEstabelecimento)
+            WHERE p.codEstabelecimento = ".$nomeId." AND p.codPedido = " .$codPed.
+            " ORDER BY pp.codProduto asc;"; 
+//        echo $sql;
         $result = $database->query($sql);
+//        var_dump($result);
         if ($result->num_rows > 0) {
+//        if (mysqli_num_rows($result) > 0) {
             $found = $result->fetch_all(MYSQLI_ASSOC);
         }
     } catch (Exception $e) {
@@ -231,4 +232,33 @@ function itens($nomeId = null, $codPed=null)
     }
     close_database($database);
     return $found;
+}
+
+function updateStatus($table = null, $codPedido = 0, $dados=null)
+{
+    $items = null;
+    $database = open_database();
+    
+    foreach ($data as $key => $value) {
+        $items .= trim($key, "'") . "='$value',";
+    }
+    
+    // remove a ultima virgula
+    $items = rtrim($items, ',');
+    $sql = "UPDATE " . $table;
+    $sql .= " SET $items = ".$dados;
+    $sql .= " WHERE " . $codPedido . " = " . $id . ";";
+    echo "$sql";
+    
+    try {
+        
+        $database->query($sql);
+//        $_SESSION['message'] = $sql;
+        $_SESSION['message'] = 'Registro atualizado com sucesso.';
+        $_SESSION['type'] = 'success';
+    } catch (Exception $e) {
+        $_SESSION['message'] = 'Nao foi possivel realizar a operacao.';
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
 }

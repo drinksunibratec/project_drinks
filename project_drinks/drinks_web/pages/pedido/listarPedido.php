@@ -72,18 +72,18 @@ $dados = listarPedido($codEstabelecimento);
                                     ?>
 
                            <tbody id="myTable">
-							<tr>
-								<td><?php echo $pedido['codPedido']; ?></td>
-								<td><?php echo $pedido['usuario']; ?></td>
-								<td><?php echo $pedido['dataPedido']; ?></td>
-								<td><?php echo $pedido['pagamento']; ?></td>
-								<td><?php echo "R$ ".$pedido['valorTotal']; ?></td>
-								<td><?php echo $pedido['status']; ?></td>
-								<td align="center"><a title="Detalhes"
-									href="detalhePedido.php?codPedido=<?php echo  $pedido['codPedido']?>"
-									class="btn btn-sm btn-warning">&#9999; Detalhes</a></td>
-							</tr>
-						</tbody>						
+				<tr>
+                                    <td><?php echo $pedido['codPedido']; ?></td>
+                                    <td><?php echo $pedido['usuario']; ?></td>
+                                    <td><?php echo $pedido['dataPedido']; ?></td>
+                                    <td><?php echo $pedido['pagamento']; ?></td>
+                                    <td><?php echo "R$ ".$pedido['valorTotal']; ?></td>
+                                    <td><?php echo $pedido['status']; ?></td>
+                                    <td align="center"><a title="Detalhes"
+                                    href="detalhePedido.php?codPedido=<?php echo  $pedido['codPedido']?>"
+                                    class="btn btn-sm btn-warning">&#9999; Detalhes</a></td>
+				</tr>
+			   </tbody>						
                                 <?php
                                 }
                             }
