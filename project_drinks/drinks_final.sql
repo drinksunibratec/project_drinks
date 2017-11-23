@@ -141,7 +141,7 @@ INSERT INTO `pedido_produto` (`codPedido`, `codProduto`, `preco`, `quantidade`, 
 
 CREATE TABLE `produto` (
   `codProduto` int(11) NOT NULL,
-  `ean` int(15) NOT NULL,
+  `ean` varchar(15) NOT NULL,
   `descricao` varchar(400) NOT NULL,
   `nome` varchar(150) NOT NULL,
   `ref_img` varchar(150) DEFAULT NULL
@@ -183,7 +183,7 @@ INSERT INTO `produto` (`codProduto`, `ean`,`descricao`, `nome`, `ref_img`) VALUE
 CREATE TABLE `produto_estab` (
 `codProduto` int(11) NOT NULL,
 `codEstabelecimento` int(11) NOT NULL,
-`ean` int(15) NOT NULL,
+`ean` varchar(15) NOT NULL,
 `preco` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
