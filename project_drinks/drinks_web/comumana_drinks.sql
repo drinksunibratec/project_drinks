@@ -144,6 +144,7 @@ CREATE TABLE `produto` (
   `ean` varchar(15) NOT NULL,
   `descricao` varchar(400) NOT NULL,
   `nome` varchar(150) NOT NULL,
+  `bandeiraCartao` varchar(15) NOT NULL,
   `ref_img` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
