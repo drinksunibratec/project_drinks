@@ -32,7 +32,7 @@ public class DAODrinks {
     public DAODrinks(Context context) {
         this.mHelper = new DrinksSQLHelper(context);
         mContext = context;
-        mContext.deleteDatabase(this.mHelper.getDatabaseName());
+//        mContext.deleteDatabase(this.mHelper.getDatabaseName());
     }
 
     public long insertUsuario(Usuarios usuario) {
@@ -79,6 +79,19 @@ public class DAODrinks {
         }
     }
 
+    public void insertProdutoEstab(Produto produto) {
+        SQLiteDatabase db = mHelper.getWritableDatabase();
+
+        String sql = "SELECT * FROM " + DrinksContract.TABLE_NAME_PRODUTO_ESTAB + " WHERE " + DrinksContract.EAN + " = ?";
+
+        Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(produto.getEan())});
+
+        if (cursor.getCount() == 0) {
+            ContentValues values = parserProdutoEstab(produto);
+            db.insertOrThrow(DrinksContract.TABLE_NAME_PRODUTO_ESTAB, null, values);
+            db.close();
+        }
+    }
 
     public void insertEstabelecimentoFavorito(Estabelecimento estabelecimento) {
         SQLiteDatabase db = mHelper.getWritableDatabase();
@@ -240,6 +253,23 @@ public class DAODrinks {
         return existe;
     }
 
+    public boolean existeCarrinho(){
+        boolean existe = false;
+        SQLiteDatabase db = mHelper.getReadableDatabase();
+
+        String sql = "SELECT * FROM " + DrinksContract.TABLE_NAME_CARRINHO_COMPRAS;
+
+
+        Cursor cursor = db.rawQuery(sql, null);
+
+        if (cursor.getCount() > 0) {
+            existe = true;
+        }
+        cursor.close();
+        db.close();
+        return existe;
+    }
+
     public int quantidadeDoProdutoNoCarrinho(Produto produto) {
         int quantidade = 0;
         SQLiteDatabase db = mHelper.getReadableDatabase();
@@ -314,10 +344,11 @@ public class DAODrinks {
                 "C." + DrinksContract.PRECO_UNITARIO + ", " +
                 "C." + DrinksContract.PRECO_TOTAL + ", " +
                 "P." + DrinksContract.NOME + ", " +
-                "P." + DrinksContract.CODPRODUTO + ", " +
+                "PE." + DrinksContract.CODPRODUTO + ", " +
                 "C." + DrinksContract.CODESTABELECIMENTO +
                 " FROM " + DrinksContract.TABLE_NAME_CARRINHO_COMPRAS + " C " +
-                " JOIN " + DrinksContract.TABLE_NAME_PRODUTO + " P ON P." + DrinksContract.CODPRODUTO + " = C." + DrinksContract.CODPRODUTO;
+                " JOIN " + DrinksContract.TABLE_NAME_PRODUTO_ESTAB + " PE ON PE." + DrinksContract.CODPRODUTO + " = C." + DrinksContract.CODPRODUTO +
+                " JOIN " + DrinksContract.TABLE_NAME_PRODUTO + " P ON P." + DrinksContract.EAN + " = PE." + DrinksContract.EAN;
 
         Cursor cursor = db.rawQuery(sql, argumentos);
 
@@ -361,8 +392,14 @@ public class DAODrinks {
         List<Produto> produtos = new ArrayList<Produto>();
         SQLiteDatabase db = mHelper.getReadableDatabase();
 
-        String sql = "SELECT * " +
-                " FROM " + DrinksContract.TABLE_NAME_PRODUTO + " WHERE " + DrinksContract.CODESTABELECIMENTO + " = ?";
+        String sql = "SELECT PE."  + DrinksContract.CODPRODUTO + ", "
+                + " P." + DrinksContract.NOME + ", "
+                + " PE." + DrinksContract.PRECO + ", "
+                + " P." + DrinksContract.DESCRICAO + ", "
+                + " PE." + DrinksContract.CODESTABELECIMENTO
+                + " FROM " + DrinksContract.TABLE_NAME_PRODUTO_ESTAB + " PE "
+                + " JOIN " + DrinksContract.TABLE_NAME_PRODUTO + " P ON P." + DrinksContract.EAN  + " = PE."  + DrinksContract.EAN
+                + " WHERE PE." + DrinksContract.CODESTABELECIMENTO + " = ?";
 
         Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(estabelecimento.getCodEstabelecimento())});
 
@@ -371,14 +408,12 @@ public class DAODrinks {
             int idxNomeProduto = cursor.getColumnIndex(DrinksContract.NOME);
             int idxValorUnitario = cursor.getColumnIndex(DrinksContract.PRECO);
             int idxDescricao = cursor.getColumnIndex(DrinksContract.DESCRICAO);
-            int idxGelada = cursor.getColumnIndex(DrinksContract.GELADA);
             int idxCodEstabelecimento = cursor.getColumnIndex(DrinksContract.CODESTABELECIMENTO);
 
             while (cursor.moveToNext()) {
                 long codProduto = cursor.getLong(idxCodProduto);
                 String nome = cursor.getString(idxNomeProduto);
                 String descricao = cursor.getString(idxDescricao);
-                String gelada = cursor.getString(idxGelada);
                 Double valorUnitario = cursor.getDouble(idxValorUnitario);
                 long codEstabelecimento = cursor.getLong(idxCodEstabelecimento);
 
@@ -386,7 +421,6 @@ public class DAODrinks {
                 produto.setNome(nome);
                 produto.setCodProduto(codProduto);
                 produto.setDescricao(descricao);
-                produto.setGelada(gelada);
                 produto.setPreco(String.valueOf(valorUnitario));
                 produto.setCodEstabelecimento(String.valueOf(codEstabelecimento));
 
@@ -453,20 +487,17 @@ public class DAODrinks {
             int idxNomeProduto = cursor.getColumnIndex(DrinksContract.NOME);
             int idxValorUnitario = cursor.getColumnIndex(DrinksContract.PRECO);
             int idxDescricao = cursor.getColumnIndex(DrinksContract.DESCRICAO);
-            int idxGelada = cursor.getColumnIndex(DrinksContract.GELADA);
 
             while (cursor.moveToNext()) {
                 long codProduto = cursor.getLong(idxCodProduto);
                 String nome = cursor.getString(idxNomeProduto);
                 String descricao = cursor.getString(idxDescricao);
-                String gelada = cursor.getString(idxGelada);
                 Double valorUnitario = cursor.getDouble(idxValorUnitario);
 
                 Produto produto = new Produto();
                 produto.setNome(nome);
                 produto.setCodProduto(codProduto);
                 produto.setDescricao(descricao);
-                produto.setGelada(gelada);
                 produto.setPreco(String.valueOf(valorUnitario));
 
                 produtos.add(produto);
@@ -549,6 +580,16 @@ public class DAODrinks {
         values.put(DrinksContract.DESCRICAO, produto.getDescricao());
         values.put(DrinksContract.EAN, produto.getEan());
         values.put(DrinksContract.REF_IMG, produto.getRef_img());
+
+        return values;
+    }
+
+    private ContentValues parserProdutoEstab(Produto produto) {
+        ContentValues values = new ContentValues();
+        values.put(DrinksContract.CODPRODUTO, produto.getCodProduto());
+        values.put(DrinksContract.CODESTABELECIMENTO, produto.getEstabelecimento().getCodEstabelecimento());
+        values.put(DrinksContract.PRECO, produto.getPreco());
+        values.put(DrinksContract.EAN, produto.getEan());
 
         return values;
     }

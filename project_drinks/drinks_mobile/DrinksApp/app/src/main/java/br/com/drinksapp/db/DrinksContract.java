@@ -136,7 +136,7 @@ public interface DrinksContract {
             "FOREIGN KEY(" + CODUSUARIO + ") " +
             "REFERENCES " + TABLE_NAME_USUARIOS + "(" + CODUSUARIO + ")," +
             "FOREIGN KEY(" + CODPRODUTO + ") " +
-            "REFERENCES " + TABLE_NAME_PRODUTO + "(" + CODPRODUTO + ")) ";
+            "REFERENCES " + TABLE_NAME_PRODUTO_ESTAB + "(" + CODPRODUTO + ")) ";
 
 
     String SQL_CREATE_PEDIDO = "CREATE TABLE " + TABLE_NAME_PEDIDO + " (" +
@@ -158,7 +158,7 @@ public interface DrinksContract {
             "FOREIGN KEY(" + CODESTABELECIMENTO + ") " +
             "REFERENCES " + TABLE_NAME_ESTABELECIMENTO + "(" + CODESTABELECIMENTO + ")" +
             "FOREIGN KEY(" + CODPRODUTO + ") " +
-            "REFERENCES " + TABLE_NAME_PRODUTO + "(" + CODPRODUTO + "))";
+            "REFERENCES " + TABLE_NAME_PRODUTO_ESTAB + "(" + CODPRODUTO + "))";
 
 
     String SQL_CREATE_PEDIDO_PRODUTO = "CREATE TABLE " + TABLE_NAME_PEDIDO_PRODUTO + " (" +
@@ -170,7 +170,7 @@ public interface DrinksContract {
             "FOREIGN KEY(" + CODPEDIDO + ") " +
             "REFERENCES " + TABLE_NAME_PEDIDO + "(" + CODPEDIDO + ")," +
             "FOREIGN KEY(" + CODPRODUTO + ") " +
-            "REFERENCES " + TABLE_NAME_PRODUTO + "(" + CODPRODUTO + "))";
+            "REFERENCES " + TABLE_NAME_PRODUTO_ESTAB + "(" + CODPRODUTO + "))";
 
     String SQL_CREATE_PEDIDO_ENDERECO_ENTREGA = "CREATE TABLE " + TABLE_NAME_ENDERECO_ENTREGA + " (" +
             CODENDERECOENTREGA + " INTEGER PRIMARY KEY AUTOINCREMENT, " +

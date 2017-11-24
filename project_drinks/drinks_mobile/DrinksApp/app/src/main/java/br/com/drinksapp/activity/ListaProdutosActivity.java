@@ -39,7 +39,7 @@ public class ListaProdutosActivity extends AppCompatActivity {
 
     DAODrinks mDAO;
 
-    Button mBtnCarrinho;
+    FloatingActionButton mBtnCarrinho;
 
     FloatingActionButton fab;
 
@@ -50,15 +50,19 @@ public class ListaProdutosActivity extends AppCompatActivity {
         setContentView(R.layout.list_produtos_layout);
         mListView = (ListView) findViewById(R.id.listaProdutos);
 
-        mTxtNomeEstabelecimento = (TextView)findViewById(R.id.txtNomeEstabelecimentoProdutos);
-        mTxtEnderecoEstabelecimento = (TextView)findViewById(R.id.txtEnderecoEstabelecimentoProdutos) ;
+        mDAO = new DAODrinks(this);
 
-        mBtnCarrinho = (Button) findViewById(R.id.btn_carrinho);
+        mTxtNomeEstabelecimento = (TextView) findViewById(R.id.txtNomeEstabelecimentoProdutos);
+        mTxtEnderecoEstabelecimento = (TextView) findViewById(R.id.txtEnderecoEstabelecimentoProdutos);
+
+        mBtnCarrinho = (FloatingActionButton) findViewById(R.id.btn_carrinho);
         mBtnCarrinho.setOnClickListener(new BotaoCarrinho(this));
+
+        mBtnCarrinho.setVisibility(View.INVISIBLE);
+
         fab = (FloatingActionButton) findViewById(R.id.fab_estabelecimento_favorito);
         fab.setOnClickListener(new BotaoFavorito());
 
-        mDAO = new DAODrinks(this);
         mDAO.deleteCarrinhoCompras();
 
         ajustarLista();
@@ -76,8 +80,8 @@ public class ListaProdutosActivity extends AppCompatActivity {
 
     private void inserirProdutos() {
         for (Produto p : mProdutos) {
-            if(p.getNome() != null){
-                mDAO.insertProduto(p);
+            if (p.getNome() != null) {
+                mDAO.insertProdutoEstab(p);
             }
         }
     }
@@ -85,8 +89,8 @@ public class ListaProdutosActivity extends AppCompatActivity {
     private void ajustarLista() {
         mProdutos = new ArrayList<Produto>();
         mEstabelecimento = (Estabelecimento) getIntent().getSerializableExtra(Constantes.EXTRA_ESTABELECIMENTO);
-        Bundle bundle = (Bundle)getIntent().getExtras().get(Constantes.EXTRA_BUNDLE);
-        List<Produto> result = (List<Produto>)bundle.getSerializable(Constantes.EXTRA_PRODUTO);
+        Bundle bundle = (Bundle) getIntent().getExtras().get(Constantes.EXTRA_BUNDLE);
+        List<Produto> result = (List<Produto>) bundle.getSerializable(Constantes.EXTRA_PRODUTO);
 
         for (Produto p : result) {
             p.setEstabelecimento(mEstabelecimento);
@@ -104,6 +108,11 @@ public class ListaProdutosActivity extends AppCompatActivity {
 
                 for (int i = 0; i < mProdutos.size(); i++) {
                     mProdutos.get(i).setEstabelecimento(estabelecimento);
+                }
+                if (mDAO.existeCarrinho()) {
+                    mBtnCarrinho.setVisibility(View.VISIBLE);
+                } else {
+                    mBtnCarrinho.setVisibility(View.INVISIBLE);
                 }
             }
         }
@@ -157,7 +166,7 @@ public class ListaProdutosActivity extends AppCompatActivity {
         }
     }
 
-    public void toggleFavorito(){
+    public void toggleFavorito() {
         fab.setImageResource(
                 mDAO.isEstabelecimentoFavorito(mEstabelecimento) ? R.drawable.ic_remove_favoritos : R.drawable.ic_add_favorito
         );

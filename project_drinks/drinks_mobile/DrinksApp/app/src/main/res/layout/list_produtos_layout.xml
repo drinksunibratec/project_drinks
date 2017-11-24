@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/swipe_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -97,7 +98,7 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -105,20 +106,30 @@
         <ListView
             android:id="@+id/listaProdutos"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.8" />
+            android:layout_height="wrap_content" />
 
-        <Button
+        <android.support.design.widget.FloatingActionButton
             android:id="@+id/btn_carrinho"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.1"
-            android:background="@drawable/click_botao"
-            android:drawableRight="@drawable/ic_arrow_forward"
-            android:text="@string/btn_ver_carrinho"
-            android:textColor="@color/btn_login" />
+            app:layout_anchor="@id/listaProdutos"
+            app:layout_anchorGravity="bottom|end"
+            android:layout_margin="@dimen/medium_padding"
+            android:background="@color/background_botoes"
+            android:backgroundTint="@color/background_botoes"
+            android:src="@drawable/ic_carrinho_black" />
 
-    </LinearLayout>
+        <!--<Button-->
+        <!--android:id="@+id/btn_carrinho"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="0.1"-->
+        <!--android:background="@drawable/click_botao"-->
+        <!--android:drawableRight="@drawable/ic_arrow_forward"-->
+        <!--android:text="@string/btn_ver_carrinho"-->
+        <!--android:textColor="@color/btn_login" />-->
+
+    </android.support.design.widget.CoordinatorLayout>
 
 
 </LinearLayout>
