@@ -4,9 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Build;
-import android.renderscript.Sampler;
-import android.support.annotation.RequiresApi;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,7 +32,7 @@ public class DAODrinks {
     public DAODrinks(Context context) {
         this.mHelper = new DrinksSQLHelper(context);
         mContext = context;
-//        mContext.deleteDatabase(this.mHelper.getDatabaseName());
+        mContext.deleteDatabase(this.mHelper.getDatabaseName());
     }
 
     public long insertUsuario(Usuarios usuario) {
@@ -71,9 +68,9 @@ public class DAODrinks {
     public void insertProduto(Produto produto) {
         SQLiteDatabase db = mHelper.getWritableDatabase();
 
-        String sql = "SELECT * FROM " + DrinksContract.TABLE_NAME_PRODUTO + " WHERE " + DrinksContract.CODPRODUTO + " = ?";
+        String sql = "SELECT * FROM " + DrinksContract.TABLE_NAME_PRODUTO + " WHERE " + DrinksContract.EAN + " = ?";
 
-        Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(produto.getCodProduto())});
+        Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(produto.getEan())});
 
         if (cursor.getCount() == 0) {
             ContentValues values = parserProduto(produto);
@@ -265,6 +262,28 @@ public class DAODrinks {
         return quantidade;
     }
 
+    public String getEANProduto(Produto produto) {
+        String EAN = "";
+        SQLiteDatabase db = mHelper.getReadableDatabase();
+        String[] argumentos = null;
+
+        String sql = "SELECT EAN FROM " + DrinksContract.TABLE_NAME_PRODUTO + " WHERE " + DrinksContract.NOME + " LIKE ?";
+
+        argumentos = new String[]{produto.getNome()};
+
+        Cursor cursor = db.rawQuery(sql, argumentos);
+
+        if (cursor.getCount() > 0) {
+            int idxEAN = cursor.getColumnIndex(DrinksContract.EAN);
+            if (cursor.moveToFirst()) {
+                EAN = cursor.getString(idxEAN);
+            }
+        }
+        cursor.close();
+        db.close();
+        return EAN;
+    }
+
     public double precoTotalDoCarrinho(ItemCarrinhoCompras cc) {
         double valorTotal = 0;
         SQLiteDatabase db = mHelper.getReadableDatabase();
@@ -379,6 +398,41 @@ public class DAODrinks {
         return produtos;
     }
 
+    public List<Produto> consultarProdutos() {
+
+        List<Produto> produtos = new ArrayList<Produto>();
+        SQLiteDatabase db = mHelper.getReadableDatabase();
+
+        String sql = "SELECT * FROM " + DrinksContract.TABLE_NAME_PRODUTO;
+
+        Cursor cursor = db.rawQuery(sql, null);
+
+        if (cursor.getCount() > 0) {
+            int idxCodProduto = cursor.getColumnIndex(DrinksContract.CODPRODUTO);
+            int idxNomeProduto = cursor.getColumnIndex(DrinksContract.NOME);
+            int idxDescricao = cursor.getColumnIndex(DrinksContract.DESCRICAO);
+            int idxEan = cursor.getColumnIndex(DrinksContract.EAN);
+
+            while (cursor.moveToNext()) {
+                long codProduto = cursor.getLong(idxCodProduto);
+                String nome = cursor.getString(idxNomeProduto);
+                String descricao = cursor.getString(idxDescricao);
+                String ean = cursor.getString(idxEan);
+
+                Produto produto = new Produto();
+                produto.setNome(nome);
+                produto.setCodProduto(codProduto);
+                produto.setDescricao(descricao);
+                produto.setEan(ean);
+
+                produtos.add(produto);
+            }
+        }
+        cursor.close();
+        db.close();
+        return produtos;
+    }
+
     public List<Produto> consultarProdutosFavoritos() {
 
         List<Produto> produtos = new ArrayList<Produto>();
@@ -386,11 +440,11 @@ public class DAODrinks {
 
         String sql = "SELECT P." + DrinksContract.CODPRODUTO + ", " +
                 "P." + DrinksContract.NOME + ", " +
-                "P." + DrinksContract.PRECO + ", " +
-                "P." + DrinksContract.DESCRICAO + ", " +
-                "P." + DrinksContract.GELADA +
+                "PE." + DrinksContract.PRECO + ", " +
+                "P." + DrinksContract.DESCRICAO +
                 " FROM " + DrinksContract.TABLE_NAME_PRODUTOS_FAVORITOS + " F " +
-                " JOIN " + DrinksContract.TABLE_NAME_PRODUTO + " P ON P." + DrinksContract.CODPRODUTO + " = F." + DrinksContract.CODPRODUTO;
+                " JOIN " + DrinksContract.TABLE_NAME_PRODUTO + " P ON P." + DrinksContract.CODPRODUTO + " = F." + DrinksContract.CODPRODUTO +
+                " JOIN " + DrinksContract.TABLE_NAME_PRODUTO_ESTAB + " PE ON P." + DrinksContract.EAN + " = PE." + DrinksContract.EAN;
 
         Cursor cursor = db.rawQuery(sql, null);
 
@@ -493,9 +547,8 @@ public class DAODrinks {
         values.put(DrinksContract.CODPRODUTO, produto.getCodProduto());
         values.put(DrinksContract.NOME, produto.getNome());
         values.put(DrinksContract.DESCRICAO, produto.getDescricao());
-        values.put(DrinksContract.GELADA, produto.getGelada());
-        values.put(DrinksContract.PRECO, produto.getPreco());
-        values.put(DrinksContract.CODESTABELECIMENTO, produto.getCodEstabelecimento());
+        values.put(DrinksContract.EAN, produto.getEan());
+        values.put(DrinksContract.REF_IMG, produto.getRef_img());
 
         return values;
     }

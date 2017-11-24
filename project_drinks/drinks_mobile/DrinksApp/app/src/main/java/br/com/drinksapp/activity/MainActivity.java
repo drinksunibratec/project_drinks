@@ -1,6 +1,7 @@
 package br.com.drinksapp.activity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -9,13 +10,32 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import br.com.drinksapp.R;
+import br.com.drinksapp.adapter.ProdutoPesquisaAdapter;
 import br.com.drinksapp.bean.Pedido;
+import br.com.drinksapp.bean.Produto;
+import br.com.drinksapp.db.DAODrinks;
 import br.com.drinksapp.fragment.EstabelecimentosFavoritosFragment;
 import br.com.drinksapp.fragment.MapFragment;
 import br.com.drinksapp.fragment.PedidosListFragment;
 import br.com.drinksapp.fragment.ProdutosFavoritosFragment;
+import br.com.drinksapp.http.DBConnectParser;
 import br.com.drinksapp.interfaces.OnPedidoClick;
 import br.com.drinksapp.util.Constantes;
 
@@ -35,19 +55,29 @@ public class MainActivity extends AppCompatActivity implements OnPedidoClick {
 
     ViewPager mViewPager;
 
+    AutoCompleteTextView mTxtPesquisa;
+
+    List<Produto> mProdutos;
+
+    DAODrinks mDAO;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarMain);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        mTxtPesquisa = (AutoCompleteTextView)findViewById(R.id.edt_pesquisa_precos);
+        mTxtPesquisa.setText("");
+        mDAO = new DAODrinks(this);
+
+        new TaskBuscarProdutos().execute();
 
 
         buildViewPager();
-
-
     }
-
 
     private void buildViewPager() {
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
@@ -124,5 +154,52 @@ public class MainActivity extends AppCompatActivity implements OnPedidoClick {
         }
     }
 
+    class TaskBuscarProdutos extends AsyncTask<Void, Void, List<Produto>>{
+
+        @Override
+        protected List<Produto> doInBackground(Void... params) {
+            List<Produto> produtos = new ArrayList<Produto>();
+            try {
+                produtos = DBConnectParser.listarTodosOsProdutos();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return produtos;
+        }
+
+        @Override
+        protected void onPostExecute(List<Produto> produtos) {
+
+            if(produtos != null){
+
+                for(Produto p : produtos){
+                    mDAO.insertProduto(p);
+                }
+                mProdutos = produtos;
+
+                String[] listaNomesProdutos = new String[mProdutos.size()];
+                for(int i = 0; i < mProdutos.size(); i++){
+                    listaNomesProdutos[i] = mProdutos.get(i).getNome();
+                }
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                        (MainActivity.this,R.layout.item_pesquisa_produto, listaNomesProdutos);
+                mTxtPesquisa.setThreshold(2);
+                mTxtPesquisa.setAdapter(adapter);
+
+                mTxtPesquisa.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                        Produto p = new Produto(parent.getItemAtPosition(position).toString());
+                        String ean = mDAO.getEANProduto(p);
+                        Intent it = new  Intent(MainActivity.this, ComparaPrecosActivity.class);
+                        it.putExtra(Constantes.EXTRA_EAN, ean);
+                        startActivity(it);
+                    }
+                });
+            }
+        }
+    }
 
 }

@@ -86,6 +86,69 @@ public class DBConnectParser {
 
     }
 
+    public static List<Produto> listarTodosOsProdutos() throws IOException {
+        Response response = null;
+
+        OkHttpClient client = new OkHttpClient();
+
+        Request request = new Request.Builder()
+                .url(AppConfig.URL_LISTA_PRODUTOS)
+                .build();
+
+        response = client.newCall(request).execute();
+        if (response.networkResponse().code() == HttpURLConnection.HTTP_OK) {
+            String json = response.body().string();
+
+            Gson gson = new Gson();
+
+            ListProduto produtos = gson.fromJson(json, ListProduto.class);
+
+            if (produtos != null) {
+                return produtos.getProdutos();
+            }
+        }
+
+        return null;
+
+    }
+
+    public static List<Produto> listarProdutosPorEan(String ean) throws IOException {
+        Response response = null;
+
+        OkHttpClient client = new OkHttpClient();
+
+        RequestBody body = new FormBody.Builder()
+                .add("ean", ean)
+                .build();
+
+        Request request = new Request.Builder()
+                .url(AppConfig.URL_LISTA_PRODUTOS_POR_EAN)
+                .post(body)
+                .build();
+
+        response = client.newCall(request).execute();
+        if (response.networkResponse().code() == HttpURLConnection.HTTP_OK) {
+            String json = response.body().string();
+
+            Gson gson = new Gson();
+
+            ListProduto listProduto = gson.fromJson(json, ListProduto.class);
+
+            if (listProduto != null) {
+
+                List<Produto> produtos = listProduto.getProdutos();
+                for (int i = 0; i < produtos.size(); i++) {
+                    long codEstabelecimento = Long.parseLong(produtos.get(i).getCodEstabelecimento());
+                    Estabelecimento estabelecimento = consultarEstabelecimento(String.valueOf(codEstabelecimento));
+                    produtos.get(i).setEstabelecimento(estabelecimento);
+                }
+
+                return produtos;
+            }
+        }
+        return null;
+    }
+
     public static Usuarios login(Usuarios usuario) {
         Response response = null;
 

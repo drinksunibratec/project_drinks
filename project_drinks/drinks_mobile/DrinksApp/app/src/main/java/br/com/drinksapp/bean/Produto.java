@@ -1,12 +1,10 @@
 package br.com.drinksapp.bean;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import java.io.Serializable;
 
 
 public class Produto implements Serializable {
+
     public long codProduto;
     public String descricao;
     public String gelada;
@@ -14,15 +12,9 @@ public class Produto implements Serializable {
     public String preco;
     public String codEstabelecimento;
     public Estabelecimento estabelecimento;
+    public String ean;
+    public String ref_img;
 
-    protected Produto(Parcel in) {
-        codProduto = in.readLong();
-        descricao = in.readString();
-        gelada = in.readString();
-        nome = in.readString();
-        preco = in.readString();
-        codEstabelecimento = in.readString();
-    }
 
     public Produto() {
 
@@ -44,8 +36,30 @@ public class Produto implements Serializable {
         this.preco = preco;
         this.codEstabelecimento = codEstabelecimento;
     }
-    public Produto(String descricao, String gelada, String nome, String preco, String codEstabelecimento) {
-        this(0, descricao, gelada, nome, preco, codEstabelecimento);
+
+    public Produto(String nome) {
+        this.nome = nome;
+    }
+
+    @Override
+    public String toString() {
+        return getNome().toString();
+    }
+
+    public String getRef_img() {
+        return ref_img;
+    }
+
+    public void setRef_img(String ref_img) {
+        this.ref_img = ref_img;
+    }
+
+    public String getEan() {
+        return ean;
+    }
+
+    public void setEan(String ean) {
+        this.ean = ean;
     }
 
     public long getCodProduto() {

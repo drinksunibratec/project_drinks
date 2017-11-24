@@ -8,6 +8,8 @@ public interface DrinksContract {
 
     String TABLE_NAME_PRODUTO = "PRODUTO";
 
+    String TABLE_NAME_PRODUTO_ESTAB = "PRODUTO_ESTAB";
+
     String TABLE_NAME_USUARIOS = "USUARIOS";
 
     String TABLE_NAME_PEDIDO_PRODUTO = "PEDIDO_PRODUTO";
@@ -33,6 +35,8 @@ public interface DrinksContract {
     String CODPEDIDO = "CODPEDIDO";
 
     String NOME = "NOME";
+
+    String EAN = "EAN";
 
     String CNPJ = "CNPJ";
 
@@ -78,6 +82,8 @@ public interface DrinksContract {
 
     String FAVORITO = "FAVORITO";
 
+    String REF_IMG = "REF_IMG";
+
     String SQL_CREATE_USUARIO = "CREATE TABLE " + TABLE_NAME_USUARIOS + " (" +
             CODUSUARIO + " INTEGER PRIMARY KEY," +
             NOME + " TEXT NOT NULL," +
@@ -99,15 +105,22 @@ public interface DrinksContract {
             LONGITUDE + " TEXT," +
             TELEFONE + " TEXT NOT NULL) ";
 
-    String SQL_CREATE_PRODUTO = "CREATE TABLE " + TABLE_NAME_PRODUTO+ " (" +
+    String SQL_CREATE_PRODUTO = "CREATE TABLE " + TABLE_NAME_PRODUTO + " (" +
             CODPRODUTO + " INTEGER PRIMARY KEY," +
             NOME + " TEXT NOT NULL," +
-            DESCRICAO + " TEXT NOT NULL," +
+            DESCRICAO + " TEXT," +
+            EAN + " TEXT NOT NULL," +
+            REF_IMG + " TEXT) ";
+
+    String SQL_CREATE_PRODUTO_ESTAB = "CREATE TABLE " + TABLE_NAME_PRODUTO_ESTAB + " (" +
+            CODPRODUTO + " INTEGER PRIMARY KEY," +
+            EAN + " TEXT NOT NULL," +
             PRECO + " TEXT," +
-            GELADA + " TEXT NOT NULL, " +
             CODESTABELECIMENTO + " INTEGER NOT NULL, " +
             "FOREIGN KEY(" + CODESTABELECIMENTO + ") " +
-            "REFERENCES " + TABLE_NAME_ESTABELECIMENTO + "(" + CODESTABELECIMENTO + ")) ";
+            "REFERENCES " + TABLE_NAME_ESTABELECIMENTO + "(" + CODESTABELECIMENTO + ")," +
+            "FOREIGN KEY(" + EAN + ") " +
+            "REFERENCES " + TABLE_NAME_PRODUTO + "(" + EAN + "))";
 
     String SQL_CREATE_ESTABELECIMENTOS_FAVORITOS = "CREATE TABLE " + TABLE_NAME_ESTABELECIMENTOS_FAVORITOS + " (" +
             CODESTABELECIMENTO + " INTEGER NOT NULL, " +

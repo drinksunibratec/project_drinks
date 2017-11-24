@@ -8,6 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_actionbar_fragments"
         android:background="@color/cinza_claro_color"
         android:gravity="left"
         android:orientation="horizontal"

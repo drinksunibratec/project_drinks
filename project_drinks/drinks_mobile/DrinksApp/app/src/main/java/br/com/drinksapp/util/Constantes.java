@@ -49,4 +49,6 @@ public class Constantes {
     public static final String EXTRA_BANDEIRA = "EXTRA_BANDEIRA";
 
     public static final String EXTRA_ID_BANDEIRA = "EXTRA_ID_BANDEIRA";
+
+    public static final String EXTRA_EAN = "EXTRA_EAN";
 }

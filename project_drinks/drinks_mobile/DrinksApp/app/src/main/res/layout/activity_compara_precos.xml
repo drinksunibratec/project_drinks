@@ -1,46 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white_color"
-    android:orientation="vertical">
+    android:background="@color/cinza_claro_color"
+    android:orientation="vertical"
+    tools:context="br.com.drinksapp.activity.ComparaPrecosActivity">
+
+
+
+    <Spinner
+        android:id="@+id/ordem_pesquisa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white_color"
+        android:backgroundTint="@color/white_color"
+        android:padding="@dimen/medium_padding"
+        android:spinnerMode="dropdown" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_actionbar_fragments"
         android:background="@color/cinza_claro_color"
-        android:gravity="left"
         android:orientation="horizontal"
         android:padding="@dimen/medium_padding">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_home_marker" />
+            android:src="@drawable/ic_beer" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/medium_padding"
-            android:text="@string/estabelecimento_favorito"
+            android:text="@string/produtos"
             android:textColor="@color/black_color"
             android:textSize="@dimen/medium_text" />
-
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/white_color">
 
         <ListView
-            android:id="@+id/listaEstabelecimentosFavoritos"
+            android:id="@+id/listaProdutosPesquisa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-
     </LinearLayout>
-
 </LinearLayout>

@@ -1,6 +1,7 @@
 package br.com.drinksapp.db;
 
 import android.content.Context;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -23,16 +24,20 @@ public class DrinksSQLHelper extends SQLiteOpenHelper{
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-
-            db.execSQL(DrinksContract.SQL_CREATE_USUARIO);
-            db.execSQL(DrinksContract.SQL_CREATE_ESTABELECIMENTO);
-            db.execSQL(DrinksContract.SQL_CREATE_PRODUTO);
-            db.execSQL(DrinksContract.SQL_CREATE_PEDIDO);
-            db.execSQL(DrinksContract.SQL_CREATE_PEDIDO_PRODUTO);
-            db.execSQL(DrinksContract.SQL_CREATE_PEDIDO_ENDERECO_ENTREGA);
-            db.execSQL(DrinksContract.SQL_CREATE_CARRINHO_COMPRAS);
-            db.execSQL(DrinksContract.SQL_CREATE_ESTABELECIMENTOS_FAVORITOS);
-            db.execSQL(DrinksContract.SQL_CREATE_PRODUTOS_FAVORITOS);
+            try {
+                db.execSQL(DrinksContract.SQL_CREATE_USUARIO);
+                db.execSQL(DrinksContract.SQL_CREATE_ESTABELECIMENTO);
+                db.execSQL(DrinksContract.SQL_CREATE_PRODUTO);
+                db.execSQL(DrinksContract.SQL_CREATE_PRODUTOS_FAVORITOS);
+                db.execSQL(DrinksContract.SQL_CREATE_PRODUTO_ESTAB);
+                db.execSQL(DrinksContract.SQL_CREATE_PEDIDO);
+                db.execSQL(DrinksContract.SQL_CREATE_PEDIDO_PRODUTO);
+                db.execSQL(DrinksContract.SQL_CREATE_PEDIDO_ENDERECO_ENTREGA);
+                db.execSQL(DrinksContract.SQL_CREATE_CARRINHO_COMPRAS);
+                db.execSQL(DrinksContract.SQL_CREATE_ESTABELECIMENTOS_FAVORITOS);
+            }catch (SQLException e) {
+                e.printStackTrace();
+            }
 
         }
 
@@ -43,10 +48,11 @@ public class DrinksSQLHelper extends SQLiteOpenHelper{
             db.execSQL("DROP TABLE IF EXISTS " + DrinksContract.TABLE_NAME_PRODUTO);
             db.execSQL("DROP TABLE IF EXISTS " + DrinksContract.TABLE_NAME_PEDIDO);
             db.execSQL("DROP TABLE IF EXISTS " + DrinksContract.TABLE_NAME_PEDIDO_PRODUTO);
+            db.execSQL("DROP TABLE IF EXISTS " + DrinksContract.TABLE_NAME_PRODUTO_ESTAB);
             db.execSQL("DROP TABLE IF EXISTS " + DrinksContract.TABLE_NAME_ENDERECO_ENTREGA);
-            db.execSQL("DROP TABLE IF EXISTS " + DrinksContract.SQL_CREATE_CARRINHO_COMPRAS);
-            db.execSQL("DROP TABLE IF EXISTS " + DrinksContract.SQL_CREATE_ESTABELECIMENTOS_FAVORITOS);
-            db.execSQL("DROP TABLE IF EXISTS " + DrinksContract.SQL_CREATE_PRODUTOS_FAVORITOS);
+            db.execSQL("DROP TABLE IF EXISTS " + DrinksContract.TABLE_NAME_CARRINHO_COMPRAS);
+            db.execSQL("DROP TABLE IF EXISTS " + DrinksContract.TABLE_NAME_ESTABELECIMENTOS_FAVORITOS);
+            db.execSQL("DROP TABLE IF EXISTS " + DrinksContract.TABLE_NAME_PRODUTOS_FAVORITOS);
 
             // create new tables
             onCreate(db);

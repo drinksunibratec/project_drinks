@@ -21,6 +21,19 @@ class DB_Functions {
 	    function __destruct() {
 	        
 	    }
+	    
+	function logMe($msg){
+		// Abre ou cria o arquivo bloco1.txt
+		// "a" representa que o arquivo é aberto para ser escrito
+		$fp = fopen("log.txt", "a");
+		
+		// Escreve a mensagem passada através da variável $msg
+		$escreve = fwrite($fp, $msg);
+		
+		// Fecha o arquivo
+		fclose($fp); 
+	
+	}
 
     /**
      * Storing new user
@@ -50,10 +63,10 @@ class DB_Functions {
 	        }
 	    }
     
-    public function inserirPedido($pedido){
+	public function inserirPedido($pedido){
 		$columns = null;
     		$values = null;
-		foreach ($pedido as $key => $value) {
+    		foreach ($pedido as $key => $value) {
 			$columns .= trim($key, "'") . ",";
 			$values .= "'$value',";
 		}
@@ -63,7 +76,7 @@ class DB_Functions {
 		$values = rtrim($values, ',');
 		
 		$sql = "INSERT INTO pedido (" . $columns . ") VALUES (" . $values . ");";
-		
+		error_log("Insert pedido:" . $sql );
 		$this->conn->query($sql);
 	}
 	
@@ -73,20 +86,6 @@ class DB_Functions {
 		error_log("Update situação pedido:" . $sql );
 		$this->conn->query($sql);
 	
-	}
-	
-	public function consultaPedidoPorId($codPedido){
-		$pedido = null;
-		$sql = "SELECT * FROM pedido where codPedido = " . $codPedido;
-
-		
-		$result = $this->conn->query($sql);
-		
-		if ($result->num_rows > 0) {
-			$pedido = $result->fetch_assoc();
-		}
-
-		return $pedido;
 	}
 	
 	public function listarPedidosDeUsuario($codUsuario){
@@ -105,7 +104,7 @@ class DB_Functions {
 	
 	public function listarProdutosPedidos($codPedido){
 		$pedidos = null;
-		$sql = "select pr.nome,	pr.preco, pr.descricao, pp.quantidade, pp.precoTotal from pedido_produto pp join produto pr on pr.codProduto = pp.codProduto WHERE pp.codPedido = " . $codPedido;
+		$sql = "SELECT pr.nome, pe.preco, pr.ean, pr.descricao, pp.quantidade, pp.precoTotal FROM pedido_produto pp JOIN produto_estab pe ON pe.codProduto = pp.codProduto JOIN produto pr ON pr.ean = pe.ean WHERE pp.codPedido  = " . $codPedido;
 
 		
 		$result = $this->conn->query($sql);
@@ -132,7 +131,6 @@ class DB_Functions {
 			$values = rtrim($values, ',');
 			
 			$sql = "INSERT INTO pedido_produto (" . $columns . ") VALUES (" . $values . ");";
-			echo $sql;	
 			$this->conn->query($sql);
 		}
 		
@@ -153,6 +151,19 @@ class DB_Functions {
 		return $produtos;
 	}
 	
+	public function consultaPedidoPorId($codPedido){
+		$pedido = null;
+		$sql = "SELECT * FROM pedido where codPedido = " . $codPedido;
+
+		
+		$result = $this->conn->query($sql);
+		
+		if ($result->num_rows > 0) {
+			$pedido = $result->fetch_assoc();
+		}
+
+		return $pedido;
+	}
 	
 	public function listaEstabelecimentos(){
 		$estabelecimentos = null;
@@ -169,7 +180,21 @@ class DB_Functions {
 
 	public function listaProdutosPorEstabelecimento($codEstabelecimento){
 		$produtos = null;
-		$sql = "SELECT * FROM produto p WHERE p.codEstabelecimento = " . $codEstabelecimento;
+		$sql = "select pe.codProduto, p.nome, p.descricao, p.ean, pe.preco from produto_estab pe join produto p on p.ean = pe.ean where pe.codEstabelecimento = " . $codEstabelecimento;
+
+		
+		$result = $this->conn->query($sql);
+		
+		if ($result->num_rows > 0) {
+			$produtos = $result->fetch_all(MYSQLI_ASSOC);
+		}
+
+		return $produtos;
+	}
+	
+	public function listaProdutosPorEan($ean){
+		$produtos = null;
+		$sql = "SELECT pe.codProduto, p.nome, p.descricao, p.ean, pe.preco, pe.codEstabelecimento FROM produto_estab pe JOIN produto p ON p.ean = pe.ean WHERE p.ean =  " . $ean;
 
 		
 		$result = $this->conn->query($sql);
@@ -256,6 +281,20 @@ class DB_Functions {
 	
 	        return $hash;
 	    }
+		
+		public function listarTodosOsProdutos(){
+		$pedidos = null;
+		$sql = "SELECT * FROM produto";
+
+		
+		$result = $this->conn->query($sql);
+		
+		if ($result->num_rows > 0) {
+			$pedidos = $result->fetch_all(MYSQLI_ASSOC);
+		}
+
+		return $pedidos;
+	}
 }
 
 ?>

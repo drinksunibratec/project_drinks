@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white_color"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/medium_padding">
+
+        <TextView
+            android:id="@+id/txtNomeProdutoCompara"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:paddingLeft="@dimen/medium_padding"
+            android:paddingTop="@dimen/medium_padding"
+            android:text="@string/nome"
+            android:textColor="@color/black_color"
+            android:textSize="@dimen/small_text"/>
+
+        <TextView
+            android:id="@+id/txtEstabelecimentoProdutoCompara"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/txtNomeProdutoCompara"
+            android:paddingLeft="@dimen/medium_padding"
+            android:paddingTop="@dimen/very_small_padding"
+            android:text="Sala de Reboco"
+            android:textColor="@color/gray_color"
+            android:textSize="@dimen/small_text"/>
+
+        <TextView
+            android:id="@+id/txtPrecoProdutoLista"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/txtEstabelecimentoProdutoCompara"
+            android:paddingLeft="@dimen/medium_padding"
+            android:paddingTop="@dimen/very_small_padding"
+            android:text="Preço"
+            android:textColor="@color/blue_color"
+            android:textSize="@dimen/small_text" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/imagmProdutoCompara"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center"
+        android:paddingRight="@dimen/small_padding"
+        android:paddingTop="@dimen/medium_padding"
+        android:src="@mipmap/ic_launcher" />
+
+
+</RelativeLayout>

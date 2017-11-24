@@ -10,17 +10,34 @@
         android:id="@+id/appBarMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:theme="@style/AppTheme.AppBarOverlay">
+        app:theme="@style/AppTheme.AppBarOverlay"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
 
-        <!--<android.support.v7.widget.Toolbar-->
-            <!--android:id="@+id/toolbarMain"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="@color/colorPrimary"-->
-            <!--app:theme="@style/AppTheme.AppBarOverlay">-->
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbarMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary">
 
-        <!--</android.support.v7.widget.Toolbar>-->
+            <AutoCompleteTextView
+                android:id="@+id/edt_pesquisa_precos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/input_arredondado"
+                android:drawableLeft="@drawable/ic_search"
+                android:hint="@string/edt_pesquisa_precos"
+                android:inputType="text"
+                android:padding="@dimen/small_padding"
+                android:layout_marginTop="@dimen/medium_padding"
+                android:layout_marginRight="@dimen/medium_padding"
+                android:textColor="@color/input_login"
+                android:textColorHint="@color/gray_color"
+                android:completionThreshold="1"/>
+
+        </android.support.v7.widget.Toolbar>
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
@@ -29,17 +46,13 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <!--<fragment xmlns:android="http://schemas.android.com/apk/res/android"-->
-        <!--xmlns:tools="http://schemas.android.com/tools"-->
-        <!--android:id="@+id/map"-->
-        <!--android:name="com.google.android.gms.maps.SupportMapFragment"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content" />-->
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/appBarMain"/>
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

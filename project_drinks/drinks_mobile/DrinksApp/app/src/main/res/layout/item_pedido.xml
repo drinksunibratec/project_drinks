@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white_color"
@@ -8,33 +7,33 @@
 
 
     <TextView
+        android:id="@+id/txtEstabelecimentoPedido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Medium Text"
-        android:id="@+id/txtEstabelecimentoPedido"
+        android:layout_alignParentTop="true"
         android:paddingTop="20dp"
-        android:layout_alignParentTop="true" />
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
+        android:id="@+id/txtDataPedido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Small Text"
-        android:id="@+id/txtDataPedido"
-        android:textColor="@color/gray_color"
         android:layout_below="@+id/txtEstabelecimentoPedido"
-        android:layout_marginBottom="@dimen/medium_padding"/>
+        android:layout_marginBottom="@dimen/medium_padding"
+        android:text="Small Text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/gray_color" />
 
     <TextView
         android:id="@+id/txtPrecoPedido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/txtEstabelecimentoPedido"
-        android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_alignParentEnd="true"
-        android:textColor="@color/black_color"
         android:layout_alignParentRight="true"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/black_color" />
 
 </RelativeLayout>
