@@ -18,14 +18,22 @@
     					
     					    <li><a href="../estabelecimento/lista.php">Estabelecimentos</a></li>
     						<li><a href="../cliente/lista.php">Clientes</a></li>
-                            
+                                                <li><a href="../produto/lista.php">Produtos</a></li>
+                                                <li><a href="../pedido/listarPedido.php">Pedidos</a></li>
+                                                <li><a href="../estabelecimento/relatorios.php">Relatorios</a></li>
+                                                <li><a href="../campanhas/campanhas.php">Campanhas</a></li>
+                                                <li><a href="../login/login.php">Sair</a></li>
+                                                
+                                                
+    					<?php }else {?>
+                                                <li><a href="../pedido/listarPedido.php">Pedidos</a></li>
+                                                <li><a href="../produto/listaProdutoEstabelecimento.php">Catálogo Produtos</a></li>
+                                                <li><a href="../produto/listaProdutoVinculados.php">Produtos Vinculados</a></li>
+                                                <li><a href="../estabelecimento/relatorios.php">Relatorios</a></li>
+                                                <li><a href="../campanhas/campanhas.php">Campanhas</a></li>
+                                                <li><a href="../login/login.php">Sair</a></li>
+                                              
     					<?php }?>
-    					
-							<li><a href="../pedido/listarPedido.php">Pedidos</a></li>
-                            <li><a href="../produto/lista.php">Produtos</a></li>
-                            <li><a href="../estabelecimento/relatorios.php">Relatorios</a></li>
-					 
-					   <li><a href="../login/login.php">Sair</a></li>
 				</ul>
 				
 			</div>

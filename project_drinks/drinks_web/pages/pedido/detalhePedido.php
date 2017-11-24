@@ -37,6 +37,7 @@ if (isset($_POST['codPedido']) && empty($_POST['codPedido']) == false) {
 
 $dados = detalhesPedido($codEstabelecimento, $codPedido);
 $pdo = itens($codEstabelecimento, $codPedido);
+//var_dump($pdo);
 ?>
 
 <!DOCTYPE html>
@@ -69,9 +70,9 @@ if (count($dados) > 0) {
                                     </div>
 
                                     <div class="form-group col-md-7">
-                                        <label for="codUsuario">Cliente</label> <input type="text"
-                                                                                       class="form-control" name="codUsuario"
-                                                                                       value="<?php echo $pedido['nome']; ?>" readonly>
+                                        <label for="codUsuario">Cliente</label> 
+                                        <input type="text"  class="form-control" name="codUsuario"
+                                         value="<?php echo $pedido['usuario']; ?>" readonly>
                                     </div>
                                 </div>
 
@@ -92,7 +93,7 @@ if (count($dados) > 0) {
                                                                                      value="<?php echo " R$ " . $pedido['valorTotal']; ?>" readonly>
                                     </div>
                                 </div>
- <br>
+                                <br>
                                 <br>
                                 <br>
                                 <!-- La�o para verificar quantos s�o os produtos e add na table -->
@@ -100,7 +101,7 @@ if (count($dados) > 0) {
                                     <table border="1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <!--<th>Cod.</th>-->
+                                                <th>Cod.</th>
                                                 <th>Produto</th>
                                                 <th>Preço</th>
                                                 <th>Quantidade</th>
@@ -110,8 +111,9 @@ if (count($dados) > 0) {
                                         <tbody>
 
         <?php
-        if (count($dados) > 0) {
-            foreach ($dados as $row) {
+        
+          if (count($pdo) > 0) {
+            foreach ($pdo as $row) {
                 echo '<tr>';
                 echo '<td>' . $row['codProduto'] . '</td>';
                 echo '<td>' . $row['nome'] . '</td>';
@@ -121,6 +123,7 @@ if (count($dados) > 0) {
                 echo '</tr>';
             }
         }
+        
         ?>
 
                                         </tbody>

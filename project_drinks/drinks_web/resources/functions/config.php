@@ -14,5 +14,6 @@ define("PRODUTO", "produto");
 define("CLIENTE", "cliente");
 define("USUARIOS", "usuarios");
 define("PEDIDO", "pedido");
+define("PRODUTO_ESTABELECIMENTO", "produto_estab");
 
 ?>

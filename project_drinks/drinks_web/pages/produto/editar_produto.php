@@ -4,61 +4,55 @@ require_once ('../menu/menu.php');
 
 
 
-$codProduto = 0;
-
-
 if (isset($_GET['codProduto']) && empty($_GET['codProduto']) == false) {
-    $codEstabelecimento = addslashes($_GET['codProduto']);
+    $codProduto = addslashes($_GET['codProduto']);
+    $dados = $_POST;
+    $codEstabelecimento = $_SESSION['codEstabelecimento'];
+    
+    $database = open_database();
+    $preco = "SELECT pe.preco 
+               FROM `produto_estab` as pe
+               INNER JOIN produto as p on 
+               (p.codProduto = pe.codProduto)
+               INNER JOIN estabelecimento as e on
+               (e.codEstabelecimento = pe.codEstabelecimento)
+               WHERE e.codEstabelecimento = ".$codEstabelecimento." AND pe.codProduto = $codProduto";
+//    echo $preco;
+    var_dump($preco);
+    $sql = "UPDATE `produto_estab` SET `preco`=$preco WHERE codEstabelecimento =$codEstabelecimento";
+//    echo $sql;
+    try {
+//        $database->query($sql);
+        $_SESSION['message'] = 'PreÃ§o Alterado com sucesso.';
+        $_SESSION['type'] = 'success';
+//        header("Location: listaProdutoEstabelecimento.php");
+    } catch (Exception $ex) {
+        $_SESSION['message'] = 'Nao foi possivel realizar a operacao.';
+        $_SESSION['type'] = 'danger';
+         header("Location: listaProdutoEstabelecimento.php");
+    }
 }
-    
-    $inserir['codEstabelecimento'] = $_SESSION['id'];
-    update('codProduto', $codProduto, $dados, '$codProduto');
-    
-    //header("Location: cadastro-estabelecimentos.php");//WTF????
-
-$dados = buscarRegistroPorId(PRODUTO, $codProduto, 'codProduto');
-
 ?>
 
 <!DOCTYPE html>
-
 <head>
-	<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <title>Editar Produto</title>	
 </head>
 
 <body>
 	<div class="container">
 	
-		<?php foreach ($dados as $dado) {?>
+		<?php 
+                if(count($dados) > 0){
+                    foreach ($dados as $dado) {?> 
 		
 		<h3>Dados cadastrais de <?php echo $dado['nome']; ?>:</h3>
 		<div class="jumbotron">
-			<form method="POST">
-
-                <div class="row">
-                    
+		<form method="POST">
+                    <div class="row">
                     <div class="form-group col-md-3">
-                      <label for="cnpj">Nome</label>      
-                      <input type="text" class="form-control" id="nome" name="nome" value="<?php echo $dado['nome']; ?>"required>
-                	</div>
-                    
-                    <div class="form-group col-md-5">
-                      <label for="razaoSocial">Descrição</label>
-                      <input type="text" class="form-control" name="descricao" value="<?php echo $dado['descricao']; ?>"required>
-                	</div>
-                    
-					<div class="row">
-						<div class="form-group col-md-3">
-							<label for="gelada">Gelada</label> 
-							<select class="form-control selectpicker" name="gelada" id="gelada">
-							<option value="">--Selecione--</option>
-                        	<option value="1">SIM</option>
-                        	<option value="0">NÃO</option>
-					</select>
-                	
-                	<div class="form-group col-md-3">
-                      <label for="email">Preço</label>
+                      <label for="email">PreÃ§o</label>
                       <input type="text" class="form-control" id="preco" name="preco" value="<?php echo $dado['preco']; ?>"required>
                 	</div>
                 	                	
@@ -74,7 +68,8 @@ $dados = buscarRegistroPorId(PRODUTO, $codProduto, 'codProduto');
 				
 			</form>
 		</div>
-		<?php }?>
+                    <?php }?>
+                <?php }?>
 	</div>
 
 	</body>
