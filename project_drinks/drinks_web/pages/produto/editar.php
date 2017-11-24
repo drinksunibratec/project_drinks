@@ -2,7 +2,7 @@
 require_once ('../include/header.php');
 require_once ('../menu/menu.php');
 
-$codProduto = 0;
+$codProduto = $_GET['codProduto'];
 $caracters = array(
         "R",
         "$"
@@ -28,55 +28,70 @@ if (isset($_POST['nome']) && empty($_POST['nome']) == false) {
 //$dados = buscarRegistroPorId(ESTABELECIMENTO, $codEstabelecimento, 'codEstabelecimento');
 
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
 
-<title>Cadastrar Produto</title>
-
-<!-- MASCARA -->
+	<meta charset="UTF-8">
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+       
+<title>Alterar Produto</title>
 <script>
-      jQuery(function($){
-             $('#preco').maskMoney({prefix:'R$ ', allowNegative: false, thousands:'.', decimal:',', affixesStay: false}); 
-      });
-     </script>
+        $(document).ready(function(){
+          $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
+        });
+</script>
+
 </head>
 
-
-
 <body>
-<div class="container">
-    <?php 
-	if(count($dados) > 0){
-            foreach ($dados as $dado) 
-        {?>
-            <h2>Novo Produto </h2>
-        
+    <br>
+    <br>
+    <br>
+    
+	<div class="container">
+            	
                 <div class="jumbotron">
-                    <form method="POST">
-                        <div class="row">
+			<form method="POST">
+
+				<div class="row">
+                                <div class="panel panel-default">
+				<div class="panel-heading">Editar Produtos</div>
+				<div class="panel-body">
+                            <br>
+                            <br>
+                            <br>
 
 				<div class="form-group col-md-3">
 					<label for="nome">Nome</label> 
-                                        <input type="text" value="<?php echo $produto['nome']; ?>"
+                                        <input type="text" value="<?php echo $_GET['nome']; ?>"
 						class="form-control" id="nome" name="nome" required>
 				</div>
 
 				<div class="form-group col-md-3">
 					<label for="descricao">Descri&ccedil;&atilde;o</label> 
-                                        <input value="<?php echo $produto['descricao']; ?>"
+                                        <input value="<?php echo $_GET['descricao']; ?>"
 						type="text" id="descricao" class="form-control" 
                                                 name="descricao" required>
 				</div>
                             
 				<div class="form-group col-md-3">
-					<label for="gelada">Ean</label> 
-					<input value="<?php echo $produto['ean']; ?>"
-						type="text" id="ean" class="form-control" name="ean" required>
-					
+					<label for="ean">Ean</label> 
+                                        <input 
+                                               type="text" id="ean" class="form-control" 
+                                                name="ean" required >
 				</div>
+                            
 			</div>
+                                    <br>
+                                    <br>
+                                    <br>
 
 			<div class=row>
 				<div class="form-group col-md-4">                                
@@ -86,10 +101,12 @@ if (isset($_POST['nome']) && empty($_POST['nome']) == false) {
 				</div>
 			</div>
 
-		</form>
+		</form>		
+            		</table>
+					<!-- END TABLE -->
+				</div>
+			</div>
+		</div>
 	</div>
-                <?php } ?>
-            <?php } ?>
-</div>
 </body>
-</html>
+</html

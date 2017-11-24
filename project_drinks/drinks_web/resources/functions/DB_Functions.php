@@ -79,7 +79,7 @@ function update($table = null, $id = 0, $data = null, $nomeId=null)
     $sql = "UPDATE " . $table;
     $sql .= " SET $items";
     $sql .= " WHERE " . $nomeId . " = " . $id . ";";
-//    echo $sql;
+    echo $sql;
     
     try {
         
