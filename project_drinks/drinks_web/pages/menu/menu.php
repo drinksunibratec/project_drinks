@@ -21,10 +21,11 @@
                             
     					<?php }?>
     					
-							<li><a href="../pedido/listarPedido.php">Pedidos</a></li>
-                            <li><a href="../produto/lista.php">Produtos</a></li>
-                            <li><a href="../estabelecimento/relatorios.php">Relatorios</a></li>
-                            <li><a href="../campanhas/campanhas.php">Campanhas</a></li>
+						<li><a href="../pedido/listarPedido.php">Pedidos</a></li>
+                                                <li><a href="../produto/listaProdutoEstabelecimento.php">Catálogo Produtos</a></li>
+                                                <li><a href="../produto/listaProdutoVinculados.php">Produtos Vinculados</a></li>
+                                                <li><a href="../estabelecimento/relatorios.php">Relatorios</a></li>
+                                                <li><a href="../campanhas/campanhas.php">Campanhas</a></li>
 					 
 					   <li><a href="../login/login.php">Sair</a></li>
 				</ul>

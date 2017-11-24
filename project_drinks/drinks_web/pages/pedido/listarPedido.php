@@ -79,7 +79,8 @@ $dados = listarPedido($codEstabelecimento);
                                     <td><?php echo $pedido['pagamento']; ?></td>
                                     <td><?php echo "R$ ".$pedido['valorTotal']; ?></td>
                                     <td><?php echo $pedido['status']; ?></td>
-                                    <td align="center"><a title="Detalhes"
+                                    <td align="center">
+                                    <a title="Detalhes"
                                     href="detalhePedido.php?codPedido=<?php echo  $pedido['codPedido']?>"
                                     class="btn btn-sm btn-warning">&#9999; Detalhes</a></td>
 				</tr>

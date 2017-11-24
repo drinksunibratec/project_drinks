@@ -10,15 +10,6 @@ if (isset($_GET['codEstabelecimento']) && empty($_GET['codEstabelecimento']) == 
 }
 
 $dado = listarPedido($codEstabelecimento);
-$Novembro = pedidoNovembro(PEDIDO);
-$fatNov = faturamentoNovembro(PEDIDO);
-$Agosto = pedidoAgosto(PEDIDO);
-$Setembro = pedidoSetembro(PEDIDO);
-$Outubro = pedidoOutubro(PEDIDO);
-$fatAgo = faturamentoAgosto(PEDIDO);
-$fatSet = faturamentoSetembro(PEDIDO);
-$fatOut = faturamentoOutubro(PEDIDO);
-
 
 ?>
 
@@ -45,43 +36,19 @@ $fatOut = faturamentoOutubro(PEDIDO);
 				<div class="panel-body">
            			
             	<?php
-              //$temp =;
-              //$variavel = $temp['count(data'];
-            $count_Nov = $Novembro['teste'];
-            $faturamentoBruto = $fatNov['valor'];
-            $faturamentoBrutoAgosto = $fatAgo['valorAgosto'];
-            $faturamentoBrutoSetembro = $fatSet['valorSetembro'];
-            $faturamentoBrutoOutubro = $fatOut['valorOutubro'];
-            $ticketAgosto = null;
+            $count_Nov = null;
+            $faturamentoBruto = null;
             $ticket = null;
-            $ticketSetembro = null;
-            $ticketOutubro = null;
-            $count_Ago = $Agosto['agosto'];
-            $count_Set = $Setembro['setembro'];
-            $count_Out = $Outubro['outubro'];
-            
-           
-            
             if (count($dado) > 0) {
                 foreach ($dado as $pedido) {
                     
+                    if (count($pedido['codPedido']) > 0) {
+                        $count_Nov ++;
+                    }
                     
-                    
-                    if ($count_Nov > 0) {
-                        //$faturamentoBruto = $pedido['valorTotal'] + $faturamentoBruto;
+                    if ($pedido['valorTotal'] > 0) {
+                        $faturamentoBruto = $pedido['valorTotal'] + $faturamentoBruto;
                         $ticket = $faturamentoBruto / $count_Nov;
-                    }
-
-                    if($count_Ago > 0) {
-                        $ticketAgosto = $faturamentoBrutoAgosto / $count_Ago;
-                    }
-
-                    if($count_Set > 0) {
-                        $ticketSetembro = $faturamentoBrutoSetembro / $count_Set;
-                    }
-
-                    if($count_Out > 0) {
-                        $ticketOutubro = $faturamentoBrutoOutubro / $count_Out;
                     }
                     
                     ?>
@@ -97,10 +64,10 @@ $fatOut = faturamentoOutubro(PEDIDO);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Mes', 'Pedidos', 'Faturamento', 'Ticket Medio'],
-          ['Agosto', <?php echo $count_Ago; ?>, <?php echo $faturamentoBrutoAgosto ?>, <?php echo $ticketAgosto; ?>],
-          ['Setembro', <?php echo $count_Set; ?>, <?php echo $faturamentoBrutoSetembro ?>, <?php echo $ticketSetembro ?>],
-          ['Outubro', <?php echo $count_Out; ?>, <?php echo $faturamentoBrutoOutubro ?>, <?php echo $ticketOutubro ?>],
-          ['Novembro', <?php echo $count_Nov; ?>, <?php echo $faturamentoBruto ?>, <?php echo $ticket ?>]
+          ['Novembro', <?php echo $count_Nov; ?>, <?php echo $faturamentoBruto ?>, <?php echo $ticket; ?>],
+          ['Dezembro', 1170, 460, 250],
+          ['Janeiro', 660, 1120, 300],
+          ['Fevereiro', 1030, 540, 350]
         ]);
 
         var options = {

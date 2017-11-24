@@ -20,9 +20,8 @@ require_once ('../menu/menu.php');
       }
       
       
-      $s_estabelecimento = $_GET['codEstabelecimento'];
-      
-      insert(PRODUTO, $inserir, $s_estabelecimento);
+                  
+      $dados = insertProduto(PRODUTO, $inserir);
       
 
     header("Location: lista.php");
@@ -76,24 +75,21 @@ require_once ('../menu/menu.php');
 
 			<div class="row">
 				<div class="form-group col-md-3">
-					<label for="gelada">Gelada</label> 
-					<select class="form-control selectpicker" name="gelada" id="gelada" required>
-							<option value="">--Selecione--</option>
-                        	<option value="1">SIM</option>
-                        	<option value="0">NAO</option>
-					</select>
+					<label for="gelada">Ean</label> 
+					<input
+						type="text" id="ean" class="form-control" name="ean" required>
 					
 				</div>
 
-				<div class="form-group col-md-3">
+<!--				<div class="form-group col-md-3">
 					<label for="preco">Pre&ccedil;o</label> <input type="text"
 						class="form-control" id="preco" name="preco" required>
-				</div>
+				</div>-->
                             
-				<div class="form-group col-md-3">
+<!--				<div class="form-group col-md-3">
                                     <input type="hidden" value="<?php $valor = $_SESSION['codEstabelecimento'];echo $valor; ?>"
                                            class="form-control" id="codigo" name="codEstabelecimento" required>
-				</div>
+				</div>-->
 
 			</div>
 

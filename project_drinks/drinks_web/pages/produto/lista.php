@@ -1,17 +1,18 @@
 <?php
 require_once ('../include/header.php');
 require_once ('../menu/menu.php');
-
-$codEstabelecimento = $_SESSION['codEstabelecimento'];
-
 $mensagens = new Mensagens();
-$dados = null;
 
-if ($_SESSION['administrador'] == 1) {
-    $dados = buscarTodosOsRegistros(PRODUTO);
+$codEstabelecimento = null;
+
+if (isset($_GET['codEstabelecimento']) && empty($_GET['codEstabelecimento']) == false) {
+    $codEstabelecimento = $_GET['codEstabelecimento'];
 } else {
-    $dados = buscarRegistroPorId(PRODUTO, $codEstabelecimento, 'codEstabelecimento');
+    $codEstabelecimento = $_SESSION['codEstabelecimento'];
 }
+
+$dados = listarProduto($codEstabelecimento);
+//var_dump($dados);
 ?>
 
 
@@ -69,10 +70,10 @@ if ($_SESSION['administrador'] == 1) {
 					<table border="1" class="table table-bordered table-striped">
 						<thead class="blue-grey lighten-4">
 							<tr>
-								<th>Nome</th>
-								<th>Preço</th>
-								<th>Descrição</th>
-								<th>Ações</th>
+                                                            <th>Código</th>
+                                                            <th>Nome</th>
+                                                            <th>Descrição</th>
+                                                            <th>Ean</th>
 							</tr>
 						</thead>
             			
@@ -83,15 +84,16 @@ if ($_SESSION['administrador'] == 1) {
             			
                     <tbody id="myTable">
     					<tr>
+                            <td><?php echo $produto['codProduto']; ?></td>
+                            <!--<td><?php echo "R$ ".$produto['nome']; ?></td>-->
                             <td><?php echo $produto['nome']; ?></td>
-                            <td><?php echo "R$ ".$produto['preco']; ?></td>
                             <td><?php echo $produto['descricao']; ?></td>
+                            <td><?php echo $produto['ean']; ?></td>
                             <td align="center">
                                 <a title="Alterar" href="editar.php?codProduto=<?php echo  $produto['codProduto']?>
                                    &nome=<?php echo  $produto['nome']?>
                                    &descricao=<?php echo  $produto['descricao']?>
-                                   &gelada=<?php echo  $produto['gelada']?>
-                                   &preco=<?php echo  $produto['preco']?>"
+                                   &preco=<?php echo  $produto['ean']?>"
     						class="btn btn-sm btn-warning">&#9999; Alterar</a>
                           <?php 
 //                           if(isset($_POST['excluir'])){
@@ -100,8 +102,8 @@ if ($_SESSION['administrador'] == 1) {
 //                             deleta(PRODUTO, "where codProduto = ".$codProduto);
 //                           }
                           ?>
-                            <a title="Excluir" id="btn-excluir" href="deletar.php?codProduto= <?php echo $produto['codProduto']?>"
-                               class="btn btn-sm btn-danger tooltipBtn"> &#10006; Excluir</a>
+<!--                            <a title="Excluir" id="btn-excluir" href="deletar.php?codProduto= <?php echo $produto['codProduto']?>"
+                               class="btn btn-sm btn-danger tooltipBtn"> &#10006; Excluir</a>-->
                             </td>
     					</tr>
                     </tbody>
