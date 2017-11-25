@@ -12,17 +12,12 @@ require_once ('../menu/menu.php');
 <html lang="pt-br">
 
 <head>
-<link
-	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script>
+<script	src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script>
 </head>
 
 <body>
 
 	<div class="container">
-
 		<div class="jumbotron">
 
 			<form action="enviar.php" method="post" class="contactForm">
@@ -40,18 +35,16 @@ require_once ('../menu/menu.php');
 				</div>
 
 				<div class="fileupload fileupload-new" data-provides="fileupload">
-					<span class="btn btn-primary btn-file"><span class="fileupload-new">Select
-							file</span> <span class="fileupload-exists">Change</span><br>
+					<span class="btn btn-primary btn-file">
 							
-							<input
-						type="file" /></span> <span class="fileupload-preview"></span> <a
-						href="#" class="close fileupload-exists" data-dismiss="fileupload"
-						style="float: none">×</a>
+					<input type="file" /></span> <span class="fileupload-preview"></span>
 				</div><br>
 
 				<input type="submit" name="btn_enviar" value="Enviar" />
 			</form>
 
 		</div>
+	</div>
 </body>
+
 </html>

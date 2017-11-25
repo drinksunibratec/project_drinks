@@ -59,8 +59,7 @@ INSERT INTO `estabelecimento` (`codEstabelecimento`, `cnpj`, `eMail`, `login`, `
 (3, '11004583000145', 'afabricabar@hotmail.com', 'fabrica', 'Carmo', '53120160', 'Olinda', '-8.0144249', '-34.8475361', 9, 'Travessa Municipal', 'PE', 'A Fábrica Bar', 'A Fabrica Bar e Restaurante Ltda - Me', '123456', '81987209705', 0),
 (4, '10636838000120', 'grutabar.camaragibe@gmail.com', 'grutabar', 'Vila da Fábrica', '54759135', 'Camaragibe', '-8.0139369', '-34.9788453', 387, 'Rua Carlos Alberto de Menezes', 'PE', 'GRUTA BAR', 'M J DE SOUZA BAR - ME', '123456', '81999998146', 0),
 (5, '12972637000129', 'betosbaroficial@gmail.com', 'betosbar', 'Candeias', '54440620', 'Jaboatao Dos Guararapes', '-8.0139369', '-34.9788453', 4738, 'Av. Bernardo Vieira De Melo', 'PE', 'BetoS Bar', 'BetoS Restaurante e Pizzaria Ltda - Epp', '123456', '8134692995', 0),
-(6, '09202813000139', 'bardobarriga@gmail.com', 'bardobarriga', 'Pilar', '53900000', 'Ilha de Itamaracï¿½', '-8.0139369', '-34.9788453', 30, 'Rua Assunï¿½ï¿½o', 'PE', 'Bar Do Barriga O Rei Da Tainhas', 'Bar Do Barriga O Rei Da Tainha', '123456', '81991915773', 0),
-(7, '99999999999999', 'teste@teste.com.br', NULL, 'Santa MÃ´nicaÂ ', '54767400', 'Camaragibe', '-8.0298807', '-35.0011523', 116, 'Margarida Pereira dos Santos', 'PE', 'Teste', 'Teste', '123456', '99999999999', 0);
+(6, '09202813000139', 'bardobarriga@gmail.com', 'bardobarriga', 'Pilar', '53900000', 'Ilha de Itamaracï¿½', '-8.0139369', '-34.9788453', 30, 'Rua Assunï¿½ï¿½o', 'PE', 'Bar Do Barriga O Rei Da Tainhas', 'Bar Do Barriga O Rei Da Tainha', '123456', '81991915773', 0);
 
 -- --------------------------------------------------------
 
@@ -82,6 +81,7 @@ CREATE TABLE `pedido` (
   `pagamento` varchar(255) DEFAULT NULL,
   `status` varchar(255) NOT NULL,
   `valorTotal` double NOT NULL,
+  `bandeiraCartao` varchar(15) DEFAULT NULL,
   `codUsuario` int(11) NOT NULL,
   `codEstabelecimento` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -90,13 +90,13 @@ CREATE TABLE `pedido` (
 -- Extraindo dados da tabela `pedido`
 --
 
-INSERT INTO `pedido` (`codPedido`, `dataPedido`, `bairro`, `cep`, `cidade`, `latitude`, `longitude`, `numero`, `rua`, `uf`, `pagamento`, `status`, `valorTotal`, `codUsuario`, `codEstabelecimento`) VALUES
-(1, '31/10/2017 19:16:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ESPECIE', 'AGUARDANDO', 25.57, 5, 5),
-(2, '31/10/2017 19:28:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ESPECIE', 'AGUARDANDO', 40.74, 4, 2),
-(3, '01/11/2017 20:18:12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'CARTAO', 'AGUARDANDO', 81.15, 2, 3),
-(4, '05/11/2017 19:05:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'CARTAO', 'AGUARDANDO', 66.93, 1, 5),
-(5, '16/11/2017 19:50:33', 'Ipsep', '51350020', 'Recife', NULL, NULL, 21, 'Rua Joa', 'PE', 'ESPECIE', 'AGUARDANDO', 18.84, 2, 3),
-(6, '16/11/2017 20:08:00', 'Ipsep', '51350020', 'Recife', NULL, NULL, 23, 'Rua Joa', 'PE', 'CARTAO', 'AGUARDANDO', 52.42, 5, 3);
+INSERT INTO `pedido` (`codPedido`, `dataPedido`, `bairro`, `cep`, `cidade`, `latitude`, `longitude`, `numero`, `rua`, `uf`, `pagamento`, `status`, `valorTotal`, `bandeiraCartao`, `codUsuario`, `codEstabelecimento`) VALUES
+(1, '31/10/2017 19:16:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ESPECIE', 'AGUARDANDO', 25.57, NULL, 5, 5),
+(2, '31/10/2017 19:28:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ESPECIE', 'AGUARDANDO', 40.74, NULL, 4, 2),
+(3, '01/11/2017 20:18:12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'CARTAO', 'AGUARDANDO', 81.15, NULL, 2, 3),
+(4, '05/11/2017 19:05:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'CARTAO', 'AGUARDANDO', 66.93, NULL, 1, 5),
+(5, '16/11/2017 19:50:33', 'Ipsep', '51350020', 'Recife', NULL, NULL, 21, 'Rua Joa', 'PE', 'ESPECIE', 'AGUARDANDO', 18.84, NULL, 2, 3),
+(6, '16/11/2017 20:08:00', 'Ipsep', '51350020', 'Recife', NULL, NULL, 23, 'Rua Joa', 'PE', 'CARTAO', 'AGUARDANDO', 52.42, NULL, 5, 3);
 
 -- --------------------------------------------------------
 
@@ -144,7 +144,6 @@ CREATE TABLE `produto` (
   `ean` varchar(15) NOT NULL,
   `descricao` varchar(400) NOT NULL,
   `nome` varchar(150) NOT NULL,
-  `bandeiraCartao` varchar(15) NOT NULL,
   `ref_img` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
