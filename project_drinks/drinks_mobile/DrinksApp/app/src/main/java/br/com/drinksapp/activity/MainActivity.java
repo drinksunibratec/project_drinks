@@ -36,6 +36,7 @@ import br.com.drinksapp.fragment.MapFragment;
 import br.com.drinksapp.fragment.PedidosListFragment;
 import br.com.drinksapp.fragment.ProdutosFavoritosFragment;
 import br.com.drinksapp.http.DBConnectParser;
+import br.com.drinksapp.interfaces.OnBackPressedListener;
 import br.com.drinksapp.interfaces.OnPedidoClick;
 import br.com.drinksapp.util.Constantes;
 
@@ -60,6 +61,8 @@ public class MainActivity extends AppCompatActivity implements OnPedidoClick {
     List<Produto> mProdutos;
 
     DAODrinks mDAO;
+
+    protected OnBackPressedListener onBackPressedListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +90,10 @@ public class MainActivity extends AppCompatActivity implements OnPedidoClick {
 
         TabLayout tab = (TabLayout) findViewById(R.id.tabs);
         tab.setupWithViewPager(mViewPager);
+    }
+
+    public void setOnBackPressedListener(OnBackPressedListener onBackPressedListener) {
+        this.onBackPressedListener = onBackPressedListener;
     }
 
     @Override
@@ -156,16 +163,10 @@ public class MainActivity extends AppCompatActivity implements OnPedidoClick {
 
     @Override
     public void onBackPressed() {
-
-        int count = getFragmentManager().getBackStackEntryCount();
-
-        if (count == 0) {
+        if (onBackPressedListener != null)
+            onBackPressedListener.doBack();
+        else
             super.onBackPressed();
-            //additional code
-        } else {
-            getFragmentManager().popBackStack();
-        }
-
     }
 
     class TaskBuscarProdutos extends AsyncTask<Void, Void, List<Produto>>{

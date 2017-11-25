@@ -20,13 +20,14 @@ import br.com.drinksapp.adapter.PedidosAdapter;
 import br.com.drinksapp.bean.Pedido;
 import br.com.drinksapp.bean.Usuarios;
 import br.com.drinksapp.http.DBConnectParser;
+import br.com.drinksapp.interfaces.OnBackPressedListener;
 import br.com.drinksapp.interfaces.OnPedidoClick;
 
 /**
  * Created by Silvio Cedrim on 14/11/2017.
  */
 
-public class PedidosListFragment extends Fragment {
+public class PedidosListFragment extends Fragment implements OnBackPressedListener {
 
     private ListView mListView;
 
@@ -69,6 +70,11 @@ public class PedidosListFragment extends Fragment {
 
     void initTask(Usuarios usuario) {
         new TaskPedidos().execute(usuario);
+    }
+
+    @Override
+    public void doBack() {
+        getActivity().finish();
     }
 
     class TaskPedidos extends AsyncTask<Usuarios, Void, Void> {

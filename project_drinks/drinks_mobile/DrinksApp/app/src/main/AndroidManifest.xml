@@ -72,14 +72,16 @@
         </activity>
         <activity
             android:name=".activity.CarrinhoDeComprasActivity"
-            android:parentActivityName=".activity.ListaProdutosActivity">
+            android:parentActivityName=".activity.ListaProdutosActivity"
+            android:label="@string/carrinho_compras">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.ListaProdutosActivity" />
         </activity>
         <activity
             android:name=".activity.PagamentoActivity"
-            android:parentActivityName=".activity.CarrinhoDeComprasActivity">
+            android:parentActivityName=".activity.CarrinhoDeComprasActivity"
+            android:label="@string/pagamento">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.CarrinhoDeComprasActivity" />

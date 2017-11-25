@@ -50,17 +50,20 @@ import java.util.List;
 
 import br.com.drinksapp.R;
 import br.com.drinksapp.activity.ListaProdutosActivity;
+import br.com.drinksapp.activity.MainActivity;
 import br.com.drinksapp.bean.Estabelecimento;
 import br.com.drinksapp.bean.Produto;
 import br.com.drinksapp.http.DBConnectParser;
 import br.com.drinksapp.http.EstabelecimentoTask;
+import br.com.drinksapp.interfaces.OnBackPressedListener;
 import br.com.drinksapp.util.Constantes;
 
 public class MapFragment extends Fragment
         implements LoaderManager.LoaderCallbacks<List<Estabelecimento>>,
         OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener {
+        GoogleApiClient.OnConnectionFailedListener,
+        OnBackPressedListener {
 
     GoogleApiClient mGoogleApiClient;
 
@@ -121,6 +124,16 @@ public class MapFragment extends Fragment
         return layout;
     }
 
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ((MainActivity) getActivity()).setOnBackPressedListener(this);
+    }
+
+    @Override
+    public void doBack() {
+        getActivity().finish();
+    }
 
     @Override
     public Loader<List<Estabelecimento>> onCreateLoader(int id, Bundle args) {
@@ -205,6 +218,8 @@ public class MapFragment extends Fragment
 
         }
     }
+
+
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
