@@ -17,12 +17,13 @@ import br.com.drinksapp.R;
 import br.com.drinksapp.adapter.EstabelecimentosFavoritosAdapter;
 import br.com.drinksapp.bean.Estabelecimento;
 import br.com.drinksapp.db.DAODrinks;
+import br.com.drinksapp.interfaces.OnBackPressedListener;
 
 /**
  * Created by Silvio Cedrim on 19/11/2017.
  */
 
-public class EstabelecimentosFavoritosFragment extends Fragment{
+public class EstabelecimentosFavoritosFragment extends Fragment implements OnBackPressedListener{
 
     List<Estabelecimento> mEstabelecimentos;
 
@@ -63,5 +64,10 @@ public class EstabelecimentosFavoritosFragment extends Fragment{
         mEstabelecimentos.clear();
         mEstabelecimentos.addAll(mDAO.consultarEstabelecimentosFavoritos());
         mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void doBack() {
+        getActivity().finish();
     }
 }

@@ -108,6 +108,8 @@
     <string name="status_aguardando">AGUARDANDO</string>
     <string name="status_cancelado">CANCELADO</string>
     <string name="edt_pesquisa_precos">Digite o produto e compare preços</string>
+    <string name="pagamento">Pagamento</string>
+    <string name="carrinho_compras">Carrinho de Compras</string>
 
     <string-array name="ordem_precos">
         <item>Ordenar por</item>

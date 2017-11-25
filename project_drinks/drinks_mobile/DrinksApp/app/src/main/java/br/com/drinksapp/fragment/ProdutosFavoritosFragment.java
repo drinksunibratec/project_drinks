@@ -20,8 +20,9 @@ import br.com.drinksapp.adapter.ProdutoAdapter;
 import br.com.drinksapp.bean.Estabelecimento;
 import br.com.drinksapp.bean.Produto;
 import br.com.drinksapp.db.DAODrinks;
+import br.com.drinksapp.interfaces.OnBackPressedListener;
 
-public class ProdutosFavoritosFragment extends Fragment {
+public class ProdutosFavoritosFragment extends Fragment implements OnBackPressedListener{
 
     List<Produto> mProdutos;
 
@@ -69,4 +70,8 @@ public class ProdutosFavoritosFragment extends Fragment {
         mAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void doBack() {
+        getActivity().onBackPressed();
+    }
 }

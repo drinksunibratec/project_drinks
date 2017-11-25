@@ -330,7 +330,9 @@ public class PagamentoActivity extends AppCompatActivity implements DialogComple
                 Toast.makeText(getApplicationContext(), "Seu pedido foi gerado com sucesso!", Toast.LENGTH_LONG).show();
                 mDAO.deleteCarrinhoCompras();
                 Intent it = new Intent(PagamentoActivity.this, MainActivity.class);
+                it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(it);
+                finish();
             }
 
 
