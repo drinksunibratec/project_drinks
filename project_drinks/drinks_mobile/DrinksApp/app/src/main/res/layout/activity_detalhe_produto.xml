@@ -22,14 +22,14 @@
                 android:layout_height="wrap_content"
                 android:text="Test"
                 android:textColor="@color/black_color"
-                android:textSize="@dimen/large_text" />
+                android:textSize="@dimen/medium_text" />
 
         </LinearLayout>
 
     </android.support.v7.widget.Toolbar>
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imagemProdutoDetalhe"
         android:layout_width="100dp"
         android:layout_height="120dp"
         android:paddingTop="@dimen/medium_padding"
@@ -43,7 +43,7 @@
         android:paddingTop="@dimen/large_padding"
         android:text="Nome do Produto"
         android:textColor="@color/black_color"
-        android:textSize="@dimen/large_text" />
+        android:textSize="@dimen/small_text" />
 
     <TextView
         android:id="@+id/txtDescricaoProdutoDetalhe"
@@ -54,7 +54,7 @@
         android:paddingTop="@dimen/small_padding"
         android:text="Decrição"
         android:textColor="@color/gray_color"
-        android:textSize="@dimen/medium_padding" />
+        android:textSize="@dimen/very_small_text" />
 
     <LinearLayout
         android:id="@+id/layoutValorTotalPorProduto"
@@ -62,7 +62,8 @@
         android:layout_height="wrap_content"
         android:background="@color/cinza_claro_color"
         android:orientation="horizontal"
-        android:padding="@dimen/large_padding">
+        android:layout_marginTop="@dimen/medium_padding"
+        android:padding="@dimen/small_padding">
 
         <TextView
             android:id="@+id/txtPrecoUnitarioProduto"
@@ -71,7 +72,7 @@
             android:paddingLeft="@dimen/small_padding"
             android:text="@string/txt_valor_unitario"
             android:textColor="@color/black_color"
-            android:textSize="@dimen/medium_text" />
+            android:textSize="@dimen/small_text" />
 
 
         <ImageButton

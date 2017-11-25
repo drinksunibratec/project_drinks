@@ -10,8 +10,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -20,6 +24,7 @@ import br.com.drinksapp.bean.ItemCarrinhoCompras;
 import br.com.drinksapp.bean.Estabelecimento;
 import br.com.drinksapp.bean.Produto;
 import br.com.drinksapp.db.DAODrinks;
+import br.com.drinksapp.util.AppConfig;
 import br.com.drinksapp.util.Constantes;
 
 public class ProdutoDetalheActivity extends AppCompatActivity {
@@ -55,6 +60,8 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
 
     Button mBtnAdicionarAoCarrinho;
 
+    ImageView imagemProdutoDetalhe;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +83,11 @@ public class ProdutoDetalheActivity extends AppCompatActivity {
         mBtnAdicionarAoCarrinho = (Button) findViewById(R.id.btn_add_carrinho);
         fab = (FloatingActionButton) findViewById(R.id.fab_produtos_favoritos);
         fab.setOnClickListener(new BotaoFavorito());
+
+        imagemProdutoDetalhe = (ImageView) findViewById(R.id.imagemProdutoDetalhe);
+        Glide.with(this).load(AppConfig.URL_IMAGENS + mProduto.getEan() + AppConfig.EXTENSAO_IMAGEM)
+                .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                .into(imagemProdutoDetalhe);
 
         mBotaoMais.setOnClickListener(new CliqueBotaoMais());
         mBotaoMenos.setOnClickListener(new CliqueBotaoMenos());

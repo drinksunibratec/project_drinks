@@ -24,6 +24,9 @@ public class AppConfig {
     public static final String URL_LISTA_PRODUTOS_POR_EAN = "https://www.comunidademaanaim.org.br/drinks_service/lista_produtos_por_ean.php";
 
 
+    public static final String URL_IMAGENS = "https://www.comunidademaanaim.org.br/drinks_service/imagens_produtos/";
+
+    public static final String EXTENSAO_IMAGEM = ".jpg";
 
     public static final String APP_KEY = "6CTKkcmHuqSnl90jz58KxXe5DMDld9gi";
 

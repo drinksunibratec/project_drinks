@@ -5,12 +5,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.List;
 
 import br.com.drinksapp.R;
 import br.com.drinksapp.bean.Produto;
+import br.com.drinksapp.util.AppConfig;
 
 /**
  * Created by Silvio Cedrim on 25/10/2017.
@@ -35,6 +40,7 @@ public class ProdutoAdapter extends ArrayAdapter<Produto> {
             holder.txtNomeProduto = (TextView) convertView.findViewById(R.id.txtNomeProdutoLista);
             holder.txtPrecoProduto = (TextView) convertView.findViewById(R.id.txtPrecoProdutoLista);
             holder.txtDescricaoProdutoLista = (TextView) convertView.findViewById(R.id.txtDescricaoProdutoLista);
+            holder.imagemProduto = (ImageView) convertView.findViewById(R.id.imagemProduto);
             convertView.setTag(holder);
 
         } else {
@@ -44,7 +50,9 @@ public class ProdutoAdapter extends ArrayAdapter<Produto> {
         holder.txtNomeProduto.setText(produto.getNome());
         holder.txtPrecoProduto.setText("R$ " + produto.getPreco());
         holder.txtDescricaoProdutoLista.setText(produto.getDescricao());
-
+        Glide.with(context).load(AppConfig.URL_IMAGENS + produto.getEan() + AppConfig.EXTENSAO_IMAGEM)
+                .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                .into(holder.imagemProduto);
         return convertView;
     }
 
@@ -53,6 +61,7 @@ public class ProdutoAdapter extends ArrayAdapter<Produto> {
         TextView txtNomeProduto;
         TextView txtPrecoProduto;
         TextView txtDescricaoProdutoLista;
+        ImageView imagemProduto;
     }
 
 

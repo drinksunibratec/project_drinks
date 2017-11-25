@@ -107,7 +107,7 @@ public interface DrinksContract {
 
     String SQL_CREATE_PRODUTO = "CREATE TABLE " + TABLE_NAME_PRODUTO + " (" +
             CODPRODUTO + " INTEGER PRIMARY KEY," +
-            NOME + " TEXT NOT NULL," +
+            NOME + " TEXT," +
             DESCRICAO + " TEXT," +
             EAN + " TEXT NOT NULL," +
             REF_IMG + " TEXT) ";
