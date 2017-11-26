@@ -27,6 +27,159 @@ function login($table, $email_login, $senha)
     return $found;
 }
 
+function pedidoNovembro ($table = null) {
+         $found = null;
+    try {
+        $database = open_database();
+
+        $sql = "SELECT count(dataPedido) as teste FROM Pedido WHERE dataPedido BETWEEN '2017/11/01' AND '2017/11/30'";
+        $result = $database->query($sql);
+         if ($result->num_rows > 0) {
+            $found = $result->fetch_assoc();
+        }
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+    return $found;
+
+}
+
+function pedidoAgosto ($table = null) {
+         $found = null;
+    try {
+        $database = open_database();
+
+        $sql = "SELECT count(dataPedido) as agosto FROM Pedido WHERE dataPedido BETWEEN '2017/08/01' AND '2017/08/31'";
+        $result = $database->query($sql);
+         if ($result->num_rows > 0) {
+            $found = $result->fetch_assoc();
+        }
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+    return $found;
+
+}
+
+function pedidoSetembro ($table = null) {
+         $found = null;
+    try {
+        $database = open_database();
+
+        $sql = "SELECT count(dataPedido) as setembro FROM Pedido WHERE dataPedido BETWEEN '2017/09/01' AND '2017/09/30'";
+        $result = $database->query($sql);
+         if ($result->num_rows > 0) {
+            $found = $result->fetch_assoc();
+        }
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+    return $found;
+
+}
+
+function pedidoOutubro ($table = null) {
+         $found = null;
+    try {
+        $database = open_database();
+
+        $sql = "SELECT count(dataPedido) as outubro FROM Pedido WHERE dataPedido BETWEEN '2017/10/01' AND '2017/10/31'";
+        $result = $database->query($sql);
+         if ($result->num_rows > 0) {
+            $found = $result->fetch_assoc();
+        }
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+    return $found;
+
+}
+
+
+function faturamentoNovembro ($table = null) {
+         $found = null;
+    try {
+        $database = open_database();
+        
+        $sql = "SELECT Sum(valorTotal) as valor FROM Pedido WHERE dataPedido BETWEEN '2017/11/01' AND '2017/11/30'";
+        $result = $database->query($sql);
+         if ($result->num_rows > 0) {
+            $found = $result->fetch_assoc();
+        }
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+    return $found;
+        
+}
+
+function faturamentoAgosto ($table = null) {
+         $found = null;
+    try {
+        $database = open_database();
+        
+        $sql = "SELECT Sum(valorTotal) as valorAgosto FROM Pedido WHERE dataPedido BETWEEN '2017/08/01' AND '2017/08/31'";
+        $result = $database->query($sql);
+         if ($result->num_rows > 0) {
+            $found = $result->fetch_assoc();
+        }
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+    return $found;
+        
+}
+
+function faturamentoSetembro ($table = null) {
+         $found = null;
+    try {
+        $database = open_database();
+        
+        $sql = "SELECT Sum(valorTotal) as valorSetembro FROM Pedido WHERE dataPedido BETWEEN '2017/09/01' AND '2017/09/30'";
+        $result = $database->query($sql);
+         if ($result->num_rows > 0) {
+            $found = $result->fetch_assoc();
+        }
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+    return $found;
+        
+}
+
+function faturamentoOutubro ($table = null) {
+         $found = null;
+    try {
+        $database = open_database();
+        
+        $sql = "SELECT Sum(valorTotal) as valorOutubro FROM Pedido WHERE dataPedido BETWEEN '2017/10/01' AND '2017/10/31'";
+        $result = $database->query($sql);
+         if ($result->num_rows > 0) {
+            $found = $result->fetch_assoc();
+        }
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+    return $found;
+        
+}
+
 function buscarTodosOsRegistros($table = null)
 {
     $found = null;
