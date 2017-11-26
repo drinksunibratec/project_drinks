@@ -5,7 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.List;
 
@@ -13,6 +17,7 @@ import br.com.drinksapp.R;
 import br.com.drinksapp.bean.Pedido;
 import br.com.drinksapp.bean.PedidoProdutos;
 import br.com.drinksapp.bean.Produto;
+import br.com.drinksapp.util.AppConfig;
 
 /**
  * Created by Silvio Cedrim on 25/10/2017.
@@ -39,6 +44,7 @@ public class PedidoProdutosAdapter extends ArrayAdapter<PedidoProdutos> {
             holder.txtDescricaoProdutoDetalhe = (TextView) convertView.findViewById(R.id.txtDescricaoProdutoDetalhe);
             holder.txtQuantidadeProdutosDetalhe = (TextView) convertView.findViewById(R.id.txtQuantidadeProdutosDetalhe);
             holder.txtValorTotalProdutoDetalhe = (TextView) convertView.findViewById(R.id.txtValorTotalProdutoDetalhe);
+            holder.imagemProdutoDetalhePedido = (ImageView) convertView.findViewById(R.id.imagemProdutoDetalhePedido);
             convertView.setTag(holder);
 
         } else {
@@ -46,11 +52,13 @@ public class PedidoProdutosAdapter extends ArrayAdapter<PedidoProdutos> {
         }
 
         holder.txtNomeProdutoDetalhe.setText(produto.getProduto().getNome());
-        holder.txtPrecoProdutoDetalhe.setText("R$ " + produto.getProduto().getPreco());
+        holder.txtPrecoProdutoDetalhe.setText("Preço unitário: R$ " + produto.getProduto().getPreco());
         holder.txtDescricaoProdutoDetalhe.setText(produto.getProduto().getDescricao());
         holder.txtQuantidadeProdutosDetalhe.setText("Quantidade: " + produto.getQuantidade());
-        holder.txtValorTotalProdutoDetalhe.setText("R$ " + (Double.parseDouble(produto.getProduto().getPreco()) * produto.getQuantidade()));
-
+        holder.txtValorTotalProdutoDetalhe.setText("Valor total: R$ " + (Double.parseDouble(produto.getProduto().getPreco()) * produto.getQuantidade()));
+        Glide.with(context).load(AppConfig.URL_IMAGENS + produto.getProduto().getEan() + AppConfig.EXTENSAO_IMAGEM)
+                .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                .into(holder.imagemProdutoDetalhePedido);
         return convertView;
     }
 
@@ -61,6 +69,7 @@ public class PedidoProdutosAdapter extends ArrayAdapter<PedidoProdutos> {
         TextView txtDescricaoProdutoDetalhe;
         TextView txtQuantidadeProdutosDetalhe;
         TextView txtValorTotalProdutoDetalhe;
+        ImageView imagemProdutoDetalhePedido;
     }
 
 

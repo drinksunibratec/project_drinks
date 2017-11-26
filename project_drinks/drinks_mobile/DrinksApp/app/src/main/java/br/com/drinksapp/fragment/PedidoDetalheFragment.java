@@ -106,8 +106,10 @@ public class PedidoDetalheFragment extends Fragment {
             }
 
 
-            mListProdutos = (ListView)layout.findViewById(R.id.lista_produto_detalhe_pedidos);
-            mListProdutos.setAdapter(new PedidoProdutosAdapter(getActivity(), mProdutos));
+            if(mProdutos != null){
+                mListProdutos = (ListView)layout.findViewById(R.id.lista_produto_detalhe_pedidos);
+                mListProdutos.setAdapter(new PedidoProdutosAdapter(getActivity(), mProdutos));
+            }
 
 
         }

@@ -23,7 +23,7 @@
             android:paddingTop="@dimen/medium_padding"
             android:text="@string/nome"
             android:textColor="@color/black_color"
-            android:textSize="@dimen/medium_text" />
+            android:textSize="@dimen/small_text" />
 
         <TextView
             android:id="@+id/txtDescricaoProdutoDetalhe"
@@ -36,7 +36,7 @@
             android:paddingTop="@dimen/very_small_padding"
             android:text="Cerveja Antartica gelada"
             android:textColor="@color/gray_color"
-            android:textSize="@dimen/small_text" />/
+            android:textSize="@dimen/very_small_text" />/
 
         <TextView
             android:id="@+id/txtPrecoProdutoDetalhe"
@@ -49,44 +49,51 @@
             android:paddingTop="@dimen/very_small_padding"
             android:text="Preço"
             android:textColor="@color/blue_color"
-            android:textSize="@dimen/small_text" />
+            android:textSize="@dimen/very_small_text" />
+
+        <TextView
+            android:id="@+id/txtQuantidadeProdutosDetalhe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/txtPrecoProdutoDetalhe"
+            android:layout_marginTop="@dimen/very_small_padding"
+            android:paddingLeft="@dimen/medium_padding"
+            android:paddingRight="@dimen/medium_padding"
+            android:paddingTop="@dimen/very_small_padding"
+            android:text="Quantidade"
+            android:textColor="@color/black_color"
+            android:textSize="@dimen/very_small_text"/>
+
+        <TextView
+            android:id="@+id/txtValorTotalProdutoDetalhe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/txtQuantidadeProdutosDetalhe"
+            android:paddingLeft="@dimen/medium_padding"
+            android:paddingRight="@dimen/medium_padding"
+            android:paddingTop="@dimen/very_small_padding"
+            android:text="Valor total"
+            android:textColor="@color/black_color"
+            android:textSize="@dimen/very_small_text"/>
+
 
     </RelativeLayout>
 
     <ImageView
-        android:id="@+id/imagemProduto"
+        android:id="@+id/imagemProdutoDetalhePedido"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_gravity="center"
-        android:paddingRight="@dimen/medium_padding"
-        android:paddingTop="@dimen/small_padding"
+        android:paddingRight="@dimen/small_padding"
+        android:layout_marginTop="@dimen/large_padding"
         android:src="@mipmap/ic_launcher" />
-
-    <TextView
-        android:id="@+id/txtQuantidadeProdutosDetalhe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/imagemProduto"
-        android:paddingRight="@dimen/medium_padding"
-        android:layout_marginTop="@dimen/very_small_padding"
-        android:text="Quantidade"
-        android:textColor="@color/black_color" />
-
-    <TextView
-        android:id="@+id/txtValorTotalProdutoDetalhe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:paddingRight="@dimen/medium_padding"
-        android:layout_below="@+id/txtQuantidadeProdutosDetalhe"
-        android:text="Valor total"
-        android:textColor="@color/black_color" />
 
 
 </RelativeLayout>
