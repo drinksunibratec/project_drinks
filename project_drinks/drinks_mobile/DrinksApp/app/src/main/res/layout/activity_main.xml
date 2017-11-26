@@ -35,6 +35,7 @@
                 android:layout_marginRight="@dimen/medium_padding"
                 android:textColor="@color/input_login"
                 android:textColorHint="@color/gray_color"
+                android:textSize="@dimen/very_small_text"
                 android:completionThreshold="1"/>
 
         </android.support.v7.widget.Toolbar>

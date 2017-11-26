@@ -13,6 +13,9 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -73,12 +76,9 @@ public class MainActivity extends AppCompatActivity implements OnPedidoClick {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         mTxtPesquisa = (AutoCompleteTextView)findViewById(R.id.edt_pesquisa_precos);
-        mTxtPesquisa.setText("");
         mDAO = new DAODrinks(this);
 
         new TaskBuscarProdutos().execute();
-
-
         buildViewPager();
     }
 
@@ -169,6 +169,27 @@ public class MainActivity extends AppCompatActivity implements OnPedidoClick {
             super.onBackPressed();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.menu_perfil:
+                return true;
+            case R.id.menu_logout:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     class TaskBuscarProdutos extends AsyncTask<Void, Void, List<Produto>>{
 
         @Override
@@ -199,7 +220,7 @@ public class MainActivity extends AppCompatActivity implements OnPedidoClick {
 
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>
                         (MainActivity.this,R.layout.item_pesquisa_produto, listaNomesProdutos);
-                mTxtPesquisa.setThreshold(2);
+                mTxtPesquisa.setThreshold(3);
                 mTxtPesquisa.setAdapter(adapter);
 
                 mTxtPesquisa.setOnItemClickListener(new AdapterView.OnItemClickListener() {

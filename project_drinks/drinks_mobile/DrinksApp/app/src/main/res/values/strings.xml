@@ -110,6 +110,8 @@
     <string name="edt_pesquisa_precos">Digite o produto e compare preços</string>
     <string name="pagamento">Pagamento</string>
     <string name="carrinho_compras">Carrinho de Compras</string>
+    <string name="menu_perfil">Perfil</string>
+    <string name="menu_logout">Sair</string>
 
     <string-array name="ordem_precos">
         <item>Ordenar por</item>
