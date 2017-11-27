@@ -47,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
         mBtnRegister = (Button) findViewById(R.id.btnRegister);
 
         // Progress dialog
-        pDialog = new ProgressDialog(this);
+        pDialog = new ProgressDialog(this, R.style.MyDialogTheme);
         pDialog.setCancelable(false);
 
         mToolbar = (Toolbar)findViewById(R.id.toolbar_cadastro);
@@ -95,6 +95,7 @@ public class RegisterActivity extends AppCompatActivity {
                 mEdtEmail.requestFocus();
                 Toast.makeText(RegisterActivity.this, "Usuário com esse e-mail já existe!", Toast.LENGTH_LONG).show();
             }
+            hideDialog();
         }
     }
 
@@ -109,7 +110,7 @@ public class RegisterActivity extends AppCompatActivity {
         public void onClick(View view) {
 
             boolean nome_valido = Validator.validateNotNull(mEdtNome,"Preencha o campo nome");
-            boolean senha_valido =Validator.validateNotNull(mEdtSenha,"Preencha o campo Senha");
+            boolean senha_valido = Validator.validateNotNull(mEdtSenha,"Preencha o campo Senha");
             boolean telefone_valido =Validator.validateNotNull(mEdtTelefone,"Preencha o campo Telefone");
 
             boolean email_valido = Validator.validateEmail(mEdtEmail.getText().toString());
@@ -121,7 +122,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
 
-            if(!email_valido){
+            if(!email_valido || !nome_valido || !senha_valido || !telefone_valido){
                 return;
             }
 

@@ -44,4 +44,16 @@ public abstract class Mask {
             public void afterTextChanged(Editable s) {}
         };
     }
+
+
+    public static String formartTelefone(String telefone){
+        String retorno = "(";
+        retorno += telefone.substring(0,2);
+        retorno += ") ";
+        retorno += telefone.substring(2,7);
+        retorno += " - ";
+        retorno += telefone.substring(7,11);
+        return retorno;
+
+    }
 }

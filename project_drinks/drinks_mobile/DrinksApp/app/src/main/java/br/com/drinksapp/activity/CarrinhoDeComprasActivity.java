@@ -66,7 +66,7 @@ public class CarrinhoDeComprasActivity extends AppCompatActivity {
         }
 
         DecimalFormat df = new DecimalFormat("#.00");
-        String valor = df.format(valorTotalPedido);
+        String valor = df.format(valorTotalPedido + 8.00);
 
         mDAO  = new DAODrinks(this);
         mTxtValorTotalPedido.setText("R$ " + valor);

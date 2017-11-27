@@ -100,7 +100,7 @@ public class CarrinhoComprasAdapter extends ArrayAdapter<ItemCarrinhoCompras> {
             mDAO.atualizarQuantidadeProdutoNoCarrinho(p, mQuantidade);
             double valorTotalPedido = mDAO.precoTotalDoCarrinho(cc);
             DecimalFormat df = new DecimalFormat("#.00");
-            String valor = df.format(valorTotalPedido);
+            String valor = df.format(valorTotalPedido + 8.00);
 
             mTxtValorTotal.setText("R$ " + valor);
         }
@@ -137,7 +137,7 @@ public class CarrinhoComprasAdapter extends ArrayAdapter<ItemCarrinhoCompras> {
             double valorTotalPedido = mDAO.precoTotalDoCarrinho(cc);
 
             DecimalFormat df = new DecimalFormat("#.00");
-            String valor = df.format(valorTotalPedido);
+            String valor = df.format(valorTotalPedido + 8.00);
 
             mTxtValorTotal.setText("R$ " + valor);
         }

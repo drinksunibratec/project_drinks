@@ -112,6 +112,7 @@
     <string name="carrinho_compras">Carrinho de Compras</string>
     <string name="menu_perfil">Perfil</string>
     <string name="menu_logout">Sair</string>
+    <string name="email">Email</string>
 
     <string-array name="ordem_precos">
         <item>Ordenar por</item>
