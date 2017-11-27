@@ -162,6 +162,7 @@ public class ListaProdutosActivity extends AppCompatActivity {
             Bundle bundle = new Bundle();
             bundle.putSerializable(Constantes.EXTRA_CARRINHO_COMPRAS, new ArrayList<ItemCarrinhoCompras>(carrinho));
             it.putExtra(Constantes.EXTRA_BUNDLE, bundle);
+            it.putExtra(Constantes.EXTRA_ESTABELECIMENTO, mEstabelecimento);
             startActivity(it);
         }
     }

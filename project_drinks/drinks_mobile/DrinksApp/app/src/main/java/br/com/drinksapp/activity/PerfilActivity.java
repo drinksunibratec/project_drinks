@@ -1,36 +1,91 @@
 package br.com.drinksapp.activity;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
+
 import br.com.drinksapp.R;
+import br.com.drinksapp.SaveSharedPreference.MySaveSharedPreference;
+import br.com.drinksapp.bean.Usuarios;
+import br.com.drinksapp.http.DBConnectParser;
+import br.com.drinksapp.util.Mask;
 
 public class PerfilActivity extends AppCompatActivity {
 
-    private TextView txtName;
-    private TextView txtEmail;
-    private TextView txtSenha;
-    private TextView txtTelefone;
+    private TextView mTxtNomePerfil;
+    private TextView mTxtEmailPerfil;
+    private TextView mTxtTelefonePerfil;
+
+    private ProgressDialog pDialog;
+    private Toolbar mToolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
 
-        txtName = (TextView) findViewById(R.id.name);
-        txtEmail = (TextView) findViewById(R.id.email);
-        txtSenha = (TextView) findViewById(R.id.senha);
-        txtTelefone = (TextView) findViewById(R.id.telefone);
+        mTxtNomePerfil = (TextView) findViewById(R.id.txtNomePerfil);
+        mTxtEmailPerfil = (TextView) findViewById(R.id.txtEmailPerfil);
+        mTxtTelefonePerfil = (TextView) findViewById(R.id.txtTelefonePerfil);
 
-//        HashMap<String, String> usuario = db.getUserDetails();
-//        String nome = usuario.get("nome");
-//        String email = usuario.get("email");
-//        String senha = usuario.get("senha");
-//        String telefone = usuario.get("telefone");
-//        txtName.setText(nome);
-//        txtEmail.setText(email);
-//        txtSenha.setText(senha);
-//        txtTelefone.setText(telefone);
+        pDialog = new ProgressDialog(this, R.style.MyDialogTheme);
+        pDialog.setCancelable(false);
+
+        mToolbar = (Toolbar)findViewById(R.id.toolbar_perfil);
+
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        long codUsuario = MySaveSharedPreference.getUserId(this);
+        Usuarios usuario = new Usuarios(codUsuario);
+        initAsyncTask(usuario);
+    }
+
+    private void showDialog() {
+        if (!pDialog.isShowing())
+            pDialog.show();
+    }
+
+    private void hideDialog() {
+        if (pDialog.isShowing())
+            pDialog.dismiss();
+    }
+
+    private class TaskBuscarUsuario extends AsyncTask<Usuarios, Void, Usuarios> {
+
+        @Override
+        protected void onPreExecute() {
+            pDialog.setMessage("Salvando ... Aguarde!");
+            showDialog();
+        }
+
+        @Override
+        protected Usuarios doInBackground(Usuarios... params) {
+
+            Usuarios usuario = DBConnectParser.getUsuario(params[0]);
+            return usuario;
+        }
+
+        @Override
+        protected void onPostExecute(Usuarios usuario) {
+
+            if(usuario != null){
+                mTxtNomePerfil.setText(getString(R.string.nome) + ": " + usuario.getNome());
+                mTxtEmailPerfil.setText((getString(R.string.email) + ": " + usuario.getEmail()));
+                mTxtTelefonePerfil.setText(getString(R.string.edt_telefone) + ": " + Mask.formartTelefone(usuario.getTelefone()));
+            }
+
+            hideDialog();
+        }
+    }
+
+    private void initAsyncTask(Usuarios usuario){
+        TaskBuscarUsuario taskCadastrarUsuario = new TaskBuscarUsuario();
+        taskCadastrarUsuario.execute(usuario);
     }
 
 }
