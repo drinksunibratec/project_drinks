@@ -10,14 +10,19 @@ if (isset($_GET['codEstabelecimento']) && empty($_GET['codEstabelecimento']) == 
 }
 
 $dado = listarPedido($codEstabelecimento);
-$Novembro = pedidoNovembro(PEDIDO);
-$fatNov = faturamentoNovembro(PEDIDO);
-$Agosto = pedidoAgosto(PEDIDO);
-$Setembro = pedidoSetembro(PEDIDO);
-$Outubro = pedidoOutubro(PEDIDO);
-$fatAgo = faturamentoAgosto(PEDIDO);
-$fatSet = faturamentoSetembro(PEDIDO);
-$fatOut = faturamentoOutubro(PEDIDO);
+$Novembro = pedidoNovembro($codEstabelecimento);
+$fatNov = faturamentoNovembro($codEstabelecimento);
+$Dezembro = pedidoDezembro($codEstabelecimento);
+$Setembro = pedidoSetembro($codEstabelecimento);
+$Outubro = pedidoOutubro($codEstabelecimento);
+$fatDez = faturamentoDezembro($codEstabelecimento);
+$fatSet = faturamentoSetembro($codEstabelecimento);
+$fatOut = faturamentoOutubro($codEstabelecimento);
+$bairro = bairroBoaViagem($codEstabelecimento);
+$bairroIpsep = bairroIpsep($codEstabelecimento);
+$bairroBoaVista = bairroBoaVista($codEstabelecimento);
+$bairroCandeias = bairroCandeias($codEstabelecimento);
+$bairroTejipio = bairroTejipio($codEstabelecimento);
 
 ?>
 
@@ -44,23 +49,36 @@ $fatOut = faturamentoOutubro(PEDIDO);
 				<div class="panel-body">
            			
             	<?php
-            $count_Nov = null;
+            //$count_Nov = null;
             $faturamentoBruto = null;
             $ticket = null;
             $count_Nov = $Novembro['teste'];
             $faturamentoBruto = $fatNov['valor'];
-            $faturamentoBrutoAgosto = $fatAgo['valorAgosto'];
+            $faturamentoBrutoDezembro = $fatDez['valorDezembro'];
             $faturamentoBrutoSetembro = $fatSet['valorSetembro'];
             $faturamentoBrutoOutubro = $fatOut['valorOutubro'];
-            $ticketAgosto = null;
+            $ticketDezembro = null;
             $ticket = null;
             $ticketSetembro = null;
             $ticketOutubro = null;
-            $count_Ago = $Agosto['agosto'];
+            $count_Dez = $Dezembro['dezembro'];
             $count_Set = $Setembro['setembro'];
             $count_Out = $Outubro['outubro'];
+            $count_Bv = $bairro['boaviagem'];
+            $count_Ip = $bairroIpsep['ipsep'];
+            $count_BoaV = $bairroBoaVista['boavista'];
+            $count_Can = $bairroCandeias['candeias'];
+            $count_Tej = $bairroTejipio['tejipio'];
+
+            //$selecionarBairro = $bairro['bairro'];
+
+           // echo $bairro['boaviagem'];
+
+            
+            
             if (count($dado) > 0) {
                 foreach ($dado as $pedido) {
+                    
                     
                     
                     if ($count_Nov > 0) {
@@ -68,8 +86,8 @@ $fatOut = faturamentoOutubro(PEDIDO);
                         $ticket = $faturamentoBruto / $count_Nov;
                     }
 
-                    if($count_Ago > 0) {
-                        $ticketAgosto = $faturamentoBrutoAgosto / $count_Ago;
+                    if($count_Dez > 0) {
+                        $ticketDezembro = $faturamentoBrutoDezembro / $count_Dez;
                     }
 
                     if($count_Set > 0) {
@@ -95,10 +113,10 @@ $fatOut = faturamentoOutubro(PEDIDO);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Mes', 'Pedidos', 'Faturamento', 'Ticket Medio'],
-           ['Agosto', <?php echo $count_Ago; ?>, <?php echo $faturamentoBrutoAgosto ?>, <?php echo $ticketAgosto; ?>],
-          ['Setembro', <?php echo $count_Set; ?>, <?php echo $faturamentoBrutoSetembro ?>, <?php echo $ticketSetembro ?>],
+           ['Setembro', <?php echo $count_Set; ?>, <?php echo $faturamentoBrutoSetembro ?>, <?php echo $ticketSetembro ?>],
           ['Outubro', <?php echo $count_Out; ?>, <?php echo $faturamentoBrutoOutubro ?>, <?php echo $ticketOutubro ?>],
-          ['Novembro', <?php echo $count_Nov; ?>, <?php echo $faturamentoBruto ?>, <?php echo $ticket ?>]
+          ['Novembro', <?php echo $count_Nov; ?>, <?php echo $faturamentoBruto ?>, <?php echo $ticket ?>],
+          ['Dezembro', <?php echo $count_Dez; ?> , <?php echo $faturamentoBrutoDezembro ?>, <?php echo $ticketDezembro; ?>]
         ]);
 
         var options = {
@@ -112,8 +130,38 @@ $fatOut = faturamentoOutubro(PEDIDO);
         var chart = new google.charts.Bar(document.getElementById('barchart_material'));
 
         chart.draw(data, google.charts.Bar.convertOptions(options));
+
+
       }
     </script>
+
+    <div id="donutchart" style="width: 900px; height: 500px;"></div>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Bairro', 'Percentual de pedidos / Bairro'],
+          ['Boa Viagem',     <?php echo $count_Bv; ?>],
+          ['Ipsep',      <?php echo $count_Ip; ?>],
+          ['Boa Vista',  <?php echo $count_BoaV; ?>],
+          ['Candeias', <?php echo $count_Can; ?>],
+          ['Tejipio',   <?php echo $count_Tej; ?> ]
+        ]);
+
+        var options = {
+          title: 'Percentual de pedidos / Bairro',
+          pieHole: 0.4,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+      }
+    </script>
+
+    
             			
             	<?php
                 
