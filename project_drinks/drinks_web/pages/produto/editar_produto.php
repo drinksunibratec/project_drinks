@@ -1,75 +1,100 @@
-<?php
+<?php  
 require_once ('../include/header.php');
 require_once ('../menu/menu.php');
 
+  if (isset($_POST['nome']) && empty($_POST['nome']) == false) {
+
+      $caracters = array(
+        "R",
+        "$"
+    );
 
 
-if (isset($_GET['codProduto']) && empty($_GET['codProduto']) == false) {
-    $codProduto = addslashes($_GET['codProduto']);
-    $dados = $_POST;
-    $codEstabelecimento = $_SESSION['codEstabelecimento'];
-    
-    $database = open_database();
-    $preco = "SELECT pe.preco 
-               FROM `produto_estab` as pe
-               INNER JOIN produto as p on 
-               (p.codProduto = pe.codProduto)
-               INNER JOIN estabelecimento as e on
-               (e.codEstabelecimento = pe.codEstabelecimento)
-               WHERE e.codEstabelecimento = ".$codEstabelecimento." AND pe.codProduto = $codProduto";
-//    echo $preco;
-    var_dump($preco);
-    $sql = "UPDATE `produto_estab` SET `preco`=$preco WHERE codEstabelecimento =$codEstabelecimento";
-//    echo $sql;
-    try {
-//        $database->query($sql);
-        $_SESSION['message'] = 'Preço Alterado com sucesso.';
-        $_SESSION['type'] = 'success';
-//        header("Location: listaProdutoEstabelecimento.php");
-    } catch (Exception $ex) {
-        $_SESSION['message'] = 'Nao foi possivel realizar a operacao.';
-        $_SESSION['type'] = 'danger';
-         header("Location: listaProdutoEstabelecimento.php");
-    }
-}
+      $inserir = $_POST;
+      foreach ($inserir as $key => $value) {
+          if($key == 'preco'){
+              $inserir[$key] = str_replace($caracters, "", $value);
+              
+          }
+          
+      }
+      
+      
+                  
+      $dados = insertProduto(PRODUTO, $inserir);
+      
+
+    header("Location: lista.php");
+  }
 ?>
 
 <!DOCTYPE html>
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <title>Editar Produto</title>	
+
+<title>Cadastrar Produto</title>
+
+<!-- MASCARA -->
+<script>
+      jQuery(function($){
+             $('#preco').maskMoney({prefix:'R$ ', allowNegative: false, thousands:'.', decimal:',', affixesStay: false}); 
+      });
+     </script>
 </head>
 
-<body>
-	<div class="container">
-	
-		<?php 
-                if(count($dados) > 0){
-                    foreach ($dados as $dado) {?> 
-		
-		<h3>Dados cadastrais de <?php echo $dado['nome']; ?>:</h3>
-		<div class="jumbotron">
-		<form method="POST">
-                    <div class="row">
-                    <div class="form-group col-md-3">
-                      <label for="email">Preço</label>
-                      <input type="text" class="form-control" id="preco" name="preco" value="<?php echo $dado['preco']; ?>"required>
-                	</div>
-                	                	
-                </div>               
-                
-				
-				<div class=row>
-    				<div class="form-group col-md-4">
-    					<input type="submit" value="&#10003 Alterar" class="btn btn-primary" /> 
-    					<a href="lista.php" class="btn btn-danger">&#10005Cancelar</a>
-                   	</div>
-               	</div>
-				
-			</form>
-		</div>
-                    <?php }?>
-                <?php }?>
-	</div>
 
-	</body>
+
+<body>
+<div class="container">
+    <h2>Novo Produto </h2>
+        
+	<div class="jumbotron">
+                <?php
+//                if(count($erro) > 0){ 
+//                    echo "<div class='erro'>"; 
+//                    foreach ($erro as $valor) 
+//                        echo "$valor <br>"; 
+//                    echo "</div>";
+//                }
+                ?>
+            
+		<form method="POST">
+
+			<div class="row">
+
+				<div class="form-group col-md-3">
+					<label for="nome">Nome</label> 
+                                        <input type="text" 
+						class="form-control" id="nome" name="nome" required>
+				</div>
+
+				<div class="form-group col-md-3">
+					<label for="descricao">Descri&ccedil;&atilde;o</label> 
+                                        <input value=""
+						type="text" id="descricao" class="form-control" name="descricao" required>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-group col-md-3">
+					<label for="gelada">Ean</label> 
+					<input
+						type="text" id="ean" class="form-control" name="ean" required>
+					
+				</div>
+
+			</div>
+
+			<div class=row>
+				<div class="form-group col-md-4">                                
+                                        
+                                        <input type="submit" value="&#10003 Alterar" class="btn btn-primary" /> 
+    					<a href="lista.php" class="btn btn-danger">&#10005 Cancelar</a>
+				</div>
+			</div>
+
+		</form>
+	</div>
+</div>
+</body>
+</html>

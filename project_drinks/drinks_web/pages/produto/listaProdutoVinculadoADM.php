@@ -86,7 +86,7 @@ $dados = listarProdutoEstabelecimento($codEstabelecimento);
                             <td><?php echo $produto['ean']; ?></td>
                             <td><?php echo "R$ ".$produto['preco']; ?></td>
                             <td align="center">
-                                <a title="Alterar" href="formularioCadastroProduto.php?codProduto=
+<!--                                <a title="Alterar" href="formularioCadastroProduto.php?codProduto=
                                 <?php echo  $produto['codProduto']?>"
 				class="btn btn-sm btn-warning">&#9999; Alterar</a>
                           <?php 
@@ -97,7 +97,7 @@ $dados = listarProdutoEstabelecimento($codEstabelecimento);
 //                           }
                           ?>
                             <a title="Excluir" id="btn-excluir" href="deletar.php?codProduto= <?php echo $produto['codProduto']?>"
-                               class="btn btn-sm btn-danger tooltipBtn"> &#10006; Excluir</a>
+                               class="btn btn-sm btn-danger tooltipBtn"> &#10006; Excluir</a>-->
                             </td>
     					</tr>
                     </tbody>

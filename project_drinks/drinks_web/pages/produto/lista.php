@@ -90,7 +90,7 @@ $dados = listarProduto($codEstabelecimento);
                             <td><?php echo $produto['descricao']; ?></td>
                             <td><?php echo $produto['ean']; ?></td>
                             <td align="center">
-                                <a title="Alterar" href="editar.php?codProduto=<?php echo  $produto['codProduto']?>
+                                <a title="Alterar" href="editar_produto.php?codProduto=<?php echo  $produto['codProduto']?>
                                    &nome=<?php echo  $produto['nome']?>
                                    &descricao=<?php echo  $produto['descricao']?>
                                    &preco=<?php echo  $produto['ean']?>"
@@ -102,8 +102,8 @@ $dados = listarProduto($codEstabelecimento);
 //                             deleta(PRODUTO, "where codProduto = ".$codProduto);
 //                           }
                           ?>
-<!--                            <a title="Excluir" id="btn-excluir" href="deletar.php?codProduto= <?php echo $produto['codProduto']?>"
-                               class="btn btn-sm btn-danger tooltipBtn"> &#10006; Excluir</a>-->
+                                <a title="Excluir" id="btn-excluir" href="deletarAdm.php?codProduto= <?php echo $produto['codProduto']?>"
+                               class="btn btn-sm btn-danger tooltipBtn"> &#10006; Excluir</a>
                             </td>
     					</tr>
                     </tbody>

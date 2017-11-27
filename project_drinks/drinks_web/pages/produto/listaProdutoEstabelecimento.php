@@ -12,7 +12,6 @@ if (isset($_GET['codEstabelecimento']) && empty($_GET['codEstabelecimento']) == 
 }
 
 $dados = listarProduto($codEstabelecimento);
-//var_dump($dados);
 ?>
 
 
@@ -70,10 +69,11 @@ $dados = listarProduto($codEstabelecimento);
 					<table border="1" class="table table-bordered table-striped">
 						<thead class="blue-grey lighten-4">
 							<tr>
-                                                            <th>Código</th>
+                                                            <!--<th>Código</th>-->
+                                                            <th>Ean</th>
                                                             <th>Nome</th>
                                                             <th>Descrição</th>
-                                                            <th>Ean</th>
+                                                            
 							</tr>
 						</thead>
             			
@@ -84,15 +84,18 @@ $dados = listarProduto($codEstabelecimento);
             			
                     <tbody id="myTable">
     					<tr>
-                            <td><?php echo $produto['codProduto']; ?></td>
+                            <td><?php echo $produto['ean']; ?></td>
+<!--                            <td><?php echo $produto['codProduto']; ?></td>-->
                             <!--<td><?php echo "R$ ".$produto['nome']; ?></td>-->
                             <td><?php echo $produto['nome']; ?></td>
                             <td><?php echo $produto['descricao']; ?></td>
-                            <td><?php echo $produto['ean']; ?></td>
                             <td align="center">
-                                <a title="Alterar"
+<!--                                <a title="Alterar"
                                 href="vincular.php?codProduto=<?php echo $produto['codProduto']?>"
-    				class="btn btn-sm btn-warning">&#9999; Vincular</a>
+    				class="btn btn-sm btn-warning">&#9999; Cadastrar Produto</a>-->
+                                <a title="Alterar"
+                                   href="formularioCadastroProduto.php?codProduto=<?php echo $produto['codProduto']?>"
+    				class="btn btn-sm btn-warning">&#9999; Cadastrar Produto</a>
                                
                           <?php 
 //                           if(isset($_POST['excluir'])){

@@ -20,7 +20,7 @@ if (isset($_POST['nome']) && empty($_POST['nome']) == false) {
         }
     }
     
-    update('produto', $codProduto, $dados, 'codProduto');
+    update(PRODUTO, $codProduto, $dados, 'codProduto');
     
     header("Location: lista.php");
 }
@@ -83,6 +83,13 @@ if (isset($_POST['nome']) && empty($_POST['nome']) == false) {
                             
 				<div class="form-group col-md-3">
 					<label for="ean">Ean</label> 
+                                        <input value="<?php echo $_GET['ean']; ?>"
+                                               type="text" id="ean" class="form-control" 
+                                                name="ean" required >
+				</div>
+                            
+				<div class="form-group col-md-3">
+					<label for="ean">Preço</label> 
                                         <input 
                                                type="text" id="ean" class="form-control" 
                                                 name="ean" required >

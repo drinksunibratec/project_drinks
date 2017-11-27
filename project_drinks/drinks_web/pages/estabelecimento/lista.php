@@ -105,7 +105,7 @@ foreach ($dados as $estabelecimento) {
 								<td align="center">
 								<a title="Alterar" href="editar.php?codEstabelecimento=<?php echo  $estabelecimento['codEstabelecimento']?>"
 									class="btn btn-sm btn-warning">&#9999; Alterar</a>
-								<a href="../produto/lista.php?codEstabelecimento=<?php echo  $estabelecimento['codEstabelecimento']?>"
+                                                                        <a href="../produto/listaProdutoVinculadoADM.php?codEstabelecimento=<?php echo  $estabelecimento['codEstabelecimento']?>"
 									class="btn btn-sm btn-info">&#x1a; Produtos</a></td>
 							</tr>
 						</tbody>

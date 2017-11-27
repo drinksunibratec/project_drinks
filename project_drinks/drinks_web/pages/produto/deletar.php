@@ -1,7 +1,6 @@
 <?php
 require '../../resources/functions/DB_Connect.php';
 
-
 if (isset($_GET['codProduto']) && empty($_GET['codProduto']) == false) {
     $codProduto = addslashes($_GET['codProduto']);
 
@@ -17,7 +16,7 @@ if (isset($_GET['codProduto']) && empty($_GET['codProduto']) == false) {
 //            . " AND codEstabelecimento = $codEstabelecimento";
 //    $sql = "DELETE produto_estab WHERE codProduto = $codProduto NOT IN (SELECT codProduto FROM"
 //            . " pedido_produto) AND codEstabelecimento = $codEstabelecimento";
-    echo $sql;
+//    echo $sql;
     try {
         $database->query($sql);
         $_SESSION['message'] = 'Excluído com sucesso.';
@@ -28,4 +27,5 @@ if (isset($_GET['codProduto']) && empty($_GET['codProduto']) == false) {
         $_SESSION['type'] = 'danger';
          header("Location: listaProdutoEstabelecimento.php");
     }
+    close_database($database);
 }
