@@ -37,10 +37,10 @@
 
         <activity
             android:name=".activity.MainActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateHidden" />
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".activity.ApresentacaoActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -72,30 +72,21 @@
         </activity>
         <activity
             android:name=".activity.CarrinhoDeComprasActivity"
-            android:label="@string/carrinho_compras"
-            android:parentActivityName=".activity.ListaProdutosActivity">
+            android:parentActivityName=".activity.ListaProdutosActivity"
+            android:label="@string/carrinho_compras">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.ListaProdutosActivity" />
         </activity>
         <activity
             android:name=".activity.PagamentoActivity"
-            android:label="@string/pagamento"
-            android:parentActivityName=".activity.CarrinhoDeComprasActivity">
+            android:parentActivityName=".activity.CarrinhoDeComprasActivity"
+            android:label="@string/pagamento">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.CarrinhoDeComprasActivity" />
         </activity>
-        <activity
-            android:name=".activity.PerfilActivity"
-            android:launchMode="singleTop"
-            android:label="@string/menu_perfil"
-            android:parentActivityName=".activity.MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.MainActivity" />
-        </activity>
-
+        <activity android:name=".activity.PerfilActivity" />
         <activity
             android:name=".activity.MapsActivity"
             android:label="@string/title_activity_maps" />

@@ -16,7 +16,6 @@ public class Usuarios implements Serializable {
     String nome;
 
     String email;
-
     @SerializedName("senha")
     String senha;
 

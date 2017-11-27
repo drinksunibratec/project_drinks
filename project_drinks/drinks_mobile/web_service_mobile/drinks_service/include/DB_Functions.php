@@ -40,9 +40,12 @@ class DB_Functions {
      * returns user details
      */
 	    public function storeUser($nome, $email, $senha, $telefone) {
+		$uuid = uniqid('', true);
+	        $hash = $this->hashSSHA($senha);
+	        $encrypted_password = $hash["encrypted"];
 		
-	        $stmt = $this->conn->prepare("INSERT INTO usuarios(nome, email, senha, telefone) VALUES(?, ?, ?, ?)");
-	        $stmt->bind_param("ssss",$nome, $email, $senha, $telefone);
+	        $stmt = $this->conn->prepare("INSERT INTO usuarios(nome, email, encrypted_password, telefone) VALUES(?, ?, ?, ?)");
+	        $stmt->bind_param("ssss",$nome, $email, $encrypted_password, $telefone);
 	        $result = $stmt->execute();
 	        $stmt->close();
 	
@@ -113,20 +116,6 @@ class DB_Functions {
 		return $pedidos;
 	}
 	
-	public function listarTodosOsProdutos(){
-		$pedidos = null;
-		$sql = "SELECT * FROM produto";
-
-		
-		$result = $this->conn->query($sql);
-		
-		if ($result->num_rows > 0) {
-			$pedidos = $result->fetch_all(MYSQLI_ASSOC);
-		}
-
-		return $pedidos;
-	}
-	
 	public function inserirProdutosDoPedido($input_data){
 		
 		foreach($input_data as $key => $produtos){
@@ -142,7 +131,6 @@ class DB_Functions {
 			$values = rtrim($values, ',');
 			
 			$sql = "INSERT INTO pedido_produto (" . $columns . ") VALUES (" . $values . ");";
-			error_log("Insert produto Pedido: " .  $sql);
 			$this->conn->query($sql);
 		}
 		
@@ -189,7 +177,7 @@ class DB_Functions {
 	
 		return $estabelecimentos;
 	}
-	
+
 	public function listaProdutosPorEstabelecimento($codEstabelecimento){
 		$produtos = null;
 		$sql = "select pe.codProduto, p.nome, p.descricao, p.ean, pe.preco from produto_estab pe join produto p on p.ean = pe.ean where pe.codEstabelecimento = " . $codEstabelecimento;
@@ -204,7 +192,6 @@ class DB_Functions {
 		return $produtos;
 	}
 	
-
 	public function listaProdutosPorEan($ean){
 		$produtos = null;
 		$sql = "SELECT pe.codProduto, p.nome, p.descricao, p.ean, pe.preco, pe.codEstabelecimento FROM produto_estab pe JOIN produto p ON p.ean = pe.ean WHERE p.ean =  " . $ean;
@@ -238,17 +225,26 @@ class DB_Functions {
 	     */
 	    public function getUserByEmailAndPassword($email, $senha) {
 	
-	       	$usuario = null;
-	     
-	     	$sql = "SELECT * FROM usuarios WHERE email  = '" . $email . "' and senha = '" . $senha . "'";
-		error_log("Busca Usuario: " . $sql);
-		
-		$result = $this->conn->query($sql);
-		
-		if ($result->num_rows > 0) {
-			$usuario = $result->fetch_assoc();
-		}
-		return $usuario;
+	        $stmt = $this->conn->prepare("SELECT * FROM usuarios WHERE email = ?");
+	
+	        $stmt->bind_param("s", $email);
+	
+	        if ($stmt->execute()) {
+	            $usuario = $stmt->get_result()->fetch_assoc();
+	            $stmt->close();
+	
+	            // verifying user password
+	            
+	            $encrypted_password = $usuario['encrypted_password'];
+	            $hash = $this->checkhashSSHA($senha);
+	            // check for password equality
+	            if ($encrypted_password == $hash) {
+	                // user authentication details are correct
+	                return $usuario;
+	            }
+	        } else {
+	            return NULL;
+	        }
 	    }
 	
 	    /**
@@ -273,23 +269,32 @@ class DB_Functions {
 	            return false;
 	        }
 	    }
-		
-		 public function getUsuarioPorId($codUsuario) {
+		public function hashSSHA($senha) {
 	
-	       	$usuario = null;
-	     
-	     	$sql = "SELECT * FROM usuarios WHERE codUsuario = " . $codUsuario;
+	        $encrypted = base64_encode(sha1($senha, true));
+	        $hash = array("salt" => $salt, "encrypted" => $encrypted);
+	        return $hash;
+	    }
+		public function checkhashSSHA($senha) {
+	
+	        $hash = base64_encode(sha1($senha, true));
+	
+	        return $hash;
+	    }
+		
+		public function listarTodosOsProdutos(){
+		$pedidos = null;
+		$sql = "SELECT * FROM produto";
+
 		
 		$result = $this->conn->query($sql);
 		
-		if($result != null){
-			if ($result->num_rows > 0) {
-				$usuario = $result->fetch_assoc();
-			}
+		if ($result->num_rows > 0) {
+			$pedidos = $result->fetch_all(MYSQLI_ASSOC);
 		}
-		return $usuario;
-	    }
-		
+
+		return $pedidos;
+	}
 }
 
 ?>

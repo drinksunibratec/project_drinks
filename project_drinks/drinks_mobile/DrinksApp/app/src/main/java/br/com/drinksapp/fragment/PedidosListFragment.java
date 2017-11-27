@@ -92,11 +92,8 @@ public class PedidosListFragment extends Fragment implements OnBackPressedListen
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            if(mPedidos != null){
-
-                mListView.setAdapter(new PedidosAdapter(getActivity(), mPedidos));
-                mListView.setOnItemClickListener(new ListViewPedido());
-            }
+            mListView.setAdapter(new PedidosAdapter(getActivity(), mPedidos));
+            mListView.setOnItemClickListener(new ListViewPedido());
             hideDialog();
         }
     }

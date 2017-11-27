@@ -30,7 +30,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import br.com.drinksapp.R;
-import br.com.drinksapp.SaveSharedPreference.MySaveSharedPreference;
 import br.com.drinksapp.adapter.ProdutoPesquisaAdapter;
 import br.com.drinksapp.bean.Pedido;
 import br.com.drinksapp.bean.Produto;
@@ -183,21 +182,12 @@ public class MainActivity extends AppCompatActivity implements OnPedidoClick {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.menu_perfil:
-                Intent it = new Intent(MainActivity.this, PerfilActivity.class);
-                startActivity(it);
                 return true;
             case R.id.menu_logout:
-                logout();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    private void logout() {
-        MySaveSharedPreference.clearSharedPreference(this);
-        Intent it = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(it);
     }
 
     class TaskBuscarProdutos extends AsyncTask<Void, Void, List<Produto>>{
