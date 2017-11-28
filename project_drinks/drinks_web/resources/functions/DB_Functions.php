@@ -368,6 +368,256 @@ function buscarProdutoCadastro($codProduto = null)
     return $found;
 }
 
+function pedidoNovembro ($nomeId) {
+         $found = null;
+    try {
+        $database = open_database();
+
+        $sql = "SELECT count(dataPedido) as teste FROM Pedido WHERE dataPedido BETWEEN '2017/11/01' AND '2017/11/30' AND codEstabelecimento =" . $nomeId;
+        $result = $database->query($sql);
+         if ($result->num_rows > 0) {
+            $found = $result->fetch_assoc();
+        }
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+    return $found;
+
+}
+
+function pedidoDezembro ($nomeId) {
+         $found = null;
+    try {
+        $database = open_database();
+
+        $sql = "SELECT count(dataPedido) as dezembro FROM Pedido WHERE dataPedido BETWEEN '2017/12/01' AND '2017/12/31' AND codEstabelecimento = " . $nomeId;
+        $result = $database->query($sql);
+         if ($result->num_rows > 0) {
+            $found = $result->fetch_assoc();
+        }
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+    return $found;
+
+}
+
+function pedidoSetembro ($nomeId) {
+         $found = null;
+    try {
+        $database = open_database();
+
+        $sql = "SELECT count(dataPedido) as setembro FROM Pedido WHERE dataPedido BETWEEN '2017/09/01' AND '2017/09/30' and codEstabelecimento =" . $nomeId;
+        $result = $database->query($sql);
+         if ($result->num_rows > 0) {
+            $found = $result->fetch_assoc();
+        }
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+    return $found;
+
+}
+
+function pedidoOutubro ($nomeId) {
+         $found = null;
+    try {
+        $database = open_database();
+
+        $sql = "SELECT count(dataPedido) as outubro FROM Pedido WHERE dataPedido BETWEEN '2017/10/01' AND '2017/10/31' AND codEstabelecimento = " . $nomeId;
+        $result = $database->query($sql);
+         if ($result->num_rows > 0) {
+            $found = $result->fetch_assoc();
+        }
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+    return $found;
+
+}
+
+
+function faturamentoNovembro ($nomeId) {
+         $found = null;
+    try {
+        $database = open_database();
+        
+        $sql = "SELECT Sum(valorTotal) as valor FROM Pedido WHERE dataPedido BETWEEN '2017/11/01' AND '2017/11/30' AND codEstabelecimento = " . $nomeId;
+        $result = $database->query($sql);
+         if ($result->num_rows > 0) {
+            $found = $result->fetch_assoc();
+        }
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+    return $found;
+        
+}
+
+function faturamentoDezembro ($nomeId) {
+         $found = null;
+    try {
+        $database = open_database();
+        
+        $sql = "SELECT Sum(valorTotal) as valorDezembro FROM Pedido WHERE dataPedido BETWEEN '2017/12/01' AND '2017/12/31' AND codEstabelecimento = " . $nomeId;
+        $result = $database->query($sql);
+         if ($result->num_rows > 0) {
+            $found = $result->fetch_assoc();
+        }
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+    return $found;
+        
+}
+
+function faturamentoSetembro ($nomeId) {
+         $found = null;
+    try {
+        $database = open_database();
+        
+        $sql = "SELECT Sum(valorTotal) as valorSetembro FROM Pedido WHERE dataPedido BETWEEN '2017/09/01' AND '2017/09/30' and codEstabelecimento = " . $nomeId;
+        $result = $database->query($sql);
+         if ($result->num_rows > 0) {
+            $found = $result->fetch_assoc();
+        }
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+    return $found;
+        
+}
+
+function faturamentoOutubro ($nomeId) {
+         $found = null;
+    try {
+        $database = open_database();
+        
+        $sql = "SELECT Sum(valorTotal) as valorOutubro FROM Pedido WHERE dataPedido BETWEEN '2017/10/01' AND '2017/10/31' and codEstabelecimento = " . $nomeId;
+        $result = $database->query($sql);
+         if ($result->num_rows > 0) {
+            $found = $result->fetch_assoc();
+        }
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+    return $found;
+        
+}
+
+function bairroBoaViagem ($nomeId) {
+         $found = null;
+    try {
+        $database = open_database();
+        
+        $sql = "SELECT count(bairro) as boaviagem FROM Pedido WHERE bairro = 'Boa Viagem' and codEstabelecimento = " . $nomeId;
+        $result = $database->query($sql);
+         if ($result->num_rows > 0) {
+            $found = $result->fetch_assoc();
+        }
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+    return $found;
+        
+}
+
+function bairroIpsep ($nomeId) {
+         $found = null;
+    try {
+        $database = open_database();
+        
+        $sql = "SELECT count(bairro) as ipsep FROM Pedido WHERE bairro = 'Ipsep' and codEstabelecimento = " . $nomeId;
+        $result = $database->query($sql);
+         if ($result->num_rows > 0) {
+            $found = $result->fetch_assoc();
+        }
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+    return $found;
+        
+}
+
+function bairroBoaVista ($nomeId) {
+         $found = null;
+    try {
+        $database = open_database();
+        
+        $sql = "SELECT count(bairro) as boavista FROM Pedido WHERE bairro = 'Boa Vista' and codEstabelecimento = " . $nomeId;
+        $result = $database->query($sql);
+         if ($result->num_rows > 0) {
+            $found = $result->fetch_assoc();
+        }
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+    return $found;
+        
+}
+
+function bairroCandeias ($nomeId) {
+         $found = null;
+    try {
+        $database = open_database();
+        
+        $sql = "SELECT count(bairro) as candeias FROM Pedido WHERE bairro = 'Candeias' and codEstabelecimento = " . $nomeId;
+        $result = $database->query($sql);
+         if ($result->num_rows > 0) {
+            $found = $result->fetch_assoc();
+        }
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+    return $found;
+        
+}
+
+function bairroTejipio ($nomeId) {
+         $found = null;
+    try {
+        $database = open_database();
+        
+        $sql = "SELECT count(bairro) as tejipio FROM Pedido WHERE bairro = 'Tejipio' and codEstabelecimento = " . $nomeId;
+        $result = $database->query($sql);
+         if ($result->num_rows > 0) {
+            $found = $result->fetch_assoc();
+        }
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+    return $found;
+        
+}
+
+
+
 function insertProdutoEstabelecimento($table = null, $data = null)
 {
     $columns = null;

@@ -103,8 +103,7 @@ foreach ($dados as $estabelecimento) {
 								<td><?php echo $estabelecimento['uf']; ?></td>
 								<td id="telefone"><?php echo Mask('(##) #####-####',$estabelecimento['telefone']); ?></td>
 								<td align="center">
-								<a title="Alterar" href="editar.php?codEstabelecimento=<?php echo  $estabelecimento['codEstabelecimento']?>"
-									class="btn btn-sm btn-warning">&#9999; Alterar</a>
+								
                                                                         <a href="../produto/listaProdutoVinculadoADM.php?codEstabelecimento=<?php echo  $estabelecimento['codEstabelecimento']?>"
 									class="btn btn-sm btn-info">&#x1a; Produtos</a></td>
 							</tr>

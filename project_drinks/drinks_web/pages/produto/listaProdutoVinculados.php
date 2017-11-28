@@ -86,7 +86,7 @@ $dados = listarProdutoEstabelecimento($codEstabelecimento);
                             <td><?php echo $produto['ean']; ?></td>
                             <td><?php echo "R$ ".$produto['preco']; ?></td>
                             <td align="center">
-                                <a title="Alterar" href="formularioCadastroProduto.php?codProduto=
+                                <a title="Alterar" href="editar_produto.php?codProduto=
                                 <?php echo  $produto['codProduto']?>"
 				class="btn btn-sm btn-warning">&#9999; Alterar</a>
                           <?php 

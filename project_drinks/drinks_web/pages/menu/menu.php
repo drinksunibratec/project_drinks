@@ -26,6 +26,7 @@
                                                 
                                                 
     					<?php }else {?>
+    											<li><a href="../estabelecimento/lista.php">Estabelecimentos</a></li>
                                                 <li><a href="../pedido/listarPedido.php">Pedidos</a></li>
                                                 <li><a href="../produto/listaProdutoEstabelecimento.php">Catálogo Produtos</a></li>
                                                 <li><a href="../produto/listaProdutoVinculados.php">Produtos Cadastrados</a></li>

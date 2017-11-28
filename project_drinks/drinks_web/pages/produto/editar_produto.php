@@ -1,31 +1,34 @@
-<?php  
+<?php
 require_once ('../include/header.php');
 require_once ('../menu/menu.php');
 
-  if (isset($_POST['nome']) && empty($_POST['nome']) == false) {
 
-      $caracters = array(
+$codProduto = 0;
+$caracters = array(
         "R",
         "$"
     );
 
+ 
+if (isset($_GET['codProduto']) && empty($_GET['codProduto']) == false) {
+    $codProduto = addslashes($_GET['codProduto']);
+}
 
-      $inserir = $_POST;
-      foreach ($inserir as $key => $value) {
-          if($key == 'preco'){
-              $inserir[$key] = str_replace($caracters, "", $value);
-              
-          }
-          
-      }
-      
-      
-                  
-      $dados = insertProduto(PRODUTO, $inserir);
-      
 
-    header("Location: lista.php");
-  }
+$codEstabelecimento = $_SESSION['codEstabelecimento'];
+$dados = buscarProdutoCadastro($codProduto);
+
+if(isset($_POST['preco']) && empty($_POST['preco']) == false){
+    
+//    $inserir['codEstabelecimento'] = $codEstabelecimento;
+//    $inserir['ean'] = $_POST['ean'];
+    $inserir['preco'] = $_POST['preco'];
+//    $inserir['codProduto'] = $codProduto;
+    
+    update(PRODUTO_ESTABELECIMENTO, $codProduto, $inserir, 'codProduto');
+    header("Location: listaProdutoVinculados.php");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -46,44 +49,47 @@ require_once ('../menu/menu.php');
 
 <body>
 <div class="container">
-    <h2>Novo Produto </h2>
+    <h2>Alterar Produto </h2>
         
 	<div class="jumbotron">
-                <?php
-//                if(count($erro) > 0){ 
-//                    echo "<div class='erro'>"; 
-//                    foreach ($erro as $valor) 
-//                        echo "$valor <br>"; 
-//                    echo "</div>";
-//                }
-                ?>
-            
-		<form method="POST">
+                
+            <?php
+		if(count($dados) > 0){
+                    foreach ($dados as $dado) {?>
+		<div class="jumbotron">
+                    <form method="POST" id="formProduto">
 
-			<div class="row">
+				<div class="row">
 
-				<div class="form-group col-md-3">
-					<label for="nome">Nome</label> 
-                                        <input type="text" 
-						class="form-control" id="nome" name="nome" required>
+					<div class="form-group col-md-3">
+						<label for="nome">Nome:</label> <input type="text"
+							class="form-control" id="cnpj" name="nome"
+							value="<?php echo $dado['nome']; ?> " readonly>
+					</div>
+
+					<div class="form-group col-md-5">
+						<label for="descricao">Descrição:</label> <input
+							type="text" class="form-control" name="descricao"
+							value="<?php echo $dado['descricao']; ?>" 
+							readonly>
+					</div>
+
+					<div class="form-group col-md-5">
+						<label for="ean">Ean:</label> 
+                                                <input type="text"
+							class="form-control" name="ean"
+							value="<?php echo $dado['ean']; ?>" 
+							readonly>
+					</div>
+
+					<div class="form-group col-md-3">
+						<label for="preco">Preco</label> 
+                                                <input type="text"  id="preco"
+							class="form-control" name="preco"
+                                                        required>
+					</div>
 				</div>
 
-				<div class="form-group col-md-3">
-					<label for="descricao">Descri&ccedil;&atilde;o</label> 
-                                        <input value=""
-						type="text" id="descricao" class="form-control" name="descricao" required>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="form-group col-md-3">
-					<label for="gelada">Ean</label> 
-					<input
-						type="text" id="ean" class="form-control" name="ean" required>
-					
-				</div>
-
-			</div>
 
 			<div class=row>
 				<div class="form-group col-md-4">                                
@@ -94,6 +100,8 @@ require_once ('../menu/menu.php');
 			</div>
 
 		</form>
+                    <?php }?>
+                    <?php }?>
 	</div>
 </div>
 </body>
