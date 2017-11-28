@@ -6,6 +6,7 @@
  */
 require_once ('../include/header.php');
 require_once ('../menu/menu.php');
+//require ('../util/enviarCampanha.php');
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +26,7 @@ require_once ('../menu/menu.php');
 
 		<div class="jumbotron">
 
-			<form action="enviar.php" method="post" class="contactForm">
+			<form action="enviarCampanha.php" method="post" class="contactForm">
 
 				<div class="form-group">
 					<label for="titulo">Título:</label> <input type="text"
@@ -40,13 +41,10 @@ require_once ('../menu/menu.php');
 				</div>
 
 				<div class="fileupload fileupload-new" data-provides="fileupload">
-					<span class="btn btn-primary btn-file"><span class="fileupload-new">Select
-							file</span> <span class="fileupload-exists">Change</span><br>
+					<span class="btn btn-primary btn-file">
 							
 							<input
-						type="file" /></span> <span class="fileupload-preview"></span> <a
-						href="#" class="close fileupload-exists" data-dismiss="fileupload"
-						style="float: none">×</a>
+						type="file" /></span> <span class="fileupload-preview"></span>
 				</div><br>
 
 				<input type="submit" name="btn_enviar" value="Enviar" />
