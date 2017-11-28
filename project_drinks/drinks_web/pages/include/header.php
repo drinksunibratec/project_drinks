@@ -4,7 +4,6 @@ require_once ('../../resources/functions/DB_Functions.php');
 require_once ('../../resources/functions/Functions.php');
 require_once ('../../resources/util/Mensagens.php');
 require_once ('../../resources/util/array_status.php');
-//require_once ('../../resources/util/enviarCampanha.php');
 
 
 ?>
