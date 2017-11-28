@@ -74,6 +74,7 @@ public class PedidosListFragment extends Fragment implements OnBackPressedListen
 
     @Override
     public void doBack() {
+        getActivity().getIntent().putExtra("EXIT", true);
         getActivity().finish();
     }
 

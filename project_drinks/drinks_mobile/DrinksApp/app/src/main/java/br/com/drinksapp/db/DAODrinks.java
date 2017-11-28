@@ -38,9 +38,15 @@ public class DAODrinks {
     public long insertUsuario(Usuarios usuario) {
         SQLiteDatabase db = mHelper.getWritableDatabase();
 
-        ContentValues values = parserUsuario(usuario);
+        String sql = "SELECT * FROM " + DrinksContract.TABLE_NAME_USUARIOS + " WHERE " + DrinksContract.CODUSUARIO + " = ?";
+
+        Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(usuario.getCodUsuario())});
+
         long id = 0;
-        id = db.insertOrThrow(DrinksContract.TABLE_NAME_USUARIOS, null, values);
+        if (cursor.getCount() == 0) {
+            ContentValues values = parserUsuario(usuario);
+            id = db.insertOrThrow(DrinksContract.TABLE_NAME_USUARIOS, null, values);
+        }
 
         db.close();
         return id;
@@ -253,7 +259,7 @@ public class DAODrinks {
         return existe;
     }
 
-    public boolean existeCarrinho(){
+    public boolean existeCarrinho() {
         boolean existe = false;
         SQLiteDatabase db = mHelper.getReadableDatabase();
 
@@ -263,11 +269,22 @@ public class DAODrinks {
         Cursor cursor = db.rawQuery(sql, null);
 
         if (cursor.getCount() > 0) {
+
+            int idxQuantidade = cursor.getColumnIndex(DrinksContract.QUANTIDADE);
+            int idxCodProduto = cursor.getColumnIndex(DrinksContract.CODPRODUTO);
+            int idxCodEstabelecimento = cursor.getColumnIndex(DrinksContract.CODESTABELECIMENTO);
+
+            while (cursor.moveToNext()) {
+                int quantidade = cursor.getInt(idxQuantidade);
+                long codProduto = cursor.getLong(idxCodProduto);
+                long codEs= cursor.getLong(idxCodEstabelecimento);
+            }
             existe = true;
         }
         cursor.close();
         db.close();
         return existe;
+
     }
 
     public int quantidadeDoProdutoNoCarrinho(Produto produto) {
@@ -344,11 +361,11 @@ public class DAODrinks {
                 "C." + DrinksContract.PRECO_UNITARIO + ", " +
                 "C." + DrinksContract.PRECO_TOTAL + ", " +
                 "P." + DrinksContract.NOME + ", " +
-                "PE." + DrinksContract.CODPRODUTO + ", " +
+                "P." + DrinksContract.CODPRODUTO + ", " +
                 "C." + DrinksContract.CODESTABELECIMENTO +
                 " FROM " + DrinksContract.TABLE_NAME_CARRINHO_COMPRAS + " C " +
                 " JOIN " + DrinksContract.TABLE_NAME_PRODUTO_ESTAB + " PE ON PE." + DrinksContract.CODPRODUTO + " = C." + DrinksContract.CODPRODUTO +
-                " JOIN " + DrinksContract.TABLE_NAME_PRODUTO + " P ON P." + DrinksContract.EAN + " = PE." + DrinksContract.EAN;
+                " JOIN " + DrinksContract.TABLE_NAME_PRODUTO + " P ON P." + DrinksContract.CODPRODUTO + " = C." + DrinksContract.CODPRODUTO;
 
         Cursor cursor = db.rawQuery(sql, argumentos);
 
@@ -392,13 +409,13 @@ public class DAODrinks {
         List<Produto> produtos = new ArrayList<Produto>();
         SQLiteDatabase db = mHelper.getReadableDatabase();
 
-        String sql = "SELECT PE."  + DrinksContract.CODPRODUTO + ", "
+        String sql = "SELECT PE." + DrinksContract.CODPRODUTO + ", "
                 + " P." + DrinksContract.NOME + ", "
                 + " PE." + DrinksContract.PRECO + ", "
                 + " P." + DrinksContract.DESCRICAO + ", "
                 + " PE." + DrinksContract.CODESTABELECIMENTO
                 + " FROM " + DrinksContract.TABLE_NAME_PRODUTO_ESTAB + " PE "
-                + " JOIN " + DrinksContract.TABLE_NAME_PRODUTO + " P ON P." + DrinksContract.EAN  + " = PE."  + DrinksContract.EAN
+                + " JOIN " + DrinksContract.TABLE_NAME_PRODUTO + " P ON P." + DrinksContract.EAN + " = PE." + DrinksContract.EAN
                 + " WHERE PE." + DrinksContract.CODESTABELECIMENTO + " = ?";
 
         Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(estabelecimento.getCodEstabelecimento())});

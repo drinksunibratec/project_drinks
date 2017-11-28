@@ -15,7 +15,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.Loader;
@@ -132,6 +131,7 @@ public class MapFragment extends Fragment
 
     @Override
     public void doBack() {
+        getActivity().getIntent().putExtra("EXIT", true);
         getActivity().finish();
     }
 

@@ -168,6 +168,18 @@ public class PagamentoActivity extends AppCompatActivity implements DialogComple
             pDialog.show();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        pDialog.dismiss();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        pDialog.dismiss();
+    }
+
     private void hideDialog() {
         if (pDialog.isShowing())
             pDialog.dismiss();
@@ -251,7 +263,7 @@ public class PagamentoActivity extends AppCompatActivity implements DialogComple
 
         @Override
         protected void onPostExecute(Endereco endereco) {
-            if(endereco != null){
+            if(endereco.getEndereco() != null && !endereco.getEndereco().equals("")){
 
                 mLogradouro = endereco.getEndereco();
                 mBairro = endereco.getBairro();
@@ -260,6 +272,9 @@ public class PagamentoActivity extends AppCompatActivity implements DialogComple
 
                 ComplementoEnderecoDialogFragment dialogFragment = ComplementoEnderecoDialogFragment.getInstancia();
                 dialogFragment.show(getSupportFragmentManager(), Constantes.DIALOG_FRAGMENT);
+
+            }else{
+                Toast.makeText(PagamentoActivity.this, "Endereço não encontrado. Verifique o CEP e tente novamente!", Toast.LENGTH_LONG).show();
 
             }
         }

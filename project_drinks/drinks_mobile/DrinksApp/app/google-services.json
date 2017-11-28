@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1005642965620",
+    "project_id": "drinks-8b2bf"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1005642965620:android:83d6a61e5fbe56be",
+        "android_client_info": {
+          "package_name": "br.com.drinksapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1005642965620-2snma97b73qfut87b8l4b2rdebm781es.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.drinksapp",
+            "certificate_hash": "dd82a2496a9c72021700f45dacc4c7232fda04ab"
+          }
+        },
+        {
+          "client_id": "1005642965620-ubjpnc65klqno18tddahhd9j6utsvb4r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCY20A970tHA8AA9ERJ7XK8Cg5Darj-DuI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

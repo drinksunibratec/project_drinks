@@ -23,6 +23,11 @@ import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -43,6 +48,7 @@ import br.com.drinksapp.http.DBConnectParser;
 import br.com.drinksapp.interfaces.OnBackPressedListener;
 import br.com.drinksapp.interfaces.OnPedidoClick;
 import br.com.drinksapp.util.Constantes;
+import br.com.drinksapp.util.GooglePlusLogin;
 
 
 public class MainActivity extends AppCompatActivity implements OnPedidoClick {
@@ -166,8 +172,10 @@ public class MainActivity extends AppCompatActivity implements OnPedidoClick {
     public void onBackPressed() {
         if (onBackPressedListener != null)
             onBackPressedListener.doBack();
-        else
+        else{
             super.onBackPressed();
+            finish();
+        }
     }
 
     @Override
@@ -195,6 +203,10 @@ public class MainActivity extends AppCompatActivity implements OnPedidoClick {
     }
 
     private void logout() {
+
+        GooglePlusLogin.getInstancia(this).mGoogleApiClient.signOut();
+        GooglePlusLogin.getInstancia(this).mGoogleApiClient.revokeAccess();
+
         MySaveSharedPreference.clearSharedPreference(this);
         Intent it = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(it);

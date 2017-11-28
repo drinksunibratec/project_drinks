@@ -51,4 +51,6 @@ public class Constantes {
     public static final String EXTRA_ID_BANDEIRA = "EXTRA_ID_BANDEIRA";
 
     public static final String EXTRA_EAN = "EXTRA_EAN";
+
+    public static final int RC_SIGN_IN = 2;
 }

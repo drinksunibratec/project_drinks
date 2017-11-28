@@ -26,8 +26,6 @@ import br.com.drinksapp.util.Constantes;
 
 public class ComparaPrecosActivity extends AppCompatActivity {
 
-    Spinner mSpinnerOrdemPreços;
-
     private ProgressDialog pDialog;
 
     ListView mListView;
@@ -37,9 +35,6 @@ public class ComparaPrecosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compara_precos);
 
-        mSpinnerOrdemPreços = (Spinner)findViewById(R.id.ordem_pesquisa);
-        addItensSpinnerOrdemPreco();
-
         mListView = (ListView)findViewById(R.id.listaProdutosPesquisa);
 
         pDialog = new ProgressDialog(this, R.style.MyDialogTheme);
@@ -47,14 +42,6 @@ public class ComparaPrecosActivity extends AppCompatActivity {
 
         String ean = getIntent().getStringExtra(Constantes.EXTRA_EAN);
         initTaskListaProdutoPorEan(ean);
-    }
-
-    public void addItensSpinnerOrdemPreco(){
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spiner_item, getResources().getStringArray(R.array.ordem_precos));
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mSpinnerOrdemPreços.getBackground().setColorFilter(ContextCompat.getColor(this, R.color.white_color), PorterDuff.Mode.SRC_ATOP);
-        mSpinnerOrdemPreços.setAdapter(adapter);
     }
 
     private void showDialog() {

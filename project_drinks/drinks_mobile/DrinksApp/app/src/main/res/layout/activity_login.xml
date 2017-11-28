@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="70dp"
         android:elevation="4dp"
         android:orientation="vertical"
         android:padding="20dp">
@@ -78,6 +78,22 @@
                 android:text="@string/btn_link_to_register"
                 android:textAllCaps="false"
                 android:textSize="@dimen/txt_medio_botao" />
+
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/btn_google"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"/>
+
+
+            <!--<com.facebook.login.widget.LoginButton
+                android:id="@+id/login_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/medium_padding"
+                android:layout_marginRight="@dimen/medium_padding"/>-->
+
         </LinearLayout>
     </RelativeLayout>
 

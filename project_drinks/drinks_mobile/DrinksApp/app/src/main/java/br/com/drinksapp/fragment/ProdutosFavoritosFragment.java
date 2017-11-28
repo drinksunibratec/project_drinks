@@ -72,6 +72,7 @@ public class ProdutosFavoritosFragment extends Fragment implements OnBackPressed
 
     @Override
     public void doBack() {
+        getActivity().getIntent().putExtra("EXIT", true);
         getActivity().onBackPressed();
     }
 }

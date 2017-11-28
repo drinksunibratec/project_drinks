@@ -9,15 +9,6 @@
 
 
 
-    <Spinner
-        android:id="@+id/ordem_pesquisa"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white_color"
-        android:backgroundTint="@color/white_color"
-        android:padding="@dimen/medium_padding"
-        android:spinnerMode="dropdown" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
