@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,7 +93,6 @@ public class PedidosListFragment extends Fragment implements OnBackPressedListen
         @Override
         protected void onPostExecute(Void aVoid) {
             if(mPedidos != null){
-
                 mListView.setAdapter(new PedidosAdapter(getActivity(), mPedidos));
                 mListView.setOnItemClickListener(new ListViewPedido());
             }

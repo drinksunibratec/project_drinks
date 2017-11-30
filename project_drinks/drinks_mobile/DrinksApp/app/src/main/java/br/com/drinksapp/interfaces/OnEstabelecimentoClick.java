@@ -2,6 +2,7 @@ package br.com.drinksapp.interfaces;
 
 import java.util.List;
 
+import br.com.drinksapp.bean.Estabelecimento;
 import br.com.drinksapp.bean.Produto;
 
 /**
@@ -10,5 +11,5 @@ import br.com.drinksapp.bean.Produto;
 
 public interface OnEstabelecimentoClick {
 
-    void clicouNoEstabelecimento(List<Produto> produtos);
+    void clicouNoEstabelecimento(Estabelecimento estabelecimento);
 }

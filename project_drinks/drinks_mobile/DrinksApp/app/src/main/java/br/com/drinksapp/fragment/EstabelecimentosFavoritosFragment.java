@@ -21,9 +21,9 @@ import java.util.List;
 import br.com.drinksapp.R;
 import br.com.drinksapp.adapter.EstabelecimentosFavoritosAdapter;
 import br.com.drinksapp.bean.Estabelecimento;
-import br.com.drinksapp.bean.Produto;
 import br.com.drinksapp.db.DAODrinks;
 import br.com.drinksapp.interfaces.OnBackPressedListener;
+import br.com.drinksapp.interfaces.OnEstabelecimentoClick;
 
 /**
  * Created by Silvio Cedrim on 19/11/2017.
@@ -58,7 +58,8 @@ public class EstabelecimentosFavoritosFragment extends Fragment implements OnBac
         mListView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
             @Override
             public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
-                contextMenu.add(Menu.NONE, 1, Menu.NONE, "Compartilhar");
+                contextMenu.add(Menu.NONE, 1, Menu.NONE, "Ver produtos");
+                contextMenu.add(Menu.NONE, 2, Menu.NONE, "Compartilhar");
             }
         });
 
@@ -71,18 +72,20 @@ public class EstabelecimentosFavoritosFragment extends Fragment implements OnBac
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         int position = menuInfo.position;
+        Estabelecimento e = (Estabelecimento)mAdapter.getItem(position);
         switch (item.getItemId()) {
             case 1:
-                compartilhar(position);
+                ((OnEstabelecimentoClick)getActivity()).clicouNoEstabelecimento(e);
+                break;
+            case 2:
+                compartilhar(e);
                 break;
         }
         return super.onContextItemSelected(item);
     }
 
 
-    void compartilhar(int position) {
-
-        Estabelecimento e = (Estabelecimento)mAdapter.getItem(position);
+    void compartilhar(Estabelecimento e) {
 
         Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
         whatsappIntent.setType("text/plain");

@@ -449,6 +449,61 @@ public class DAODrinks {
         return produtos;
     }
 
+    public long consultarIdEstabelecimentoProduto(Produto p) {
+
+        long codEstabelecimento = 0;
+        SQLiteDatabase db = mHelper.getReadableDatabase();
+
+        String sql = "SELECT E." + DrinksContract.CODESTABELECIMENTO
+                + " FROM " + DrinksContract.TABLE_NAME_ESTABELECIMENTO + " E "
+                + " JOIN " + DrinksContract.TABLE_NAME_PRODUTO_ESTAB + " PE ON PE." + DrinksContract.CODESTABELECIMENTO + " = E." + DrinksContract.CODESTABELECIMENTO
+                + " WHERE PE." + DrinksContract.CODPRODUTO + " = ?";
+
+        Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(p.getCodProduto())});
+
+        if (cursor.getCount() > 0) {
+            int idxCodEstabelecimento = cursor.getColumnIndex(DrinksContract.CODESTABELECIMENTO);
+
+            if (cursor.moveToFirst()) {
+                codEstabelecimento = cursor.getLong(idxCodEstabelecimento);
+
+            }
+        }
+        cursor.close();
+        db.close();
+        return codEstabelecimento;
+    }
+
+    public Usuarios consultarUsuarioId(Usuarios usuario) {
+
+        Usuarios retorno =  null;
+        SQLiteDatabase db = mHelper.getReadableDatabase();
+
+        String sql = "SELECT * FROM " + DrinksContract.TABLE_NAME_USUARIOS;
+
+        Cursor cursor = db.rawQuery(sql, null);
+
+        if (cursor.getCount() > 0) {
+            int iNome = cursor.getColumnIndex(DrinksContract.NOME);
+            int iEmail = cursor.getColumnIndex(DrinksContract.EMAIL);
+            int iTelefone = cursor.getColumnIndex(DrinksContract.TELEFONE);
+
+            while (cursor.moveToNext()) {
+                String nome = cursor.getString(iNome);
+                String email = cursor.getString(iEmail);
+                String telefone = cursor.getString(iTelefone);
+
+                retorno = new Usuarios();
+                retorno.setNome(nome);
+                retorno.setEmail(email);
+                retorno.setTelefone(telefone);
+            }
+        }
+        cursor.close();
+        db.close();
+        return retorno;
+    }
+
     public List<Produto> consultarProdutos() {
 
         List<Produto> produtos = new ArrayList<Produto>();

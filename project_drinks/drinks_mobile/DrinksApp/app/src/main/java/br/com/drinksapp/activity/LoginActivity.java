@@ -258,7 +258,6 @@ public class LoginActivity extends AppCompatActivity implements
                 mEdtSenha.setFocusable(true);
                 mEdtSenha.requestFocus();
             }
-            hideDialog();
         }
     }
 

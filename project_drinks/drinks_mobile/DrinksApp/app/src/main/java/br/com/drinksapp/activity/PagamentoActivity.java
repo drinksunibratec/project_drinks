@@ -263,19 +263,25 @@ public class PagamentoActivity extends AppCompatActivity implements DialogComple
 
         @Override
         protected void onPostExecute(Endereco endereco) {
-            if(endereco.getEndereco() != null && !endereco.getEndereco().equals("")){
+
+            if(endereco != null && endereco.getEndereco() != null && !endereco.getEndereco().equals("")){
 
                 mLogradouro = endereco.getEndereco();
                 mBairro = endereco.getBairro();
                 mCidade = endereco.getCidade();
                 mUf = endereco.getUf();
 
+                hideDialog();
+
                 ComplementoEnderecoDialogFragment dialogFragment = ComplementoEnderecoDialogFragment.getInstancia();
                 dialogFragment.show(getSupportFragmentManager(), Constantes.DIALOG_FRAGMENT);
 
             }else{
+                mEdtCep.setError("CEP inválido");
+                mEdtCep.setFocusable(true);
+                mEdtCep.requestFocus();
                 Toast.makeText(PagamentoActivity.this, "Endereço não encontrado. Verifique o CEP e tente novamente!", Toast.LENGTH_LONG).show();
-
+                hideDialog();
             }
         }
     }

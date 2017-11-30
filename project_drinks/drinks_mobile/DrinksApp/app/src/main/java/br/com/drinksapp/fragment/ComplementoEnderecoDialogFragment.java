@@ -83,7 +83,14 @@ public class ComplementoEnderecoDialogFragment extends DialogFragment {
         @Override
         public void onClick(View v) {
 
-            Validator.validateNotNull(mEdtNumero,"Preencha o campo número");
+            boolean numeroValido = Validator.validateNotNull(mEdtNumero,"Preencha o campo número");
+
+            if(!numeroValido){
+                mEdtNumero.setError("Campo obrigatório");
+                mEdtNumero.setFocusable(true);
+                mEdtNumero.requestFocus();
+                return;
+            }
 
             int numero = Integer.parseInt( mEdtNumero.getText().toString());
             String complento = mEdtComplemento.getText().toString();

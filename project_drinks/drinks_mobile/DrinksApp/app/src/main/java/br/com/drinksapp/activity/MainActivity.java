@@ -1,5 +1,6 @@
 package br.com.drinksapp.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ import java.util.List;
 import br.com.drinksapp.R;
 import br.com.drinksapp.SaveSharedPreference.MySaveSharedPreference;
 import br.com.drinksapp.adapter.ProdutoPesquisaAdapter;
+import br.com.drinksapp.bean.Estabelecimento;
 import br.com.drinksapp.bean.Pedido;
 import br.com.drinksapp.bean.Produto;
 import br.com.drinksapp.db.DAODrinks;
@@ -46,12 +48,13 @@ import br.com.drinksapp.fragment.PedidosListFragment;
 import br.com.drinksapp.fragment.ProdutosFavoritosFragment;
 import br.com.drinksapp.http.DBConnectParser;
 import br.com.drinksapp.interfaces.OnBackPressedListener;
+import br.com.drinksapp.interfaces.OnEstabelecimentoClick;
 import br.com.drinksapp.interfaces.OnPedidoClick;
 import br.com.drinksapp.util.Constantes;
 import br.com.drinksapp.util.GooglePlusLogin;
 
 
-public class MainActivity extends AppCompatActivity implements OnPedidoClick {
+public class MainActivity extends AppCompatActivity implements OnPedidoClick, OnEstabelecimentoClick {
 
 
     SelectorPageAdapter selectorPageAdapter;
@@ -73,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements OnPedidoClick {
     DAODrinks mDAO;
 
     protected OnBackPressedListener onBackPressedListener;
+    private ProgressDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +91,9 @@ public class MainActivity extends AppCompatActivity implements OnPedidoClick {
 
         new TaskBuscarProdutos().execute();
         buildViewPager();
+
+        pDialog = new ProgressDialog(this, R.style.MyDialogTheme);
+        pDialog.setCancelable(false);
     }
 
     private void buildViewPager() {
@@ -109,6 +116,60 @@ public class MainActivity extends AppCompatActivity implements OnPedidoClick {
         it.putExtra(Constantes.EXTRA_PEDIDO, pedido);
         startActivity(it);
 
+    }
+
+    private void showDialog() {
+        if (!pDialog.isShowing())
+            pDialog.show();
+    }
+
+    private void hideDialog() {
+        if (pDialog.isShowing())
+            pDialog.dismiss();
+    }
+
+    @Override
+    public void clicouNoEstabelecimento(Estabelecimento estabelecimento) {
+        new TaskListarProdutosPorEstabelecimento().execute(estabelecimento);
+    }
+
+
+    private class TaskListarProdutosPorEstabelecimento extends AsyncTask<Estabelecimento, Void, Intent> {
+
+        @Override
+        protected void onPreExecute() {
+            pDialog.setMessage("Carregando... Aguarde!");
+            showDialog();
+        }
+
+        @Override
+        protected Intent doInBackground(Estabelecimento... estabelecimento) {
+            ArrayList<Produto> retorno = null;
+            List<Produto> produtos = null;
+            Intent it = null;
+            try {
+                produtos = DBConnectParser.listProdutosPorEstabelecimento(estabelecimento[0]);
+                retorno = new ArrayList<Produto>(produtos);
+                if (retorno != null) {
+                    it = new Intent(MainActivity.this, ListaProdutosActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(Constantes.EXTRA_PRODUTO, retorno);
+                    it.putExtra(Constantes.EXTRA_BUNDLE, bundle);
+                    it.putExtra(Constantes.EXTRA_ESTABELECIMENTO, estabelecimento[0]);
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return it;
+        }
+
+        @Override
+        protected void onPostExecute(Intent it) {
+            startActivity(it);
+            hideDialog();
+
+        }
     }
 
     public class SelectorPageAdapter extends FragmentPagerAdapter {

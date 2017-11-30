@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -21,6 +22,7 @@ import br.com.drinksapp.bean.Estabelecimento;
 import br.com.drinksapp.bean.Produto;
 import br.com.drinksapp.db.DAODrinks;
 import br.com.drinksapp.interfaces.OnBackPressedListener;
+import br.com.drinksapp.interfaces.OnEstabelecimentoClick;
 
 public class ProdutosFavoritosFragment extends Fragment implements OnBackPressedListener{
 
@@ -53,6 +55,7 @@ public class ProdutosFavoritosFragment extends Fragment implements OnBackPressed
         View layout = inflater.inflate(R.layout.fragment_produtos_favoritos, container, false);
         mListView = (ListView)layout.findViewById(R.id.listaProdutosFavoritos);
         mListView.setAdapter(mAdapter);
+        mListView.setOnItemClickListener(new ClicarNoProduto());
 
         return  layout;
     }
@@ -74,5 +77,18 @@ public class ProdutosFavoritosFragment extends Fragment implements OnBackPressed
     public void doBack() {
         getActivity().getIntent().putExtra("EXIT", true);
         getActivity().onBackPressed();
+    }
+
+    class ClicarNoProduto implements AdapterView.OnItemClickListener{
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Produto p = (Produto)parent.getItemAtPosition(position);
+            long codEstabelecimento = mDAO.consultarIdEstabelecimentoProduto(p);
+            Estabelecimento estabelecimento = new Estabelecimento();
+            estabelecimento.setCodEstabelecimento(codEstabelecimento);
+            ((OnEstabelecimentoClick)getActivity()).clicouNoEstabelecimento(estabelecimento);
+
+        }
     }
 }

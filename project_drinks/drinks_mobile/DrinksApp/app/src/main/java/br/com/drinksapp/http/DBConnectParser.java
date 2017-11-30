@@ -187,39 +187,6 @@ public class DBConnectParser {
 
     }
 
-    public static Usuarios getUsuario(Usuarios usuario){
-        Response response = null;
-
-        Usuarios retorno = null;
-
-        try {
-            OkHttpClient client = new OkHttpClient();
-
-            RequestBody body = new FormBody.Builder()
-                    .add("codUsuario", String.valueOf(usuario.getCodUsuario()))
-                    .build();
-
-            Request request = new Request.Builder()
-                    .url(AppConfig.URL_BUSCAR_USUARIO_POR_ID)
-                    .post(body)
-                    .build();
-
-            response = client.newCall(request).execute();
-
-            if (response.networkResponse().code() == HttpURLConnection.HTTP_OK) {
-                String json = response.body().string();
-
-                Gson gson = new Gson();
-
-                retorno = gson.fromJson(json, Usuarios.class);
-
-            }
-        } catch (IOException e) {
-
-        }
-        return retorno;
-    }
-
     public static Usuarios cadastrar(Usuarios usuario) {
         Response response = null;
 
