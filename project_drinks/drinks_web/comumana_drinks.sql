@@ -59,7 +59,8 @@ INSERT INTO `estabelecimento` (`codEstabelecimento`, `cnpj`, `eMail`, `login`, `
 (3, '11004583000145', 'afabricabar@hotmail.com', 'fabrica', 'Carmo', '53120160', 'Olinda', '-8.0144249', '-34.8475361', 9, 'Travessa Municipal', 'PE', 'A Fábrica Bar', 'A Fabrica Bar e Restaurante Ltda - Me', '123456', '81987209705', 0),
 (4, '10636838000120', 'grutabar.camaragibe@gmail.com', 'grutabar', 'Vila da Fábrica', '54759135', 'Camaragibe', '-8.0139369', '-34.9788453', 387, 'Rua Carlos Alberto de Menezes', 'PE', 'GRUTA BAR', 'M J DE SOUZA BAR - ME', '123456', '81999998146', 0),
 (5, '12972637000129', 'betosbaroficial@gmail.com', 'betosbar', 'Candeias', '54440620', 'Jaboatao Dos Guararapes', '-8.0139369', '-34.9788453', 4738, 'Av. Bernardo Vieira De Melo', 'PE', 'BetoS Bar', 'BetoS Restaurante e Pizzaria Ltda - Epp', '123456', '8134692995', 0),
-(6, '09202813000139', 'bardobarriga@gmail.com', 'bardobarriga', 'Pilar', '53900000', 'Ilha de Itamaracï¿½', '-8.0139369', '-34.9788453', 30, 'Rua Assunï¿½ï¿½o', 'PE', 'Bar Do Barriga O Rei Da Tainhas', 'Bar Do Barriga O Rei Da Tainha', '123456', '81991915773', 0);
+(6, '09202813000139', 'bardobarriga@gmail.com', 'bardobarriga', 'Pilar', '53900000', 'Ilha de Itamaracï¿½', '-8.0139369', '-34.9788453', 30, 'Rua Assunï¿½ï¿½o', 'PE', 'Bar Do Barriga O Rei Da Tainhas', 'Bar Do Barriga O Rei Da Tainha', '123456', '81991915773', 0),
+(7, '42950996000146', 'nunesbar@gmail.com.br', 'nunesbar', 'Guararapes', '54325035', 'Jaboatão dos Guararapes', '-8.1525992', '-34.9223416', 1000, 'Estrada da Batalha', 'PE', 'NunesBar', 'NunesBar', '123456', '99999999999', 0);
 
 -- --------------------------------------------------------
 
