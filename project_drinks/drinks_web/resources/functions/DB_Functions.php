@@ -32,7 +32,7 @@ function pedidoNovembro ($table = null) {
     try {
         $database = open_database();
 
-        $sql = "SELECT count(dataPedido) as teste FROM Pedido WHERE dataPedido BETWEEN '2017/11/01' AND '2017/11/30'";
+        $sql = "SELECT count(dataPedido) as teste FROM pedido WHERE dataPedido BETWEEN '2017/11/01' AND '2017/11/30'";
         $result = $database->query($sql);
          if ($result->num_rows > 0) {
             $found = $result->fetch_assoc();
@@ -51,7 +51,7 @@ function pedidoAgosto ($table = null) {
     try {
         $database = open_database();
 
-        $sql = "SELECT count(dataPedido) as agosto FROM Pedido WHERE dataPedido BETWEEN '2017/08/01' AND '2017/08/31'";
+        $sql = "SELECT count(dataPedido) as agosto FROM pedido WHERE dataPedido BETWEEN '2017/08/01' AND '2017/08/31'";
         $result = $database->query($sql);
          if ($result->num_rows > 0) {
             $found = $result->fetch_assoc();
@@ -70,7 +70,7 @@ function pedidoSetembro ($table = null) {
     try {
         $database = open_database();
 
-        $sql = "SELECT count(dataPedido) as setembro FROM Pedido WHERE dataPedido BETWEEN '2017/09/01' AND '2017/09/30'";
+        $sql = "SELECT count(dataPedido) as setembro FROM pedido WHERE dataPedido BETWEEN '2017/09/01' AND '2017/09/30'";
         $result = $database->query($sql);
          if ($result->num_rows > 0) {
             $found = $result->fetch_assoc();
@@ -89,7 +89,7 @@ function pedidoOutubro ($table = null) {
     try {
         $database = open_database();
 
-        $sql = "SELECT count(dataPedido) as outubro FROM Pedido WHERE dataPedido BETWEEN '2017/10/01' AND '2017/10/31'";
+        $sql = "SELECT count(dataPedido) as outubro FROM pedido WHERE dataPedido BETWEEN '2017/10/01' AND '2017/10/31'";
         $result = $database->query($sql);
          if ($result->num_rows > 0) {
             $found = $result->fetch_assoc();
@@ -109,7 +109,7 @@ function faturamentoNovembro ($table = null) {
     try {
         $database = open_database();
         
-        $sql = "SELECT Sum(valorTotal) as valor FROM Pedido WHERE dataPedido BETWEEN '2017/11/01' AND '2017/11/30'";
+        $sql = "SELECT Sum(valorTotal) as valor FROM pedido WHERE dataPedido BETWEEN '2017/11/01' AND '2017/11/30'";
         $result = $database->query($sql);
          if ($result->num_rows > 0) {
             $found = $result->fetch_assoc();
@@ -128,7 +128,7 @@ function faturamentoAgosto ($table = null) {
     try {
         $database = open_database();
         
-        $sql = "SELECT Sum(valorTotal) as valorAgosto FROM Pedido WHERE dataPedido BETWEEN '2017/08/01' AND '2017/08/31'";
+        $sql = "SELECT Sum(valorTotal) as valorAgosto FROM pedido WHERE dataPedido BETWEEN '2017/08/01' AND '2017/08/31'";
         $result = $database->query($sql);
          if ($result->num_rows > 0) {
             $found = $result->fetch_assoc();
@@ -147,7 +147,7 @@ function faturamentoSetembro ($table = null) {
     try {
         $database = open_database();
         
-        $sql = "SELECT Sum(valorTotal) as valorSetembro FROM Pedido WHERE dataPedido BETWEEN '2017/09/01' AND '2017/09/30'";
+        $sql = "SELECT Sum(valorTotal) as valorSetembro FROM pedido WHERE dataPedido BETWEEN '2017/09/01' AND '2017/09/30'";
         $result = $database->query($sql);
          if ($result->num_rows > 0) {
             $found = $result->fetch_assoc();
@@ -166,7 +166,7 @@ function faturamentoOutubro ($table = null) {
     try {
         $database = open_database();
         
-        $sql = "SELECT Sum(valorTotal) as valorOutubro FROM Pedido WHERE dataPedido BETWEEN '2017/10/01' AND '2017/10/31'";
+        $sql = "SELECT Sum(valorTotal) as valorOutubro FROM pedido WHERE dataPedido BETWEEN '2017/10/01' AND '2017/10/31'";
         $result = $database->query($sql);
          if ($result->num_rows > 0) {
             $found = $result->fetch_assoc();

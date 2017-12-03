@@ -6,7 +6,7 @@
  */
 function selected_Status($status = null)
 {
-    $array_status = array("AGUARDANDO","ENTREGUE","CANCELADO");
+    $array_status = array("AGUARDANDO", "EM TRANSITO", "ENTREGUE", "CANCELADO");
     $select = '<select class="form-control selectpicker" name="status" id="status">';
     $select .= '<option value="">--Selecione--</option>';
     foreach($array_status as $val){

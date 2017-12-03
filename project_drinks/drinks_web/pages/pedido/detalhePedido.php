@@ -139,13 +139,13 @@ if (count($dados) > 0) {
                                     <div class="form-group col-md-7">
                                         <label for="rua">Rua</label> <input type="text"
                                                                             class="form-control" name="rua"
-                                                                            value="<?php echo $pedido['rua']; ?>">
+                                                                            value="<?php echo $pedido['rua']; ?>" readonly>
                                     </div>
 
                                     <div class="form-group col-md-2">
                                         <label for="numero">Numero</label> <input type="text"
                                                                                   class="form-control" id="numero" name="numero"
-                                                                                  value="<?php echo $pedido['numero']; ?>">
+                                                                                  value="<?php echo $pedido['numero']; ?>" readonly>
                                     </div>
                                 </div>
 
@@ -153,12 +153,12 @@ if (count($dados) > 0) {
                                     <div class="form-group col-md-4">
                                         <label for="bairro">Bairro</label> <input type="text"
                                                                                   class="form-control" name="bairro"
-                                                                                  value="<?php echo $pedido['bairro']; ?>">
+                                                                                  value="<?php echo $pedido['bairro']; ?>" readonly>
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label for="cidade">Cidade</label> <input type="text"
                                                                                   class="form-control" name="cidade"
-                                                                                  value="<?php echo $pedido['cidade']; ?>">
+                                                                                  value="<?php echo $pedido['cidade']; ?>" readonly>
                                     </div>
                                 </div>
 
