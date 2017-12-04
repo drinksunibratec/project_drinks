@@ -31,6 +31,16 @@ public class PedidoProdutos implements Serializable {
 
     String descricao;
 
+    String ean;
+
+    public String getEan() {
+        return ean;
+    }
+
+    public void setEan(String ean) {
+        this.ean = ean;
+    }
+
     public String getNome() {
         return nome;
     }

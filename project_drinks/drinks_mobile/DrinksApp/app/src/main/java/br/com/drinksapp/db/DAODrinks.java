@@ -547,6 +547,7 @@ public class DAODrinks {
         String sql = "SELECT P." + DrinksContract.CODPRODUTO + ", " +
                 "P." + DrinksContract.NOME + ", " +
                 "PE." + DrinksContract.PRECO + ", " +
+                "PE." + DrinksContract.EAN + ", " +
                 "P." + DrinksContract.DESCRICAO +
                 " FROM " + DrinksContract.TABLE_NAME_PRODUTOS_FAVORITOS + " F " +
                 " JOIN " + DrinksContract.TABLE_NAME_PRODUTO + " P ON P." + DrinksContract.CODPRODUTO + " = F." + DrinksContract.CODPRODUTO +
