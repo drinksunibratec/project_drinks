@@ -91,6 +91,7 @@ public class PagamentoActivity extends AppCompatActivity implements DialogComple
 
     RelativeLayout mLayoutBandeira;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -159,7 +160,6 @@ public class PagamentoActivity extends AppCompatActivity implements DialogComple
                 }
             }
         });
-
 
     }
 
@@ -237,6 +237,7 @@ public class PagamentoActivity extends AppCompatActivity implements DialogComple
 
     }
 
+
     private class TaskBuscarEndereco extends AsyncTask<String, Void, Endereco>{
 
         @Override
@@ -310,7 +311,7 @@ public class PagamentoActivity extends AppCompatActivity implements DialogComple
             pedido.setCodEstabelecimento(carrinhoCompras.getCodEstabelcimento());
             pedido.setCodUsuario(MySaveSharedPreference.getUserId(getApplicationContext()));
             pedido.setValorTotal(valorTotalPedido);
-            pedido.setDataPedido(Util.getDataAtual());
+            pedido.setDataPedido(Util.getDataAtualAmericana());
             pedido.setStatus(getString(R.string.status_aguardando));
             pedido.setRua(mLogradouro);
             pedido.setNumero(mNumero);
@@ -321,6 +322,7 @@ public class PagamentoActivity extends AppCompatActivity implements DialogComple
             pedido.setNumero(mNumero);
             pedido.setCEP(mCEP);
             pedido.setPagamento(mPagamento);
+            pedido.setDataHoraPedido(Util.getDataAtual());
 
             if(mPagamento.equals(getString(R.string.cartao_debito))){
                 pedido.setBandeiraCartao(mBandeira);
@@ -359,6 +361,7 @@ public class PagamentoActivity extends AppCompatActivity implements DialogComple
 
         }
     }
+
 
     private void initAsyncTask(List<ItemCarrinhoCompras> carrinhoComprases){
         TaskCadastrarCarrinho taskCadastrarCarrinho = new TaskCadastrarCarrinho();

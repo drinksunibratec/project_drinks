@@ -43,7 +43,7 @@ public class PedidosAdapter extends ArrayAdapter<Pedido> {
         }
 
         holder.txtEstabelecimentoPedido.setText(pedido.getEstabelecimento().getNomeFantasia());
-        holder.txtDataPedido.setText(pedido.getDataPedido());
+        holder.txtDataPedido.setText(pedido.getDataHoraPedido());
         holder.txtPrecoPedido.setText("R$ " + pedido.getValorTotal());
 
         return convertView;

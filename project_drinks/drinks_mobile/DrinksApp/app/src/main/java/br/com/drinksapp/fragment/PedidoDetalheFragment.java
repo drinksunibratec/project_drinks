@@ -93,7 +93,7 @@ public class PedidoDetalheFragment extends Fragment {
             mTxtStatusDetalhe = (TextView)layout.findViewById(R.id.txtStatusDetalhe);
 
             mTxtNomeEstabelecimentoDetalhe.setText(getString(R.string.estabelecimento) + ": " + mPedido.getEstabelecimento().getNomeFantasia());
-            mTxtDataPedidoDetalhe.setText(getString(R.string.data_pedido) + ": "  + mPedido.getDataPedido());
+            mTxtDataPedidoDetalhe.setText(getString(R.string.data_pedido) + ": "  + mPedido.getDataHoraPedido());
             mTxtValorTotalDetalhe.setText(getString(R.string.valor_total_pedido) + ": R$ "  + mPedido.getValorTotal());
             mTxtStatusDetalhe.setText(getString(R.string.status) + ":"  + mPedido.getStatus());
 

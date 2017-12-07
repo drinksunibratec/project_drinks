@@ -14,6 +14,8 @@ public class Util {
 
     static final SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
+    static final SimpleDateFormat americanFormat = new SimpleDateFormat("yyyy/MM/dd");
+
     public static String[] REPLACES =
             { "a", "e", "i", "o", "u", "c" };
 
@@ -58,6 +60,22 @@ public class Util {
 
             dataFormatada = format.parse(dataSistema);
             dataBanco = format.format(dataFormatada);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return dataBanco;
+    }
+
+    public static String getDataAtualAmericana() {
+        Date dataFormatada;
+        String dataBanco = "";//variavel que vai receber a data para o banco
+        try {
+
+            Date minhaDate = new Date();
+            String dataSistema = americanFormat.format(minhaDate);
+
+            dataFormatada = americanFormat.parse(dataSistema);
+            dataBanco = americanFormat.format(dataFormatada);
         } catch (ParseException e) {
             e.printStackTrace();
         }

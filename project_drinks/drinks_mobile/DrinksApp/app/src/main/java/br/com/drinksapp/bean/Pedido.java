@@ -23,6 +23,8 @@ public class Pedido implements Serializable{
 
     String dataPedido;
 
+    String 	dataHoraPedido;
+
     double valorTotal;
 
     String status;
@@ -44,6 +46,14 @@ public class Pedido implements Serializable{
     String pagamento;
 
     String bandeiraCartao;
+
+    public String getDataHoraPedido() {
+        return dataHoraPedido;
+    }
+
+    public void setDataHoraPedido(String dataHoraPedido) {
+        this.dataHoraPedido = dataHoraPedido;
+    }
 
     public String getBandeiraCartao() {
         return bandeiraCartao;

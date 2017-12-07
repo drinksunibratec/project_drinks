@@ -12,7 +12,6 @@ if (isset($_GET['codEstabelecimento']) && empty($_GET['codEstabelecimento']) == 
 }
 
 $dados = listarProdutoEstabelecimento($codEstabelecimento);
-//var_dump($dados);
 ?>
 
 

@@ -9,13 +9,18 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.drinksapp.R;
 import br.com.drinksapp.bean.Produto;
+import br.com.drinksapp.util.AppConfig;
 import br.com.drinksapp.util.Util;
 
 /**
@@ -43,6 +48,7 @@ public class ProdutoPesquisaAdapter extends ArrayAdapter<Produto>{
             holder.txtNomeProdutoCompara = (TextView) convertView.findViewById(R.id.txtNomeProdutoCompara);
             holder.txtEstabelecimentoProdutoCompara = (TextView) convertView.findViewById(R.id.txtEstabelecimentoProdutoCompara);
             holder.txtPrecoProdutoLista = (TextView) convertView.findViewById(R.id.txtPrecoProdutoLista);
+            holder.imagemProduto = (ImageView) convertView.findViewById(R.id.imagmProdutoCompara);
             convertView.setTag(holder);
 
         } else {
@@ -53,6 +59,9 @@ public class ProdutoPesquisaAdapter extends ArrayAdapter<Produto>{
         holder.txtEstabelecimentoProdutoCompara.setText(produto.getEstabelecimento().getNomeFantasia());
         holder.txtPrecoProdutoLista.setText("R$ " + produto.getPreco());
 
+        Glide.with(context).load(AppConfig.URL_IMAGENS + produto.getEan() + AppConfig.EXTENSAO_IMAGEM)
+                .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                .into(holder.imagemProduto);
         return convertView;
     }
 
@@ -61,6 +70,7 @@ public class ProdutoPesquisaAdapter extends ArrayAdapter<Produto>{
         TextView txtNomeProdutoCompara;
         TextView txtEstabelecimentoProdutoCompara;
         TextView txtPrecoProdutoLista;
+        ImageView imagemProduto;
 
     }
 
