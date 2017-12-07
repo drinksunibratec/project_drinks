@@ -175,7 +175,7 @@ function listarPedido($nomeId = null)
                 pedido_produto.codProduto,pedido_produto.preco,
                 pedido_produto.quantidade,pedido_produto.precoTotal,produto.nome
             
-                FROM pedido,pedido_produto,usuarios,produto, estabelecimento
+                FROM pedido,pedido_produto,usuarios,produto, estabelecimento    
             
                 WHERE pedido.codPedido = pedido_produto.codPedido
                 AND pedido.codUsuario = usuarios.codUsuario
@@ -316,6 +316,30 @@ function listarProduto($codEst = null)
     return $found;
 }
 
+function listarProdutosJaInseridosPorEstabelecimento($codEst = null)
+{
+    $found = null;
+    try {
+        $database = open_database();
+        
+        $sql = "SELECT p.codProduto, p.nome, p.descricao, p.ean
+               FROM produto_estab pe
+               INNER JOIN produto p on p.ean = pe.ean
+               INNER JOIN estabelecimento e on e.codEstabelecimento = pe.codEstabelecimento
+               WHERE e.codEstabelecimento = ".$codEst." ORDER BY p.codProduto ASC;";
+        
+        $result = $database->query($sql);
+        if ($result->num_rows > 0) {
+            $found = $result->fetch_all(MYSQLI_ASSOC);
+        }
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+    return $found;
+}
+
 function insertProduto($table = null, $data = null)
 {
     $columns = null;
@@ -378,6 +402,8 @@ function listarProdutoEstabelecimento($codEst = null)
     close_database($database);
     return $found;
 }
+
+
 
 
 function buscarProdutoCadastro($codProduto = null)

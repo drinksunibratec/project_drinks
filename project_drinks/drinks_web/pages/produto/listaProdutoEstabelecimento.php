@@ -11,7 +11,37 @@ if (isset($_GET['codEstabelecimento']) && empty($_GET['codEstabelecimento']) == 
     $codEstabelecimento = $_SESSION['codEstabelecimento'];
 }
 
-$dados = listarProduto($codEstabelecimento);
+$produtos = listarProduto($codEstabelecimento);
+$inseridos = listarProdutosJaInseridosPorEstabelecimento($codEstabelecimento);
+$tmpArray = array();
+
+foreach($produtos as $key => $value) {
+    $existe = false;
+    
+    foreach($value as $key1 => $value1){
+        if($key1 == 'ean'){
+            
+            foreach ($inseridos as $key2 => $value2){
+                
+                foreach($value2 as $key3 => $value3){
+                    if($key3 == 'ean'){
+                        if($value1 == $value3){
+                            $existe = true;
+                        }
+                    }
+                }
+            }
+            
+        }
+        
+    }
+    if($existe == false){
+        $tmpArray[] = $produtos[$key];
+    }
+    
+}
+           
+$dados = $tmpArray;
 ?>
 
 
