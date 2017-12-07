@@ -171,8 +171,11 @@ if (count($dados) > 0) {
 
                                 <div class=row>
                                     <div class="form-group col-md-4">
-                                        <input type="submit" value="&#10003 Alterar"
-                                               class="btn btn-primary" /> 
+                                        <?php if($pedido['status'] != "ENTREGUE"){ ?> 
+                                            <input type="submit" value="&#10003 Alterar" class="btn btn-primary"  /> 
+                                       <?php }else {?>
+                                       		<input type="submit" value="&#10003 Alterar" class="btn btn-primary" disabled /> 
+                                       <?php } ?>
                                         <a href="listarPedido.php"
                                            class="btn btn-danger">&#10005Cancelar</a>
                                     </div>
