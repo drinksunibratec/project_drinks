@@ -7,6 +7,8 @@
 function selected_Status($status = null)
 {
     $array_status = array("AGUARDANDO", "EM TRANSITO", "ENTREGUE", "CANCELADO");
+    $disabled = '';
+    
     if($status == "ENTREGUE"){
         $disabled = 'disabled';
     }
